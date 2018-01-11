@@ -1,0 +1,11 @@
+Package: GMisc
+Title: Miscellaneous Functions for Geology (and its areas)
+Version: 0.1
+Author: Maximiliano Garnier Villarreal <max.garnier.villa@gmail.com>
+Maintainer: Maximiliano Garnier Villarreal <max.garnier.villa@gmail.com>
+Description: Functions for general statistical purpose use, and geological use. 
+    Aimed also to be used by students from Escuela Centroamericana de Geologia (Geology Department) of Universidad de Costa Rica.
+License: GPL (>= 2)
+LazyData: TRUE
+RoxygenNote: 6.0.1
+Imports: stats, ggplot2, dplyr, tidyr, zoo, broom, grDevices, png, grid, RFOC, stringr, geotech, pracma
