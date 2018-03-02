@@ -7,15 +7,15 @@
 RI(x, k = 7)
 }
 \arguments{
-\item{x}{A data frame containing the depth of perforation in the first column, and the SPT values in the seconds column}
+\item{x}{A data frame containing the depth of perforation in the first column, and the value of interest in the second column}
 
 \item{k}{The window length for the number of data points to include in the calculation of RI. Always and odd number}
 }
 \value{
-A list of data frames: original data plus the RI coefficient, locations where the coefficient is higher than 0.7 and 0.8
+A ggplot object showing the RI statistic and lines marking the critical values of 0.7 and 0.8
 }
 \description{
-Calculates the intraclass correlation coefficient (RI) for a perforation log from a Dynamic Probing Machine (DPM), and finds the locations where this coefficient is higher than 0.7 and 0.8. The coefficient is used to find layer boundaries in a perforation log.
+Calculates the intraclass correlation coefficient (RI) for a perforation log, and shows the locations where this coefficient is higher than 0.7 and 0.8. The coefficient is used to find layer boundaries in a perforation log.
 }
 \details{
 The example data given is intended to show the structure needed for input data. The user should follow this structure, which in general corresponds with a data frame with a sequence in the first column and the observed/measured values in the second column

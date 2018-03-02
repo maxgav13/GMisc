@@ -4,18 +4,18 @@
 \alias{pval_t2}
 \title{P-value for proposed difference of the mean between 2 samples}
 \usage{
-pval_t2(mu1, s1, n1, mu2, s2, n2, dmu = 0, side = c("two", "one"))
+pval_t2(x1, s1, n1, x2, s2, n2, dmu = 0, side = c("two", "one"))
 }
 \arguments{
-\item{mu1}{A point estimate of sample's 1 mean}
+\item{x1}{Sample's 1 mean}
 
-\item{s1}{A point estimate of sample's 1 standard deviation}
+\item{s1}{Sample's 1 standard deviation}
 
 \item{n1}{Sample size of sample 1}
 
-\item{mu2}{A point estimate of sample's 2 mean}
+\item{x2}{Sample's 2 mean}
 
-\item{s2}{A point estimate of sample's 2 standard deviation}
+\item{s2}{Sample's 2 standard deviation}
 
 \item{n2}{Sample size of sample 2}
 
@@ -27,13 +27,13 @@ pval_t2(mu1, s1, n1, mu2, s2, n2, dmu = 0, side = c("two", "one"))
 P-value
 }
 \description{
-Calculates the p-value for the proposed difference of the mean between 2 samples (student-t distribution).
+Calculates the p-value for the proposed difference of the mean between 2 samples (t distribution).
 }
 \examples{
-mu1 <- 34.67
+x1 <- 34.67
 s1 <- 4.97
 n1 <- 15
-mu2 <- 40.87
+x2 <- 40.87
 s2 <- 5.36
 n2 <- 15
 pval_t2(mu1, s1, n1, mu2, s2, n2)

@@ -2,18 +2,18 @@
 % Please edit documentation in R/pval_t.R
 \name{pval_t}
 \alias{pval_t}
-\title{P-value for proposed mean of a population}
+\title{P-value for proposed mean of a population (unknown sigma)}
 \usage{
-pval_t(x, s, n, mu = 0, side = c("two", "one"))
+pval_t(x, s, n, mu, side = c("two", "one"))
 }
 \arguments{
-\item{x}{A point estimate of the population mean}
+\item{x}{Sample mean}
 
-\item{s}{A point estimate of the sample standard deviation}
+\item{s}{Sample standard deviation}
 
-\item{n}{Sample size from the population}
+\item{n}{Sample size}
 
-\item{mu}{Proposed population mean to test for}
+\item{mu}{Population mean}
 
 \item{side}{To either get a two-tail or one-tail p-value (Default is "two")}
 }
@@ -21,7 +21,7 @@ pval_t(x, s, n, mu = 0, side = c("two", "one"))
 P-value
 }
 \description{
-Calculates the p-value for a proposed mean for a population with unknown standard deviation, using the t-statistic (student-t distribution).
+Calculates the p-value for a proposed mean for a population with unknown standard deviation, using the t-statistic (t distribution).
 }
 \examples{
 x <- 6.14

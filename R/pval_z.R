@@ -1,9 +1,9 @@
-#' @title P-value for proposed mean of a population
+#' @title P-value for proposed mean of a population (known sigma)
 #' @description Calculates the p-value for a proposed mean for a population with known standard deviation, using the Z-statistic (normal distribution).
-#' @param x A point estimate of the population mean
-#' @param sig A point estimate of the population standard deviation
-#' @param n Sample size from the population
-#' @param mu Proposed population mean to test for
+#' @param x Sample mean
+#' @param sig Population standard deviation
+#' @param n Sample size
+#' @param mu Population mean
 #' @param side To either get a two-tail or one-tail p-value (Default is "two")
 #' @export
 #' @return P-value

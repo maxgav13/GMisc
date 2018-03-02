@@ -7,15 +7,15 @@
 T2_stat(x, k = 51)
 }
 \arguments{
-\item{x}{A data frame containing the depth of perforation in the first column, and the variables of interest in the rest of the columns: point resistance (qc), sleeve friction (fs), and pore-water pressure (u)}
+\item{x}{A data frame containing the depth of perforation in the first column, and the variables of interest in the rest of the columns, for a CPTu test: point resistance (qc), sleeve friction (fs), and pore-water pressure (u)}
 
 \item{k}{The window length for the number of data points to include in the calculation of T2-statistic. Always and odd number}
 }
 \value{
-A list of data frames: original data plus the T2-statistic, locations where the coefficient is significant to 0.95, 0.99, and 0.995, and one with the degrees of freedom and the corresponding critical f-values for the 0.95, 0.99, and 0.995 signficance
+A ggplot object showing the Mahalanobis D2 statistic and lines marking the critical values at 0.95, 0.99, and 0.999
 }
 \description{
-Calculates the T2-statistic for a perforation log from a Cone Penetration Test (CPTu), and finds the locations where this statistic is significant to 0.95, 0.99, and 0.995. The coefficient is used to find layer boundaries in a perforation log.
+Calculates the T2-statistic and corresponding effect size (Mahalanobis distance) for a perforation log with more than 1 variable. The coefficient is used to find layer boundaries in a perforation log.
 }
 \details{
 The example data given is intended to show the structure needed for input data. The user should follow this structure, which in general corresponds with a data frame with a sequence in the first column and the observed/measured values in the second, third, and fourth columns

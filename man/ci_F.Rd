@@ -4,24 +4,24 @@
 \alias{ci_F}
 \title{Confidence interval for ratio of standard deviations of 2 samples}
 \usage{
-ci_F(s1, n1, s2, n2, conf.level = 0.98)
+ci_F(s1, n1, s2, n2, conf.level = 0.95)
 }
 \arguments{
-\item{s1}{A point estimate of sample's 1 standard deviation}
+\item{s1}{Sample's 1 standard deviation}
 
 \item{n1}{Sample size of sample 1}
 
-\item{s2}{A point estimate of sample's 2 standard deviation}
+\item{s2}{Sample's 2 standard deviation}
 
 \item{n2}{Sample size of sample 2}
 
-\item{conf.level}{Confidence level to use for the confidence interval (Default is 0.98, and commonly another one is 0.90)}
+\item{conf.level}{Confidence level to use for the confidence interval (Default is 0.95)}
 }
 \value{
 A data frame with the ratio of standard deviations and variances, degrees of freedom for both samples, and lower and upper ends of the confidence interval
 }
 \description{
-Calculates the confidence interval for the ratio of the standard deviation of 2 sample (F distribution).
+Calculates the confidence interval for the ratio of the standard deviation of 2 samples (F distribution).
 }
 \examples{
 s1 <- 3.1

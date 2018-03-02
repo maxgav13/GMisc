@@ -7,15 +7,15 @@
 T_stat(x, k = 7)
 }
 \arguments{
-\item{x}{A data frame containing the depth of perforation in the first column, and the SPT values in the seconds column}
+\item{x}{A data frame containing the depth of perforation in the first column, and the value of interest in the second column}
 
 \item{k}{The window length for the number of data points to include in the calculation of T-statistic. Always and odd number}
 }
 \value{
-A list of data frames: original data plus the T-statistic, locations where the coefficient is significant to 0.95 and 0.99, and one with the degrees of freedom and the corresponding critical T-values for the 0.95 and 0.99 signficance
+A ggplot object showing the Cohen's d statistic and lines marking the Cohen's U3 values for 0.95, 0.99, and 0.999
 }
 \description{
-Calculates the T-statistic for a perforation log from a Dynamic Probing Machine (DPM), and finds the locations where this statistic is significant to 0.95 and 0.99. The coefficient is used to find layer boundaries in a perforation log.
+Calculates the T-statistic and Cohen's d effect size for a perforation log. The coefficient is used to find layer boundaries in a perforation log.
 }
 \details{
 The example data given is intended to show the structure needed for input data. The user should follow this structure, which in general corresponds with a data frame with a sequence in the first column and the observed/measured values in the second column

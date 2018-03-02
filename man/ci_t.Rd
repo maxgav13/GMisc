@@ -2,16 +2,16 @@
 % Please edit documentation in R/ci_t.R
 \name{ci_t}
 \alias{ci_t}
-\title{Confidence interval for mean of a sample}
+\title{Confidence interval for mean (unknown sigma)}
 \usage{
-ci_t(mu, s, n, conf.level = 0.95)
+ci_t(x, s, n, conf.level = 0.95)
 }
 \arguments{
-\item{mu}{A point estimate of the population mean (a vector of values can also be used)}
+\item{x}{Sample mean}
 
-\item{s}{A point estimate of the sample standard deviation (a vector of values can also be used)}
+\item{s}{Sample standard deviation}
 
-\item{n}{Sample size (a vector of values can also be used)}
+\item{n}{Sample size}
 
 \item{conf.level}{Confidence level to use for the confidence interval (Default is 0.95)}
 }
@@ -19,12 +19,15 @@ ci_t(mu, s, n, conf.level = 0.95)
 A data frame with the mean, degrees of freedom, and lower and upper ends of the confidence interval
 }
 \description{
-Calculates the confidence interval for a population mean with known mean and unknown standard deviation, using the t-statistic (student-t distribution).
+Calculates the confidence interval for the mean with unknown standard deviation, using the t-statistic (t distribution).
+}
+\details{
+It can work for dependent (paired) samples using the mean and standard deviation of differences
 }
 \examples{
-mu <- 80
+x <- 80
 s <- 15
 n <- 20
-ci_t(mu, s, n)
+ci_t(x, s, n)
 
 }

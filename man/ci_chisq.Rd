@@ -7,9 +7,9 @@
 ci_chisq(s, n, conf.level = 0.95)
 }
 \arguments{
-\item{s}{A point estimate of the sample standard deviation (a vector of values can also be used)}
+\item{s}{Sample standard deviation}
 
-\item{n}{Sample size (a vector of values can also be used)}
+\item{n}{Sample size}
 
 \item{conf.level}{Confidence level to use for the confidence interval (Default is 0.95)}
 }

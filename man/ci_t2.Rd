@@ -4,18 +4,18 @@
 \alias{ci_t2}
 \title{Confidence interval for difference of the mean between 2 samples}
 \usage{
-ci_t2(mu1, s1, n1, mu2, s2, n2, conf.level = 0.95)
+ci_t2(x1, s1, n1, x2, s2, n2, conf.level = 0.95)
 }
 \arguments{
-\item{mu1}{A point estimate of sample's 1 mean}
+\item{x1}{Sample's 1 mean}
 
-\item{s1}{A point estimate of sample's 1 standard deviation}
+\item{s1}{Sample's 1 standard deviation}
 
 \item{n1}{Sample size of sample 1}
 
-\item{mu2}{A point estimate of sample's 2 mean}
+\item{x2}{Sample's 2 mean}
 
-\item{s2}{A point estimate of sample's 2 standard deviation}
+\item{s2}{Sample's 2 standard deviation}
 
 \item{n2}{Sample size of sample 2}
 
@@ -25,15 +25,15 @@ ci_t2(mu1, s1, n1, mu2, s2, n2, conf.level = 0.95)
 A data frame with the difference of means, degrees of freedom, and lower and upper ends of the confidence interval
 }
 \description{
-Calculates the confidence interval for the difference of the mean between 2 samples (student-t distribution).
+Calculates the confidence interval for the difference of the mean between 2 samples (t distribution).
 }
 \examples{
-mu1 <- 90
+x1 <- 90
 s1 <- 15
 n1 <- 20
-mu2 <- 80
+x2 <- 80
 s2 <- 8
 n2 <- 30
-ci_t2(mu1, s1, n1, mu2, s2, n2)
+ci_t2(x1, s1, n1, x2, s2, n2)
 
 }

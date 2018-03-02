@@ -13,7 +13,7 @@ coef_var(x)
 The coefficient of variation for the given vector
 }
 \description{
-Calculates the coefficient of variation.
+Calculates the coefficient of variation, disregarding NAs.
 }
 \examples{
 x = rnorm(50, 150, 30)
