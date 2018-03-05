@@ -3,11 +3,16 @@
 #' @param x Sample 1
 #' @param y Sample 2
 #' @param dep Logical indicating if the samples are dependent (Default is F)
+#' @param ylab.diff Label for the secondary y-axis for the difference
+#' @param col.x Color to use for sample 1
+#' @param col.y Color to use for sample 2
+#' @param col.diff Color to use for the difference
 #' @export
 #' @return A ggplot object
-#' @references Cumming, G. (2014). The Statistics: Why and How. - Psychological Science, 25(1): 7-29.
+#' @references Cumming, G. (2014). The New Statistics: Why and How - Psychological Science, 25(1): 7-29.
 #' @import stats
 #' @import ggplot2
+#' @import cowplot
 #' @details The labels of the plot are generic but they can be customised using the \code{labs()} and \code{scale_x_discrete(labels = c())} functions. For the dependent samples case the two means are joined by a line, to indicate the dependency
 #' @examples
 #' set.seed(101)
@@ -17,10 +22,10 @@
 #' NewStats_2samples(x, y, dep = F)
 #' NewStats_2samples(x, y1, dep = T)
 #'
-NewStats_2samples = function(x, y, dep = F) {
+NewStats_2samples = function(x, y, dep = F, col.x = 3, col.y = 4, col.diff = 2, ylab.diff = 'Difference') {
 
-  my_theme = theme(axis.text = element_text(size=14),
-                   axis.title = element_text(size=16),
+  my_theme = theme(axis.text = element_text(size=12),
+                   axis.title = element_text(size=14),
                    legend.position = 'none')
 
   G1 = x
@@ -47,9 +52,9 @@ NewStats_2samples = function(x, y, dep = F) {
   estimates[3,2:4] = estimates[3,2:4] + tweak
 
   q = ggplot(estimates,aes(group,point))+
-    geom_errorbar(aes(ymin=lower,ymax=upper),width=.1)+
-    geom_point(aes(shape=(group=='Difference'),col=(group=='Difference')),size=3.5)+
-    scale_y_continuous(sec.axis = sec_axis(~.-tweak,name='Difference'))+
+    # geom_errorbar(aes(ymin=lower,ymax=upper),width=.1)+
+    geom_pointrange(aes(ymin=lower,ymax=upper,shape=(group=='Difference')),col=c(col.x,col.y,col.diff),size=1)+
+    scale_y_continuous(sec.axis = sec_axis(~.-tweak,name=ylab.diff))+
     geom_segment(aes(x=1,xend=4,y=estimates$point[1],yend=estimates$point[1]),linetype=3, size=.6)+
     geom_segment(aes(x=2,xend=4,y=estimates$point[2],yend=estimates$point[2]),linetype=3, size=.6)+
     {if (dep==T) geom_segment(aes(x=1,xend=2,y=estimates$point[1],yend=estimates$point[2]))}+

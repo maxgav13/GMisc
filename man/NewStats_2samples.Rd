@@ -4,7 +4,8 @@
 \alias{NewStats_2samples}
 \title{New Statistics two samples (idependent & dependent)}
 \usage{
-NewStats_2samples(x, y, dep = F)
+NewStats_2samples(x, y, dep = F, col.x = 3, col.y = 4, col.diff = 2,
+  ylab.diff = "Difference")
 }
 \arguments{
 \item{x}{Sample 1}
@@ -12,6 +13,14 @@ NewStats_2samples(x, y, dep = F)
 \item{y}{Sample 2}
 
 \item{dep}{Logical indicating if the samples are dependent (Default is F)}
+
+\item{col.x}{Color to use for sample 1}
+
+\item{col.y}{Color to use for sample 2}
+
+\item{col.diff}{Color to use for the difference}
+
+\item{ylab.diff}{Label for the secondary y-axis for the difference}
 }
 \value{
 A ggplot object
@@ -32,5 +41,5 @@ NewStats_2samples(x, y1, dep = T)
 
 }
 \references{
-Cumming, G. (2014). The Statistics: Why and How. - Psychological Science, 25(1): 7-29.
+Cumming, G. (2014). The New Statistics: Why and How - Psychological Science, 25(1): 7-29.
 }
