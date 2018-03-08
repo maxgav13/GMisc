@@ -12,7 +12,7 @@ RI(x, k = 7)
 \item{k}{The window length for the number of data points to include in the calculation of RI. Always and odd number}
 }
 \value{
-A ggplot object showing the RI statistic and lines marking the critical values of 0.7 and 0.8
+A ggplot and plotly objects showing the RI statistic and lines marking the critical values of 0.7 and 0.8
 }
 \description{
 Calculates the intraclass correlation coefficient (RI) for a perforation log, and shows the locations where this coefficient is higher than 0.7 and 0.8. The coefficient is used to find layer boundaries in a perforation log.
@@ -21,7 +21,7 @@ Calculates the intraclass correlation coefficient (RI) for a perforation log, an
 The example data given is intended to show the structure needed for input data. The user should follow this structure, which in general corresponds with a data frame with a sequence in the first column and the observed/measured values in the second column
 }
 \examples{
-testRI = RI(DPM_data, k = 7)
+RI(DPM_data, k = 7)
 
 }
 \references{
