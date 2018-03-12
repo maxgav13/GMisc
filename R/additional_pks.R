@@ -4,12 +4,11 @@
 #' @return Installed packages
 #'
 additional_pks <- function (){
+  install.packages("DescTools", dep=T)
   install.packages("sf", dep=T)
-  install.packages("sp", dep=T)
+  install.packages("raster", dep=T)
   install.packages("gstat", dep=T)
   install.packages("geoR", dep=T)
-  install.packages("psych", dep=T)
-  install.packages("Hmisc", dep=T)
   install.packages("automap", dep=T)
   install.packages("OneTwoSamples", dep=T)
   install.packages("rgl", dep=T)
@@ -19,12 +18,10 @@ additional_pks <- function (){
   install.packages("ggpubr", dep=T)
   install.packages("sjstats", dep=T)
   install.packages("sjPlot", dep=T)
-  install.packages("arm", dep=T)
   install.packages("rockchalk", dep=T)
   install.packages("effsize", dep=T)
   install.packages("Metrics", dep=T)
   install.packages("plotmo", dep=T)
-  install.packages("effects", dep=T)
   devtools::install_github('doomlab/MOTE')
-  devtools::install_github('girman/itns')
+  devtools::install_github('gitrman/itns')
 }
