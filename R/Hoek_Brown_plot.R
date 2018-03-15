@@ -29,7 +29,9 @@ Hoek_Brown_plot = function(HB) {
          y = expression(paste(sigma[1], " [MPa]"))) +
     scale_color_manual(name = "", values = c("blue", "magenta")) +
     theme_bw() +
-    theme(legend.position = "top")
+    theme(legend.position = "top",
+          axis.title = element_text(size = 16),
+          axis.text = element_text(size = 14))
 
   labelphi = sprintf("phi*minute == %0.1f*degree", HB$Results$phi)
   labelc = sprintf("c*minute == %0.3f~MPa", HB$Results$c)
@@ -39,7 +41,7 @@ Hoek_Brown_plot = function(HB) {
   q = ggplot(HB$shear, aes(sig.n, tau, group = crit, col = crit)) +
     geom_vline(xintercept = 0, size = 0.2) +
     geom_hline(yintercept = 0, size = 0.2) +
-    geom_line(size = 0.3) +
+    geom_line(size = 0.5) +
     geom_point(data = HB$stress.level, aes(sign, tau), col = "red", size = 2) +
     coord_fixed(ratio = .5) +
     labs(x = expression(paste(sigma[n], " [MPa]")),
@@ -47,14 +49,17 @@ Hoek_Brown_plot = function(HB) {
     scale_color_manual(name = "", values = c("blue", "magenta", "red")) +
     annotate("text", x = max(HB$shear$sig.n)/5, y = max(HB$shear$tau),
              label = labelphi, parse = T) +
-    annotate("text", x = max(HB$shear$sig.n)/5, y = 0.965*max(HB$shear$tau),
+    annotate("text", x = max(HB$shear$sig.n)/5, y = 0.95*max(HB$shear$tau),
              label = labelc, parse = T) +
-    annotate("text", x = 1.275*HB$stress.level$sign, y = HB$stress.level$tau,
+    annotate("text", x = 1.5*HB$stress.level$sign, y = HB$stress.level$tau,
              label = labelphi.inst, parse = T) +
-    annotate("text", x = 1.275*HB$stress.level$sign, y = 0.925*HB$stress.level$tau,
+    annotate("text", x = 1.5*HB$stress.level$sign, y = 0.825*HB$stress.level$tau,
              label = labelc.inst, parse = T) +
     theme_bw() +
-    theme(legend.position = "top")
+    theme(legend.position = "top",
+          axis.title = element_text(size = 16),
+          axis.text = element_text(size = 14),
+          legend.text = element_text(size = 12))
 
   return(HB_plots = list(princ.stresses = p, normal.shear = q))
 }

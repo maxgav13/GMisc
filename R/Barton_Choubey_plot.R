@@ -47,7 +47,9 @@ Barton_Choubey_plot = function(BC, units = "kPa") {
                label = labelphi, parse = T)+
       annotate("text", x = max(BC$dat$sig_n*unit.factor)/4, y = 0.925*max(BC$dat$tau*unit.factor)/1.25,
                label = labelc, parse = T)+
-      theme_bw()
+      theme_bw()+
+      theme(axis.title = element_text(size = 16),
+            axis.text = element_text(size = 14))
   } else {
     q = ggplot(BC$dat, aes(sig_n, tau)) +
       geom_line(col = "red") +
@@ -59,7 +61,9 @@ Barton_Choubey_plot = function(BC, units = "kPa") {
                label = labelphi, parse = T)+
       annotate("text", x = max(BC$dat$sig_n)/4, y = 0.925*max(BC$dat$tau)/1.25,
                label = labelc, parse = T)+
-      theme_bw()
+      theme_bw()+
+      theme(axis.title = element_text(size = 16),
+            axis.text = element_text(size = 14))
   }
   return(q)
 }

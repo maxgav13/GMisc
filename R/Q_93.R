@@ -30,6 +30,8 @@ Q_93 = function(Q, De, dot.col = 'blue') {
     scale_y_log10("Equivalent dimension, De",
                   breaks = c(1,2,3,5,10,20,50,100),
                   labels = c("1","2","3","5","10","20","50","100"),
-                  limits=c(1,190), expand = c(0,0))
+                  limits=c(1,190), expand = c(0,0))+
+    theme(axis.title = element_text(size = 16),
+          axis.text = element_text(size = 14))
   return(p)
 }
