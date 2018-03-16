@@ -12,6 +12,7 @@
 #' @import dplyr
 #' @import tidyr
 #' @import ggplot2
+#' @import plotly
 #' @import pracma
 #' @references Holtz, R. D., Kovacs, W. D. & Sheahan, T. C. (2011). An Introduction to Geotechnical Engineering. Prentice Hall.
 #' @details The stresses are calculated using the solutions from Boussinesq. The parameter \code{L} only applies for rectangular footings, otherwise is not considered, thus the default value of \code{NULL}. For rectangular footings the length (\code{L}) can be varied, while for the other footing shapes the width \code{B} can be varied. For circular footings the width is equal to the radius (\code{B=R})
@@ -181,5 +182,5 @@ induced_stress = function(qs, B, L = NULL, z.end, footing = c("strip", "square",
         ggtitle(paste("Induced stress under a", footing, "footing "))
     }
   }
-  return(Plot = q)
+  return(list(Plot = q, Plotly = ggplotly(q)))
 }
