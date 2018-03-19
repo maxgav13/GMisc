@@ -62,30 +62,44 @@ bearing_capacity = function(B, D, L = NULL, gamma.h, gamma.s, tau0, phi, wl, FS,
   BD$qa = BD$qu / FS
 
   BD_spread = BD %>% select(B, D, qa) %>% spread(B, qa)
+  noms = names(BD_spread)
+  names(BD_spread) = c('D/B',noms[2:length(noms)])
 
   if (length(B) > 1 & length(D) > 1) {
    q = ggplot(BD, aes(D, qa, group = B, col = as.factor(B))) +
     geom_line() +
     geom_point() +
     labs(x = "Depth, D (m)", y = "Allowable bearing capacity, qa (kPa)", col = "Width, B (m)") +
-    theme_bw() + ggtitle(paste("Bearing capacity for a", footing, "footing with a FS =", FS))
+    theme_bw() + ggtitle(paste("Bearing capacity for a", footing, "footing with a FS =", FS)) +
+     theme(axis.title = element_text(size = 16),
+           axis.text = element_text(size = 14),
+           legend.text = element_text(size = 12))
   } else if (length(B) > 1 & length(D) == 1) {
     q = ggplot(BD, aes(B, qa, col = as.factor(D))) +
       geom_line() +
       geom_point() +
       labs(x = "Width, B (m)", y = "Allowable bearing capacity, qa (kPa)", col = "Depth, D (m)") +
-      theme_bw() + ggtitle(paste("Bearing capacity for a", footing, "footing with a FS =", FS))
+      theme_bw() + ggtitle(paste("Bearing capacity for a", footing, "footing with a FS =", FS)) +
+      theme(axis.title = element_text(size = 16),
+            axis.text = element_text(size = 14),
+            legend.text = element_text(size = 12))
   } else if (length(B) == 1 & length(D) > 1) {
     q = ggplot(BD, aes(D, qa, col = as.factor(B))) +
       geom_line() +
       geom_point() +
       labs(x = "Depth, D (m)", y = "Allowable bearing capacity, qa (kPa)", col = "Width, B (m)") +
-      theme_bw() + ggtitle(paste("Bearing capacity for a", footing, "footing with a FS =", FS))
+      theme_bw() + ggtitle(paste("Bearing capacity for a", footing, "footing with a FS =", FS)) +
+      theme(axis.title = element_text(size = 16),
+            axis.text = element_text(size = 14),
+            legend.text = element_text(size = 12))
   } else {
     q = ggplot(BD, aes(D, qa, col = as.factor(B))) +
       geom_point() +
       labs(x = "Depth, D (m)", y = "Allowable bearing capacity, qa (kPa)", col = "Width, B (m)") +
-      theme_bw() + ggtitle(paste("Bearing capacity for a", footing, "footing with a FS =", FS))
+      theme_bw() + ggtitle(paste("Bearing capacity for a", footing, "footing with a FS =", FS)) +
+      theme(axis.title = element_text(size = 16),
+            axis.text = element_text(size = 14),
+            legend.text = element_text(size = 12))
   }
   return(list(Result = round(BD_spread, 2), Plot = q))
 }

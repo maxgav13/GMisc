@@ -97,14 +97,18 @@ induced_stress = function(qs, B, L = NULL, z.end, footing = c("strip", "square",
         scale_y_reverse() +
         theme_bw() +
         labs(x = "Stress [kPa]", y = "Depth [m]", col = "Length [m]") +
-        ggtitle(paste("Induced stress under a", footing, "footing "))
+        ggtitle(paste("Induced stress under a", footing, "footing ")) +
+        theme(axis.title = element_text(size = 16),
+              axis.text = element_text(size = 14))
     } else {
       q = ggplot(sz, aes(sig.z, d, col = as.factor(L))) +
         geom_line() +
         scale_y_reverse() +
         theme_bw() +
         labs(x = "Stress [kPa]", y = "Depth [m]", col = "Length [m]") +
-        ggtitle(paste("Induced stress under a", footing, "footing "))
+        ggtitle(paste("Induced stress under a", footing, "footing ")) +
+        theme(axis.title = element_text(size = 16),
+              axis.text = element_text(size = 14))
     }
   } else {
     M = list()
@@ -172,14 +176,18 @@ induced_stress = function(qs, B, L = NULL, z.end, footing = c("strip", "square",
         scale_y_reverse() +
         theme_bw() +
         labs(x = "Stress [kPa]", y = "Depth [m]", col = texto)  +
-        ggtitle(paste("Induced stress under a", footing, "footing "))
+        ggtitle(paste("Induced stress under a", footing, "footing ")) +
+        theme(axis.title = element_text(size = 16),
+              axis.text = element_text(size = 14))
     } else {
       q = ggplot(sz, aes(sig.z, d, col = as.factor(B))) +
         geom_line() +
         scale_y_reverse() +
         theme_bw() +
         labs(x = "Stress [kPa]", y = "Depth [m]", col = texto) +
-        ggtitle(paste("Induced stress under a", footing, "footing "))
+        ggtitle(paste("Induced stress under a", footing, "footing ")) +
+        theme(axis.title = element_text(size = 16),
+              axis.text = element_text(size = 14))
     }
   }
   return(list(Plot = q, Plotly = ggplotly(q)))
