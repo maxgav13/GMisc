@@ -96,19 +96,21 @@ induced_stress = function(qs, B, L = NULL, z.end, footing = c("strip", "square",
         geom_line() +
         scale_y_reverse() +
         theme_bw() +
-        labs(x = "Stress [kPa]", y = "Depth [m]", col = "Length [m]") +
+        labs(x = "Stress (kPa)", y = "Depth (m)", col = "Length (m)") +
         ggtitle(paste("Induced stress under a", footing, "footing ")) +
         theme(axis.title = element_text(size = 16),
-              axis.text = element_text(size = 14))
+              axis.text = element_text(size = 14),
+              legend.text = element_text(size = 12))
     } else {
       q = ggplot(sz, aes(sig.z, d, col = as.factor(L))) +
         geom_line() +
         scale_y_reverse() +
         theme_bw() +
-        labs(x = "Stress [kPa]", y = "Depth [m]", col = "Length [m]") +
+        labs(x = "Stress (kPa)", y = "Depth (m)", col = "Length (m)") +
         ggtitle(paste("Induced stress under a", footing, "footing ")) +
         theme(axis.title = element_text(size = 16),
-              axis.text = element_text(size = 14))
+              axis.text = element_text(size = 14),
+              legend.text = element_text(size = 12))
     }
   } else {
     M = list()
@@ -164,30 +166,34 @@ induced_stress = function(qs, B, L = NULL, z.end, footing = c("strip", "square",
     }
 
     if (any(footing == "strip")) {
-      texto = "Width [m]"
+      texto = "Width (m)"
     } else if (footing == "square") {
-      texto = "Width [m]"
+      texto = "Width (m)"
     } else if (footing == "circular") {
-      texto = "Radius [m]"
+      texto = "Radius (m)"
     }
     if (length(B) > 1) {
       q = ggplot(sz, aes(sig.z, d, col = B)) +
         geom_line() +
         scale_y_reverse() +
         theme_bw() +
-        labs(x = "Stress [kPa]", y = "Depth [m]", col = texto)  +
+        labs(x = "Stress (kPa)", y = "Depth (m)", col = texto)  +
         ggtitle(paste("Induced stress under a", footing, "footing ")) +
         theme(axis.title = element_text(size = 16),
-              axis.text = element_text(size = 14))
+              axis.text = element_text(size = 14),
+              legend.text = element_text(size = 12),
+              legend.title = element_text(size = 12))
     } else {
       q = ggplot(sz, aes(sig.z, d, col = as.factor(B))) +
         geom_line() +
         scale_y_reverse() +
         theme_bw() +
-        labs(x = "Stress [kPa]", y = "Depth [m]", col = texto) +
+        labs(x = "Stress (kPa)", y = "Depth (m)", col = texto) +
         ggtitle(paste("Induced stress under a", footing, "footing ")) +
         theme(axis.title = element_text(size = 16),
-              axis.text = element_text(size = 14))
+              axis.text = element_text(size = 14),
+              legend.text = element_text(size = 12),
+              legend.title = element_text(size = 12))
     }
   }
   return(list(Plot = q, Plotly = ggplotly(q)))
