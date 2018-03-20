@@ -27,8 +27,10 @@ moving_filter_plot_f = function(x, xlab = "X", ylab = "Data", filterlab = "Filte
     df = x$Filtered %>% select_at(c("x",zz))
   }
 
-  f = df %>% gather(filtro, y_val, -x) %>%
-    ggplot(aes(x = x, y = y_val, group = filtro, col = filtro)) +
+  df = df %>% gather(filtro, y_val, -x)
+  df$filtro = factor(df$filtro, levels = unique(df$filtro))
+
+  f = ggplot(df, aes(x = x, y = y_val, group = filtro, col = filtro)) +
     geom_line(size = 0.5) +
     labs(x = xlab, y = ylab, col = filterlab) +
     theme_bw()

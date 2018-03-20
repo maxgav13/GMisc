@@ -35,13 +35,13 @@ RI = function(x, k = 7) {
   q = ggplot(Data, aes_string("RI", nombres[1])) +
     geom_path(na.rm = T) +
     geom_vline(xintercept = c(.7,.8), col = c("blue", "red")) +
-    scale_y_reverse(name = "Depth [m]") +
+    scale_y_reverse(name = "Depth (m)") +
     scale_x_continuous(name = "RI") +
     theme_bw()
   p = plotly::ggplotly(ggplot(Data, aes_string("RI", nombres[1])) +
                          geom_path(size = 0.25,na.rm = T) +
                          geom_vline(size = 0.25, xintercept = c(.7,.8), col = c("blue", "red")) +
-                         scale_y_reverse(name = "Depth [m]") +
+                         scale_y_reverse(name = "Depth (m)") +
                          scale_x_continuous(name = "RI") +
                          theme_bw())
 

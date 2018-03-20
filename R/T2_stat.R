@@ -61,13 +61,13 @@ T2_stat = function(x, k = 51) {
   q = ggplot(Data, aes_string("D2", nombres[1])) +
     geom_path(na.rm = T) +
     geom_vline(xintercept = chi, col = c("blue", "orange", "red")) +
-    scale_y_reverse(name = "Depth [m]") +
+    scale_y_reverse(name = "Depth (m)") +
     scale_x_continuous(name = "Mahalanobis D2") +
     theme_bw()
   p = plotly::ggplotly(ggplot(Data, aes_string("D2", nombres[1])) +
                          geom_path(size = 0.25, na.rm = T) +
                          geom_vline(size = 0.25, xintercept = chi, col = c("blue", "orange", "red")) +
-                         scale_y_reverse(name = "Depth [m]") +
+                         scale_y_reverse(name = "Depth (m)") +
                          scale_x_continuous(name = "Mahalanobis D2") +
                          theme_bw())
 
