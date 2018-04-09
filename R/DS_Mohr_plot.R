@@ -71,7 +71,7 @@ DS_Mohr_plot <- function(sign, tau) {
                     ylim=c(0,1.25*R[length(R)]))+
     coord_fixed()+
     geom_line(data=MOHR,aes(X,Y,group=cir),col="blue")+
-    labs(x=expression(paste(sigma, " [kPa]")),y=expression(paste(tau, " [kPa]")))+
+    labs(x=expression(paste(sigma, " (kPa)")),y=expression(paste(tau, " (kPa)")))+
     annotate("text",x=C[length(C)]+0.7*R[length(R)],y=1.15*R[length(R)],
              label=labelphi,parse=T)+
     annotate("text",x=C[length(C)]+0.7*R[length(R)],y=1.05*R[length(R)],

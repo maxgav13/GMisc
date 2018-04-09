@@ -25,8 +25,8 @@ Hoek_Brown_plot = function(HB) {
     geom_hline(yintercept = 0, size = 0.2) +
     geom_line(size = 0.3) +
     coord_fixed(ratio = .1) +
-    labs(x = expression(paste(sigma[3], " [MPa]")),
-         y = expression(paste(sigma[1], " [MPa]"))) +
+    labs(x = expression(paste(sigma[3], " (MPa)")),
+         y = expression(paste(sigma[1], " (MPa)"))) +
     scale_color_manual(name = "", values = c("blue", "magenta")) +
     theme_bw() +
     theme(legend.position = "top",
@@ -44,8 +44,8 @@ Hoek_Brown_plot = function(HB) {
     geom_line(size = 0.5) +
     geom_point(data = HB$stress.level, aes(sign, tau), col = "red", size = 2) +
     coord_fixed(ratio = .5) +
-    labs(x = expression(paste(sigma[n], " [MPa]")),
-         y = expression(paste(tau, " [MPa]"))) +
+    labs(x = expression(paste(sigma[n], " (MPa)")),
+         y = expression(paste(tau, " (MPa)"))) +
     scale_color_manual(name = "", values = c("blue", "magenta", "red")) +
     annotate("text", x = max(HB$shear$sig.n)/5, y = max(HB$shear$tau),
              label = labelphi, parse = T) +

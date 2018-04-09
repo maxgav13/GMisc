@@ -85,11 +85,11 @@ Hoek_Brown = function(sig.ci, GSI, mi, MR, D, height, unit.weight, use = c("gene
   sig.1.HB[1] = 0
   sig.1.MC[1] = 0
 
-  MC = data.frame(sig.n, tau.HB, tau.MC, tau.MC.inst)
+  MC = data.frame(round(sig.n,3), round(tau.HB,3), round(tau.MC,3), round(tau.MC.inst,3))
   names(MC) = c("sig.n", "Hoek-Brown", "Mohr-Coulomb", "Stress level")
   MC.tidy = gather(MC, key = "crit", value = "tau", -sig.n)
 
-  prin.stress = data.frame(sig.3, sig.1.HB, sig.1.MC)
+  prin.stress = data.frame(round(sig.3,3), round(sig.1.HB,3), round(sig.1.MC,3))
   names(prin.stress) = c("sig.3", "Hoek-Brown", "Mohr-Coulomb")
   prin.stress.tidy = gather(prin.stress, key = "crit", value = "sig.1", -sig.3)
 

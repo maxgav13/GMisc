@@ -27,7 +27,7 @@ Barton_Choubey = function(JRC, JCS, phi.r, unit.weight, depth) {
   pred1 = predict(spl, x = sig.n, deriv = 1)
   c = signif(pred0$y - (pred1$y * sig.n), 3)
   phi = signif(degs(atan(pred1$y)), 3)
-  return(list(dat = data.frame(sig_n = x, tau),
+  return(list(dat = data.frame(sig_n = round(x,3), tau = round(tau,3)),
               stress.level = data.frame(pred0),
               parameters = data.frame(c, phi)))
 }

@@ -69,7 +69,7 @@ DS_plot <- function(sign, tau) {
     coord_fixed()+
     xlim(0,1.1*sign[length(sign)])+
     ylim(0,1.1*tau[length(tau)])+
-    labs(x=expression(paste(sigma, " [kPa]")),y=expression(paste(tau, " [kPa]")))+
+    labs(x=expression(paste(sigma, " (kPa)")),y=expression(paste(tau, " (kPa)")))+
     annotate("text",x=(max(sign)-min(sign))/2,y=max(tau),
              label=labelphi,parse=T)+
     annotate("text",x=(max(sign)-min(sign))/2,y=0.95*max(tau),

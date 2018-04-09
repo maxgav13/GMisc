@@ -41,8 +41,8 @@ Barton_Choubey_plot = function(BC, units = "kPa") {
       geom_line(col = "red") +
       geom_point(data = BC$stress.level, aes(x*unit.factor, y*unit.factor), col = "blue", size = 2) +
       stat_function(fun = shear, col = "blue") +
-      labs(x = expression(paste("Normal stress ", sigma, " [kPa]")),
-           y = expression(paste("Shear stress ", tau, " [kPa]"))) +
+      labs(x = expression(paste("Normal stress ", sigma, " (kPa)")),
+           y = expression(paste("Shear stress ", tau, " (kPa)"))) +
       annotate("text", x = max(BC$dat$sig_n*unit.factor)/4, y = max(BC$dat$tau*unit.factor)/1.25,
                label = labelphi, parse = T)+
       annotate("text", x = max(BC$dat$sig_n*unit.factor)/4, y = 0.925*max(BC$dat$tau*unit.factor)/1.25,
@@ -55,8 +55,8 @@ Barton_Choubey_plot = function(BC, units = "kPa") {
       geom_line(col = "red") +
       geom_point(data = BC$stress.level, aes(x, y), col = "blue", size = 2) +
       stat_function(fun = shear, col = "blue") +
-      labs(x = expression(paste("Normal stress ", sigma, " [MPa]")),
-           y = expression(paste("Shear stress ", tau, " [MPa]"))) +
+      labs(x = expression(paste("Normal stress ", sigma, " (MPa)")),
+           y = expression(paste("Shear stress ", tau, " (MPa)"))) +
       annotate("text", x = max(BC$dat$sig_n)/4, y = max(BC$dat$tau)/1.25,
                label = labelphi, parse = T)+
       annotate("text", x = max(BC$dat$sig_n)/4, y = 0.925*max(BC$dat$tau)/1.25,
