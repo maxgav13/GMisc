@@ -16,7 +16,7 @@ additional_pks <- function (){
   install.packages("rgdal", dep=T)
   install.packages("tmap", dep=T)
   install.packages("ggpubr", dep=T)
-  install.packages("sjstats", dep=T)
+  # install.packages("sjstats", dep=T)
   install.packages("sjPlot", dep=T)
   install.packages("rockchalk", dep=T)
   install.packages("effsize", dep=T)
