@@ -30,7 +30,7 @@ cp_aic_eta = function(x, m = 10, nl = 3) {
                    breaks = c(min(datos[[1]]), breaks, max(datos[[1]])),
                    include.lowest = T)
     datos[[i+2]] = grouping
-    etas[i] = round(eta_sq(aov(datos[[2]] ~ datos[[i+2]])),3)
+    etas[i] = round(eta_sq(aov(datos[[2]] ~ datos[[i+2]]))$etasq,3)
     aic[i] = round(AIC(aov(datos[[2]] ~ datos[[i+2]])),2)
     names(datos)[[i+2]] = paste("B", i, sep = "")
   }
