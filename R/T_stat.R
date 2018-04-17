@@ -32,6 +32,7 @@ T_stat = function(x, k = 7) {
   }
 
   Tstat = ifelse(Tstat == Inf, max(Tstat[Tstat != Inf],na.rm = T) * 1.2, Tstat)
+  d = ifelse(d == Inf, max(d[d != Inf],na.rm = T) * 1.2, d)
   # if (any(Tstat == Inf)) {
   #   Tstat[which(Tstat == Inf)] = max(Tstat[Tstat != Inf],na.rm = T) * 1.2
   # }
