@@ -52,7 +52,7 @@ dir_stats_ps = function(dir, dip) {
   row.names(S) = c("Dip Dir","Dip")
 
   for (w in 1:nrow(eigvec)) {
-    S[1,w] = deg(atan(eigvec[2,w]/eigvec[1,w]))
+    S[1,w] = degs(atan(eigvec[2,w]/eigvec[1,w]))
     if (eigvec[2,w]>0 & eigvec[1,w]>0) {
       S[1,w] = S[1,w]
     } else if (eigvec[2,w]>0 & eigvec[1,w]<0) {
@@ -62,7 +62,7 @@ dir_stats_ps = function(dir, dip) {
     } else {
       S[1,w] = S[1,w]+360
     }
-    S[2,w] = deg(asin(eigvec[3,w]/(sqrt(sum(eigvec[,w]^2)))))
+    S[2,w] = degs(asin(eigvec[3,w]/(sqrt(sum(eigvec[,w]^2)))))
   }
   S = round(S,2)
   return(PS = S)
