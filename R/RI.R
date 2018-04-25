@@ -3,7 +3,7 @@
 #' @param x A data frame containing the depth of perforation in the first column, and the value of interest in the second column
 #' @param k The window length for the number of data points to include in the calculation of RI. Always and even (par) number
 #' @export
-#' @return A ggplot and plotly objects showing the RI statistic and lines marking the critical values of 0.7 and 0.8
+#' @return ggplot and plotly objects showing the RI statistic and lines marking the critical values of 0.7 and 0.8, and suggested boundaries
 #' @references Mora, R. (2013). Uso de metodos estadisticos para la determinacion de capas homogeneas de suelos volcanicos en un sitio de las laderas del Volcan Irazu, Cartago, Costa Rica. - Rev. Geol. Amer. Central, 49: 101-108.
 #' @import stats
 #' @import ggplot2
@@ -25,12 +25,15 @@ RI = function(x, k = 6) {
     S2 = var(wadj[(i+1):(i+n)], na.rm = TRUE)
     SC = (n * (S1 + S2)) / (2 * n - 1)
     SB = var(wadj[(i-(n-1)):(i+n)], na.rm = TRUE)
-    RI[i] = round(SB / (SB + SC),2)
+    RI[i] = round(SB / (SB + SC),3)
   }
   DF = data.frame(k, RI)
   DF = DF[c((n+1):nrow(DF)),]
   row.names(DF) = 1:nrow(DF)
   Data$RI = DF$RI
+
+  bounds.7 = head(Data[c(0,diff(sign(diff(Data$RI))))<0 & Data$RI>=.7,nombres[1]],-1)
+  bounds.8 = head(Data[c(0,diff(sign(diff(Data$RI))))<0 & Data$RI>=.8,nombres[1]],-1)
 
   q = ggplot(Data, aes_string("RI", nombres[1])) +
     geom_path(na.rm = T) +
@@ -45,5 +48,5 @@ RI = function(x, k = 6) {
                          scale_x_continuous(name = "RI") +
                          theme_bw())
 
-  return(list(GGPLOT=q, PLOTLY=p))
+  return(list(GGPLOT=q, PLOTLY=p, Bounds.7=bounds.7, Bounds.8=bounds.8))
 }

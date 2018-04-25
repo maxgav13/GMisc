@@ -12,7 +12,7 @@ T2_stat(x, k = 50)
 \item{k}{The window length for the number of data points to include in the calculation of T2-statistic. Always and even (par) number}
 }
 \value{
-A ggplot and plotly objects showing the Mahalanobis D2 statistic and lines marking the critical values at 0.95, 0.99, and 0.999
+ggplot and plotly objects showing the Mahalanobis D2 statistic and lines marking the critical values at 0.95, 0.99, and 0.999, and suggested boundaries
 }
 \description{
 Calculates the T2-statistic and corresponding effect size (Mahalanobis distance) for a perforation log with more than 1 variable. The coefficient is used to find layer boundaries in a perforation log.

@@ -3,7 +3,7 @@
 #' @param x A data frame containing the depth of perforation in the first column, and the variables of interest in the rest of the columns, for a CPTu test: point resistance (qc), sleeve friction (fs), and pore-water pressure (u)
 #' @param k The window length for the number of data points to include in the calculation of T2-statistic. Always and even (par) number
 #' @export
-#' @return A ggplot and plotly objects showing the Mahalanobis D2 statistic and lines marking the critical values at 0.95, 0.99, and 0.999
+#' @return ggplot and plotly objects showing the Mahalanobis D2 statistic and lines marking the critical values at 0.95, 0.99, and 0.999, and suggested boundaries
 #' @references Davis, J. C. (2002). Statistical and Data Analysis in Geology. 3rd ed. John Wiley & Sons.
 #' @import stats
 #' @import ggplot2
@@ -34,7 +34,7 @@ T2_stat = function(x, k = 50) {
     S2 = cov(s2, use = "na.or.complete")
     Sp = ((n - 1) * S1 + (n - 1) * S2) / (n + n - 2)
     D = colMeans(s1, na.rm = T) - colMeans(s2, na.rm = T)
-    D2[i] = round(as.numeric(D %*% solve(Sp) %*% D),2)
+    D2[i] = round(as.numeric(D %*% solve(Sp) %*% D),3)
     T2stat[i] = (n * n) / (n + n) * D2[i]
     f[i] = (n + n - m - 1) / ((n + n - 2) * m) * T2stat[i]
   }
@@ -58,6 +58,10 @@ T2_stat = function(x, k = 50) {
   chi = qchisq(c(0.95, 0.99, 0.999), df1)
   Stats = data.frame(k = k, df1 = df1, df2 = df2)
 
+  bounds.95 = Data[c(0,diff(sign(diff(Data$D2))))<0 & Data$D2>=chi[1],nombres[1]] %>% as.data.frame() %>% tidyr::drop_na() %>% unlist() %>% as.vector()
+  bounds.99 = Data[c(0,diff(sign(diff(Data$D2))))<0 & Data$D2>=chi[2],nombres[1]] %>% as.data.frame() %>% tidyr::drop_na() %>% unlist() %>% as.vector()
+  bounds.999 = Data[c(0,diff(sign(diff(Data$D2))))<0 & Data$D2>=chi[3],nombres[1]] %>% as.data.frame() %>% tidyr::drop_na() %>% unlist() %>% as.vector()
+
   q = ggplot(Data, aes_string("D2", nombres[1])) +
     geom_path(na.rm = T) +
     geom_vline(xintercept = chi, col = c("blue", "orange", "red")) +
@@ -71,5 +75,5 @@ T2_stat = function(x, k = 50) {
                          scale_x_continuous(name = "Mahalanobis D2") +
                          theme_bw())
 
-  return(list(GGPLOT=q, PLOTLY=p))
+  return(list(GGPLOT=q, PLOTLY=p, Bounds.95=bounds.95, Bounds.99=bounds.99, Bounds.999=bounds.999))
 }

@@ -12,7 +12,7 @@ T_stat(x, k = 6)
 \item{k}{The window length for the number of data points to include in the calculation of T-statistic. Always and even (par) number}
 }
 \value{
-A ggplot and plotly objects showing the Cohen's d statistic and lines marking the Cohen's U3 values for 0.95, 0.99, and 0.999
+ggplot and plotly objects showing the Cohen's d statistic and lines marking the Cohen's U3 values for 0.95, 0.99, and 0.999, and suggested boundaries
 }
 \description{
 Calculates the T-statistic and Cohen's d effect size for a perforation log. The coefficient is used to find layer boundaries in a perforation log.

@@ -3,7 +3,7 @@
 #' @param x A data frame containing the depth of perforation in the first column, and the value of interest in the second column
 #' @param k The window length for the number of data points to include in the calculation of T-statistic. Always and even (par) number
 #' @export
-#' @return A ggplot and plotly objects showing the Cohen's d statistic and lines marking the Cohen's U3 values for 0.95, 0.99, and 0.999
+#' @return ggplot and plotly objects showing the Cohen's d statistic and lines marking the Cohen's U3 values for 0.95, 0.99, and 0.999, and suggested boundaries
 #' @references Mora, R. (2013). Uso de metodos estadisticos para la identifacion de capas de suelos volcanicos con el ensayo del cono de pentracion en los terrenos de la Universidad de Costa Rica, Montes de Oca, San Jose, Costa Rica. - Rev. Geol. Amer. Central, 49: 109-120.
 #' @import stats
 #' @import ggplot2
@@ -28,7 +28,7 @@ T_stat = function(x, k = 6) {
     sp = sqrt(var(S1, na.rm = T)/n + var(S2, na.rm = T)/n)
     spd = sqrt((var(S1, na.rm = T)*(n-1) + var(S2, na.rm = T)*(n-1))/(n + n - 2))
     Tstat[i] = abs(diff / sp)
-    d[i] = round(abs(diff / spd),2)
+    d[i] = round(abs(diff / spd),3)
   }
 
   Tstat = ifelse(Tstat == Inf, max(Tstat[Tstat != Inf],na.rm = T) * 1.2, Tstat)
@@ -49,6 +49,10 @@ T_stat = function(x, k = 6) {
   # d_crit = c(2.3, 2.88, 3.29, 3.92)
   d_crit = qnorm(c(.95,.99,.999))
 
+  bounds.95 = head(Data[c(0,diff(sign(diff(Data$d))))<0 & Data$d>=d_crit[1],nombres[1]],-1)
+  bounds.99 = head(Data[c(0,diff(sign(diff(Data$d))))<0 & Data$d>=d_crit[2],nombres[1]],-1)
+  bounds.999 = head(Data[c(0,diff(sign(diff(Data$d))))<0 & Data$d>=d_crit[3],nombres[1]],-1)
+
   q = ggplot(Data, aes_string("d", nombres[1])) +
     geom_path(na.rm = T) +
     geom_vline(xintercept = d_crit, col = c("blue", "orange", "red")) +
@@ -62,5 +66,5 @@ T_stat = function(x, k = 6) {
                          scale_x_continuous(name = "Cohen's d") +
                          theme_bw())
 
-  return(list(GGPLOT=q, PLOTLY=p))
+  return(list(GGPLOT=q, PLOTLY=p, Bounds.95=bounds.95, Bounds.99=bounds.99, Bounds.999=bounds.999))
 }
