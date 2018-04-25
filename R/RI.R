@@ -32,8 +32,8 @@ RI = function(x, k = 6) {
   row.names(DF) = 1:nrow(DF)
   Data$RI = DF$RI
 
-  bounds.7 = head(Data[c(0,diff(sign(diff(Data$RI))))<0 & Data$RI>=.7,nombres[1]],-1)
-  bounds.8 = head(Data[c(0,diff(sign(diff(Data$RI))))<0 & Data$RI>=.8,nombres[1]],-1)
+  bounds.7 = Data[c(0,diff(sign(diff(Data$RI))))<0 & Data$RI>=.7,nombres[1]] %>% as.data.frame() %>% tidyr::drop_na() %>% unlist() %>% as.vector()
+  bounds.8 = Data[c(0,diff(sign(diff(Data$RI))))<0 & Data$RI>=.8,nombres[1]] %>% as.data.frame() %>% tidyr::drop_na() %>% unlist() %>% as.vector()
 
   q = ggplot(Data, aes_string("RI", nombres[1])) +
     geom_path(na.rm = T) +

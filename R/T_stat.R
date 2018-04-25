@@ -49,9 +49,9 @@ T_stat = function(x, k = 6) {
   # d_crit = c(2.3, 2.88, 3.29, 3.92)
   d_crit = qnorm(c(.95,.99,.999))
 
-  bounds.95 = head(Data[c(0,diff(sign(diff(Data$d))))<0 & Data$d>=d_crit[1],nombres[1]],-1)
-  bounds.99 = head(Data[c(0,diff(sign(diff(Data$d))))<0 & Data$d>=d_crit[2],nombres[1]],-1)
-  bounds.999 = head(Data[c(0,diff(sign(diff(Data$d))))<0 & Data$d>=d_crit[3],nombres[1]],-1)
+  bounds.95 = Data[c(0,diff(sign(diff(Data$d))))<0 & Data$d>=d_crit[1],nombres[1]] %>% as.data.frame() %>% tidyr::drop_na() %>% unlist() %>% as.vector()
+  bounds.99 = Data[c(0,diff(sign(diff(Data$d))))<0 & Data$d>=d_crit[2],nombres[1]] %>% as.data.frame() %>% tidyr::drop_na() %>% unlist() %>% as.vector()
+  bounds.999 = Data[c(0,diff(sign(diff(Data$d))))<0 & Data$d>=d_crit[3],nombres[1]] %>% as.data.frame() %>% tidyr::drop_na() %>% unlist() %>% as.vector()
 
   q = ggplot(Data, aes_string("d", nombres[1])) +
     geom_path(na.rm = T) +
