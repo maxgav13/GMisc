@@ -19,10 +19,7 @@ cp_aic_eta = function(x, m = 10, nl = 3) {
   nombres = names(datos)
 
   etas = NULL
-  f = NULL
   aic = NULL
-  avgs = list()
-  sdevs = list()
   for (i in 1:m) {
     cpt = cpt.meanvar(datos[[2]], method = "BinSeg", penalty = "MBIC", Q = i, minseglen = nl)
     breaks = datos[[1]][cpts(cpt)]
