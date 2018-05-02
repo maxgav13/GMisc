@@ -196,5 +196,5 @@ induced_stress = function(qs, B, L = NULL, z.end, footing = c("strip", "square",
               legend.title = element_text(size = 12))
     }
   }
-  return(list(Plot = q, Plotly = ggplotly(q)))
+  return(list(Plot = q, Plotly = ggplotly(q, dynamicTicks = T)))
 }

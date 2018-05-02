@@ -4,7 +4,6 @@
 #' @return Installed packages
 #'
 additional_pks <- function (){
-  install.packages("DescTools", dep=T)
   install.packages("sf", dep=T)
   install.packages("raster", dep=T)
   install.packages("gstat", dep=T)
