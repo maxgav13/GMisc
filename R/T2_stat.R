@@ -73,7 +73,7 @@ T2_stat = function(x, k = 50) {
                          geom_vline(size = 0.25, xintercept = chi, col = c("blue", "orange", "red")) +
                          scale_y_reverse(name = "Depth (m)") +
                          scale_x_continuous(name = "Mahalanobis D2") +
-                         theme_bw())
+                         theme_bw(), dynamicTicks = T)
 
   return(list(GGPLOT=q, PLOTLY=p, Bounds.95=bounds.95, Bounds.99=bounds.99, Bounds.999=bounds.999))
 }

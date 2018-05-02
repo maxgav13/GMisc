@@ -19,7 +19,7 @@ moving_filter_plot_f(x, xlab = "X", ylab = "Data",
 \item{plotk}{A string for choosing what to plot (Default is "all")}
 }
 \value{
-A ggplot object with the filtered data and original data
+ggplot and plotly objects with the filtered data and original data
 }
 \description{
 Plots the filtered results of a moving (weighted) average filter routine.

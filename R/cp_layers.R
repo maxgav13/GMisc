@@ -26,7 +26,7 @@ cp_layers = function(x, breaks) {
     labs(x = nom[2], y = "Depth [m]", col = 'Layers') +
     theme_bw()
 
-  p = plotly::ggplotly(q)
+  p = plotly::ggplotly(q, dynamicTicks = T)
 
   q2 = ggplot(datos, aes_string(nom[3], nom[2])) +
     stat_summary(fun.data = mean_cl_normal,
@@ -35,7 +35,7 @@ cp_layers = function(x, breaks) {
                  size=.75) +
     theme_bw() + theme(axis.text.x = element_text(angle = 45, vjust = 1, hjust=1))
 
-  p2 = plotly::ggplotly(q2)
+  p2 = plotly::ggplotly(q2, dynamicTicks = T)
 
   Summary = datos %>%
     group_by(Layers) %>%

@@ -36,7 +36,7 @@ cp_aic_eta = function(x, m = 10, nl = 3) {
   q = ggplot(stats_df, aes(breaks, stat_value)) +
     geom_line(size = .5, col = 4) +
     geom_point(size = 2, shape = 19, col = 4) +
-    facet_wrap("stat", scales = "free") +
+    facet_grid(vars(stat), scales = "free_y", switch = 'both') +
     labs(x = "Number of breakpoints", y = "Statistic Value") +
     scale_x_continuous(breaks = 1:m) +
     theme_bw()

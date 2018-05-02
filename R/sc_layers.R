@@ -33,7 +33,7 @@ sc_layers = function(x, h = 0.1, breaks) {
     labs(x = nom[2], y = nom[1], col = 'Layers') +
     theme_bw()
 
-  p = plotly::ggplotly(q)
+  p = plotly::ggplotly(q, dynamicTicks = T)
 
   q2 = ggplot(dat, aes_string('boundaries', nom[2], col = 'boundaries')) +
     stat_summary(fun.data = mean_cl_normal,
@@ -43,7 +43,7 @@ sc_layers = function(x, h = 0.1, breaks) {
     labs(x = 'Layers', y = nom[2], col = '') +
     theme_bw() + theme(axis.text.x = element_text(angle = 45, vjust = 1, hjust=1))
 
-  p2 = plotly::ggplotly(q2)
+  p2 = plotly::ggplotly(q2, dynamicTicks = T)
 
   Summary = dat %>%
     group_by(boundaries) %>%

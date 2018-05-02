@@ -64,7 +64,7 @@ T_stat = function(x, k = 6) {
                          geom_vline(size = 0.25, xintercept = d_crit, col = c("blue", "orange", "red")) +
                          scale_y_reverse(name = "Depth (m)") +
                          scale_x_continuous(name = "Cohen's d") +
-                         theme_bw())
+                         theme_bw(), dynamicTicks = T)
 
   return(list(GGPLOT=q, PLOTLY=p, Bounds.95=bounds.95, Bounds.99=bounds.99, Bounds.999=bounds.999))
 }

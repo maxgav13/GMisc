@@ -46,7 +46,7 @@ RI = function(x, k = 6) {
                          geom_vline(size = 0.25, xintercept = c(.7,.8), col = c("blue", "red")) +
                          scale_y_reverse(name = "Depth (m)") +
                          scale_x_continuous(name = "RI") +
-                         theme_bw())
+                         theme_bw(), dynamicTicks = T)
 
   return(list(GGPLOT=q, PLOTLY=p, Bounds.7=bounds.7, Bounds.8=bounds.8))
 }

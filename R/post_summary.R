@@ -1,7 +1,7 @@
 #' @title Summary of vectors, matrices or data frames
 #' @description Summarises vectors, matrices or data frames by showing their mean, median, standard deviation, inter quartile range, and desired quantiles.
 #' @param x A vector, matrix or data frame with numerical variables
-#' @param probs Deisred quantiles to display
+#' @param probs Desired quantiles to display
 #' @param digits Number of significant digits to display
 #' @export
 #' @return A data frame with the mean, median, standard deviation, inter quartile range, and chosen quantiles

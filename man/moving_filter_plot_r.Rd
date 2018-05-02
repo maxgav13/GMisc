@@ -19,7 +19,7 @@ moving_filter_plot_r(x, xlab = "X", ylab = "Residual data",
 \item{plotk}{A string for choosing what to plot (Default is "all")}
 }
 \value{
-A ggplot object with the residual data
+ggplot and plotly objects with the residual data
 }
 \description{
 Plots the residual results of a moving (weighted) average filter routine.

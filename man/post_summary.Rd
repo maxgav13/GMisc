@@ -9,7 +9,7 @@ post_summary(x, probs = c(0.025, 0.975), digits = 3)
 \arguments{
 \item{x}{A vector, matrix or data frame with numerical variables}
 
-\item{probs}{Deisred quantiles to display}
+\item{probs}{Desired quantiles to display}
 
 \item{digits}{Number of significant digits to display}
 }

@@ -6,7 +6,7 @@
 #' @param filterlab The label for the legend
 #' @param plotk A string for choosing what to plot (Default is "all")
 #' @export
-#' @return A ggplot object with the filtered data and original data
+#' @return ggplot and plotly objects with the filtered data and original data
 #' @import stats
 #' @import ggplot2
 #' @import tidyr
@@ -34,5 +34,8 @@ moving_filter_plot_f = function(x, xlab = "X", ylab = "Data", filterlab = "Filte
     geom_line(size = 0.5) +
     labs(x = xlab, y = ylab, col = filterlab) +
     theme_bw()
-  return(f)
+
+  p = plotly::ggplotly(f, dynamicTicks = T)
+
+  return(list(GGPLOT=f, PLOTLY=p))
 }
