@@ -14,7 +14,7 @@
 ci_chisq <- function (s, n, conf.level = .95){
   alpha <- 1 - conf.level
   upper <- ((n-1) * s^2)/qchisq(alpha/2, n-1)
-  lower <- ((n-1) * s^2)/qchisq(1-alpha, n-1)
+  lower <- ((n-1) * s^2)/qchisq(1-alpha/2, n-1)
   DF <- data.frame(stat = c("sd", "var"), value = round(c(s, s^2), 2) , df = n-1,
                    lower = c(round(sqrt(lower), 2), round(lower, 2)),
                    upper = c(round(sqrt(upper), 2), round(upper, 2)))
