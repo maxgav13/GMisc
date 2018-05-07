@@ -24,8 +24,8 @@ dir_unif_test_2D = function(x, dir = 1, conf.level = 0.95) {
   # Rcrit = (sqrt(2.605 * n) - .04) / n
 
   interpretation = ifelse(R > Rcrit,
-                          paste("Reject H0 and conclude that the sample has a prefered mean direction"),
-                          paste("Do not reject H0 and conclude there is not enough evidence to suggest that the sample has a prefered mean direction"))
+                          paste("Reject H0 and conclude that the sample has a preferred mean direction"),
+                          paste("Do not reject H0 and conclude there is not enough evidence to suggest that the sample has a preferred mean direction"))
 
   return(list(R = round(R, 3), Rcrit = round(Rcrit, 3),
               interpretation = interpretation))
