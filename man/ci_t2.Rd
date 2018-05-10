@@ -2,9 +2,9 @@
 % Please edit documentation in R/ci_t2.R
 \name{ci_t2}
 \alias{ci_t2}
-\title{Confidence interval for difference of the mean between 2 samples}
+\title{Confidence interval for difference of the mean between 2 samples (unknown sigmas)}
 \usage{
-ci_t2(x1, s1, n1, x2, s2, n2, conf.level = 0.95)
+ci_t2(x1, s1, n1, x2, s2, n2, var.equal = TRUE, conf.level = 0.95)
 }
 \arguments{
 \item{x1}{Sample's 1 mean}
@@ -18,6 +18,8 @@ ci_t2(x1, s1, n1, x2, s2, n2, conf.level = 0.95)
 \item{s2}{Sample's 2 standard deviation}
 
 \item{n2}{Sample size of sample 2}
+
+\item{var.equal}{Logical indicating if the variances are equal or not}
 
 \item{conf.level}{Confidence level to use for the confidence interval (Default is 0.95)}
 }
