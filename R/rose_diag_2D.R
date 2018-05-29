@@ -36,17 +36,20 @@ rose_diag_2D = function(x, width = 30, dir = 1, conf.level = 0.95) {
   nt = length(x)
 
   plt.dirrose <- ggplot(data.frame(z), aes(z)) +
-    stat_bin(breaks = (0:n)/n*360, colour = "black", fill = "blue") +
+    stat_bin(aes(y=sqrt((..count..)/max(..count..)*100^2)),
+             breaks = (0:n)/n*360, colour = "black", fill = "blue") +
     scale_x_continuous(breaks = 0:12/12*360, limits = c(0, 360)) +
     # scale_y_continuous(limits = c(0, outer)) +
     geom_vline(xintercept = c(r$Cone.lower, r$Mean.Dir, r$Cone.upper),
                col=c('cyan', 'red', 'cyan'), size = c(0.75, 1, 0.75)) +
-    labs(y = paste('Frequency of measurements (n = ', nt, ')')) +
-    labs(caption = labelmeandir) +
+    scale_y_continuous('', labels = NULL) +
+    # labs(y = paste('Frequency of measurements (n = ', nt, ')')) +
+    labs(caption = labelmeandir, title = paste('N = ', nt)) +
     coord_polar() +
     theme_bw() +
     theme(axis.title.x = element_blank(),
           panel.border = element_blank(),
+          axis.ticks.y = element_blank(),
           axis.title.y = element_text(size=8, face = "plain", hjust = 0.9, vjust = 1.3),
           panel.grid.major = element_line(size=.3,colour = 'grey60'),
           panel.grid.minor = element_blank())

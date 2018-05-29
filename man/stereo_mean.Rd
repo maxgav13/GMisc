@@ -4,8 +4,7 @@
 \alias{stereo_mean}
 \title{Stereonet (mean)}
 \usage{
-stereo_mean(dir, dip, conf.level = 0.95, points.shape = 3,
-  points.col = "blue", plane.col = "red", add = FALSE)
+stereo_mean(dir, dip, conf.level = 0.95, mean.col = "red", add = FALSE)
 }
 \arguments{
 \item{dir}{A vector of dir directions in degrees}
@@ -14,11 +13,7 @@ stereo_mean(dir, dip, conf.level = 0.95, points.shape = 3,
 
 \item{conf.level}{Confidence level for the cone of confidence (Default is 0.95)}
 
-\item{points.shape}{Shape value (pch) for the data points}
-
-\item{points.col}{Color for the data points}
-
-\item{plane.col}{Color for the mean plane and cone of confidence}
+\item{mean.col}{Color for the mean and cone of confidence}
 
 \item{add}{A logical indicating to add or not another set of measurements and its calculations}
 }
@@ -26,7 +21,7 @@ stereo_mean(dir, dip, conf.level = 0.95, points.shape = 3,
 A stereonet plot of data points and its mean estimations
 }
 \description{
-Draws the mean great circle, mean direction and cone of confidence for a set of measurements.
+Draws the mean direction and cone of confidence for a set of measurements.
 }
 \examples{
 dir <- runif(min = 30, max = 80, n = 20)

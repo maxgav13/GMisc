@@ -4,8 +4,8 @@
 \alias{NewStats_2samples}
 \title{New Statistics two samples (idependent & dependent)}
 \usage{
-NewStats_2samples(x, y, dep = F, col.x = 3, col.y = 4, col.diff = 2,
-  ylab.diff = "Difference")
+NewStats_2samples(x, y, dep = F, conf.level = 0.95, col.x = 3,
+  col.y = 4, col.diff = 2, ylab.diff = "Difference")
 }
 \arguments{
 \item{x}{Sample 1}
@@ -13,6 +13,8 @@ NewStats_2samples(x, y, dep = F, col.x = 3, col.y = 4, col.diff = 2,
 \item{y}{Sample 2}
 
 \item{dep}{Logical indicating if the samples are dependent (Default is F)}
+
+\item{conf.level}{Confidence level for the interval (Default is 0.95)}
 
 \item{col.x}{Color to use for sample 1}
 
@@ -33,8 +35,8 @@ The labels of the plot are generic but they can be customised using the \code{la
 }
 \examples{
 set.seed(101)
-x = rnorm(20, 15, 6)
-y = rnorm(20, 10, 8)
+x = rnorm(20, 15, 7)
+y = rnorm(20, 10, 5)
 y1 = rnorm(20,x/1.1,2)
 NewStats_2samples(x, y, dep = F)
 NewStats_2samples(x, y1, dep = T)
