@@ -50,7 +50,7 @@ dir_stats_3D = function(dir, dip, conf.level = 0.95) {
   cono_sup = meandirtrue + cono
   cono_inf = meandirtrue - cono
 
-  cono_sup = ifelse(cono_sup > 360, 360 - cono_sup, cono_sup)
+  cono_sup = ifelse(cono_sup > 360, cono_sup - 360, cono_sup)
   cono_inf = ifelse(cono_inf < 0, 360 + cono_inf, cono_inf)
 
   dir.stats = data.frame(Mean.Dir = round(meandirtrue, 1), MeanDip = round(meandip, 1), R = signif(Rbar, 3), Sph.Var = signif(ss, 3),

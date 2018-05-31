@@ -27,7 +27,7 @@ rose_diag_3D = function(dir, dip, width = 30, conf.level = 0.95) {
 
   plt.dirrose <- ggplot(data.frame(dir), aes(dir)) +
     stat_bin(aes(y=sqrt((..count..)/max(..count..)*100^2)),
-             breaks = (0:n)/n*360, colour = "black", fill = "blue") +
+             breaks = (0:n)/n*360, colour = "black", fill = "blue", closed = 'left') +
     scale_x_continuous(breaks = 0:12/12*360, limits = c(0, 360)) +
     # scale_y_continuous(limits = c(0, outer)) +
     geom_vline(xintercept = c(r$Cone.lower, r$Mean.Dir, r$Cone.upper),

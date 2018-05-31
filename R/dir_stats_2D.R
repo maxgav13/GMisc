@@ -56,7 +56,7 @@ dir_stats_2D = function(x, dir = 1, conf.level = 0.95) {
   cono_sup = meantrue + cono
   cono_inf = meantrue - cono
 
-  cono_sup = ifelse(cono_sup > 360, 360 - cono_sup, cono_sup)
+  cono_sup = ifelse(cono_sup > 360, cono_sup - 360, cono_sup)
   cono_inf = ifelse(cono_inf < 0, 360 + cono_inf, cono_inf)
 
   dir.stats = data.frame(Mean.Dir = round(meantrue, 1), R = signif(R, 3), Circ.Var = signif(s0, 3),
