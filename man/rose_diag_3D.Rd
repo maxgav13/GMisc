@@ -4,14 +4,16 @@
 \alias{rose_diag_3D}
 \title{Rose diagram (3D)}
 \usage{
-rose_diag_3D(dir, dip, width = 30, conf.level = 0.95)
+rose_diag_3D(az, dip, width = 30, dir = 1, conf.level = 0.95)
 }
 \arguments{
-\item{dir}{A vector of dip directions in degrees}
+\item{az}{A vector of directions in degrees}
 
 \item{dip}{A vector of dip angles in degrees}
 
 \item{width}{Petal width}
+
+\item{dir}{A logical indicating if the data are directional (1) or non-directional (0)}
 
 \item{conf.level}{Confidence level to use for the cone of confidence (Default is 0.95)}
 }
@@ -22,11 +24,12 @@ A ggplot obejct
 Plots a rose diagram for angular (direction and dip) data.
 }
 \details{
-The mean direction and cone of confidence are displayed as red and cyan lines respectively.
+The mean direction and cone of confidence are displayed as red and cyan lines respectively. If non-directional data is provided it must follow the right-hand rule.
 }
 \examples{
-dir = c(12,18,22,15,10,20)
+dip.dir = c(12,18,22,15,10,20)
+strike = d2s(dip.dir)
 dip = c(42,40,48,30,42,30)
-rose_diag_3D(dir, dip)
+rose_diag_3D(dip.dir, dip)
 
 }

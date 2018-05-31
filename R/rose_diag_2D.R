@@ -32,15 +32,15 @@ rose_diag_2D = function(x, width = 30, dir = 1, conf.level = 0.95) {
   cone = c(r$Cone.lower, r$Mean.Dir, r$Cone.upper)
 
   if (dir == 0) {
-    if (r$Cone.lower > 180 & r$Cone.upper < 360) {
+    if (r$Cone.lower > 180 & r$Cone.upper < 360 & r$Cone.upper > 180) {
       cone0 = c(r$Cone.lower, r$Mean.Dir, r$Cone.upper) - 180
-    } else if (r$Cone.lower > 0 & r$Cone.upper < 180) {
+    } else if (r$Cone.lower > 0 & r$Cone.upper < 180 & r$Cone.lower < 180) {
       cone0 = c(r$Cone.lower, r$Mean.Dir, r$Cone.upper) + 180
     } else if (r$Cone.lower < 180 & r$Cone.upper > 180 & r$Mean.Dir < 180) {
       cone0 = c(r$Cone.lower + 180 , r$Mean.Dir + 180, r$Cone.upper - 180)
     } else if (r$Cone.lower < 180 & r$Cone.upper > 180 & r$Mean.Dir > 180) {
       cone0 = c(r$Cone.lower + 180 , r$Mean.Dir - 180, r$Cone.upper - 180)
-    } else if (r$Cone.lower < 360 & r$Cone.upper < 90 & r$Mean.Dir < 360) {
+    } else if (r$Cone.lower < 360 & r$Cone.upper < 90 & r$Mean.Dir < 360 & r$Mean.Dir > 180) {
       cone0 = c(r$Cone.lower - 180 , r$Mean.Dir - 180, r$Cone.upper + 180)
     } else if (r$Cone.lower < 360 & r$Cone.upper < 90 & r$Mean.Dir < 90) {
       cone0 = c(r$Cone.lower - 180 , r$Mean.Dir + 180, r$Cone.upper + 180)
