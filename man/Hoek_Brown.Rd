@@ -4,8 +4,8 @@
 \alias{Hoek_Brown}
 \title{Hoek-Brown criterion}
 \usage{
-Hoek_Brown(sig.ci, GSI, mi, MR, D, height, unit.weight, use = c("general",
-  "tunnels", "slopes"))
+Hoek_Brown(sig.ci, GSI, mi, MR, D, height, unit.weight,
+  use = c("general", "tunnels", "slopes"))
 }
 \arguments{
 \item{sig.ci}{The unconfined compressive strength of the intact rock, in MPa}

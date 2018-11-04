@@ -4,9 +4,9 @@
 \alias{NewStats_contrasts}
 \title{New Statistics contrasts}
 \usage{
-NewStats_contrasts(dat, g1, g2, conf.level = 0.95, col.g1 = 3, col.g2 = 4,
-  col.diff = 2, ylab = "Values", ylab.diff = "Difference",
-  B.labels = c("G1", "G2", "Difference"))
+NewStats_contrasts(dat, g1, g2, conf.level = 0.95, col.g1 = 3,
+  col.g2 = 4, col.diff = 2, ylab = "Values",
+  ylab.diff = "Difference", B.labels = c("G1", "G2", "Difference"))
 }
 \arguments{
 \item{dat}{Data frame of the samples with mean, standard deviation, sample size, and sample id}

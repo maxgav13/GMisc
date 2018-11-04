@@ -4,7 +4,8 @@
 \alias{stereo_plane}
 \title{Stereonet (planes)}
 \usage{
-stereo_plane(az, dip, dir = c("strike", "dip"), col = "blue", add = FALSE)
+stereo_plane(az, dip, dir = c("strike", "dip"), col = "blue",
+  add = FALSE)
 }
 \arguments{
 \item{az}{A vector of angular measurements in degrees (strike or dip directions)}

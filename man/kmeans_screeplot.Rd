@@ -4,12 +4,14 @@
 \alias{kmeans_screeplot}
 \title{kmeans_screeplot}
 \usage{
-kmeans_screeplot(x, n = 15)
+kmeans_screeplot(x, n = 15, seed = 101)
 }
 \arguments{
 \item{x}{A data frame containing the data to use for the kmeans algorithm}
 
 \item{n}{The maximum number of clusters to try}
+
+\item{seed}{Seed number for reproducibility}
 }
 \value{
 A scree plot

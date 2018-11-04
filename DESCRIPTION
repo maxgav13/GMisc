@@ -8,5 +8,5 @@ Description: Functions for general statistical purpose use, and geological use.
 URL: http://github.com/maxgav13/GMisc
 License: GPL (>= 2)
 LazyData: TRUE
-RoxygenNote: 6.0.1
+RoxygenNote: 6.1.0
 Imports: stats, ggplot2, dplyr, tidyr, zoo, broom, grDevices, png, grid, RFOC, stringr, geotech, pracma, cowplot, plotly, Hmisc, changepoint, sjstats (>= 0.14.2), strucchange, DescTools

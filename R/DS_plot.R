@@ -16,15 +16,19 @@
 #'
 DS_plot <- function(sign, tau) {
   # Calculates failure envelope and c and phi parameters
-  ds = lm(tau~sign)
+  ds = lm(tau ~ sign)
   DS = coef(ds)
-  c = DS[1]
-  phi = degs(atan(DS[2]))
+  if(DS[[1]] > 0){
+    c = DS[[1]]
+    phi = degs(atan(DS[[2]]))
+  } else {
+    DS = coef(lm(tau ~ sign - 1))
+    c = 0
+    phi = degs(atan(DS[[1]]))
+  }
   r2 = summary(ds)$r.squared
   r = cor(sign,tau)
   (rmse = sqrt(sum((residuals(ds))^2)/df.residual(ds)))
-
-  c = ifelse(c > 0,c,0)
 
   # Calculates center and radius for each pair
   C = sign+(tau/tan(rads(90-phi)))

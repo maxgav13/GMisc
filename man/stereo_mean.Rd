@@ -4,7 +4,8 @@
 \alias{stereo_mean}
 \title{Stereonet (mean)}
 \usage{
-stereo_mean(dir, dip, conf.level = 0.95, mean.col = "red", add = FALSE)
+stereo_mean(dir, dip, conf.level = 0.95, mean.col = "red",
+  add = FALSE)
 }
 \arguments{
 \item{dir}{A vector of dir directions in degrees}

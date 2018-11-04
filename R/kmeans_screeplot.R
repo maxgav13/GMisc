@@ -2,6 +2,7 @@
 #' @description Creates a scree plot for a given number of clusters to determine the "optimal" number of clusters.
 #' @param x A data frame containing the data to use for the kmeans algorithm
 #' @param n The maximum number of clusters to try
+#' @param seed Seed number for reproducibility
 #' @export
 #' @return A scree plot
 #' @import stats
@@ -9,10 +10,11 @@
 #' @examples
 #' kmeans_screeplot(CPTu_data[,2:ncol(CPTu_data)], n = 15)
 #'
-kmeans_screeplot = function(x, n = 15) {
+kmeans_screeplot = function(x, n = 15, seed = 101) {
   # Initialize total within sum of squares error: wss
   wss <- 0
 
+  set.seed(seed)
   for (i in 1:n) {
     km.out <- kmeans(x, centers = i, nstart = 20)
     # Save total within sum of squares to wss variable

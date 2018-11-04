@@ -4,7 +4,8 @@
 \alias{stereo_lines}
 \title{Stereonet (lines)}
 \usage{
-stereo_lines(dir, dip, points.shape = 3, points.col = "blue", add = FALSE)
+stereo_lines(dir, dip, points.shape = 3, points.col = "blue",
+  add = FALSE)
 }
 \arguments{
 \item{dir}{A vector of dir directions in degrees}
