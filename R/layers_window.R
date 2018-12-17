@@ -1,17 +1,18 @@
 #' @title Plots a layered model and summarizes the statistics for each layer
-#' @description Given a set of breakpoints, plots a layered model of one variable against distance, plots the confidence intervals for each layer, and gives a summary table.
-#' @param x A data frame containing the location variable (depth or distance) in the first column, and the value of interest in the second column
+#' @description Given a set of breakpoints (depths/distances), plots a layered model of the data against distance, plots the confidence intervals for each layer, and gives a summary table.
+#' @param x A data frame containing the location variable (depth or distance) in the first column, and the value(s) of interest in the rest of the columns
 #' @param breaks A vector containg the breakpoints (from 'RI', 'Cohen d' or 'Mahalanobis D2')
 #' @export
 #' @return A ggplot and plotly objects showing the layered model, another showing the confidence intervals, and a summary table
 #' @import stats
 #' @import ggplot2
 #' @import dplyr
+#' @import forcats
+#' @import tidyr
 #' @import DescTools
 #' @examples
 #' layers_window(DPM_data, breaks = c(3.8,8.9))
-#' sub = subset(CPTu_data,select = c(depth,qc))
-#' layers_window(sub, breaks = c(1.2,3.8,5.1))
+#' layers_window(CPTu_data, breaks = c(1.2,3.8,5.1))
 #'
 layers_window = function(x, breaks) {
 
@@ -21,29 +22,34 @@ layers_window = function(x, breaks) {
   grouping = cut(dat[[nom[1]]],
                  breaks = c(min(dat[1]), breaks, max(dat[1])),
                  include.lowest = T)
-  dat$boundaries = grouping
 
-  q = ggplot(dat, aes_string(nom[2], nom[1], col = "boundaries")) +
-    geom_path(size = .75) +
+  dat$boundaries = grouping
+  dat_tidy = gather(dat, Property, Value, -c(nom[1],'boundaries')) %>%
+    mutate(Property = as_factor(Property))
+
+  q = ggplot(dat_tidy, aes_string('Value', nom[1], col = "boundaries")) +
+    geom_path(aes(group=1),size = .75) +
     scale_y_reverse() +
-    labs(x = nom[2], y = nom[1], col = 'Layers') +
+    facet_grid(~Property,scales = 'free_x') +
+    labs(x = '', y = nom[1], col = 'Layers') +
     theme_bw()
 
   p = plotly::ggplotly(q, dynamicTicks = T)
 
-  q2 = ggplot(dat, aes_string('boundaries', nom[2], col = 'boundaries')) +
+  q2 = ggplot(dat_tidy, aes_string('boundaries', 'Value', col = 'boundaries')) +
     stat_summary(fun.data = mean_cl_normal,
                  geom = "pointrange",
-                 color = "red",
+                 # color = "red",
                  size=.75) +
-    labs(x = 'Layers', y = nom[2], col = '') +
+    facet_wrap(~Property,scales = 'free_y') +
+    labs(x = 'Layers', y = '', col = 'Layers') +
     theme_bw() + theme(axis.text.x = element_text(angle = 45, vjust = 1, hjust=1))
 
-  p2 = plotly::ggplotly(q2, dynamicTicks = T)
+  p2 = plotly::ggplotly(q2)
 
-  Summary = dat %>%
-    group_by(boundaries) %>%
-    summarise_at(vars(nom[2]),
+  Summary = dat_tidy %>%
+    group_by(boundaries,Property) %>%
+    summarise_at(vars(Value),
                  funs(Obs = n(),
                       Mean = signif(mean(.),3),
                       SD = signif(sd(.),3),

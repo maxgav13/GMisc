@@ -7,7 +7,7 @@
 layers_window(x, breaks)
 }
 \arguments{
-\item{x}{A data frame containing the location variable (depth or distance) in the first column, and the value of interest in the second column}
+\item{x}{A data frame containing the location variable (depth or distance) in the first column, and the value(s) of interest in the rest of the columns}
 
 \item{breaks}{A vector containg the breakpoints (from 'RI', 'Cohen d' or 'Mahalanobis D2')}
 }
@@ -15,11 +15,10 @@ layers_window(x, breaks)
 A ggplot and plotly objects showing the layered model, another showing the confidence intervals, and a summary table
 }
 \description{
-Given a set of breakpoints, plots a layered model of one variable against distance, plots the confidence intervals for each layer, and gives a summary table.
+Given a set of breakpoints (depths/distances), plots a layered model of the data against distance, plots the confidence intervals for each layer, and gives a summary table.
 }
 \examples{
 layers_window(DPM_data, breaks = c(3.8,8.9))
-sub = subset(CPTu_data,select = c(depth,qc))
-layers_window(sub, breaks = c(1.2,3.8,5.1))
+layers_window(CPTu_data, breaks = c(1.2,3.8,5.1))
 
 }
