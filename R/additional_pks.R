@@ -34,6 +34,8 @@ additional_pks <- function (){
   install.packages("tidyverse", dep=T)
   install.packages("latex2exp", dep=T)
   install.packages("binom", dep=T)
+  install.packages("heplots", dep=T)
+  install.packages(c("RVAideMemoire", "EMT", "XNomial", "ggmosaic"))
   devtools::install_github('doomlab/MOTE')
   devtools::install_github('gitrman/itns')
 }
