@@ -36,6 +36,9 @@ additional_pks <- function (){
   install.packages("binom", dep=T)
   install.packages("heplots", dep=T)
   install.packages(c("RVAideMemoire", "EMT", "XNomial", "ggmosaic"))
+  install.packages(c("xaringan", "citr", "bookdown"))
+  install.packages("CircStats", dep=T)
+  install.packages("vistributions", dep=T)
   devtools::install_github('doomlab/MOTE')
   devtools::install_github('gitrman/itns')
 }
