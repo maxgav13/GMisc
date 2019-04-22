@@ -6,6 +6,8 @@
 #' @export
 #' @return A data frame with the mean, median, standard deviation, inter quartile range, and chosen quantiles
 #' @import stats
+#' @import dplyr
+#' @import DescTools
 #' @examples
 #' x1 <- rnorm(100, 30, 6)
 #' x2 <- matrix(x1, nrow = 10)
@@ -16,18 +18,23 @@
 #'
 post_summary <- function(x, probs = c(.025, .975), digits = 3){
   if (is.data.frame(x) == TRUE | is.matrix(x) == TRUE) {
+    x = select_if(x, is.numeric)
     res = rbind.data.frame(mean = apply(x, 2, mean, na.rm = T),
+                           Gmean = apply(x, 2, Gmean, na.rm = T),
                            median = apply(x, 2, median, na.rm = T),
                            sd = apply(x, 2, sd, na.rm = T),
+                           mad = apply(x, 2, mad, na.rm = T),
                            IQR = apply(x, 2, IQR, na.rm = T),
                            apply(x, 2, quantile, probs = probs, na.rm = T))
   } else if (is.vector(x) == TRUE) {
     res <- c(mean = mean(x, na.rm = T),
+             Gmean = apply(x, 2, Gmean, na.rm = T),
              median = median(x, na.rm = T),
              sd = sd(x, na.rm = T),
+             mad = mad(x, na.rm = T),
              IQR = IQR(x, na.rm = T),
              quantile(x, probs = probs, na.rm = T))
   }
   res = signif(res, digits)
-  return(t(res))
+  return(res)
 }
