@@ -41,6 +41,9 @@ additional_pks <- function (){
   install.packages("vistributions", dep=T)
   install.packages("rpivotTable", dep=T)
   install.packages("esquisse", dep=T)
+  install.packages("ggeffects", dep=T)
+  install.packages("tensorflow", dep=T)
+  install.packages("keras", dep=T)
   devtools::install_github('doomlab/MOTE')
   devtools::install_github('gitrman/itns')
 }

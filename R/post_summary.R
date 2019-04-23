@@ -1,10 +1,10 @@
 #' @title Summary of vectors, matrices or data frames
-#' @description Summarises vectors, matrices or data frames by showing their mean, median, standard deviation, inter quartile range, and desired quantiles.
-#' @param x A vector, matrix or data frame with numerical variables
+#' @description Summarises vectors, matrices or data frames by showing their mean, gometric mean, median, standard deviation, median absolute deviation,inter quartile range, and desired quantiles.
+#' @param x A vector, matrix or data frame
 #' @param probs Desired quantiles to display
 #' @param digits Number of significant digits to display
 #' @export
-#' @return A data frame with the mean, median, standard deviation, inter quartile range, and chosen quantiles
+#' @return A data frame with summary statistics
 #' @import stats
 #' @import dplyr
 #' @import DescTools
@@ -16,7 +16,7 @@
 #' post_summary(x2)
 #' post_summary(x3)
 #'
-post_summary <- function(x, probs = c(.025, .975), digits = 3){
+post_summary <- function(x, probs = seq(0,1,.25), digits = 3){
   if (is.data.frame(x) == TRUE | is.matrix(x) == TRUE) {
     x = select_if(x, is.numeric)
     res = rbind.data.frame(mean = apply(x, 2, mean, na.rm = T),
