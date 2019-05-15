@@ -60,7 +60,7 @@ DS_Mohr_plot <- function(sign, tau) {
   MOHR$cir = as.factor(MOHR$cir)
 
   # Text to annotate with phi and c parameters
-  phitext = substitute(paste(phi, "' = ",p,"°"),list(p=round(phi,digits=1)))
+  phitext = substitute(paste(phi, "' = ",p,"deg"),list(p=round(phi,digits=1)))
   ctext = substitute(paste("c' = ",c," kPa"),list(c=round(c,digits=1)))
   labelphi = sprintf("phi*minute == %0.1f*degree",phi)
   labelc = sprintf("c*minute == %0.1f~kPa",c)

@@ -14,6 +14,8 @@ Mohr_Circle(sigx, sigy, tauxy, theta = 0, digits = 5)
 \item{tauxy}{A number corresponding with the shear stress}
 
 \item{theta}{Angle of rotation for which to find the state of stresses}
+
+\item{digits}{Number of significant digits to us}
 }
 \value{
 A list containing a data frame with the results, and a ggplot object with the Mohr circle

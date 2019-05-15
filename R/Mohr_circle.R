@@ -4,6 +4,7 @@
 #' @param sigy A number corresponding with the minor normal stress
 #' @param tauxy A number corresponding with the shear stress
 #' @param theta Angle of rotation for which to find the state of stresses
+#' @param digits Number of significant digits to us
 #' @export
 #' @return A list containing a data frame with the results, and a ggplot object with the Mohr circle
 #' @references Coduto, D. P. (1999). Geotechnical Engineering - Principles and Practices. Prentice Hall.

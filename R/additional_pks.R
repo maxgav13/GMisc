@@ -36,7 +36,7 @@ additional_pks <- function (){
   install.packages("binom", dep=T)
   # install.packages("heplots", dep=T)
   install.packages(c("RVAideMemoire", "EMT", "XNomial", "ggmosaic"))
-  install.packages(c("xaringan", "citr", "bookdown"))
+  install.packages(c("xaringan", "citr", "bookdown", "prettydoc"))
   install.packages("CircStats", dep=T)
   install.packages("vistributions", dep=T)
   install.packages("rpivotTable", dep=T)
@@ -44,6 +44,7 @@ additional_pks <- function (){
   install.packages("ggeffects", dep=T)
   install.packages("tensorflow", dep=T)
   install.packages("keras", dep=T)
-  devtools::install_github('doomlab/MOTE')
+  install.packages("MOTE", dep=T)
+  # devtools::install_github('doomlab/MOTE')
   devtools::install_github('gitrman/itns')
 }

@@ -25,6 +25,7 @@ post_summary <- function(x, probs = seq(0,1,.25), digits = 3){
                            sd = apply(x, 2, sd, na.rm = T),
                            mad = apply(x, 2, mad, na.rm = T),
                            IQR = apply(x, 2, IQR, na.rm = T),
+                           cv = apply(x, 2, CoefVar, na.rm = T),
                            apply(x, 2, quantile, probs = probs, na.rm = T))
   } else if (is.vector(x) == TRUE) {
     res <- c(mean = mean(x, na.rm = T),
@@ -33,6 +34,7 @@ post_summary <- function(x, probs = seq(0,1,.25), digits = 3){
              sd = sd(x, na.rm = T),
              mad = mad(x, na.rm = T),
              IQR = IQR(x, na.rm = T),
+             cv = CoefVar(x, na.rm = T),
              quantile(x, probs = probs, na.rm = T))
   }
   res = signif(res, digits)

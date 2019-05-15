@@ -1,6 +1,7 @@
 #' @title Splits a vector into two classes
 #' @description Splits (dichotomizes) a numeric vector into two classes using the "up-down" or "median" criteria. The results is intendend to be used in a runs test for tendency.
 #' @param x A numeric vector of values to split
+#' @param citeria Splitting criteria to use ("up-down" or "median")
 #' @export
 #' @return A vector with the splitted classes
 #' @references Davis, J. C. (2002). Statistical and Data Analysis in Geology. 3rd ed. John Wiley & Sons.

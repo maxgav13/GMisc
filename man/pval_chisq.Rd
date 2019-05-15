@@ -11,9 +11,9 @@ pval_chisq(s, n, sigma, side = c("two", "one"))
 
 \item{n}{Sample size}
 
-\item{side}{To either get a two-tail or one-tail p-value (Default is "two")}
+\item{sigma}{Population standard deviation}
 
-\item{sig}{Population standard deviation}
+\item{side}{To either get a two-tail or one-tail p-value (Default is "two")}
 }
 \value{
 P-value

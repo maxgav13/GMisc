@@ -20,10 +20,10 @@
 #' x = rnorm(20, 15, 7)
 #' y = rnorm(20, 10, 5)
 #' y1 = rnorm(20,x/1.1,2)
-#' NewStats_2samples(x, y, dep = F)
-#' NewStats_2samples(x, y1, dep = T)
+#' NewStats_2samples(x, y, dep = FALSE)
+#' NewStats_2samples(x, y1, dep = TRUE)
 #'
-NewStats_2samples = function(x, y, dep = F, conf.level = 0.95, col.x = 3, col.y = 4, col.diff = 2, ylab.diff = 'Difference') {
+NewStats_2samples = function(x, y, dep = FALSE, conf.level = 0.95, col.x = 3, col.y = 4, col.diff = 2, ylab.diff = 'Difference') {
 
   my_theme = theme(axis.text = element_text(size=12),
                    axis.title = element_text(size=14),
@@ -58,7 +58,7 @@ NewStats_2samples = function(x, y, dep = F, conf.level = 0.95, col.x = 3, col.y 
     scale_y_continuous(sec.axis = sec_axis(~.-tweak,name=ylab.diff))+
     geom_segment(aes(x=1,xend=4,y=estimates$point[1],yend=estimates$point[1]),linetype=3, size=.6)+
     geom_segment(aes(x=2,xend=4,y=estimates$point[2],yend=estimates$point[2]),linetype=3, size=.6)+
-    {if (dep==T) geom_segment(aes(x=1,xend=2,y=estimates$point[1],yend=estimates$point[2]))}+
+    {if (dep==TRUE) geom_segment(aes(x=1,xend=2,y=estimates$point[1],yend=estimates$point[2]))}+
     theme_bw()+
     my_theme+
     labs(x='', y='Values')

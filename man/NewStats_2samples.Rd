@@ -4,7 +4,7 @@
 \alias{NewStats_2samples}
 \title{New Statistics two samples (idependent & dependent)}
 \usage{
-NewStats_2samples(x, y, dep = F, conf.level = 0.95, col.x = 3,
+NewStats_2samples(x, y, dep = FALSE, conf.level = 0.95, col.x = 3,
   col.y = 4, col.diff = 2, ylab.diff = "Difference")
 }
 \arguments{
@@ -38,8 +38,8 @@ set.seed(101)
 x = rnorm(20, 15, 7)
 y = rnorm(20, 10, 5)
 y1 = rnorm(20,x/1.1,2)
-NewStats_2samples(x, y, dep = F)
-NewStats_2samples(x, y1, dep = T)
+NewStats_2samples(x, y, dep = FALSE)
+NewStats_2samples(x, y1, dep = TRUE)
 
 }
 \references{

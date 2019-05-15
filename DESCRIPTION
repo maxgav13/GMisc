@@ -1,6 +1,7 @@
 Package: GMisc
 Title: Miscellaneous Functions for Geology (and its areas)
 Version: 0.1
+Date: 2019-05-15
 Author: Maximiliano Garnier Villarreal <max.garnier.villa@gmail.com>
 Maintainer: Maximiliano Garnier Villarreal <max.garnier.villa@gmail.com>
 Description: Functions for general statistical purpose use, and geological use. 
@@ -8,5 +9,5 @@ Description: Functions for general statistical purpose use, and geological use.
 URL: http://github.com/maxgav13/GMisc
 License: GPL (>= 2)
 LazyData: TRUE
-RoxygenNote: 6.1.0
-Imports: stats, ggplot2, forcats, dplyr, tidyr, zoo, broom, grDevices, png, grid, RFOC, stringr, geotech, pracma, cowplot, plotly, Hmisc, changepoint, sjstats (>= 0.14.2), strucchange, DescTools, ecp, compositions, heplots
+RoxygenNote: 6.1.1
+Imports: stats, ggplot2, forcats, dplyr, tidyr, zoo, broom, grDevices, png, grid, RFOC, stringr, geotech, pracma, cowplot, plotly, Hmisc, changepoint, sjstats (>= 0.14.2), strucchange, DescTools, ecp, compositions, heplots, data.table, devtools

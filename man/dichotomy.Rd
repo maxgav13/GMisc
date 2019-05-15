@@ -8,6 +8,8 @@ dichotomy(x, criteria = c("up-down", "median"))
 }
 \arguments{
 \item{x}{A numeric vector of values to split}
+
+\item{citeria}{Splitting criteria to use ("up-down" or "median")}
 }
 \value{
 A vector with the splitted classes
