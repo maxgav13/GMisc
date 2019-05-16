@@ -14,6 +14,7 @@
 #' @import tidyr
 #' @import forcats
 #' @import ecp
+#' @import heplots
 #' @details The example data given is intended to show the structure needed for input data. The user should follow this structure, which in general corresponds with a data frame with a sequence in the first column and the observed/measured values in the rest of the columns
 #' @examples
 #' mcp(CPTu_data, R = 199, alpha = 2, sig.level = .01, min.perc = 15) # multivariate example
@@ -39,6 +40,12 @@ mcp = function(data, R = 199, alpha = 2, sig.level = .01, min.perc = 15) {
   dat_ecp0$Bounds = bounds
   data_ecp0_tidy = gather(dat_ecp0, Property, Value, -c(noms.ecp[1],'Layer','Bounds')) %>%
     mutate(Property = as_factor(Property))
+
+  ydata = dat_ecp0 %>% select(-1,-Layer,-Bounds) %>% as.matrix()
+  xdata = dat_ecp0 %>% select(Layer) %>% as.matrix()
+  mod = lm(ydata ~ xdata)
+
+  ES = round(etasq(mod)[[1]][1],3)
 
   q = ggplot(data = data_ecp0_tidy, aes_string(x = 'Value', y = noms.ecp[1])) +
     geom_path(aes(group=1,col=Layer),size=.75) +
@@ -76,5 +83,5 @@ mcp = function(data, R = 199, alpha = 2, sig.level = .01, min.perc = 15) {
            Interval = levels(data_ecp0_tidy$Bounds)[levels(data_ecp0_tidy$Layer) == Layer]) %>%
     as.data.frame()
 
-  return(list(LayersGG=q, LayersLY=p, StatsGG=q2, StatsLY=p2, Summary=Summary))
+  return(list(LayersGG=q, LayersLY=p, StatsGG=q2, StatsLY=p2, Summary=Summary, ES=ES))
 }

@@ -10,6 +10,7 @@
 #' @import strucchange
 #' @import dplyr
 #' @import DescTools
+#' @import heplots
 #' @examples
 #' sc_layers(DPM_data, h = 0.1, breaks = 2)
 #'
@@ -26,6 +27,12 @@ sc_layers = function(x, h = 0.1, breaks) {
                  breaks = c(min(dat[1]), breaks, max(dat[1])),
                  include.lowest = T)
   dat$boundaries = grouping
+
+  ydata = dat %>% select(-1,-boundaries) %>% as.matrix()
+  xdata = dat %>% select(boundaries) %>% as.matrix()
+  mod = lm(ydata ~ xdata)
+
+  ES = round(etasq(mod)[[1]][1],3)
 
   q = ggplot(dat, aes_string(nom[2], nom[1], col = "boundaries")) +
     geom_path(size = .75) +
@@ -60,5 +67,5 @@ sc_layers = function(x, h = 0.1, breaks) {
     mutate(MoE = signif(qt(.975,Obs-1)*SD/sqrt(Obs),3)) %>%
     as.data.frame()
 
-  return(list(LayersGG=q, LayersLY=p, StatsGG=q2, StatsLY=p2, Summary=Summary))
+  return(list(LayersGG=q, LayersLY=p, StatsGG=q2, StatsLY=p2, Summary=Summary, ES=ES))
 }

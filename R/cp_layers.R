@@ -8,6 +8,7 @@
 #' @import ggplot2
 #' @import dplyr
 #' @import DescTools
+#' @import heplots
 #' @examples
 #' cp = cp_aic_eta(DPM_data, m = 10, nl = 3)
 #' cp_layers(cp, breaks = 2)
@@ -19,6 +20,12 @@ cp_layers = function(x, breaks) {
     nombres = names(datos)
     nom = c(nombres[1:2],'Layers')
     names(datos) = nom
+
+    ydata = datos %>% select(-1,-Layers) %>% as.matrix()
+    xdata = datos %>% select(Layers) %>% as.matrix()
+    mod = lm(ydata ~ xdata)
+
+    ES = round(etasq(mod)[[1]][1],3)
 
   q = ggplot(datos, aes_string(nom[2], nom[1], col = nom[3])) +
     geom_path(size = .75) +
@@ -52,5 +59,5 @@ cp_layers = function(x, breaks) {
     mutate(MoE = signif(qt(.975,Obs-1)*SD/sqrt(Obs),3)) %>%
     as.data.frame()
 
-  return(list(LayersGG=q, LayersLY=p, StatsGG=q2, StatsLY=p2, Summary=Summary))
+  return(list(LayersGG=q, LayersLY=p, StatsGG=q2, StatsLY=p2, Summary=Summary, ES=ES))
 }

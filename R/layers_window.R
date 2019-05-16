@@ -10,6 +10,7 @@
 #' @import forcats
 #' @import tidyr
 #' @import DescTools
+#' @import heplots
 #' @examples
 #' layers_window(DPM_data, breaks = c(3.8,8.9))
 #' layers_window(CPTu_data, breaks = c(1.2,3.8,5.1))
@@ -26,6 +27,12 @@ layers_window = function(x, breaks) {
   dat$boundaries = grouping
   dat_tidy = gather(dat, Property, Value, -c(nom[1],'boundaries')) %>%
     mutate(Property = as_factor(Property))
+
+  ydata = dat %>% select(-1,-boundaries) %>% as.matrix()
+  xdata = dat %>% select(boundaries) %>% as.matrix()
+  mod = lm(ydata ~ xdata)
+
+  ES = round(etasq(mod)[[1]][1],3)
 
   q = ggplot(dat_tidy, aes_string('Value', nom[1], col = "boundaries")) +
     geom_path(aes(group=1),size = .75) +
@@ -62,5 +69,5 @@ layers_window = function(x, breaks) {
     mutate(MoE = signif(qt(.975,Obs-1)*SD/sqrt(Obs),3)) %>%
     as.data.frame()
 
-  return(list(LayersGG=q, LayersLY=p, StatsGG=q2, StatsLY=p2, Summary=Summary))
+  return(list(LayersGG=q, LayersLY=p, StatsGG=q2, StatsLY=p2, Summary=Summary, ES=ES))
 }
