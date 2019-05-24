@@ -38,7 +38,7 @@ additional_pks <- function (){
   install.packages(c("RVAideMemoire", "EMT", "XNomial"))
   install.packages(c("easyCODA", "coda.base", "StatDA"))
   install.packages(c("ggstatsplot", "ggalluvial", "easyalluvial", "ggmosaic", "dendextend"))
-  install.packages(c("xaringan", "citr", "bookdown", "prettydoc"))
+  install.packages(c("xaringan", "citr", "bookdown", "prettydoc", "kableExtra"))
   install.packages("CircStats", dep=T)
   install.packages("vistributions", dep=T)
   install.packages("rpivotTable", dep=T)
@@ -47,6 +47,7 @@ additional_pks <- function (){
   install.packages("tensorflow", dep=T)
   install.packages("keras", dep=T)
   install.packages("MOTE", dep=T)
+  install.packages("vcdExtra", dep=T)
   # devtools::install_github('doomlab/MOTE')
   devtools::install_github('gitrman/itns')
 }
