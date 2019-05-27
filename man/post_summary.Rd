@@ -7,7 +7,7 @@
 post_summary(x, probs = seq(0, 1, 0.25), digits = 3)
 }
 \arguments{
-\item{x}{A vector, matrix or data frame}
+\item{x}{A vector or data frame}
 
 \item{probs}{Desired quantiles to display}
 
@@ -17,14 +17,12 @@ post_summary(x, probs = seq(0, 1, 0.25), digits = 3)
 A data frame with summary statistics
 }
 \description{
-Summarises vectors, matrices or data frames by showing their mean, gometric mean, median, standard deviation, median absolute deviation,inter quartile range, and desired quantiles.
+Summarises vectors or data frames by showing their mean, gometric mean, median, standard deviation, median absolute deviation,inter quartile range, coefficient of variation, and desired quantiles.
 }
 \examples{
 x1 <- rnorm(100, 30, 6)
-x2 <- matrix(x1, nrow = 10)
-x3 <- data.frame(N = rnorm(100, 30, 6), T = rt(100, 10, 30))
+x2 <- data.frame(N = rnorm(100, 30, 6), T = rt(100, 10, 30))
 post_summary(x1)
 post_summary(x2)
-post_summary(x3)
 
 }
