@@ -7,6 +7,7 @@ Maintainer: Maximiliano Garnier Villarreal <max.garnier.villa@gmail.com>
 Description: Functions for general statistical purpose use, and geological use. 
     Aimed also to be used by students from Escuela Centroamericana de Geologia (Geology Department) of Universidad de Costa Rica.
 URL: http://github.com/maxgav13/GMisc
+BugReports: http://github.com/maxgav13/GMisc/issues
 License: GPL (>= 2)
 LazyData: TRUE
 RoxygenNote: 6.1.1
