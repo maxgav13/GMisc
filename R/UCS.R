@@ -56,12 +56,16 @@ UCS = function(W, D, P, digits = 2) {
     geom_point(size=2) +
     geom_smooth(method = 'lm', se = F, aes(col='Gaussian'), size=.8) +
     # geom_line(aes(De, fit.t$fitted.values, col='t-distributed'), size=.8) +
-    geom_smooth(method = 'rlm', se = F, aes(col='Robust'), size=.8) +
+    geom_smooth(method = MASS::rlm, se = F, aes(col='Robust'), size=.8) +
     geom_vline(xintercept = 50, size=1, linetype=8) +
     theme_bw(base_size = 12) +
     labs(x='Equivalent diameter, De [mm]',y='Load, P [kN]',col='Method') +
     scale_color_brewer(type = 'qual', palette = 6) +
-    theme(legend.position = 'top')
+    theme(legend.position = 'top',
+          legend.title = element_text(size = 14),
+          legend.text = element_text(size = 12),
+          axis.title = element_text(size = 14),
+          axis.text = element_text(size = 12))
 
   UCS = c(mean(I50), median(I50)) * 23
 
