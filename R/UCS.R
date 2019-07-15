@@ -69,9 +69,11 @@ UCS = function(W, D, P, digits = 2) {
 
   UCS = c(mean(I50), median(I50)) * 23
 
-  UCS.res = data.frame(Method = c('Gaussian','Robust','Corrected_mean','Corrected_median'),
+  UCS.res = data.frame(Method = c('Gaussian','Robust','Corrected (mean)','Corrected (median)'),
                        I50 = round(c(I50.g,I50.r,mean(I50),median(I50)),digits = digits),
                        UCS = round(c(UCS.g,UCS.r,UCS[1],UCS[2]),digits = digits))
+
+  names(UCS.res) = c('Method', 'I50 [MPa]', 'UCS [MPa]')
 
   return(list(Graph = gg, Summary = UCS.res))
 }
