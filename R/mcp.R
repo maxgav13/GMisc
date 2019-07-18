@@ -65,7 +65,7 @@ mcp = function(data, R = 199, alpha = 2, sig.level = .01, min.perc = 15) {
     labs(x = 'Layer', y = '', col = 'Layer') +
     theme_bw()
 
-  p2 = plotly::ggplotly(q)
+  p2 = plotly::ggplotly(q2)
 
   Summary = data_ecp0_tidy %>%
     group_by(Layer,Property) %>%
