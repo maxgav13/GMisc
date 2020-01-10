@@ -7,7 +7,7 @@
 cp_layers(x, breaks)
 }
 \arguments{
-\item{x}{The resulting objecto from \code{cp_aic_eta()}}
+\item{x}{The resulting object from \code{cp_aic_eta()}}
 
 \item{breaks}{An integer giving the number of breakpoints to use (from 'Changepoint')}
 }

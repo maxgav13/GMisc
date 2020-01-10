@@ -1,6 +1,6 @@
 #' @title Plots a layered model and summarizes the statistics for each layer from a Changepoint result
 #' @description Given a number of breakpoints, plots a layered model of one variable against distance, plots the confidence intervals for each layer, and gives a summary table.
-#' @param x The resulting objecto from \code{cp_aic_eta()}
+#' @param x The resulting object from \code{cp_aic_eta()}
 #' @param breaks An integer giving the number of breakpoints to use (from 'Changepoint')
 #' @export
 #' @return A ggplot and plotly objects showing the layered model, another showing the confidence intervals, and a summary table
