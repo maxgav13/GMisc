@@ -34,8 +34,8 @@ cp_aic_eta = function(x, m = 10, nl = 3) {
   stats_df = data.frame(breaks = rep(1:m,2), stat = rep(c("eta","AIC"),each = m), stat_value = c(etas,aic))
 
   q = ggplot(stats_df, aes(breaks, stat_value)) +
-    geom_line(size = .5, col = 4) +
-    geom_point(size = 2, shape = 19, col = 4) +
+    geom_line(size = .5, col = 'blue') +
+    geom_point(size = 2, shape = 19, col = 'blue') +
     facet_grid(vars(stat), scales = "free_y", switch = 'both') +
     labs(x = "Number of breakpoints", y = "Statistic Value") +
     scale_x_continuous(breaks = 1:m) +

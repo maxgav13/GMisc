@@ -16,7 +16,6 @@
 #' @import stats
 #' @import ggplot2
 #' @import cowplot
-#' @details For the dependent samples case the two means are joined by a line, to indicate the dependency
 #' @examples
 #' dat = data.frame(mean = c(37.5,31.9,41.2,33.4,29.9,38.2),
 #'                  sd = c(10,13.5,14.8,10,8.7,10),
@@ -24,7 +23,7 @@
 #'                  grp = c('NF10','AF10','AD10','NF17','AF17','AD17'))
 #' NewStats_contrasts(dat, g1 = c('AD10', 'AD17'), g2 = c('AF10', 'AF17'))
 #'
-NewStats_contrasts = function(dat, g1, g2, conf.level = 0.95, col.g1 = 3, col.g2 = 4, col.diff = 2, ylab = 'Values', ylab.diff = 'Difference', B.labels = c('G1', 'G2', 'Difference')) {
+NewStats_contrasts = function(dat, g1, g2, conf.level = 0.95, col.g1 = 'blue', col.g2 = 'green3', col.diff = 'red', ylab = 'Values', ylab.diff = 'Difference', B.labels = c('G1', 'G2', 'Difference')) {
 
   my_theme = theme(axis.text = element_text(size=12),
                    axis.title = element_text(size=14),

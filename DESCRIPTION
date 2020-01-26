@@ -11,4 +11,4 @@ BugReports: http://github.com/maxgav13/GMisc/issues
 License: GPL (>= 2)
 LazyData: TRUE
 RoxygenNote: 6.1.1
-Imports: stats, ggplot2, forcats, dplyr, tidyr, zoo, broom, grDevices, png, grid, RFOC, stringr, geotech, pracma, cowplot, plotly, Hmisc, changepoint, sjstats (>= 0.14.2), strucchange, DescTools, ecp, compositions, heplots, data.table, devtools, tidyverse,MASS
+Imports: stats, ggplot2, forcats, dplyr, tidyr, zoo, broom, grDevices, png, grid, RFOC, stringr, geotech, pracma, cowplot, plotly, Hmisc, changepoint, sjstats (>= 0.14.2), strucchange, DescTools, ecp, compositions, heplots, data.table, devtools, tidyverse, MASS, tibble

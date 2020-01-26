@@ -65,6 +65,7 @@ additional_pks <- function (){
   install.packages("marmap")
   install.packages("cptcity")
   install.packages("patchwork")
+  install.packages("gghighlight")
   # devtools::install_github('doomlab/MOTE')
   devtools::install_github('gitrman/itns')
 }

@@ -23,7 +23,7 @@
 #' NewStats_2samples(x, y, dep = FALSE)
 #' NewStats_2samples(x, y1, dep = TRUE)
 #'
-NewStats_2samples = function(x, y, dep = FALSE, conf.level = 0.95, col.x = 3, col.y = 4, col.diff = 2, ylab.diff = 'Difference') {
+NewStats_2samples = function(x, y, dep = FALSE, conf.level = 0.95, col.x = 'blue', col.y = 'green3', col.diff = 'red', ylab.diff = 'Difference') {
 
   my_theme = theme(axis.text = element_text(size=12),
                    axis.title = element_text(size=14),
