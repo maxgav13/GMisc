@@ -4,9 +4,16 @@
 \alias{intervalos}
 \title{Effects plots with confidence and prediction intervals}
 \usage{
-intervalos(model, sig.level = 0.95, pred.fill = "skyblue",
-  conf.fill = "darkblue", line.col = "red", points.col = "black",
-  alpha = 0.5, plot.data = FALSE)
+intervalos(
+  model,
+  sig.level = 0.95,
+  pred.fill = "skyblue",
+  conf.fill = "darkblue",
+  line.col = "red",
+  points.col = "black",
+  alpha = 0.5,
+  plot.data = FALSE
+)
 }
 \arguments{
 \item{model}{Linear model of type \code{lm()}}

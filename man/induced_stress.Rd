@@ -4,8 +4,13 @@
 \alias{induced_stress}
 \title{Induced stress on a surface}
 \usage{
-induced_stress(qs, B, L = NULL, z.end, footing = c("strip", "square",
-  "rectangular", "circular"))
+induced_stress(
+  qs,
+  B,
+  L = NULL,
+  z.end,
+  footing = c("strip", "square", "rectangular", "circular")
+)
 }
 \arguments{
 \item{qs}{The stress applied by the footing onto the surface}

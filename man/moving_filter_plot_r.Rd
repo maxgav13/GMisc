@@ -4,8 +4,13 @@
 \alias{moving_filter_plot_r}
 \title{Moving (weighted) average filter plot (residual)}
 \usage{
-moving_filter_plot_r(x, xlab = "X", ylab = "Residual data",
-  filterlab = "Filter", plotk = "all")
+moving_filter_plot_r(
+  x,
+  xlab = "X",
+  ylab = "Residual data",
+  filterlab = "Filter",
+  plotk = "all"
+)
 }
 \arguments{
 \item{x}{The result of using the \code{moving_avg_filter()} or \code{moving_wt_filter()} functions}

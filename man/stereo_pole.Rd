@@ -4,8 +4,7 @@
 \alias{stereo_pole}
 \title{Stereonet (poles)}
 \usage{
-stereo_pole(dir, dip, points.col = "blue", points.shape = 3,
-  add = FALSE)
+stereo_pole(dir, dip, points.col = "blue", points.shape = 3, add = FALSE)
 }
 \arguments{
 \item{dir}{A vector of dip directions in degrees}

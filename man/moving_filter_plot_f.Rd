@@ -4,8 +4,13 @@
 \alias{moving_filter_plot_f}
 \title{Moving (weighted) average filter plot (filtered)}
 \usage{
-moving_filter_plot_f(x, xlab = "X", ylab = "Data",
-  filterlab = "Filter & data", plotk = "all")
+moving_filter_plot_f(
+  x,
+  xlab = "X",
+  ylab = "Data",
+  filterlab = "Filter & data",
+  plotk = "all"
+)
 }
 \arguments{
 \item{x}{The result of using the \code{moving_avg_filter()} or \code{moving_wt_filter()} functions}

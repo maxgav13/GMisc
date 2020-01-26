@@ -4,20 +4,18 @@
 \alias{post_summary}
 \title{Summary of vectors, matrices or data frames}
 \usage{
-post_summary(x, probs = seq(0, 1, 0.25), digits = 3)
+post_summary(x, probs = c(0.025, 0.5, 0.975))
 }
 \arguments{
 \item{x}{A vector or data frame}
 
 \item{probs}{Desired quantiles to display}
-
-\item{digits}{Number of significant digits to display}
 }
 \value{
-A data frame with summary statistics
+A tibble with summary statistics
 }
 \description{
-Summarises vectors or data frames by showing their mean, gometric mean, median, standard deviation, median absolute deviation,inter quartile range, coefficient of variation, and desired quantiles.
+Summarises vectors or data frames by showing their mean, median, standard deviation, median absolute deviation,inter quartile range, coefficient of variation, and desired quantiles.
 }
 \examples{
 x1 <- rnorm(100, 30, 6)

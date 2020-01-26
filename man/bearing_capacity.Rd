@@ -4,8 +4,18 @@
 \alias{bearing_capacity}
 \title{Bearing capacity}
 \usage{
-bearing_capacity(B, D, L = NULL, gamma.h, gamma.s, tau0, phi, wl, FS,
-  footing = c("strip", "square", "rectangular", "circular"))
+bearing_capacity(
+  B,
+  D,
+  L = NULL,
+  gamma.h,
+  gamma.s,
+  tau0,
+  phi,
+  wl,
+  FS,
+  footing = c("strip", "square", "rectangular", "circular")
+)
 }
 \arguments{
 \item{B}{The footing's width (in meters)}

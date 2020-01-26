@@ -4,8 +4,16 @@
 \alias{NewStats_2samples}
 \title{New Statistics two samples (idependent & dependent)}
 \usage{
-NewStats_2samples(x, y, dep = FALSE, conf.level = 0.95, col.x = 3,
-  col.y = 4, col.diff = 2, ylab.diff = "Difference")
+NewStats_2samples(
+  x,
+  y,
+  dep = FALSE,
+  conf.level = 0.95,
+  col.x = "blue",
+  col.y = "green3",
+  col.diff = "red",
+  ylab.diff = "Difference"
+)
 }
 \arguments{
 \item{x}{Sample 1}
