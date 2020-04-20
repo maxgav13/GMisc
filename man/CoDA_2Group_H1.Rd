@@ -18,8 +18,8 @@ A tibble with the statistic (Q), degrees of freedom (nu), p-value, and null hypo
 Performs the calculations for the hypothesis of equal centers and covariance for two diferent samples, using Compositional Data Analysis (CoDA) principles.
 }
 \examples{
-data("Hongite")
-data("Kongite")
+data("Hongite", package = 'compositions')
+data("Kongite", package = 'compositions')
 CoDA_2Group_H1(Hongite,Kongite)
 
 }

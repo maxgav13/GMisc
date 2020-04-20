@@ -11,8 +11,8 @@
 #' @import tidyverse
 #' @name CoDA_2Group_All
 #' @examples
-#' data("Hongite")
-#' data("Kongite")
+#' data("Hongite", package = 'compositions')
+#' data("Kongite", package = 'compositions')
 #' CoDA_2Group_All(Hongite,Kongite)
 #'
 CoDA_2Group_All = function(comp1, comp2) {

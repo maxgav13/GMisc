@@ -11,8 +11,8 @@
 #' @import tidyverse
 #' @name CoDA_2Group_H3
 #' @examples
-#' data("Hongite")
-#' data("Kongite")
+#' data("Hongite", package = 'compositions')
+#' data("Kongite", package = 'compositions')
 #' CoDA_2Group_H3(Hongite,Kongite)
 #'
 CoDA_2Group_H3 = function(comp1, comp2) {

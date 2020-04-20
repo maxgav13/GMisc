@@ -10,7 +10,7 @@
 #' @import tidyverse
 #' @name CoDA_Atyp_Idx
 #' @examples
-#' data("Hongite")
+#' data("Hongite", package = 'compositions')
 #' samp = c(44, 20.4, 13.9, 9.1, 12.6)
 #' CoDA_Atyp_Idx(Hongite)
 #' CoDA_Atyp_Idx(Hongite, samp)

@@ -18,7 +18,7 @@ A matrix with the atypicality index or indices.
 Calculates the atypicality index (ranges between 0 and 1, 1 being more atypical/different) for all the observations of a composition or compares one sample to the given composition, using Compositional Data Analysis (CoDA) principles.
 }
 \examples{
-data("Hongite")
+data("Hongite", package = 'compositions')
 samp = c(44, 20.4, 13.9, 9.1, 12.6)
 CoDA_Atyp_Idx(Hongite)
 CoDA_Atyp_Idx(Hongite, samp)
