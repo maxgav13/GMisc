@@ -53,7 +53,6 @@ additional_pks <- function (){
   install.packages("keras", dep=T)
   install.packages("MOTE", dep=T)
   install.packages("vcdExtra", dep=T)
-  install.packages(c("BEST", "tidybayes"))
   install.packages(c("georob", "geoCount", "spBayes"))
   install.packages("see", dep=T)
   install.packages(c("ClustGeo", "factoextra", "NbClust"))
@@ -66,6 +65,9 @@ additional_pks <- function (){
   install.packages("cptcity")
   install.packages("patchwork")
   install.packages("gghighlight")
+  install.packages("rstatix")
+  install.packages("summarytools")
+  install.packages("gt")
   # devtools::install_github('doomlab/MOTE')
   devtools::install_github('gitrman/itns')
 }

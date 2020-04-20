@@ -7,7 +7,9 @@
 CoDA_2Group_H3(comp1, comp2)
 }
 \arguments{
-\item{comp1}{A matrix of observations for composition 2.}
+\item{comp1}{A matrix of observations for composition 1.}
+
+\item{comp2}{A matrix of observations for composition 2.}
 }
 \value{
 A tibble with the statistic (Q), degrees of freedom (nu), p-value, and null hypothesis (H0)

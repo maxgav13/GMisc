@@ -1,0 +1,159 @@
+---
+title: "Soil Mechanics"
+author: "Maximiliano Garnier Villarreal"
+date: "`r Sys.Date()`"
+output:
+  prettydoc::html_pretty:
+    theme: cayman
+    highlight: github
+    toc: true
+vignette: >
+  %\VignetteIndexEntry{Soil Mechanics}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include=FALSE}
+library(GMisc)
+
+knitr::opts_chunk$set(
+  echo = TRUE,
+  message = FALSE,
+  warning = FALSE,
+  error = FALSE,
+  fig.align = "center",
+  out.width = "80%"
+)
+```
+
+This document highlights some functions of the GMisc package related to soil mechanics problems.
+
+# Bearing capacity
+
+The idea here is to provide a function that solves the bearing capacity equation for different types of footings, giving as a result the allowable bearing capacity ($q_a$):
+
+$$q_a = \frac{0.5 \ B \ \gamma \ N_{\gamma} \ s_{\gamma} + D \ \gamma \ N_q + c \ N_c \ s_c}{FS}$$
+where $B$ is the width in meters, $D$ is the embedment depth in meters, $FS$ is the desired factor of safety, $c$ is the cohesion in kPa (referred as `tau0` in the function), $\gamma$ is the unit weight in $kN/m^3$, and the rest of the parameters are correction factors dependent on these input values, the internal friction angle $\phi$, the type of footing ("strip", "square", "rectangular","circular"), and the depth to the water level.
+
+The function that solves the above equation is `bearing_capacity`, with the mentioned arguments but specifying the wet unit weight, saturated unit weight for their respective use. The function outputs a table and graph for the results.
+
+The `B` and `D` parameters can be vectors for multiple cases comparisons or single values for a single case estimate. If `FS = 1` then the allowable and ultimate bearing capacities are the same ($qa = qu$).
+
+Different scenarios can be analyzed:
+
+* For a total stress analysis (TSA) in a cohesive soil (plastic silts and clays) set the friction angle equal to zero (`phi = 0`) and the cohesion equal to the undrained shear strength (`tau0 = Su`).
+* For an effective stress analysis (ESA) in a cohesive soil use the effective friction angle ($\phi'$) and effective cohesion ($c'$).
+* For a coarse-grained soil (gravels, sands, and non-plastic silts) usually TSA = ESA, and the friction angle and cohesion should be used, and if the material has no-cohesion then set cohesion equal to zero (`tau0 = 0`)
+
+We can define a set of parameters to use in different examples as follows:
+
+```{r}
+B = seq(0.5, 2, 0.25)
+D = seq(0, 2, 0.25)
+L = NULL
+gamma.h = 15.5
+gamma.s = 18.5
+tau0 = 10
+phi = 30
+FS = 3
+wl = 1
+```
+
+The first example uses the default "strip" footing:
+
+```{r}
+bearing_capacity(B, D, L, gamma.h, gamma.s, tau0, phi, wl, FS)
+```
+
+The second example uses the a "square" footing:
+
+```{r}
+bearing_capacity(B, D, L, gamma.h, gamma.s, tau0, phi, wl, FS, footing = "square")
+```
+
+And the last example uses a "rectangular" footing, where is needed to define the `L` argument (the length of the footing in meters):
+
+```{r}
+bearing_capacity(B, D, L = 3, gamma.h, gamma.s, tau0, phi, wl, FS, footing = "rectangular")
+```
+
+# Induced stress
+
+The function `induced_stress` calculates and plots the stress distribution under the center of a footing of different shapes ("strip", "square", "rectangular", "circular"), using the solutions from Boussinesq. The arguments of the function are `qs`: the stress applied by the footing, `B`: the width of the footing in meters, `L`: the length of the footing in meters (applies only for rectangular footings), and `z.end`: the depth down to which calculate the stress. The function returns two plots: one static (`$Plot`) and one interactive (`$Plotly`), the last one is the one shown here.
+
+The first example shows the plot for the default "strip" footing, and one value of width:
+
+```{r warning=FALSE}
+qs = 1
+B = 1
+L = NULL
+z.end = 8
+induced_stress(qs, B, L, z.end)$Plotly
+```
+
+The second example plots the results for a "square" footing and different widths:
+
+```{r}
+qs = 1
+B = c(1, 2, 4)
+L = NULL
+z.end = 8
+induced_stress(qs, B, L, z.end, footing = "square")$Plotly
+```
+
+The last example plots the results for a "rectangular" footing and different lengths:
+
+```{r}
+qs = 1
+B = 1
+L = c(1, 2, 4)
+z.end = 8
+induced_stress(qs, B, L, z.end, footing = "rectangular")$Plotly
+```
+
+# Direct shear
+
+The functions for direct shear are more for visualizing the results rather than to process the. The user should analyze the raw data and provide the normal stress (`sign`) - shear stress pairs (`tau`).
+
+The first function plots the resulting $(\sigma,\tau)$ pairs and adds a line of best fit for the Mohr-Coulomb criterion ($\tau=c+\sigma_n tan\phi$). If the line of best fit estimates an intercept of less than 0 ($c<0$), the function automatically assigns $c=0$, as this is not a possible solution. Also, the estimated parameters ($c,\phi$) are added to the plot.
+
+```{r warning=FALSE}
+DS_plot(sign = c(80,237,395), tau = c(127,345,475))
+```
+
+The second function adds on top of the first one by drawing the Mohr circles for each of the $(\sigma,\tau)$ pairs.
+
+```{r warning=FALSE, message=FALSE}
+DS_Mohr_plot(sign = c(80,237,395), tau = c(127,345,475))
+```
+
+# Mohr circle
+
+The idea here is to provide a way to solve simple Mohr circle's problems for the given normal stresses, shear stress, and rotation angle. The function returns a plot and the results for the given problem and parameters.
+
+We can define some values to use:
+
+```{r}
+sigx = 143.6
+sigy = 100.5
+tauxy = -14.4
+theta = -35
+```
+
+where `sigx` corresponds to the mayor normal stress, `sigy` corresponds to the minor normal stress, `tauxy` corresponds to the shear stress, and `theta` is the rotation angle for which to find the stresses.
+
+In the first example the rotation is not applied:
+
+```{r}
+Mohr_Circle(sigx, sigy, tauxy)
+```
+
+In the second example the rotation is applied:
+
+```{r}
+Mohr_Circle(sigx, sigy, tauxy, theta)
+```
+
+# Shinyapp
+
+A shinyapp using some these functions can be accessed at https://maximiliano-01.shinyapps.io/soil_mechanics/.
