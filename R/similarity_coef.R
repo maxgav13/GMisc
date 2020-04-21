@@ -21,6 +21,9 @@ similarity_coef = function(x, samp.names = NULL, digits = 3) {
     noms = samp.names
   }
 
+  x = x %>%
+    as.data.frame() %>%
+    select_if(is.numeric)
   n = nrow(x)
   res = NULL
   key_pairs <- expand.grid(noms, noms)

@@ -2,6 +2,10 @@
 library(GMisc)
 library(tidyverse)
 
+load('../inst/HB_D.rda')
+load('../inst/HB_mi_mr.rda')
+load('../inst/HB_sig_ci.rda')
+
 knitr::opts_chunk$set(
   echo = TRUE,
   message = FALSE,
@@ -22,6 +26,24 @@ knitr::include_graphics('../inst/GSI_general.PNG')
 
 ## ----echo=F, out.width='50%'--------------------------------------------------
 knitr::include_graphics('../inst/GSI_flysch.PNG')
+
+## ----echo=FALSE---------------------------------------------------------------
+DT::datatable(HB_sig_ci,
+              rownames=FALSE, options = list(dom='t'),
+              caption="Table 1: Intact Uniaxial Compressive Strength"
+              )
+
+DT::datatable(HB_mi_MR,
+              rownames=FALSE, filter="top",
+              caption="Table 2: mi & MR values for different rocks",
+              colnames = c('Modulus Ratio (MR)' = 'MR')
+      )
+
+DT::datatable(HB_D,
+              rownames=FALSE, options = list(dom='t'),
+              caption="Table 3: Disturbance Factor",
+              colnames = c('Use' = 'Application')
+      )
 
 ## -----------------------------------------------------------------------------
 sig.ci = 16

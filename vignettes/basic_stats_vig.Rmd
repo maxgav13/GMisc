@@ -3,8 +3,11 @@ title: "Basic statistics"
 author: "Maximiliano Garnier Villarreal"
 date: "`r Sys.Date()`"
 output:
-  rmarkdown::html_vignette:
+  prettydoc::html_pretty:
+    theme: cayman
+    highlight: github
     toc: true
+    fig_caption: yes
 vignette: >
   %\VignetteIndexEntry{Basic statistics}
   %\VignetteEngine{knitr::rmarkdown}

@@ -7,6 +7,7 @@ output:
     theme: cayman
     highlight: github
     toc: true
+    fig_caption: yes
 vignette: >
   %\VignetteIndexEntry{Rock Mechanics}
   %\VignetteEngine{knitr::rmarkdown}
@@ -16,6 +17,10 @@ vignette: >
 ```{r setup, include=FALSE}
 library(GMisc)
 library(tidyverse)
+
+load('../inst/HB_D.rda')
+load('../inst/HB_mi_mr.rda')
+load('../inst/HB_sig_ci.rda')
 
 knitr::opts_chunk$set(
   echo = TRUE,
@@ -73,6 +78,28 @@ knitr::include_graphics('../inst/GSI_flysch.PNG')
 ```
 
 To use this criterion there are two functions `Hoek_Brown` and `Hoek_Brown_plot`. The first one calculates the criterion and the second one plots the results from the first one. The arguments are: `sig.ci` the uniaxial compressive strength of the intact rock in MPa, `GSI`, `mi` the intact rock constant, `MR` the modulus ratio, `D` the quality of the explosive campaign design, `unit.weight` in $kN/m^3$, `height`, in meters, to which calculate the stress level, and `use` the expected use for the rock mass ("general", "tunnels", or "slopes").
+
+Some of these inputs can be obtained from the following tables, where in most cases are rock type dependent.
+
+```{r echo=FALSE}
+DT::datatable(HB_sig_ci,
+              rownames=FALSE, options = list(dom='t'),
+              caption="Table 1: Intact Uniaxial Compressive Strength"
+              )
+
+DT::datatable(HB_mi_MR,
+              rownames=FALSE, filter="top",
+              caption="Table 2: mi & MR values for different rocks",
+              colnames = c('Modulus Ratio (MR)' = 'MR')
+      )
+
+DT::datatable(HB_D,
+              rownames=FALSE, options = list(dom='t'),
+              caption="Table 3: Disturbance Factor",
+              colnames = c('Use' = 'Application')
+      )
+```
+
 
 ```{r}
 sig.ci = 16
