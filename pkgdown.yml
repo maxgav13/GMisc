@@ -1,10 +1,10 @@
 pandoc: 2.7.3
 pkgdown: 1.5.1.9000
-pkgdown_sha: aea6864792d681f64a9e1b8c52fe24668b2e4f55
+pkgdown_sha: c181e5c9ac09b28974a97f5e32deddc36690fcf2
 articles:
   basic_stats_vig: basic_stats_vig.html
   directional_stats_vig: directional_stats_vig.html
   rock_mechanics_vig: rock_mechanics_vig.html
   soil_mechanics_vig: soil_mechanics_vig.html
-last_built: 2020-04-21T21:50Z
+last_built: 2020-04-25T19:22Z
 
