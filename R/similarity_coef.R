@@ -1,6 +1,6 @@
 #' @title Similarity Coefficient
 #' @description Calculates the similarity coeficient between observations based on their features (columns). Coefficient ranges between 0 and 1, with values close to 1 indicating more similarity.
-#' @param x A data frame of observations in rows and features (variables) in columns. Features must be numeric and positive.
+#' @param x A data frame of observations in rows and features (variables) in columns. Features must be non-zero and positive.
 #' @param samp.names A character vector with the names of the observations (samples)
 #' @param digits Number of digits to use
 #' @export
@@ -10,8 +10,8 @@
 #' @import dplyr
 #' @name similarity_coef
 #' @examples
-#' dat = iris %>% group_by(Species) %>% sample_n(2)
-#' similarity_coef(dat[-5])
+#' dat = iris[c(1,2,51,52,101,102),]
+#' similarity_coef(dat)
 #'
 similarity_coef = function(x, samp.names = NULL, digits = 3) {
 

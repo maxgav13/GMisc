@@ -1,6 +1,6 @@
 #' @title CoDA Atypicality Index
 #' @description Calculates the atypicality index (ranges between 0 and 1, 1 being more atypical/different) for all the observations of a composition or compares one sample to the given composition, using Compositional Data Analysis (CoDA) principles.
-#' @param comp A matrix of observations for a given composition.
+#' @param comp A matrix of observations for a given composition. Entries must be non-zero and positive.
 #' @param sample A one sample vector to compare against the given composition.
 #' @export
 #' @return A matrix with the atypicality index or indices.

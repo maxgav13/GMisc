@@ -7,7 +7,7 @@
 CoDA_Atyp_Idx(comp, sample = NULL)
 }
 \arguments{
-\item{comp}{A matrix of observations for a given composition.}
+\item{comp}{A matrix of observations for a given composition. Entries must be non-zero and positive.}
 
 \item{sample}{A one sample vector to compare against the given composition.}
 }

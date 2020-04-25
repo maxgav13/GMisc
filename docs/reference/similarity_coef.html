@@ -144,7 +144,7 @@
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>x</th>
-      <td><p>A data frame of observations in rows and features (variables) in columns. Features must be numeric and positive.</p></td>
+      <td><p>A data frame of observations in rows and features (variables) in columns. Features must be non-zero and positive.</p></td>
     </tr>
     <tr>
       <th>samp.names</th>
@@ -164,7 +164,14 @@
     <p>Borchardt, G.A. (1974). The SIMAN Coefficient for Similarity Analysis. Classification Society Bulletin, 3(2), 2–8.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='no'>dat</span> <span class='kw'>=</span> <span class='no'>iris</span> <span class='kw'>%&gt;%</span> <span class='fu'>group_by</span>(<span class='no'>Species</span>) <span class='kw'>%&gt;%</span> <span class='fu'>sample_n</span>(<span class='fl'>2</span>)</div><div class='output co'>#&gt; <span class='error'>Error in iris %&gt;% group_by(Species) %&gt;% sample_n(2): could not find function "%&gt;%"</span></div><div class='input'><span class='fu'>similarity_coef</span>(<span class='no'>dat</span>[-<span class='fl'>5</span>])</div><div class='output co'>#&gt; <span class='error'>Error in row.names(x): object 'dat' not found</span></div><div class='input'>
+    <pre class="examples"><div class='input'><span class='no'>dat</span> <span class='kw'>=</span> <span class='no'>iris</span>[<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>1</span>,<span class='fl'>2</span>,<span class='fl'>51</span>,<span class='fl'>52</span>,<span class='fl'>101</span>,<span class='fl'>102</span>),]
+<span class='fu'>similarity_coef</span>(<span class='no'>dat</span>)</div><div class='output co'>#&gt;         1     2    51    52   101   102
+#&gt; 1   1.000 0.954 0.521 0.539 0.516 0.508
+#&gt; 2   0.954 1.000 0.520 0.537 0.500 0.531
+#&gt; 51  0.521 0.520 1.000 0.951 0.803 0.833
+#&gt; 52  0.539 0.537 0.951 1.000 0.826 0.855
+#&gt; 101 0.516 0.500 0.803 0.826 1.000 0.837
+#&gt; 102 0.508 0.531 0.833 0.855 0.837 1.000</div><div class='input'>
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

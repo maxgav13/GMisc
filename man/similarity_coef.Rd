@@ -4,7 +4,7 @@
 \alias{similarity_coef}
 \title{Similarity Coefficient}
 \arguments{
-\item{x}{A data frame of observations in rows and features (variables) in columns. Features must be numeric and positive.}
+\item{x}{A data frame of observations in rows and features (variables) in columns. Features must be non-zero and positive.}
 
 \item{samp.names}{A character vector with the names of the observations (samples)}
 
@@ -17,8 +17,8 @@ A matrix of similarity coefficients
 Calculates the similarity coeficient between observations based on their features (columns). Coefficient ranges between 0 and 1, with values close to 1 indicating more similarity.
 }
 \examples{
-dat = iris \%>\% group_by(Species) \%>\% sample_n(2)
-similarity_coef(dat[-5])
+dat = iris[c(1,2,51,52,101,102),]
+similarity_coef(dat)
 
 }
 \references{
