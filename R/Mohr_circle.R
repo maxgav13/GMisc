@@ -5,13 +5,14 @@
 #' @param tauxy A number corresponding with the shear stress
 #' @param theta Angle of rotation for which to find the state of stresses
 #' @param digits Number of significant digits to us
+#' @param units A string with the units of the measurements
 #' @export
 #' @return A list containing a data frame with the results, and a ggplot object with the Mohr circle
 #' @references Coduto, D. P. (1999). Geotechnical Engineering - Principles and Practices. Prentice Hall.
 #' @references Holtz, R. D., Kovacs, W. D. & Sheahan, T. C. (2011). An Introduction to Geotechnical Engineering. Prentice Hall.
 #' @references Gonzalez de Vallejo, L. I. (2004). Ingenieria Geologica. Prentice Hall.
 #' @import stats
-#' @import ggplot2
+#' @import tidyverse
 #' @examples
 #' sigx = 143.6
 #' sigy = 100.5
@@ -19,7 +20,7 @@
 #' Mohr_Circle(sigx, sigy, tauxy)
 #' Mohr_Circle(sigx, sigy, tauxy, theta = -35)
 #'
-Mohr_Circle = function(sigx, sigy, tauxy, theta = 0, digits = 5) {
+Mohr_Circle = function(sigx, sigy, tauxy, theta = 0, digits = 5, units = 'kPa') {
   tauyx = -tauxy
   # Centro, radio, tau max, y esfuerzos principales
   C = (sigx+sigy)/2
@@ -48,18 +49,21 @@ Mohr_Circle = function(sigx, sigy, tauxy, theta = 0, digits = 5) {
 
   # Grafico del circulo
   g = ggplot()+theme_bw()+
-    geom_path(aes(circ_x,circ_y))+
+    geom_path(aes(circ_x,circ_y),na.rm = T)+
     xlim(C-1.5*R,C+1.5*R)+ylim(-1.5*R,1.5*R)+
     coord_fixed()+
-    geom_hline(yintercept = 0)+
+    geom_hline(yintercept = 0,na.rm = T)+
     geom_point(aes(sigx,tauxy),size=3,col="blue")+
     geom_point(aes(sigy,tauyx),size=3,col="blue")+
-    geom_path(aes(c(sigx,tauxy),c(sigy,tauyx)),col="blue")+
+    geom_path(aes(c(sigx,tauxy),c(sigy,tauyx)),col="blue",na.rm = T)+
     geom_point(aes(sig1,0),size=2)+
     geom_point(aes(sig2,0),size=2)+
     geom_point(aes(C,R),size=2)+
     geom_point(aes(sig_theta_x,tau_theta),size=3,col="red")+
-    labs(x=expression(paste(sigma, " [kPa]")),y=expression(paste(tau, " [kPa]")))+
+    labs(x=paste0('Normal stress (',units,')'),
+         y=paste0('Shear stress (',units,')')) +
+    # labs(x=TeX(str_glue('$\\sigma$ ({units})')),
+    #      y=TeX(str_glue('$\\tau$ ({units})')))+
     annotate("text",x=C+1.1*R,y=R/12,label=sprintf("sigma[1]"),parse=T)+
     annotate("text",x=C-1.1*R,y=R/12,label=sprintf("sigma[2]"),parse=T)+
     annotate("text",x=C,y=1.1*R,label=sprintf("tau[max]"),parse=T)+

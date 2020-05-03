@@ -56,9 +56,9 @@ NewStats_2samples = function(x, y, dep = FALSE, conf.level = 0.95, col.x = 'blue
     # geom_errorbar(aes(ymin=lower,ymax=upper),width=.1)+
     geom_pointrange(aes(ymin=lower,ymax=upper,shape=(group=='Difference')),col=c(col.x,col.y,col.diff),size=1)+
     scale_y_continuous(sec.axis = sec_axis(~.-tweak,name=ylab.diff))+
-    geom_segment(aes(x=1,xend=4,y=estimates$point[1],yend=estimates$point[1]),linetype=3, size=.6)+
-    geom_segment(aes(x=2,xend=4,y=estimates$point[2],yend=estimates$point[2]),linetype=3, size=.6)+
-    {if (dep==TRUE) geom_segment(aes(x=1,xend=2,y=estimates$point[1],yend=estimates$point[2]))}+
+    geom_segment(aes(x=1,xend=4,y=point[1],yend=point[1]),linetype=3, size=.6)+
+    geom_segment(aes(x=2,xend=4,y=point[2],yend=point[2]),linetype=3, size=.6)+
+    {if (dep==TRUE) geom_segment(aes(x=1,xend=2,y=point[1],yend=point[2]))}+
     theme_bw()+
     my_theme+
     labs(x='', y='Values')

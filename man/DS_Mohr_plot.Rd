@@ -4,12 +4,14 @@
 \alias{DS_Mohr_plot}
 \title{Draws the Mohr circles for a direct shear set of results}
 \usage{
-DS_Mohr_plot(sign, tau)
+DS_Mohr_plot(sign, tau, units = "kPa")
 }
 \arguments{
 \item{sign}{A numeric vector of the normal stress values}
 
 \item{tau}{A numeric vector of the shear stress values}
+
+\item{units}{A string with the units of the measurements}
 }
 \value{
 A ggplot of the Mohr circles

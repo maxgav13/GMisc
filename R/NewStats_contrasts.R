@@ -89,8 +89,8 @@ NewStats_contrasts = function(dat, g1, g2, conf.level = 0.95, col.g1 = 'blue', c
       # geom_errorbar(aes(ymin=lower,ymax=upper),width=.1)+
       geom_pointrange(aes(ymin=lower,ymax=upper,shape=(group=='Difference')),col=c(col.g1,col.g2,col.diff),size=1)+
       scale_y_continuous(sec.axis = sec_axis(~.-tweak,name=ylab.diff), limits = c(layer_scales(p1)$y$range$range))+
-      geom_segment(aes(x=1,xend=4,y=estimates$point[1],yend=estimates$point[1]),linetype=3, size=.6)+
-      geom_segment(aes(x=2,xend=4,y=estimates$point[2],yend=estimates$point[2]),linetype=3, size=.6)+
+      geom_segment(aes(x=1,xend=4,y=point[1],yend=point[1]),linetype=3, size=.6)+
+      geom_segment(aes(x=2,xend=4,y=point[2],yend=point[2]),linetype=3, size=.6)+
       theme_bw()+
       my_theme+
       labs(x='', y='')

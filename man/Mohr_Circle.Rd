@@ -4,7 +4,7 @@
 \alias{Mohr_Circle}
 \title{Mohr circle solution and plot}
 \usage{
-Mohr_Circle(sigx, sigy, tauxy, theta = 0, digits = 5)
+Mohr_Circle(sigx, sigy, tauxy, theta = 0, digits = 5, units = "kPa")
 }
 \arguments{
 \item{sigx}{A number corresponding with the mayor normal stress}
@@ -16,6 +16,8 @@ Mohr_Circle(sigx, sigy, tauxy, theta = 0, digits = 5)
 \item{theta}{Angle of rotation for which to find the state of stresses}
 
 \item{digits}{Number of significant digits to us}
+
+\item{units}{A string with the units of the measurements}
 }
 \value{
 A list containing a data frame with the results, and a ggplot object with the Mohr circle

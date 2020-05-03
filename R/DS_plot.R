@@ -2,10 +2,11 @@
 #' @description Draws the sigma-tau pairs along with the Mohr-Coulomb failure envelope for a set of direct shear lab test results, and annotates the graph with the values of cohesion and friction angle.
 #' @param sign A numeric vector of the normal stress values
 #' @param tau A numeric vector of the shear stress values
+#' @param units A string with the units of the measurements
 #' @export
 #' @return A ggplot of the direct shear test results
 #' @import stats
-#' @import ggplot2
+#' @import tidyverse
 #' @references Coduto, D. P. (1999). Geotechnical Engineering - Principles and Practices. Prentice Hall.
 #' @references Holtz, R. D., Kovacs, W. D. & Sheahan, T. C. (2011). An Introduction to Geotechnical Engineering. Prentice Hall.
 #' @references Gonzalez de Vallejo, L. I. (2004). Ingenieria Geologica. Prentice Hall.
@@ -14,7 +15,7 @@
 #' tau = c(127,345,475)
 #' DS_plot(sign, tau)
 #'
-DS_plot <- function(sign, tau) {
+DS_plot <- function(sign, tau, units = 'kPa') {
   # Calculates failure envelope and c and phi parameters
   ds = lm(tau ~ sign)
   DS = coef(ds)
@@ -65,15 +66,19 @@ DS_plot <- function(sign, tau) {
 
   # Text to annotate with phi and c parameters
   labelphi = sprintf("phi*minute == %0.1f*degree",phi)
-  labelc = sprintf("c*minute == %0.1f~kPa",c)
+  labelc = sprintf("c*minute == %0.1f~%s",c,units)
 
   # Plot failure envelope and sign-tau pairs
-  gst = ggplot()+geom_point(aes(sign,tau),col="blue",size=2)+
-    geom_line(aes(x,y),col="red")+
+  gst = ggplot()+
+    geom_point(aes(sign,tau),col="blue",size=2)+
+    geom_line(aes(x,y),col="red",na.rm = T)+
     coord_fixed()+
     xlim(0,1.1*sign[length(sign)])+
     ylim(0,1.1*tau[length(tau)])+
-    labs(x=expression(paste(sigma, " (kPa)")),y=expression(paste(tau, " (kPa)")))+
+    labs(x=paste0('Normal stress (',units,')'),
+         y=paste0('Shear stress (',units,')')) +
+    # labs(x=TeX(str_glue('$\\sigma$ ({units})')),
+    #      y=TeX(str_glue('$\\tau$ ({units})')))+
     annotate("text",x=(max(sign)-min(sign))/2,y=max(tau),
              label=labelphi,parse=T)+
     annotate("text",x=(max(sign)-min(sign))/2,y=0.95*max(tau),

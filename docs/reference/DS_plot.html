@@ -138,7 +138,7 @@
     <p>Draws the sigma-tau pairs along with the Mohr-Coulomb failure envelope for a set of direct shear lab test results, and annotates the graph with the values of cohesion and friction angle.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>DS_plot</span>(<span class='no'>sign</span>, <span class='no'>tau</span>)</pre>
+    <pre class="usage"><span class='fu'>DS_plot</span>(<span class='no'>sign</span>, <span class='no'>tau</span>, <span class='kw'>units</span> <span class='kw'>=</span> <span class='st'>"kPa"</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -150,6 +150,10 @@
     <tr>
       <th>tau</th>
       <td><p>A numeric vector of the shear stress values</p></td>
+    </tr>
+    <tr>
+      <th>units</th>
+      <td><p>A string with the units of the measurements</p></td>
     </tr>
     </table>
 
@@ -165,7 +169,7 @@
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='no'>sign</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>80</span>,<span class='fl'>237</span>,<span class='fl'>395</span>)
 <span class='no'>tau</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>127</span>,<span class='fl'>345</span>,<span class='fl'>475</span>)
-<span class='fu'>DS_plot</span>(<span class='no'>sign</span>, <span class='no'>tau</span>)</div><div class='output co'>#&gt; <span class='warning'>Warning: Removed 425 row(s) containing missing values (geom_path).</span></div><div class='img'><img src='DS_plot-1.png' alt='' width='700' height='433' /></div><div class='input'>
+<span class='fu'>DS_plot</span>(<span class='no'>sign</span>, <span class='no'>tau</span>)</div><div class='img'><img src='DS_plot-1.png' alt='' width='700' height='433' /></div><div class='input'>
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

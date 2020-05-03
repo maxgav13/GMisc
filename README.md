@@ -26,7 +26,7 @@ Some of the main functionalities have been implemented in shiny apps:
 
 * [Directional Statistics](https://maximiliano-01.shinyapps.io/directional/): Used to analyze directional data (strike, dip, lineations, etc.) with some basic plots, and one and two sample statistics.
 
-* [Geotechnical Engineering / Soil Mechancs](https://maximiliano-01.shinyapps.io/geotech/): Mostly for teaching concepts in soil mechanics (bearing capacity and induced stress).
+* [Geotechnical Engineering / Soil Mechanics](https://maximiliano-01.shinyapps.io/geotech/): Mostly for teaching concepts in soil mechanics (bearing capacity and induced stress).
 
-* [Goestatistical Analysis](https://maximiliano-01.shinyapps.io/geostatistics/): Takes the user in a workflow on how to perform a geostatistical analysis.
+* [Geostatistical Analysis](https://maximiliano-01.shinyapps.io/geostatistics/): Takes the user in a workflow on how to perform a geostatistical analysis.
 

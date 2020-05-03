@@ -1,5 +1,6 @@
 ## ----setup, include=FALSE-----------------------------------------------------
 library(GMisc)
+library(tidyverse)
 
 knitr::opts_chunk$set(
   echo = TRUE,
