@@ -4,7 +4,7 @@
 \alias{ci_chisq}
 \title{Confidence interval for standard deviation of a sample}
 \usage{
-ci_chisq(s, n, conf.level = 0.95)
+ci_chisq(s, n, conf.level = 0.95, digits = 2)
 }
 \arguments{
 \item{s}{Sample standard deviation}
@@ -12,6 +12,8 @@ ci_chisq(s, n, conf.level = 0.95)
 \item{n}{Sample size}
 
 \item{conf.level}{Confidence level to use for the confidence interval (Default is 0.95)}
+
+\item{digits}{Number of digits to round to (Default is 2)}
 }
 \value{
 A data frame with the standard deviation and variance, degrees of freedom, and lower and upper ends of the confidence interval

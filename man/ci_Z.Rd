@@ -4,7 +4,7 @@
 \alias{ci_z}
 \title{Confidence interval for mean (known sigma)}
 \usage{
-ci_z(x, sig, n, conf.level = 0.95)
+ci_z(x, sig, n, conf.level = 0.95, digits = 2)
 }
 \arguments{
 \item{x}{Sample mean}
@@ -14,6 +14,8 @@ ci_z(x, sig, n, conf.level = 0.95)
 \item{n}{Sample size}
 
 \item{conf.level}{Confidence level to use for the confidence interval (Default is 0.95)}
+
+\item{digits}{Number of digits to round to (Default is 2)}
 }
 \value{
 A data frame with the mean, and lower and upper ends of the confidence interval

@@ -4,7 +4,7 @@
 \alias{ci_z2}
 \title{Confidence interval for difference of the mean between 2 samples (known sigmas)}
 \usage{
-ci_z2(x1, sig1, n1, x2, sig2, n2, conf.level = 0.95)
+ci_z2(x1, sig1, n1, x2, sig2, n2, conf.level = 0.95, digits = 2)
 }
 \arguments{
 \item{x1}{Sample's 1 mean}
@@ -20,6 +20,8 @@ ci_z2(x1, sig1, n1, x2, sig2, n2, conf.level = 0.95)
 \item{n2}{Sample size of sample 2}
 
 \item{conf.level}{Confidence level to use for the confidence interval (Default is 0.95)}
+
+\item{digits}{Number of digits to round to (Default is 2)}
 }
 \value{
 A data frame with the difference of means, and lower and upper ends of the confidence interval

@@ -8,6 +8,7 @@
 #' @param n2 Sample size of sample 2
 #' @param var.equal Logical indicating if the variances are equal or not
 #' @param conf.level Confidence level to use for the confidence interval (Default is 0.95)
+#' @param digits Number of digits to round to (Default is 2)
 #' @export
 #' @return A data frame with the difference of means, degrees of freedom, and lower and upper ends of the confidence interval
 #' @import stats
@@ -20,7 +21,7 @@
 #' n2 <- 30
 #' ci_t2(x1, s1, n1, x2, s2, n2)
 #'
-ci_t2 <- function (x1, s1, n1, x2, s2, n2, var.equal = TRUE, conf.level = .95){
+ci_t2 <- function (x1, s1, n1, x2, s2, n2, var.equal = FALSE, conf.level = .95, digits = 2){
   alpha <- 1 - conf.level
   if (var.equal == T) {
     stderr <- sqrt(((n1-1)*s1^2 + (n2-1)*s2^2)/(n1+n2-2)) * sqrt(1/n1 + 1/n2)
@@ -32,7 +33,9 @@ ci_t2 <- function (x1, s1, n1, x2, s2, n2, var.equal = TRUE, conf.level = .95){
 
   upper <- (x1-x2) + qt(1-alpha/2, df = v) * stderr
   lower <- (x1-x2) + qt(alpha/2, df = v) * stderr
-  DF <- data.frame(mean_diff = round(x1-x2, 2), df = round(v, 2),
-                   lower = round(lower, 2), upper = round(upper, 2))
+  DF <- data.frame(mean_diff = round(x1-x2, digits),
+                   df = round(v, digits),
+                   lower = round(lower, digits),
+                   upper = round(upper, digits))
   DF
 }

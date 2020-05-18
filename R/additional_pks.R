@@ -67,7 +67,8 @@ additional_pks <- function (){
   install.packages("gghighlight")
   install.packages("rstatix")
   install.packages("summarytools")
-  install.packages("gt")
+  install.packages(c("gtsummary", "rasterly", "explor"))
   # devtools::install_github('doomlab/MOTE')
+  remotes::install_github("ramnathv/tidymetrics")
   devtools::install_github('gitrman/itns')
 }

@@ -4,7 +4,7 @@
 \alias{ci_F}
 \title{Confidence interval for ratio of standard deviations of 2 samples}
 \usage{
-ci_F(s1, n1, s2, n2, conf.level = 0.95)
+ci_F(s1, n1, s2, n2, conf.level = 0.95, digits = 2)
 }
 \arguments{
 \item{s1}{Sample's 1 standard deviation}
@@ -16,6 +16,8 @@ ci_F(s1, n1, s2, n2, conf.level = 0.95)
 \item{n2}{Sample size of sample 2}
 
 \item{conf.level}{Confidence level to use for the confidence interval (Default is 0.95)}
+
+\item{digits}{Number of digits to round to (Default is 2)}
 }
 \value{
 A data frame with the ratio of standard deviations and variances, degrees of freedom for both samples, and lower and upper ends of the confidence interval

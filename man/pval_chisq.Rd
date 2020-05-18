@@ -25,6 +25,6 @@ Calculates the p-value for a proposed standard deviation of a population (ChiSqu
 s <- 0.535
 n <- 10
 sig <- 1
-pval_chisq(s, n, sigma)
+pval_chisq(s, n, sig)
 
 }

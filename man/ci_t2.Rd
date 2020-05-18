@@ -4,7 +4,7 @@
 \alias{ci_t2}
 \title{Confidence interval for difference of the mean between 2 samples (unknown sigmas)}
 \usage{
-ci_t2(x1, s1, n1, x2, s2, n2, var.equal = TRUE, conf.level = 0.95)
+ci_t2(x1, s1, n1, x2, s2, n2, var.equal = FALSE, conf.level = 0.95, digits = 2)
 }
 \arguments{
 \item{x1}{Sample's 1 mean}
@@ -22,6 +22,8 @@ ci_t2(x1, s1, n1, x2, s2, n2, var.equal = TRUE, conf.level = 0.95)
 \item{var.equal}{Logical indicating if the variances are equal or not}
 
 \item{conf.level}{Confidence level to use for the confidence interval (Default is 0.95)}
+
+\item{digits}{Number of digits to round to (Default is 2)}
 }
 \value{
 A data frame with the difference of means, degrees of freedom, and lower and upper ends of the confidence interval

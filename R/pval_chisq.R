@@ -11,7 +11,7 @@
 #' s <- 0.535
 #' n <- 10
 #' sig <- 1
-#' pval_chisq(s, n, sigma)
+#' pval_chisq(s, n, sig)
 #'
 pval_chisq <- function (s, n, sigma, side = c("two", "one")){
   v = n-1
