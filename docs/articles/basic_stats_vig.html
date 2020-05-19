@@ -91,7 +91,7 @@
       <h1 data-toc-skip>Basic statistics</h1>
                         <h4 class="author">Maximiliano Garnier Villarreal</h4>
             
-            <h4 class="date">2020-05-03</h4>
+            <h4 class="date">2020-05-19</h4>
       
       <small class="dont-index">Source: <a href="http://github.com/maxgav13/GMisc/blob/master/vignettes/basic_stats_vig.Rmd"><code>vignettes/basic_stats_vig.Rmd</code></a></small>
       <div class="hidden name"><code>basic_stats_vig.Rmd</code></div>
@@ -157,8 +157,8 @@
 <p><span class="math display">\[\left(\bar{x}_1-\bar{x}_2\right) \pm t_{\alpha/2,v} {\sqrt{\frac{s^2_1}{n_1} + \frac{s^2_2}{n_2}}}\]</span></p>
 <p>The function for computing it is <code>ci_t2</code>, with arguments <code>x1</code> for the mean of sample 1, <code>s1</code> for the sample 1 standard deviation, <code>n1</code> for the sample size of 1, <code>x2</code> for the mean of sample 2, <code>s2</code> for the sample 2 standard deviation, <code>n2</code> for the sample size of 2, and <code>conf.level</code> for the desired confidence level:</p>
 <div class="sourceCode" id="cb7"><html><body><pre class="r"><span class="fu"><a href="../reference/ci_t2.html">ci_t2</a></span>(<span class="kw">x1</span> <span class="kw">=</span> <span class="fl">42</span>, <span class="kw">s1</span> <span class="kw">=</span> <span class="fl">8</span>, <span class="kw">n1</span> <span class="kw">=</span> <span class="fl">75</span>, <span class="kw">x2</span> <span class="kw">=</span> <span class="fl">36</span>, <span class="kw">s2</span> <span class="kw">=</span> <span class="fl">6</span>, <span class="kw">n2</span> <span class="kw">=</span> <span class="fl">50</span>, <span class="kw">conf.level</span> <span class="kw">=</span> <span class="fl">0.95</span>)</pre></body></html></div>
-<pre><code>##   mean_diff  df lower upper
-## 1         6 123  3.37  8.63</code></pre>
+<pre><code>##   mean_diff     df lower upper
+## 1         6 121.22  3.52  8.48</code></pre>
 </div>
 <div id="one-sample-chi2-test" class="section level2">
 <h2 class="hasAnchor">
