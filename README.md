@@ -2,7 +2,7 @@
 
 ## Description
 
-This package is intendend mainly as a teaching and research tool for geology related areas (soil mechanics, rock mechanics, directional stats, hydrogeochem, etc., and more to come) for courses and projects at the Geology Department ([Escuela Centroamericana de Geologia](geologia.ucr.ac.cr)) of the University of Costa Rica ([Universidad de Costa Rica](ucr.ac.cr)).
+This package is intendend mainly as a teaching and research tool for geology related areas (soil mechanics, rock mechanics, directional stats, hydrogeochem, etc., and more to come) for courses and projects at the Geology Department ([Escuela Centroamericana de Geologia](geologia.ucr.ac.cr)) of the University of Costa Rica ([Universidad de Costa Rica](ucr.ac.cr)). There is a website for the package ([GMisc](https://maxgav13.github.io/GMisc/)) that is easier to navigate and more user fiendly.
 
 ## Installation
 
