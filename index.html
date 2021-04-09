@@ -20,6 +20,8 @@
 <![endif]-->
 </head>
 <body data-spy="scroll" data-target="#toc">
+    
+
     <div class="container template-home">
       <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -38,12 +40,6 @@
 
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
-<li>
-  <a href="index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
-     
-  </a>
-</li>
 <li>
   <a href="reference/index.html">Reference</a>
 </li>
@@ -71,8 +67,8 @@
       </ul>
 <ul class="nav navbar-nav navbar-right">
 <li>
-  <a href="http://github.com/maxgav13/GMisc/">
-    <span class="fab fa fab fa-github fa-lg"></span>
+  <a href="https://github.com/maxgav13/GMisc/">
+    <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -94,31 +90,31 @@
 <div id="description" class="section level2">
 <h2 class="hasAnchor">
 <a href="#description" class="anchor"></a>Description</h2>
-<p>This package is intendend mainly as a teaching and research tool for geology related areas (soil mechanics, rock mechanics, directional stats, hydrogeochem, etc., and more to come) for courses and projects at the Geology Department (<a href="geologia.ucr.ac.cr">Escuela Centroamericana de Geologia</a>) of the University of Costa Rica (<a href="ucr.ac.cr">Universidad de Costa Rica</a>). There is a website for the package (<a href="https://maxgav13.github.io/GMisc/">GMisc</a>) that is easier to navigate and more user fiendly.</p>
+<p>This package is intendend mainly as a teaching and research tool for geology related areas (soil mechanics, rock mechanics, directional stats, hydrogeochem, etc., and more to come) for courses and projects at the Geology Department (<a href="geologia.ucr.ac.cr">Escuela Centroamericana de Geologia</a>) of the University of Costa Rica (<a href="ucr.ac.cr">Universidad de Costa Rica</a>). There is a website for the package (<a href="https://maxgav13.github.io/GMisc/" class="external-link">GMisc</a>) that is easier to navigate and more user fiendly.</p>
 </div>
 <div id="installation" class="section level2">
 <h2 class="hasAnchor">
 <a href="#installation" class="anchor"></a>Installation</h2>
-<p>Two ways of installing the package are available in case one doesn’t work</p>
-<ul>
-<li><p><code><a href="https://devtools.r-lib.org//reference/remote-reexports.html">devtools::install_github("maxgav13/GMisc")</a></code> or</p></li>
-<li><p><code><a href="https://remotes.r-lib.org/reference/install_url.html">remotes::install_url(url='https://github.com/maxgav13/GMisc/archive/master.zip',INSTALL_opt='--no-multiarch')</a></code></p></li>
-</ul>
+<ol style="list-style-type: decimal">
+<li><p><code><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages("remotes")</a></code></p></li>
+<li><p><code><a href="https://remotes.r-lib.org/reference/install_github.html" class="external-link">remotes::install_github("maxgav13/GMisc", build_vignettes = TRUE)</a></code></p></li>
+</ol>
 <p>Additional packages that are also useful can be installed using:</p>
 <ul>
 <li><code><a href="reference/additional_pks.html">GMisc::additional_pks()</a></code></li>
 </ul>
+<p>It is also recommended to have installed the necessary compiling tools: Xcode for Mac or Rtools for Windows.</p>
 </div>
 <div id="extras" class="section level2">
 <h2 class="hasAnchor">
 <a href="#extras" class="anchor"></a>Extras</h2>
 <p>Some of the main functionalities have been implemented in shiny apps:</p>
 <ul>
-<li><p><a href="https://maximiliano-01.shinyapps.io/layer_boundary/">Layer Boundary</a>: Different methods can be used to find layer boundaries in a data sequence; unvariate and multivariate methods are available.</p></li>
-<li><p><a href="https://maximiliano-01.shinyapps.io/rock_mechanics/">Rock Mechanics</a>: Implements basic rock mechanics’ classification and failure criterion.</p></li>
-<li><p><a href="https://maximiliano-01.shinyapps.io/directional/">Directional Statistics</a>: Used to analyze directional data (strike, dip, lineations, etc.) with some basic plots, and one and two sample statistics.</p></li>
-<li><p><a href="https://maximiliano-01.shinyapps.io/geotech/">Geotechnical Engineering / Soil Mechanics</a>: Mostly for teaching concepts in soil mechanics (bearing capacity and induced stress).</p></li>
-<li><p><a href="https://maximiliano-01.shinyapps.io/geostatistics/">Geostatistical Analysis</a>: Takes the user in a workflow on how to perform a geostatistical analysis.</p></li>
+<li><p><a href="https://maximiliano-01.shinyapps.io/layer_boundary/" class="external-link">Layer Boundary</a>: Different methods can be used to find layer boundaries in a data sequence; unvariate and multivariate methods are available.</p></li>
+<li><p><a href="https://maximiliano-01.shinyapps.io/rock_mechanics/" class="external-link">Rock Mechanics</a>: Implements basic rock mechanics’ classification and failure criterion.</p></li>
+<li><p><a href="https://maximiliano-01.shinyapps.io/directional/" class="external-link">Directional Statistics</a>: Used to analyze directional data (strike, dip, lineations, etc.) with some basic plots, and one and two sample statistics.</p></li>
+<li><p><a href="https://maximiliano-01.shinyapps.io/soil_mechanics/" class="external-link">Geotechnical Engineering / Soil Mechanics</a>: Mostly for teaching concepts in soil mechanics (bearing capacity and induced stress).</p></li>
+<li><p><a href="https://maximiliano-01.shinyapps.io/geostatistics/" class="external-link">Geostatistical Analysis</a>: Takes the user in a workflow on how to perform a geostatistical analysis.</p></li>
 </ul>
 </div>
 </div>
@@ -126,37 +122,45 @@
 
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <div class="links">
-<h2>Links</h2>
+<h2 data-toc-skip>Links</h2>
 <ul class="list-unstyled">
-<li>Browse source code at <br><a href="http://github.com/maxgav13/GMisc/">http://​github.com/​maxgav13/​GMisc/​</a>
+<li>Browse source code at <br><a href="https://github.com/maxgav13/GMisc/">https://​github.com/​maxgav13/​GMisc/​</a>
 </li>
-<li>Report a bug at <br><a href="http://github.com/maxgav13/GMisc/issues">http://​github.com/​maxgav13/​GMisc/​issues</a>
+<li>Report a bug at <br><a href="https://github.com/maxgav13/GMisc/issues">https://​github.com/​maxgav13/​GMisc/​issues</a>
 </li>
 </ul>
 </div>
+
 <div class="license">
-<h2>License</h2>
+<h2 data-toc-skip>License</h2>
 <ul class="list-unstyled">
-<li>GPL (&gt;= 2)</li>
+<li><a href="LICENSE.html">Full license</a></li>
+<li><small>GPL (&gt;= 3)</small></li>
 </ul>
 </div>
+
+
 <div class="developers">
-<h2>Developers</h2>
+<h2 data-toc-skip>Developers</h2>
 <ul class="list-unstyled">
 <li>Maximiliano Garnier-Villarreal <br><small class="roles"> Maintainer </small>  </li>
 </ul>
 </div>
+
+
 
   </div>
 </div>
 
 
       <footer><div class="copyright">
-  <p>Developed by Maximiliano Garnier-Villarreal.</p>
+  <p></p>
+<p>Developed by Maximiliano Garnier-Villarreal.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.9000.</p>
+  <p></p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 1.6.1.9001.</p>
 </div>
 
       </footer>
@@ -164,6 +168,8 @@
 
   
 
+
+  
 
   </body>
 </html>

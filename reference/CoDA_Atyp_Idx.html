@@ -45,6 +45,8 @@
 
 
 
+
+
 <!-- mathjax -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script>
@@ -56,9 +58,18 @@
 
 
 
+<!-- dependencies from examples -->
+
+
+  
+
+  
+
   </head>
 
   <body data-spy="scroll" data-target="#toc">
+    
+
     <div class="container template-reference-topic">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
@@ -79,12 +90,6 @@
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li>
-  <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
-     
-  </a>
-</li>
-<li>
   <a href="../reference/index.html">Reference</a>
 </li>
 <li class="dropdown">
@@ -111,8 +116,8 @@
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li>
-  <a href="http://github.com/maxgav13/GMisc/">
-    <span class="fab fa fab fa-github fa-lg"></span>
+  <a href="https://github.com/maxgav13/GMisc/">
+    <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -130,7 +135,7 @@
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>CoDA Atypicality Index</h1>
-    <small class="dont-index">Source: <a href='http://github.com/maxgav13/GMisc/blob/master/R/CoDA_Atyp_Idx.R'><code>R/CoDA_Atyp_Idx.R</code></a></small>
+    <small class="dont-index">Source: <a href='https://github.com/maxgav13/GMisc/blob/master/R/CoDA_Atyp_Idx.R'><code>R/CoDA_Atyp_Idx.R</code></a></small>
     <div class="hidden name"><code>CoDA_Atyp_Idx.Rd</code></div>
     </div>
 
@@ -138,7 +143,7 @@
     <p>Calculates the atypicality index (ranges between 0 and 1, 1 being more atypical/different) for all the observations of a composition or compares one sample to the given composition, using Compositional Data Analysis (CoDA) principles.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>CoDA_Atyp_Idx</span>(<span class='no'>comp</span>, <span class='kw'>sample</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
+    <pre class="usage"><span class='fu'>CoDA_Atyp_Idx</span><span class='op'>(</span><span class='va'>comp</span>, sample <span class='op'>=</span> <span class='cn'>NULL</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -161,9 +166,10 @@
     <p>Aitchison, J. (1986). The statistical analysis of compositional data. Chapman and Hall.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='st'>"Hongite"</span>, <span class='kw'>package</span> <span class='kw'>=</span> <span class='st'>'compositions'</span>)
-<span class='no'>samp</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>44</span>, <span class='fl'>20.4</span>, <span class='fl'>13.9</span>, <span class='fl'>9.1</span>, <span class='fl'>12.6</span>)
-<span class='fu'>CoDA_Atyp_Idx</span>(<span class='no'>Hongite</span>)</div><div class='output co'>#&gt;         [,1]
+    <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span><span class='op'>(</span><span class='st'>"Hongite"</span>, package <span class='op'>=</span> <span class='st'>'compositions'</span><span class='op'>)</span>
+<span class='va'>samp</span> <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>44</span>, <span class='fl'>20.4</span>, <span class='fl'>13.9</span>, <span class='fl'>9.1</span>, <span class='fl'>12.6</span><span class='op'>)</span>
+<span class='fu'>CoDA_Atyp_Idx</span><span class='op'>(</span><span class='va'>Hongite</span><span class='op'>)</span>
+</div><div class='output co'>#&gt;         [,1]
 #&gt;  [1,] 0.7122
 #&gt;  [2,] 0.0171
 #&gt;  [3,] 0.1990
@@ -188,7 +194,8 @@
 #&gt; [22,] 0.0739
 #&gt; [23,] 0.8282
 #&gt; [24,] 0.2800
-#&gt; [25,] 0.2864</div><div class='input'><span class='fu'>CoDA_Atyp_Idx</span>(<span class='no'>Hongite</span>, <span class='no'>samp</span>)</div><div class='output co'>#&gt;        [,1]
+#&gt; [25,] 0.2864</div><div class='input'><span class='fu'>CoDA_Atyp_Idx</span><span class='op'>(</span><span class='va'>Hongite</span>, <span class='va'>samp</span><span class='op'>)</span>
+</div><div class='output co'>#&gt;        [,1]
 #&gt; [1,] 0.9979</div><div class='input'>
 </div></pre>
   </div>
@@ -202,11 +209,11 @@
 
       <footer>
       <div class="copyright">
-  <p>Developed by Maximiliano Garnier-Villarreal.</p>
+  <p><p>Developed by Maximiliano Garnier-Villarreal.</p></p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.9000.</p>
+  <p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 1.6.1.9001.</p></p>
 </div>
 
       </footer>
@@ -214,6 +221,8 @@
 
   
 
+
+  
 
   </body>
 </html>

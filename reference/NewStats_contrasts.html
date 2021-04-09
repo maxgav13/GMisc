@@ -45,6 +45,8 @@
 
 
 
+
+
 <!-- mathjax -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script>
@@ -56,9 +58,18 @@
 
 
 
+<!-- dependencies from examples -->
+
+
+  
+
+  
+
   </head>
 
   <body data-spy="scroll" data-target="#toc">
+    
+
     <div class="container template-reference-topic">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
@@ -79,12 +90,6 @@
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li>
-  <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
-     
-  </a>
-</li>
-<li>
   <a href="../reference/index.html">Reference</a>
 </li>
 <li class="dropdown">
@@ -111,8 +116,8 @@
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li>
-  <a href="http://github.com/maxgav13/GMisc/">
-    <span class="fab fa fab fa-github fa-lg"></span>
+  <a href="https://github.com/maxgav13/GMisc/">
+    <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -130,7 +135,7 @@
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>New Statistics contrasts</h1>
-    <small class="dont-index">Source: <a href='http://github.com/maxgav13/GMisc/blob/master/R/NewStats_contrasts.R'><code>R/NewStats_contrasts.R</code></a></small>
+    <small class="dont-index">Source: <a href='https://github.com/maxgav13/GMisc/blob/master/R/NewStats_contrasts.R'><code>R/NewStats_contrasts.R</code></a></small>
     <div class="hidden name"><code>NewStats_contrasts.Rd</code></div>
     </div>
 
@@ -138,18 +143,18 @@
     <p>It plots all the samples with their confidence intervals (CI), and in addition it plots the contrasts between the selected samples.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>NewStats_contrasts</span>(
-  <span class='no'>dat</span>,
-  <span class='no'>g1</span>,
-  <span class='no'>g2</span>,
-  <span class='kw'>conf.level</span> <span class='kw'>=</span> <span class='fl'>0.95</span>,
-  <span class='kw'>col.g1</span> <span class='kw'>=</span> <span class='st'>"blue"</span>,
-  <span class='kw'>col.g2</span> <span class='kw'>=</span> <span class='st'>"green3"</span>,
-  <span class='kw'>col.diff</span> <span class='kw'>=</span> <span class='st'>"red"</span>,
-  <span class='kw'>ylab</span> <span class='kw'>=</span> <span class='st'>"Values"</span>,
-  <span class='kw'>ylab.diff</span> <span class='kw'>=</span> <span class='st'>"Difference"</span>,
-  <span class='kw'>B.labels</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"G1"</span>, <span class='st'>"G2"</span>, <span class='st'>"Difference"</span>)
-)</pre>
+    <pre class="usage"><span class='fu'>NewStats_contrasts</span><span class='op'>(</span>
+  <span class='va'>dat</span>,
+  <span class='va'>g1</span>,
+  <span class='va'>g2</span>,
+  conf.level <span class='op'>=</span> <span class='fl'>0.95</span>,
+  col.g1 <span class='op'>=</span> <span class='st'>"blue"</span>,
+  col.g2 <span class='op'>=</span> <span class='st'>"green3"</span>,
+  col.diff <span class='op'>=</span> <span class='st'>"red"</span>,
+  ylab <span class='op'>=</span> <span class='st'>"Values"</span>,
+  ylab.diff <span class='op'>=</span> <span class='st'>"Difference"</span>,
+  B.labels <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"G1"</span>, <span class='st'>"G2"</span>, <span class='st'>"Difference"</span><span class='op'>)</span>
+<span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -204,11 +209,12 @@
     <p>Cumming, G. &amp; Calin-Jageman, R.J. (2017). Introduction to the New Statistics: Estimation, Open Science, and Beyond. New York: Routledge.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='no'>dat</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a></span>(<span class='kw'>mean</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>37.5</span>,<span class='fl'>31.9</span>,<span class='fl'>41.2</span>,<span class='fl'>33.4</span>,<span class='fl'>29.9</span>,<span class='fl'>38.2</span>),
-                 <span class='kw'>sd</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>10</span>,<span class='fl'>13.5</span>,<span class='fl'>14.8</span>,<span class='fl'>10</span>,<span class='fl'>8.7</span>,<span class='fl'>10</span>),
-                 <span class='kw'>n</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>19</span>,<span class='fl'>19</span>,<span class='fl'>19</span>,<span class='fl'>19</span>,<span class='fl'>19</span>,<span class='fl'>19</span>),
-                 <span class='kw'>grp</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>'NF10'</span>,<span class='st'>'AF10'</span>,<span class='st'>'AD10'</span>,<span class='st'>'NF17'</span>,<span class='st'>'AF17'</span>,<span class='st'>'AD17'</span>))
-<span class='fu'>NewStats_contrasts</span>(<span class='no'>dat</span>, <span class='kw'>g1</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>'AD10'</span>, <span class='st'>'AD17'</span>), <span class='kw'>g2</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>'AF10'</span>, <span class='st'>'AF17'</span>))</div><div class='img'><img src='NewStats_contrasts-1.png' alt='' width='700' height='433' /></div><div class='input'>
+    <pre class="examples"><div class='input'><span class='va'>dat</span> <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a></span><span class='op'>(</span>mean <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>37.5</span>,<span class='fl'>31.9</span>,<span class='fl'>41.2</span>,<span class='fl'>33.4</span>,<span class='fl'>29.9</span>,<span class='fl'>38.2</span><span class='op'>)</span>,
+                 sd <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>10</span>,<span class='fl'>13.5</span>,<span class='fl'>14.8</span>,<span class='fl'>10</span>,<span class='fl'>8.7</span>,<span class='fl'>10</span><span class='op'>)</span>,
+                 n <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>19</span>,<span class='fl'>19</span>,<span class='fl'>19</span>,<span class='fl'>19</span>,<span class='fl'>19</span>,<span class='fl'>19</span><span class='op'>)</span>,
+                 grp <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>'NF10'</span>,<span class='st'>'AF10'</span>,<span class='st'>'AD10'</span>,<span class='st'>'NF17'</span>,<span class='st'>'AF17'</span>,<span class='st'>'AD17'</span><span class='op'>)</span><span class='op'>)</span>
+<span class='fu'>NewStats_contrasts</span><span class='op'>(</span><span class='va'>dat</span>, g1 <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>'AD10'</span>, <span class='st'>'AD17'</span><span class='op'>)</span>, g2 <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>'AF10'</span>, <span class='st'>'AF17'</span><span class='op'>)</span><span class='op'>)</span>
+</div><div class='img'><img src='NewStats_contrasts-1.png' alt='' width='700' height='433' /></div><div class='input'>
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
@@ -221,11 +227,11 @@
 
       <footer>
       <div class="copyright">
-  <p>Developed by Maximiliano Garnier-Villarreal.</p>
+  <p><p>Developed by Maximiliano Garnier-Villarreal.</p></p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.9000.</p>
+  <p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 1.6.1.9001.</p></p>
 </div>
 
       </footer>
@@ -233,6 +239,8 @@
 
   
 
+
+  
 
   </body>
 </html>

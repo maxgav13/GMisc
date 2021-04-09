@@ -45,6 +45,8 @@
 
 
 
+
+
 <!-- mathjax -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script>
@@ -56,9 +58,18 @@
 
 
 
+<!-- dependencies from examples -->
+
+
+  
+
+  
+
   </head>
 
   <body data-spy="scroll" data-target="#toc">
+    
+
     <div class="container template-reference-topic">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
@@ -79,12 +90,6 @@
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li>
-  <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
-     
-  </a>
-</li>
-<li>
   <a href="../reference/index.html">Reference</a>
 </li>
 <li class="dropdown">
@@ -111,8 +116,8 @@
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li>
-  <a href="http://github.com/maxgav13/GMisc/">
-    <span class="fab fa fab fa-github fa-lg"></span>
+  <a href="https://github.com/maxgav13/GMisc/">
+    <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -130,7 +135,7 @@
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Barton-Choubey criterion</h1>
-    <small class="dont-index">Source: <a href='http://github.com/maxgav13/GMisc/blob/master/R/Barton_Choubey.R'><code>R/Barton_Choubey.R</code></a></small>
+    <small class="dont-index">Source: <a href='https://github.com/maxgav13/GMisc/blob/master/R/Barton_Choubey.R'><code>R/Barton_Choubey.R</code></a></small>
     <div class="hidden name"><code>Barton_Choubey.Rd</code></div>
     </div>
 
@@ -138,7 +143,7 @@
     <p>Calculates the Barton-Choubey criterion for the given data and for the given level of stress (unit weight and depth).</p>
     </div>
 
-    <pre class="usage"><span class='fu'>Barton_Choubey</span>(<span class='no'>JRC</span>, <span class='no'>JCS</span>, <span class='no'>phi.r</span>, <span class='no'>unit.weight</span>, <span class='no'>depth</span>)</pre>
+    <pre class="usage"><span class='fu'>Barton_Choubey</span><span class='op'>(</span><span class='va'>JRC</span>, <span class='va'>JCS</span>, <span class='va'>phi.r</span>, <span class='va'>unit.weight</span>, <span class='va'>depth</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -167,252 +172,47 @@
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>A list with 3 data frames: data (normal stress and shear stress), stress level point, and parameters (c and phi). All stress values are in MPa</p>
+    <p>A list with 3 tibbles: data (normal stress and shear stress), stress level point, and parameters (c and phi). All stress values are in MPa</p>
     <h2 class="hasAnchor" id="references"><a class="anchor" href="#references"></a>References</h2>
 
     <p>Barton, N. &amp; Choubey, V. (1977). The shear strength of rock joints in theory and practice. Rock Mechanichs, 10: 1-54.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='no'>JRC</span> <span class='kw'>=</span> <span class='fl'>10</span>
-<span class='no'>JCS</span> <span class='kw'>=</span> <span class='fl'>30</span>
-<span class='no'>phi.r</span> <span class='kw'>=</span> <span class='fl'>26</span>
-<span class='no'>unit.weight</span> <span class='kw'>=</span> <span class='fl'>18.6</span>
-<span class='no'>depth</span> <span class='kw'>=</span> <span class='fl'>40</span>
-<span class='fu'>Barton_Choubey</span>(<span class='no'>JRC</span>, <span class='no'>JCS</span>, <span class='no'>phi.r</span>, <span class='no'>unit.weight</span>, <span class='no'>depth</span>)</div><div class='output co'>#&gt; $dat
-#&gt;     sig_n   tau
-#&gt; 1    0.01 0.018
-#&gt; 2    0.02 0.032
-#&gt; 3    0.03 0.044
-#&gt; 4    0.04 0.057
-#&gt; 5    0.05 0.068
-#&gt; 6    0.06 0.080
-#&gt; 7    0.07 0.091
-#&gt; 8    0.08 0.101
-#&gt; 9    0.09 0.112
-#&gt; 10   0.10 0.122
-#&gt; 11   0.11 0.133
-#&gt; 12   0.12 0.143
-#&gt; 13   0.13 0.153
-#&gt; 14   0.14 0.163
-#&gt; 15   0.15 0.173
-#&gt; 16   0.16 0.182
-#&gt; 17   0.17 0.192
-#&gt; 18   0.18 0.201
-#&gt; 19   0.19 0.211
-#&gt; 20   0.20 0.220
-#&gt; 21   0.21 0.230
-#&gt; 22   0.22 0.239
-#&gt; 23   0.23 0.248
-#&gt; 24   0.24 0.257
-#&gt; 25   0.25 0.266
-#&gt; 26   0.26 0.275
-#&gt; 27   0.27 0.284
-#&gt; 28   0.28 0.293
-#&gt; 29   0.29 0.302
-#&gt; 30   0.30 0.311
-#&gt; 31   0.31 0.319
-#&gt; 32   0.32 0.328
-#&gt; 33   0.33 0.337
-#&gt; 34   0.34 0.345
-#&gt; 35   0.35 0.354
-#&gt; 36   0.36 0.363
-#&gt; 37   0.37 0.371
-#&gt; 38   0.38 0.380
-#&gt; 39   0.39 0.388
-#&gt; 40   0.40 0.397
-#&gt; 41   0.41 0.405
-#&gt; 42   0.42 0.413
-#&gt; 43   0.43 0.422
-#&gt; 44   0.44 0.430
-#&gt; 45   0.45 0.438
-#&gt; 46   0.46 0.446
-#&gt; 47   0.47 0.455
-#&gt; 48   0.48 0.463
-#&gt; 49   0.49 0.471
-#&gt; 50   0.50 0.479
-#&gt; 51   0.51 0.487
-#&gt; 52   0.52 0.495
-#&gt; 53   0.53 0.503
-#&gt; 54   0.54 0.511
-#&gt; 55   0.55 0.520
-#&gt; 56   0.56 0.528
-#&gt; 57   0.57 0.535
-#&gt; 58   0.58 0.543
-#&gt; 59   0.59 0.551
-#&gt; 60   0.60 0.559
-#&gt; 61   0.61 0.567
-#&gt; 62   0.62 0.575
-#&gt; 63   0.63 0.583
-#&gt; 64   0.64 0.591
-#&gt; 65   0.65 0.599
-#&gt; 66   0.66 0.606
-#&gt; 67   0.67 0.614
-#&gt; 68   0.68 0.622
-#&gt; 69   0.69 0.630
-#&gt; 70   0.70 0.637
-#&gt; 71   0.71 0.645
-#&gt; 72   0.72 0.653
-#&gt; 73   0.73 0.660
-#&gt; 74   0.74 0.668
-#&gt; 75   0.75 0.676
-#&gt; 76   0.76 0.683
-#&gt; 77   0.77 0.691
-#&gt; 78   0.78 0.699
-#&gt; 79   0.79 0.706
-#&gt; 80   0.80 0.714
-#&gt; 81   0.81 0.721
-#&gt; 82   0.82 0.729
-#&gt; 83   0.83 0.736
-#&gt; 84   0.84 0.744
-#&gt; 85   0.85 0.751
-#&gt; 86   0.86 0.759
-#&gt; 87   0.87 0.766
-#&gt; 88   0.88 0.774
-#&gt; 89   0.89 0.781
-#&gt; 90   0.90 0.789
-#&gt; 91   0.91 0.796
-#&gt; 92   0.92 0.804
-#&gt; 93   0.93 0.811
-#&gt; 94   0.94 0.818
-#&gt; 95   0.95 0.826
-#&gt; 96   0.96 0.833
-#&gt; 97   0.97 0.840
-#&gt; 98   0.98 0.848
-#&gt; 99   0.99 0.855
-#&gt; 100  1.00 0.862
-#&gt; 101  1.01 0.870
-#&gt; 102  1.02 0.877
-#&gt; 103  1.03 0.884
-#&gt; 104  1.04 0.891
-#&gt; 105  1.05 0.899
-#&gt; 106  1.06 0.906
-#&gt; 107  1.07 0.913
-#&gt; 108  1.08 0.920
-#&gt; 109  1.09 0.928
-#&gt; 110  1.10 0.935
-#&gt; 111  1.11 0.942
-#&gt; 112  1.12 0.949
-#&gt; 113  1.13 0.956
-#&gt; 114  1.14 0.963
-#&gt; 115  1.15 0.971
-#&gt; 116  1.16 0.978
-#&gt; 117  1.17 0.985
-#&gt; 118  1.18 0.992
-#&gt; 119  1.19 0.999
-#&gt; 120  1.20 1.006
-#&gt; 121  1.21 1.013
-#&gt; 122  1.22 1.020
-#&gt; 123  1.23 1.027
-#&gt; 124  1.24 1.034
-#&gt; 125  1.25 1.042
-#&gt; 126  1.26 1.049
-#&gt; 127  1.27 1.056
-#&gt; 128  1.28 1.063
-#&gt; 129  1.29 1.070
-#&gt; 130  1.30 1.077
-#&gt; 131  1.31 1.084
-#&gt; 132  1.32 1.091
-#&gt; 133  1.33 1.098
-#&gt; 134  1.34 1.105
-#&gt; 135  1.35 1.112
-#&gt; 136  1.36 1.119
-#&gt; 137  1.37 1.125
-#&gt; 138  1.38 1.132
-#&gt; 139  1.39 1.139
-#&gt; 140  1.40 1.146
-#&gt; 141  1.41 1.153
-#&gt; 142  1.42 1.160
-#&gt; 143  1.43 1.167
-#&gt; 144  1.44 1.174
-#&gt; 145  1.45 1.181
-#&gt; 146  1.46 1.188
-#&gt; 147  1.47 1.195
-#&gt; 148  1.48 1.201
-#&gt; 149  1.49 1.208
-#&gt; 150  1.50 1.215
-#&gt; 151  1.51 1.222
-#&gt; 152  1.52 1.229
-#&gt; 153  1.53 1.236
-#&gt; 154  1.54 1.242
-#&gt; 155  1.55 1.249
-#&gt; 156  1.56 1.256
-#&gt; 157  1.57 1.263
-#&gt; 158  1.58 1.270
-#&gt; 159  1.59 1.276
-#&gt; 160  1.60 1.283
-#&gt; 161  1.61 1.290
-#&gt; 162  1.62 1.297
-#&gt; 163  1.63 1.304
-#&gt; 164  1.64 1.310
-#&gt; 165  1.65 1.317
-#&gt; 166  1.66 1.324
-#&gt; 167  1.67 1.330
-#&gt; 168  1.68 1.337
-#&gt; 169  1.69 1.344
-#&gt; 170  1.70 1.351
-#&gt; 171  1.71 1.357
-#&gt; 172  1.72 1.364
-#&gt; 173  1.73 1.371
-#&gt; 174  1.74 1.377
-#&gt; 175  1.75 1.384
-#&gt; 176  1.76 1.391
-#&gt; 177  1.77 1.397
-#&gt; 178  1.78 1.404
-#&gt; 179  1.79 1.411
-#&gt; 180  1.80 1.417
-#&gt; 181  1.81 1.424
-#&gt; 182  1.82 1.431
-#&gt; 183  1.83 1.437
-#&gt; 184  1.84 1.444
-#&gt; 185  1.85 1.451
-#&gt; 186  1.86 1.457
-#&gt; 187  1.87 1.464
-#&gt; 188  1.88 1.470
-#&gt; 189  1.89 1.477
-#&gt; 190  1.90 1.484
-#&gt; 191  1.91 1.490
-#&gt; 192  1.92 1.497
-#&gt; 193  1.93 1.503
-#&gt; 194  1.94 1.510
-#&gt; 195  1.95 1.516
-#&gt; 196  1.96 1.523
-#&gt; 197  1.97 1.530
-#&gt; 198  1.98 1.536
-#&gt; 199  1.99 1.543
-#&gt; 200  2.00 1.549
-#&gt; 201  2.01 1.556
-#&gt; 202  2.02 1.562
-#&gt; 203  2.03 1.569
-#&gt; 204  2.04 1.575
-#&gt; 205  2.05 1.582
-#&gt; 206  2.06 1.588
-#&gt; 207  2.07 1.595
-#&gt; 208  2.08 1.601
-#&gt; 209  2.09 1.608
-#&gt; 210  2.10 1.614
-#&gt; 211  2.11 1.621
-#&gt; 212  2.12 1.627
-#&gt; 213  2.13 1.634
-#&gt; 214  2.14 1.640
-#&gt; 215  2.15 1.647
-#&gt; 216  2.16 1.653
-#&gt; 217  2.17 1.659
-#&gt; 218  2.18 1.666
-#&gt; 219  2.19 1.672
-#&gt; 220  2.20 1.679
-#&gt; 221  2.21 1.685
-#&gt; 222  2.22 1.692
-#&gt; 223  2.23 1.698
+    <pre class="examples"><div class='input'><span class='va'>JRC</span> <span class='op'>=</span> <span class='fl'>10</span>
+<span class='va'>JCS</span> <span class='op'>=</span> <span class='fl'>30</span>
+<span class='va'>phi.r</span> <span class='op'>=</span> <span class='fl'>26</span>
+<span class='va'>unit.weight</span> <span class='op'>=</span> <span class='fl'>18.6</span>
+<span class='va'>depth</span> <span class='op'>=</span> <span class='fl'>40</span>
+<span class='fu'>Barton_Choubey</span><span class='op'>(</span><span class='va'>JRC</span>, <span class='va'>JCS</span>, <span class='va'>phi.r</span>, <span class='va'>unit.weight</span>, <span class='va'>depth</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; $dat
+#&gt; <span style='color: #949494;'># A tibble: 223 x 2</span><span>
+#&gt;    sig_n   tau
+#&gt;    </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>
+#&gt; </span><span style='color: #BCBCBC;'> 1</span><span>  0.01 0.018
+#&gt; </span><span style='color: #BCBCBC;'> 2</span><span>  0.02 0.032
+#&gt; </span><span style='color: #BCBCBC;'> 3</span><span>  0.03 0.044
+#&gt; </span><span style='color: #BCBCBC;'> 4</span><span>  0.04 0.057
+#&gt; </span><span style='color: #BCBCBC;'> 5</span><span>  0.05 0.068
+#&gt; </span><span style='color: #BCBCBC;'> 6</span><span>  0.06 0.08 
+#&gt; </span><span style='color: #BCBCBC;'> 7</span><span>  0.07 0.091
+#&gt; </span><span style='color: #BCBCBC;'> 8</span><span>  0.08 0.101
+#&gt; </span><span style='color: #BCBCBC;'> 9</span><span>  0.09 0.112
+#&gt; </span><span style='color: #BCBCBC;'>10</span><span>  0.1  0.122
+#&gt; </span><span style='color: #949494;'># … with 213 more rows</span><span>
 #&gt; 
 #&gt; $stress.level
-#&gt;       x         y
-#&gt; 1 0.744 0.6712063
+#&gt; </span><span style='color: #949494;'># A tibble: 1 x 2</span><span>
+#&gt;       x     y
+#&gt;   </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>
+#&gt; </span><span style='color: #BCBCBC;'>1</span><span> 0.744 0.671
 #&gt; 
 #&gt; $parameters
-#&gt;       c  phi
-#&gt; 1 0.102 37.4
+#&gt; </span><span style='color: #949494;'># A tibble: 1 x 2</span><span>
+#&gt;       c   phi
+#&gt;   </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>
+#&gt; </span><span style='color: #BCBCBC;'>1</span><span> 0.102  37.4
 #&gt; </div><div class='input'>
-</div></pre>
+</div></span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -424,11 +224,11 @@
 
       <footer>
       <div class="copyright">
-  <p>Developed by Maximiliano Garnier-Villarreal.</p>
+  <p><p>Developed by Maximiliano Garnier-Villarreal.</p></p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.9000.</p>
+  <p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 1.6.1.9001.</p></p>
 </div>
 
       </footer>
@@ -436,6 +236,8 @@
 
   
 
+
+  
 
   </body>
 </html>

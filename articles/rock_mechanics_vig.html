@@ -19,6 +19,8 @@
 <![endif]-->
 </head>
 <body data-spy="scroll" data-target="#toc">
+    
+
     <div class="container template-article">
       <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -37,12 +39,6 @@
 
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
-<li>
-  <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
-     
-  </a>
-</li>
 <li>
   <a href="../reference/index.html">Reference</a>
 </li>
@@ -70,8 +66,8 @@
       </ul>
 <ul class="nav navbar-nav navbar-right">
 <li>
-  <a href="http://github.com/maxgav13/GMisc/">
-    <span class="fab fa fab fa-github fa-lg"></span>
+  <a href="https://github.com/maxgav13/GMisc/" class="external-link">
+    <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -85,21 +81,21 @@
 
       
 
-      </header><script src="rock_mechanics_vig_files/htmlwidgets-1.5.1/htmlwidgets.js"></script><script src="rock_mechanics_vig_files/jquery-1.12.4/jquery.min.js"></script><link href="rock_mechanics_vig_files/datatables-css-0.0.0/datatables-crosstalk.css" rel="stylesheet">
-<script src="rock_mechanics_vig_files/datatables-binding-0.13/datatables.js"></script><link href="rock_mechanics_vig_files/dt-core-1.10.20/css/jquery.dataTables.min.css" rel="stylesheet">
+      </header><script src="rock_mechanics_vig_files/accessible-code-block-0.0.1/empty-anchor.js"></script><script src="rock_mechanics_vig_files/htmlwidgets-1.5.3/htmlwidgets.js"></script><script src="rock_mechanics_vig_files/jquery-3.5.1/jquery.min.js"></script><link href="rock_mechanics_vig_files/datatables-css-0.0.0/datatables-crosstalk.css" rel="stylesheet">
+<script src="rock_mechanics_vig_files/datatables-binding-0.17/datatables.js"></script><link href="rock_mechanics_vig_files/dt-core-1.10.20/css/jquery.dataTables.min.css" rel="stylesheet">
 <link href="rock_mechanics_vig_files/dt-core-1.10.20/css/jquery.dataTables.extra.css" rel="stylesheet">
-<script src="rock_mechanics_vig_files/dt-core-1.10.20/js/jquery.dataTables.min.js"></script><link href="rock_mechanics_vig_files/crosstalk-1.1.0.1/css/crosstalk.css" rel="stylesheet">
-<script src="rock_mechanics_vig_files/crosstalk-1.1.0.1/js/crosstalk.min.js"></script><link href="rock_mechanics_vig_files/nouislider-7.0.10/jquery.nouislider.min.css" rel="stylesheet">
+<script src="rock_mechanics_vig_files/dt-core-1.10.20/js/jquery.dataTables.min.js"></script><link href="rock_mechanics_vig_files/crosstalk-1.1.1/css/crosstalk.css" rel="stylesheet">
+<script src="rock_mechanics_vig_files/crosstalk-1.1.1/js/crosstalk.min.js"></script><link href="rock_mechanics_vig_files/nouislider-7.0.10/jquery.nouislider.min.css" rel="stylesheet">
 <script src="rock_mechanics_vig_files/nouislider-7.0.10/jquery.nouislider.min.js"></script><link href="rock_mechanics_vig_files/selectize-0.12.0/selectize.bootstrap3.css" rel="stylesheet">
 <script src="rock_mechanics_vig_files/selectize-0.12.0/selectize.min.js"></script><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>Rock Mechanics</h1>
-                        <h4 class="author">Maximiliano Garnier Villarreal</h4>
+                        <h4 data-toc-skip class="author">Maximiliano Garnier Villarreal</h4>
             
-            <h4 class="date">2020-06-08</h4>
+            <h4 data-toc-skip class="date">2021-04-09</h4>
       
-      <small class="dont-index">Source: <a href="http://github.com/maxgav13/GMisc/blob/master/vignettes/rock_mechanics_vig.Rmd"><code>vignettes/rock_mechanics_vig.Rmd</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/maxgav13/GMisc/blob/master/vignettes/rock_mechanics_vig.Rmd" class="external-link"><code>vignettes/rock_mechanics_vig.Rmd</code></a></small>
       <div class="hidden name"><code>rock_mechanics_vig.Rmd</code></div>
 
     </div>
@@ -113,10 +109,11 @@
 <p>The UCS is one of the parameters needed to classify the rock mass using Hoek-Brown. There are different ways to obtain this parameter but one simple and cost effective solution is the Point Load Test (PLT). In this test several irregular samples are measured (width and diameter) and their strength is tested using the PLT machine. Afterwards, these data can be analyzed to obtain the <span class="math inline">\(I_{50}\)</span> and the respective UCS.</p>
 <p>The function <code>UCS</code> of the package performs the conventional analysis through a classical (Gaussian) regression of the failure load with respect to the equivalent diameter (calculated from the width and diameter of the irregular samples), and predicting the load and <span class="math inline">\(I_{50}\)</span> for the classical 50 mm cylinder. The function goes beyond and performs a robust regression to account for outliers, as well as estimating an <span class="math inline">\(I_{50}\)</span> for each sample and estimating the mean and median of this value (corrected mean and median).</p>
 <p>The arguments for <code>UCS</code> are <code>W</code> for the widths in millimeters, <code>D</code> for the diameter in millimeters, and <code>P</code> for the failure load. Also a vertical dashed line is shown at the 50 mm diameter, as this is the reference diameter.</p>
-<div class="sourceCode" id="cb1"><html><body><pre class="r"><span class="no">W</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">70.0</span>,<span class="fl">95.0</span>,<span class="fl">80.0</span>,<span class="fl">90.0</span>,<span class="fl">98.0</span>,<span class="fl">110.0</span>,<span class="fl">100.0</span>,<span class="fl">100.0</span>,<span class="fl">110.0</span>)
-<span class="no">D</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">40</span>,<span class="fl">55</span>,<span class="fl">60</span>,<span class="fl">50</span>,<span class="fl">25</span>,<span class="fl">60</span>,<span class="fl">40</span>,<span class="fl">70</span>,<span class="fl">50</span>)
-<span class="no">P</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">4.3</span>,<span class="fl">3.4</span>,<span class="fl">4.5</span>,<span class="fl">3.1</span>,<span class="fl">5.0</span>,<span class="fl">6.4</span>,<span class="fl">2.6</span>,<span class="fl">11</span>,<span class="fl">4.1</span>)
-<span class="fu"><a href="../reference/UCS.html">UCS</a></span>(<span class="kw">W</span> <span class="kw">=</span> <span class="no">W</span>, <span class="kw">D</span> <span class="kw">=</span> <span class="no">D</span>, <span class="kw">P</span> <span class="kw">=</span> <span class="no">P</span>)</pre></body></html></div>
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">W</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">70.0</span>,<span class="fl">95.0</span>,<span class="fl">80.0</span>,<span class="fl">90.0</span>,<span class="fl">98.0</span>,<span class="fl">110.0</span>,<span class="fl">100.0</span>,<span class="fl">100.0</span>,<span class="fl">110.0</span><span class="op">)</span>
+<span class="va">D</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">40</span>,<span class="fl">55</span>,<span class="fl">60</span>,<span class="fl">50</span>,<span class="fl">25</span>,<span class="fl">60</span>,<span class="fl">40</span>,<span class="fl">70</span>,<span class="fl">50</span><span class="op">)</span>
+<span class="va">P</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">4.3</span>,<span class="fl">3.4</span>,<span class="fl">4.5</span>,<span class="fl">3.1</span>,<span class="fl">5.0</span>,<span class="fl">6.4</span>,<span class="fl">2.6</span>,<span class="fl">11</span>,<span class="fl">4.1</span><span class="op">)</span>
+<span class="fu"><a href="../reference/UCS.html">UCS</a></span><span class="op">(</span>W <span class="op">=</span> <span class="va">W</span>, D <span class="op">=</span> <span class="va">D</span>, P <span class="op">=</span> <span class="va">P</span><span class="op">)</span></code></pre></div>
 <pre><code>## $Graph</code></pre>
 <p><img src="rock_mechanics_vig_files/figure-html/unnamed-chunk-1-1.png" width="80%" style="display: block; margin: auto;"></p>
 <pre><code>## 
@@ -144,27 +141,28 @@
 <p><img src="../inst/GSI_flysch.PNG" width="50%" style="display: block; margin: auto;"></p>
 <p>To use this criterion there are two functions <code>Hoek_Brown</code> and <code>Hoek_Brown_plot</code>. The first one calculates the criterion and the second one plots the results from the first one. The arguments are: <code>sig.ci</code> the uniaxial compressive strength of the intact rock in MPa, <code>GSI</code>, <code>mi</code> the intact rock constant, <code>MR</code> the modulus ratio, <code>D</code> the quality of the explosive campaign design, <code>unit.weight</code> in <span class="math inline">\(kN/m^3\)</span>, <code>height</code>, in meters, to which calculate the stress level, and <code>use</code> the expected use for the rock mass (“general”, “tunnels”, or “slopes”).</p>
 <p>Some of these inputs can be obtained from the following tables, where in most cases are rock type dependent.</p>
-<p></p>
-<div id="htmlwidget-95cb527b5fddc0054f49" style="width:100%;height:auto;" class="datatables html-widget"></div>
-<script type="application/json" data-for="htmlwidget-95cb527b5fddc0054f49">{"x":{"filter":"none","caption":"<caption>Table 1: Intact Uniaxial Compressive Strength<\/caption>","data":[["Specimen can only be chipped with a geological hammer","Specimen requires many blows of a geological hammer to fracture it","Specimen requires more than one blow of a geological hammer to fracture it","cannot be scraped or peeled with a pocket knife, specimen can be fractured with a single blow from a geological hammer","can be peeled with a pocket knife with difficulty, shallow indentation made by firm blow with point of a geological hammer","Crumbles under firm blows with point of a geological hammer, can be peeled by a pocket knife","Indented by thumbnail"],["Fresh basalt, chert, diabase, gneiss, granite, quartzite","Amphibolite, sandstone, basalt, gabbro, gneiss, granodiorite, limestone, marble, rhyolite, tuff","Limestone, marble, phyllite, sandstone, schist, shale","Claystone, coal, concrete, schist, shale, siltstone","Chalk, rocksalt, potash","Highly weathered or altered rock","Stiff fault gouge"],["&gt; 250","100 - 250","50 - 100","25 - 50","5 - 25","1 - 5","0.25 - 1"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>Field Estimate of Strength<\/th>\n      <th>Examples<\/th>\n      <th>Strength (MPa)<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"dom":"t","order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script><div id="htmlwidget-2826a10281528e503398" style="width:100%;height:auto;" class="datatables html-widget"></div>
-<script type="application/json" data-for="htmlwidget-2826a10281528e503398">{"x":{"filter":"top","filterHTML":"<tr>\n  <td data-type=\"factor\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n    <div style=\"width: 100%; display: none;\">\n      <select multiple=\"multiple\" style=\"width: 100%;\" data-options=\"[&quot;Igneous&quot;,&quot;Metamorphic&quot;,&quot;Sedimentary&quot;]\"><\/select>\n    <\/div>\n  <\/td>\n  <td data-type=\"factor\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n    <div style=\"width: 100%; display: none;\">\n      <select multiple=\"multiple\" style=\"width: 100%;\" data-options=\"[&quot;Coarse&quot;,&quot;Fine&quot;,&quot;Medium&quot;,&quot;Very Fine&quot;]\"><\/select>\n    <\/div>\n  <\/td>\n  <td data-type=\"character\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"character\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"character\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n  <\/td>\n<\/tr>","caption":"<caption>Table 2: mi &amp; MR values for different rocks<\/caption>","data":[["Sedimentary","Sedimentary","Sedimentary","Sedimentary","Sedimentary","Sedimentary","Sedimentary","Sedimentary","Sedimentary","Sedimentary","Sedimentary","Sedimentary","Sedimentary","Sedimentary","Sedimentary","Igneous","Igneous","Igneous","Igneous","Igneous","Igneous","Igneous","Igneous","Igneous","Igneous","Igneous","Igneous","Igneous","Igneous","Igneous","Igneous","Igneous","Igneous","Igneous","Igneous","Metamorphic","Metamorphic","Metamorphic","Metamorphic","Metamorphic","Metamorphic","Metamorphic","Metamorphic","Metamorphic","Metamorphic"],["Coarse","Coarse","Coarse","Medium","Medium","Medium","Fine","Fine","Fine","Fine","Very Fine","Very Fine","Very Fine","Very Fine","Very Fine","Coarse","Coarse","Coarse","Coarse","Coarse","Coarse","Medium","Medium","Medium","Medium","Medium","Medium","Medium","Medium","Fine","Fine","Fine","Fine","Very Fine","Very Fine","Coarse","Coarse","Coarse","Medium","Medium","Medium","Medium","Fine","Fine","Very Fine"],["Breccias","Conglomerates","Crystalline Limestones","Gypsum","Sandstones","Sparitic Limestones","Anhydrite","Greywackes","Micritic Limestones","Siltstones","Chalk","Claystones","Dolomites","Marls","Shales","Agglomerate","Gabbro","Granite","Granodiorite","Norite","Porhyries","Andesite","Breccia","Dolerite","Diorite","Granodiorite","Norite","Porhyries","Rhyolite","Basalt","Dacite","Diabase","Tuff","Obsidian","Peridotite","Gneiss","Marble","Migmatite","Amphibolites","Hornfels","Metasandstone","Schists","Phyllites","Quartzites","Slates"],["19 ± 5","21 ± 3","12 ± 3","8 ± 2","17 ± 4","10 ± 2","12 ± 2","18 ± 3","9 ± 2","7 ± 2","7 ± 2","4 ± 2","9 ± 3","7 ± 2","6 ± 2","19 ± 3","27 ± 3","32 ± 3","29 ± 3","20 ± 5","20 ± 5","25 ± 5","19 ± 5","16 ± 5","25 ± 5","29 ± 3","20 ± 5","20 ± 5","25 ± 5","25 ± 5","25 ± 3","15 ± 5","13 ± 5","19 ± 3","25 ± 5","28 ± 5","9 ± 3","29 ± 3","26 ± 6","19 ± 4","19 ± 3","12 ± 3","7 ± 3","20 ± 3","7 ± 4"],["290 ± 60","350 ± 50","500 ± 100","350 ± 0","275 ± 75","700 ± 100","350 ± 0","350 ± 0","900 ± 100","375 ± 25","1000 ± 0","250 ± 50","425 ± 75","175 ± 25","200 ± 50","500 ± 100","450 ± 50","425 ± 125","425 ± 25","375 ± 25","400 ± 0","400 ± 100","500 ± 0","350 ± 50","325 ± 25","425 ± 25","375 ± 25","400 ± 0","400 ± 100","350 ± 100","400 ± 50","325 ± 25","300 ± 100",null,"275 ± 25","525 ± 225","850 ± 150","375 ± 25","450 ± 50","550 ± 150","250 ± 50","675 ± 425","550 ± 250","375 ± 75","500 ± 100"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>Rock Type<\/th>\n      <th>Texture<\/th>\n      <th>Rock<\/th>\n      <th>mi<\/th>\n      <th>Modulus Ratio (MR)<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"order":[],"autoWidth":false,"orderClasses":false,"orderCellsTop":true}},"evals":[],"jsHooks":[]}</script><div id="htmlwidget-e8b3fe563f517c9d829d" style="width:100%;height:auto;" class="datatables html-widget"></div>
-<script type="application/json" data-for="htmlwidget-e8b3fe563f517c9d829d">{"x":{"filter":"none","caption":"<caption>Table 3: Disturbance Factor<\/caption>","data":[["Tunnels","Tunnels","Tunnels","Tunnels","Slopes","Slopes","Slopes","Slopes"],["Excellente quality controlled blasting or excavation by Tunnel Boring Machine results in minimal disturbance to the confined rock mass surrounding a tunnel","Mechanical or hand excavation in poor quality rock masses (no blasting) results in minimal disturbance to the surrounding rock mass","Where squeezing problems result in significant floor heave, disturbance can be severe unles a temporary invert is placed","Very poor quality blasting in a hard rock tunnel results in severe local damage, extending 2 or 3 m, in the surrounding rock mass","Small scale blasting in civil engineering slopes results in modes rock mass damage, particularly if controlled blasting is used. However, stress relief results in some disturbance","Small scale blasting in civil engineering slopes results in modes rock mass damage, particularly if controlled blasting is used. However, stress relief results in some disturbance","Very large open pit mine slopes suffer significant disturbance due to heavy production blasting and also due to stress relief from overburden removal","In some softer rocks excavation can be carried out by ripping and dozing and the degree of damage to the slopes is less"],[null,null,"No Invert",null,"Good Blasting","Poor Blasting","Production Blasting","Mechanical Excavation"],[0,0,0.5,0.8,0.7,1,1,0.7]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>Use<\/th>\n      <th>Description<\/th>\n      <th>Note<\/th>\n      <th>D<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"dom":"t","columnDefs":[{"className":"dt-right","targets":3}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script><div class="sourceCode" id="cb4"><html><body><pre class="r"><span class="no">sig.ci</span> <span class="kw">=</span> <span class="fl">16</span>
-<span class="no">GSI</span> <span class="kw">=</span> <span class="fl">75</span>
-<span class="no">mi</span> <span class="kw">=</span> <span class="fl">13</span>
-<span class="no">MR</span> <span class="kw">=</span> <span class="fl">300</span>
-<span class="no">D</span> <span class="kw">=</span> <span class="fl">0</span>
-<span class="no">height</span> <span class="kw">=</span> <span class="fl">40</span>
-<span class="no">unit.weight</span> <span class="kw">=</span> <span class="fl">18.6</span>
-<span class="no">HB</span> <span class="kw">=</span> <span class="fu"><a href="../reference/Hoek_Brown.html">Hoek_Brown</a></span>(<span class="no">sig.ci</span>, <span class="no">GSI</span>, <span class="no">mi</span>, <span class="no">MR</span>, <span class="no">D</span>, <span class="no">height</span>, <span class="no">unit.weight</span>)
-<span class="no">HB</span> <span class="kw">%&gt;%</span>
-  <span class="fu">pluck</span>(<span class="st">'Results'</span>) <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html">as.data.frame</a></span>()</pre></body></html></div>
+<div id="htmlwidget-607b31c0392e28f83e95" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-607b31c0392e28f83e95">{"x":{"filter":"none","caption":"<caption>Table 1: Intact Uniaxial Compressive Strength<\/caption>","data":[["Specimen can only be chipped with a geological hammer","Specimen requires many blows of a geological hammer to fracture it","Specimen requires more than one blow of a geological hammer to fracture it","cannot be scraped or peeled with a pocket knife, specimen can be fractured with a single blow from a geological hammer","can be peeled with a pocket knife with difficulty, shallow indentation made by firm blow with point of a geological hammer","Crumbles under firm blows with point of a geological hammer, can be peeled by a pocket knife","Indented by thumbnail"],["Fresh basalt, chert, diabase, gneiss, granite, quartzite","Amphibolite, sandstone, basalt, gabbro, gneiss, granodiorite, limestone, marble, rhyolite, tuff","Limestone, marble, phyllite, sandstone, schist, shale","Claystone, coal, concrete, schist, shale, siltstone","Chalk, rocksalt, potash","Highly weathered or altered rock","Stiff fault gouge"],["&gt; 250","100 - 250","50 - 100","25 - 50","5 - 25","1 - 5","0.25 - 1"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>Field Estimate of Strength<\/th>\n      <th>Examples<\/th>\n      <th>Strength (MPa)<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"dom":"t","order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script><div id="htmlwidget-e74033312369f679edbf" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-e74033312369f679edbf">{"x":{"filter":"top","filterHTML":"<tr>\n  <td data-type=\"factor\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n    <div style=\"width: 100%; display: none;\">\n      <select multiple=\"multiple\" style=\"width: 100%;\" data-options=\"[&quot;Igneous&quot;,&quot;Metamorphic&quot;,&quot;Sedimentary&quot;]\"><\/select>\n    <\/div>\n  <\/td>\n  <td data-type=\"factor\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n    <div style=\"width: 100%; display: none;\">\n      <select multiple=\"multiple\" style=\"width: 100%;\" data-options=\"[&quot;Coarse&quot;,&quot;Fine&quot;,&quot;Medium&quot;,&quot;Very Fine&quot;]\"><\/select>\n    <\/div>\n  <\/td>\n  <td data-type=\"character\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"character\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"character\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n  <\/td>\n<\/tr>","caption":"<caption>Table 2: mi &amp; MR values for different rocks<\/caption>","data":[["Sedimentary","Sedimentary","Sedimentary","Sedimentary","Sedimentary","Sedimentary","Sedimentary","Sedimentary","Sedimentary","Sedimentary","Sedimentary","Sedimentary","Sedimentary","Sedimentary","Sedimentary","Igneous","Igneous","Igneous","Igneous","Igneous","Igneous","Igneous","Igneous","Igneous","Igneous","Igneous","Igneous","Igneous","Igneous","Igneous","Igneous","Igneous","Igneous","Igneous","Igneous","Metamorphic","Metamorphic","Metamorphic","Metamorphic","Metamorphic","Metamorphic","Metamorphic","Metamorphic","Metamorphic","Metamorphic"],["Coarse","Coarse","Coarse","Medium","Medium","Medium","Fine","Fine","Fine","Fine","Very Fine","Very Fine","Very Fine","Very Fine","Very Fine","Coarse","Coarse","Coarse","Coarse","Coarse","Coarse","Medium","Medium","Medium","Medium","Medium","Medium","Medium","Medium","Fine","Fine","Fine","Fine","Very Fine","Very Fine","Coarse","Coarse","Coarse","Medium","Medium","Medium","Medium","Fine","Fine","Very Fine"],["Breccias","Conglomerates","Crystalline Limestones","Gypsum","Sandstones","Sparitic Limestones","Anhydrite","Greywackes","Micritic Limestones","Siltstones","Chalk","Claystones","Dolomites","Marls","Shales","Agglomerate","Gabbro","Granite","Granodiorite","Norite","Porhyries","Andesite","Breccia","Dolerite","Diorite","Granodiorite","Norite","Porhyries","Rhyolite","Basalt","Dacite","Diabase","Tuff","Obsidian","Peridotite","Gneiss","Marble","Migmatite","Amphibolites","Hornfels","Metasandstone","Schists","Phyllites","Quartzites","Slates"],["19 ± 5","21 ± 3","12 ± 3","8 ± 2","17 ± 4","10 ± 2","12 ± 2","18 ± 3","9 ± 2","7 ± 2","7 ± 2","4 ± 2","9 ± 3","7 ± 2","6 ± 2","19 ± 3","27 ± 3","32 ± 3","29 ± 3","20 ± 5","20 ± 5","25 ± 5","19 ± 5","16 ± 5","25 ± 5","29 ± 3","20 ± 5","20 ± 5","25 ± 5","25 ± 5","25 ± 3","15 ± 5","13 ± 5","19 ± 3","25 ± 5","28 ± 5","9 ± 3","29 ± 3","26 ± 6","19 ± 4","19 ± 3","12 ± 3","7 ± 3","20 ± 3","7 ± 4"],["290 ± 60","350 ± 50","500 ± 100","350 ± 0","275 ± 75","700 ± 100","350 ± 0","350 ± 0","900 ± 100","375 ± 25","1000 ± 0","250 ± 50","425 ± 75","175 ± 25","200 ± 50","500 ± 100","450 ± 50","425 ± 125","425 ± 25","375 ± 25","400 ± 0","400 ± 100","500 ± 0","350 ± 50","325 ± 25","425 ± 25","375 ± 25","400 ± 0","400 ± 100","350 ± 100","400 ± 50","325 ± 25","300 ± 100",null,"275 ± 25","525 ± 225","850 ± 150","375 ± 25","450 ± 50","550 ± 150","250 ± 50","675 ± 425","550 ± 250","375 ± 75","500 ± 100"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>Rock Type<\/th>\n      <th>Texture<\/th>\n      <th>Rock<\/th>\n      <th>mi<\/th>\n      <th>Modulus Ratio (MR)<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"order":[],"autoWidth":false,"orderClasses":false,"orderCellsTop":true}},"evals":[],"jsHooks":[]}</script><div id="htmlwidget-d12bae36f1c9ea516e94" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-d12bae36f1c9ea516e94">{"x":{"filter":"none","caption":"<caption>Table 3: Disturbance Factor<\/caption>","data":[["Tunnels","Tunnels","Tunnels","Tunnels","Slopes","Slopes","Slopes","Slopes"],["Excellente quality controlled blasting or excavation by Tunnel Boring Machine results in minimal disturbance to the confined rock mass surrounding a tunnel","Mechanical or hand excavation in poor quality rock masses (no blasting) results in minimal disturbance to the surrounding rock mass","Where squeezing problems result in significant floor heave, disturbance can be severe unles a temporary invert is placed","Very poor quality blasting in a hard rock tunnel results in severe local damage, extending 2 or 3 m, in the surrounding rock mass","Small scale blasting in civil engineering slopes results in modes rock mass damage, particularly if controlled blasting is used. However, stress relief results in some disturbance","Small scale blasting in civil engineering slopes results in modes rock mass damage, particularly if controlled blasting is used. However, stress relief results in some disturbance","Very large open pit mine slopes suffer significant disturbance due to heavy production blasting and also due to stress relief from overburden removal","In some softer rocks excavation can be carried out by ripping and dozing and the degree of damage to the slopes is less"],[null,null,"No Invert",null,"Good Blasting","Poor Blasting","Production Blasting","Mechanical Excavation"],[0,0,0.5,0.8,0.7,1,1,0.7]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>Use<\/th>\n      <th>Description<\/th>\n      <th>Note<\/th>\n      <th>D<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"dom":"t","columnDefs":[{"className":"dt-right","targets":3}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script><div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">sig.ci</span> <span class="op">=</span> <span class="fl">16</span>
+<span class="va">GSI</span> <span class="op">=</span> <span class="fl">75</span>
+<span class="va">mi</span> <span class="op">=</span> <span class="fl">13</span>
+<span class="va">MR</span> <span class="op">=</span> <span class="fl">300</span>
+<span class="va">D</span> <span class="op">=</span> <span class="fl">0</span>
+<span class="va">height</span> <span class="op">=</span> <span class="fl">40</span>
+<span class="va">unit.weight</span> <span class="op">=</span> <span class="fl">18.6</span>
+<span class="va">HB</span> <span class="op">=</span> <span class="fu"><a href="../reference/Hoek_Brown.html">Hoek_Brown</a></span><span class="op">(</span><span class="va">sig.ci</span>, <span class="va">GSI</span>, <span class="va">mi</span>, <span class="va">MR</span>, <span class="va">D</span>, <span class="va">height</span>, <span class="va">unit.weight</span><span class="op">)</span>
+<span class="va">HB</span> <span class="op">%&gt;%</span> 
+  <span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/pluck.html" class="external-link">pluck</a></span><span class="op">(</span><span class="st">'Results'</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html" class="external-link">as.data.frame</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
 <pre><code>##   sig.ci GSI mi D   mb      s     a  MR   Ei sig.3.max  sig.t sig.c sig.cm
 ## 1     16  75 13 0 5.32 0.0622 0.501 300 4800         4 -0.187  3.98   5.87
 ##       Erm  phi    c phi.h  c.h
 ## 1 3918.48 40.1 1.45  52.5 0.72</code></pre>
 <p>The results display the input parameters as well as the estimated strength and deformation parameters (in MPa). The <code>phi.h</code> and <code>c.h</code> are the strength parameters for the stress level.</p>
-<div class="sourceCode" id="cb6"><html><body><pre class="r"><span class="fu"><a href="../reference/Hoek_Brown_plot.html">Hoek_Brown_plot</a></span>(<span class="no">HB</span>)</pre></body></html></div>
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="../reference/Hoek_Brown_plot.html">Hoek_Brown_plot</a></span><span class="op">(</span><span class="va">HB</span><span class="op">)</span></code></pre></div>
 <pre><code>## $princ.stresses</code></pre>
 <p><img src="rock_mechanics_vig_files/figure-html/unnamed-chunk-6-1.png" width="80%" style="display: block; margin: auto;"></p>
 <pre><code>## 
@@ -178,9 +176,10 @@
 <p>The function <code>Q_93</code> is very simple in the way that it plots the <span class="math inline">\(Q\)</span> parameter for the given equivalent diameter on top of the Q-diagram to determine the quality of the rock mass and the needed support.</p>
 <p>The arguments are <code>De</code> for the equivalent diameter, and <code>Q</code>. The amount of points have to be same in both vectors, or one can be a unique value and it will be assigned to all the values of the other.</p>
 <p>In this example different values of <code>Q</code> are plotted for a single value of <code>De</code>, giving different classifications for some of the points.</p>
-<div class="sourceCode" id="cb9"><html><body><pre class="r"><span class="no">De</span> <span class="kw">=</span> <span class="fl">9</span>
-<span class="no">Q</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">.026</span>, <span class="fl">1.4</span>, <span class="fl">.078</span>, <span class="fl">.56</span>, <span class="fl">.35</span>)
-<span class="fu"><a href="../reference/Q_93.html">Q_93</a></span>(<span class="no">Q</span>, <span class="no">De</span>)</pre></body></html></div>
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">De</span> <span class="op">=</span> <span class="fl">9</span>
+<span class="va">Q</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">.026</span>, <span class="fl">1.4</span>, <span class="fl">.078</span>, <span class="fl">.56</span>, <span class="fl">.35</span><span class="op">)</span>
+<span class="fu"><a href="../reference/Q_93.html">Q_93</a></span><span class="op">(</span><span class="va">Q</span>, <span class="va">De</span><span class="op">)</span></code></pre></div>
 <p><img src="rock_mechanics_vig_files/figure-html/unnamed-chunk-7-1.png" width="80%" style="display: block; margin: auto;"></p>
 </div>
 <div id="barton-choubey" class="section level1">
@@ -196,23 +195,27 @@
 <p><span class="math display">\[JCS = 10^{0.00088 \ \gamma_{rock} \ r \ + 1.01}\]</span></p>
 <p>where <span class="math inline">\(r\)</span> is the Schmidt hammer’s rebound on the wall of the joint and <span class="math inline">\(\gamma_{rock}\)</span> is the unit weight of the rock in <span class="math inline">\(kN/m^3\)</span></p>
 <p>To use this criterion there are two functions <code>Barton_Choubey</code> and <code>Barton_Choubey_plot</code>. The first one calculates the criterion and the second one plots the results from the first one. The arguments are: <code>JRC</code>, <code>JCS</code> in MPa, <code>phi.r</code> in degrees, <code>unit.weight</code> in <span class="math inline">\(kN/m^3\)</span>, and the <code>depth</code>, in meters, to which calculate the stress level.</p>
-<div class="sourceCode" id="cb10"><html><body><pre class="r"><span class="no">JRC</span> <span class="kw">=</span> <span class="fl">10</span>
-<span class="no">JCS</span> <span class="kw">=</span> <span class="fl">30</span>
-<span class="no">phi.r</span> <span class="kw">=</span> <span class="fl">26</span>
-<span class="no">unit.weight</span> <span class="kw">=</span> <span class="fl">18.6</span>
-<span class="no">depth</span> <span class="kw">=</span> <span class="fl">40</span>
-<span class="no">BC</span> <span class="kw">=</span> <span class="fu"><a href="../reference/Barton_Choubey.html">Barton_Choubey</a></span>(<span class="no">JRC</span>, <span class="no">JCS</span>, <span class="no">phi.r</span>, <span class="no">unit.weight</span>, <span class="no">depth</span>)
-<span class="no">BC</span>$<span class="no">parameters</span></pre></body></html></div>
-<pre><code>##       c  phi
-## 1 0.102 37.4</code></pre>
-<div class="sourceCode" id="cb12"><html><body><pre class="r"><span class="fu"><a href="../reference/Barton_Choubey_plot.html">Barton_Choubey_plot</a></span>(<span class="no">BC</span>, <span class="kw">units</span> <span class="kw">=</span> <span class="st">'MPa'</span>)</pre></body></html></div>
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">JRC</span> <span class="op">=</span> <span class="fl">10</span>
+<span class="va">JCS</span> <span class="op">=</span> <span class="fl">30</span>
+<span class="va">phi.r</span> <span class="op">=</span> <span class="fl">26</span>
+<span class="va">unit.weight</span> <span class="op">=</span> <span class="fl">18.6</span>
+<span class="va">depth</span> <span class="op">=</span> <span class="fl">40</span>
+<span class="va">BC</span> <span class="op">=</span> <span class="fu"><a href="../reference/Barton_Choubey.html">Barton_Choubey</a></span><span class="op">(</span><span class="va">JRC</span>, <span class="va">JCS</span>, <span class="va">phi.r</span>, <span class="va">unit.weight</span>, <span class="va">depth</span><span class="op">)</span>
+<span class="va">BC</span><span class="op">$</span><span class="va">parameters</span></code></pre></div>
+<pre><code>## # A tibble: 1 x 2
+##       c   phi
+##   &lt;dbl&gt; &lt;dbl&gt;
+## 1 0.102  37.4</code></pre>
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="../reference/Barton_Choubey_plot.html">Barton_Choubey_plot</a></span><span class="op">(</span><span class="va">BC</span>, units <span class="op">=</span> <span class="st">'MPa'</span><span class="op">)</span></code></pre></div>
 <p><img src="rock_mechanics_vig_files/figure-html/unnamed-chunk-9-1.png" width="80%" style="display: block; margin: auto;"></p>
 <p>The results display the strength parameters, and the plot shows the general criterion (red) and a fit for the desired stress level (blue), and also the parameters of cohesion (<span class="math inline">\(c\)</span>) and friction angle (<span class="math inline">\(\phi\)</span>).</p>
 </div>
 <div id="shinyapp" class="section level1">
 <h1 class="hasAnchor">
 <a href="#shinyapp" class="anchor"></a>Shinyapp</h1>
-<p>A shinyapp using some these functions can be accessed at <a href="https://maximiliano-01.shinyapps.io/rock_mechanics/" class="uri">https://maximiliano-01.shinyapps.io/rock_mechanics/</a>.</p>
+<p>A shinyapp using these functions can be accessed at <a href="https://maximiliano-01.shinyapps.io/rock_mechanics/" class="external-link uri">https://maximiliano-01.shinyapps.io/rock_mechanics/</a>.</p>
 </div>
   </div>
 
@@ -227,11 +230,13 @@
 
 
       <footer><div class="copyright">
-  <p>Developed by Maximiliano Garnier-Villarreal.</p>
+  <p></p>
+<p>Developed by Maximiliano Garnier-Villarreal.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.9000.</p>
+  <p></p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link external-link">pkgdown</a> 1.6.1.9001.</p>
 </div>
 
       </footer>
@@ -239,6 +244,8 @@
 
   
 
+
+  
 
   </body>
 </html>

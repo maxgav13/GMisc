@@ -45,6 +45,8 @@
 
 
 
+
+
 <!-- mathjax -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script>
@@ -56,9 +58,18 @@
 
 
 
+<!-- dependencies from examples -->
+
+
+  
+
+  
+
   </head>
 
   <body data-spy="scroll" data-target="#toc">
+    
+
     <div class="container template-reference-topic">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
@@ -79,12 +90,6 @@
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li>
-  <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
-     
-  </a>
-</li>
-<li>
   <a href="../reference/index.html">Reference</a>
 </li>
 <li class="dropdown">
@@ -111,8 +116,8 @@
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li>
-  <a href="http://github.com/maxgav13/GMisc/">
-    <span class="fab fa fab fa-github fa-lg"></span>
+  <a href="https://github.com/maxgav13/GMisc/">
+    <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -130,7 +135,7 @@
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Summary of vectors, matrices or data frames</h1>
-    <small class="dont-index">Source: <a href='http://github.com/maxgav13/GMisc/blob/master/R/post_summary.R'><code>R/post_summary.R</code></a></small>
+    <small class="dont-index">Source: <a href='https://github.com/maxgav13/GMisc/blob/master/R/post_summary.R'><code>R/post_summary.R</code></a></small>
     <div class="hidden name"><code>post_summary.Rd</code></div>
     </div>
 
@@ -138,7 +143,7 @@
     <p>Summarises vectors or data frames by showing their mean, median, standard deviation, median absolute deviation,inter quartile range, coefficient of variation, and desired quantiles.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>post_summary</span>(<span class='no'>x</span>, <span class='kw'>probs</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>0.025</span>, <span class='fl'>0.5</span>, <span class='fl'>0.975</span>))</pre>
+    <pre class="usage"><span class='fu'>post_summary</span><span class='op'>(</span><span class='va'>x</span>, probs <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>0.025</span>, <span class='fl'>0.5</span>, <span class='fl'>0.975</span><span class='op'>)</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -158,31 +163,33 @@
     <p>A tibble with summary statistics</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='no'>x1</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/Normal.html'>rnorm</a></span>(<span class='fl'>100</span>, <span class='fl'>30</span>, <span class='fl'>6</span>)
-<span class='no'>x2</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a></span>(<span class='kw'>N</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/stats/Normal.html'>rnorm</a></span>(<span class='fl'>100</span>, <span class='fl'>30</span>, <span class='fl'>6</span>), <span class='kw'>T</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/stats/TDist.html'>rt</a></span>(<span class='fl'>100</span>, <span class='fl'>10</span>, <span class='fl'>30</span>))
-<span class='fu'>post_summary</span>(<span class='no'>x1</span>)</div><div class='output co'>#&gt; <span style='color: #555555;'># A tibble: 9 x 2</span><span>
+    <pre class="examples"><div class='input'><span class='va'>x1</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/Normal.html'>rnorm</a></span><span class='op'>(</span><span class='fl'>100</span>, <span class='fl'>30</span>, <span class='fl'>6</span><span class='op'>)</span>
+<span class='va'>x2</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a></span><span class='op'>(</span>N <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/stats/Normal.html'>rnorm</a></span><span class='op'>(</span><span class='fl'>100</span>, <span class='fl'>30</span>, <span class='fl'>6</span><span class='op'>)</span>, T <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/stats/TDist.html'>rt</a></span><span class='op'>(</span><span class='fl'>100</span>, <span class='fl'>10</span>, <span class='fl'>30</span><span class='op'>)</span><span class='op'>)</span>
+<span class='fu'>post_summary</span><span class='op'>(</span><span class='va'>x1</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 9 x 2</span><span>
 #&gt;   stat    value
-#&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>   </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
-#&gt; </span><span style='color: #555555;'>1</span><span> mean   30.8  
-#&gt; </span><span style='color: #555555;'>2</span><span> median 30.8  
-#&gt; </span><span style='color: #555555;'>3</span><span> sd      6.12 
-#&gt; </span><span style='color: #555555;'>4</span><span> mad     5.73 
-#&gt; </span><span style='color: #555555;'>5</span><span> IQR     8.33 
-#&gt; </span><span style='color: #555555;'>6</span><span> cv      0.199
-#&gt; </span><span style='color: #555555;'>7</span><span> 2.5%   20.3  
-#&gt; </span><span style='color: #555555;'>8</span><span> 50%    30.8  
-#&gt; </span><span style='color: #555555;'>9</span><span> 97.5%  43.7  </div><div class='input'><span class='fu'>post_summary</span>(<span class='no'>x2</span>)</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 9 x 3</span><span>
+#&gt;   </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>   </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>
+#&gt; </span><span style='color: #BCBCBC;'>1</span><span> mean   30.8  
+#&gt; </span><span style='color: #BCBCBC;'>2</span><span> median 30.8  
+#&gt; </span><span style='color: #BCBCBC;'>3</span><span> sd      6.12 
+#&gt; </span><span style='color: #BCBCBC;'>4</span><span> mad     5.73 
+#&gt; </span><span style='color: #BCBCBC;'>5</span><span> IQR     8.33 
+#&gt; </span><span style='color: #BCBCBC;'>6</span><span> cv      0.199
+#&gt; </span><span style='color: #BCBCBC;'>7</span><span> 2.5%   20.3  
+#&gt; </span><span style='color: #BCBCBC;'>8</span><span> 50%    30.8  
+#&gt; </span><span style='color: #BCBCBC;'>9</span><span> 97.5%  43.7  </div><div class='input'><span class='fu'>post_summary</span><span class='op'>(</span><span class='va'>x2</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; </span><span style='color: #949494;'># A tibble: 9 x 3</span><span>
 #&gt;   stat        N      T
-#&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>   </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>  </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
-#&gt; </span><span style='color: #555555;'>1</span><span> mean   28.6   31.7  
-#&gt; </span><span style='color: #555555;'>2</span><span> median 28.1   30.0  
-#&gt; </span><span style='color: #555555;'>3</span><span> sd      6.22   7.31 
-#&gt; </span><span style='color: #555555;'>4</span><span> mad     6.57   6.07 
-#&gt; </span><span style='color: #555555;'>5</span><span> IQR     8.81  10.2  
-#&gt; </span><span style='color: #555555;'>6</span><span> cv      0.217  0.231
-#&gt; </span><span style='color: #555555;'>7</span><span> 2.5%   15.8   21.1  
-#&gt; </span><span style='color: #555555;'>8</span><span> 50%    28.1   30.0  
-#&gt; </span><span style='color: #555555;'>9</span><span> 97.5%  39.3   48.4  </div><div class='input'>
+#&gt;   </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>   </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>  </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>
+#&gt; </span><span style='color: #BCBCBC;'>1</span><span> mean   28.6   31.7  
+#&gt; </span><span style='color: #BCBCBC;'>2</span><span> median 28.1   30.0  
+#&gt; </span><span style='color: #BCBCBC;'>3</span><span> sd      6.22   7.31 
+#&gt; </span><span style='color: #BCBCBC;'>4</span><span> mad     6.57   6.07 
+#&gt; </span><span style='color: #BCBCBC;'>5</span><span> IQR     8.81  10.2  
+#&gt; </span><span style='color: #BCBCBC;'>6</span><span> cv      0.217  0.231
+#&gt; </span><span style='color: #BCBCBC;'>7</span><span> 2.5%   15.8   21.1  
+#&gt; </span><span style='color: #BCBCBC;'>8</span><span> 50%    28.1   30.0  
+#&gt; </span><span style='color: #BCBCBC;'>9</span><span> 97.5%  39.3   48.4  </div><div class='input'>
 </div></span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
@@ -195,11 +202,11 @@
 
       <footer>
       <div class="copyright">
-  <p>Developed by Maximiliano Garnier-Villarreal.</p>
+  <p><p>Developed by Maximiliano Garnier-Villarreal.</p></p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.9000.</p>
+  <p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 1.6.1.9001.</p></p>
 </div>
 
       </footer>
@@ -207,6 +214,8 @@
 
   
 
+
+  
 
   </body>
 </html>

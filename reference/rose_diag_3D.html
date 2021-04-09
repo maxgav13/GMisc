@@ -45,6 +45,8 @@
 
 
 
+
+
 <!-- mathjax -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script>
@@ -56,9 +58,18 @@
 
 
 
+<!-- dependencies from examples -->
+
+
+  
+
+  
+
   </head>
 
   <body data-spy="scroll" data-target="#toc">
+    
+
     <div class="container template-reference-topic">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
@@ -79,12 +90,6 @@
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li>
-  <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
-     
-  </a>
-</li>
-<li>
   <a href="../reference/index.html">Reference</a>
 </li>
 <li class="dropdown">
@@ -111,8 +116,8 @@
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li>
-  <a href="http://github.com/maxgav13/GMisc/">
-    <span class="fab fa fab fa-github fa-lg"></span>
+  <a href="https://github.com/maxgav13/GMisc/">
+    <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -130,7 +135,7 @@
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Rose diagram (3D)</h1>
-    <small class="dont-index">Source: <a href='http://github.com/maxgav13/GMisc/blob/master/R/rose_diag_3D.R'><code>R/rose_diag_3D.R</code></a></small>
+    <small class="dont-index">Source: <a href='https://github.com/maxgav13/GMisc/blob/master/R/rose_diag_3D.R'><code>R/rose_diag_3D.R</code></a></small>
     <div class="hidden name"><code>rose_diag_3D.Rd</code></div>
     </div>
 
@@ -138,7 +143,7 @@
     <p>Plots a rose diagram for angular (direction and dip) data.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>rose_diag_3D</span>(<span class='no'>az</span>, <span class='no'>dip</span>, <span class='kw'>width</span> <span class='kw'>=</span> <span class='fl'>30</span>, <span class='kw'>dir</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>conf.level</span> <span class='kw'>=</span> <span class='fl'>0.95</span>)</pre>
+    <pre class="usage"><span class='fu'>rose_diag_3D</span><span class='op'>(</span><span class='va'>az</span>, <span class='va'>dip</span>, width <span class='op'>=</span> <span class='fl'>30</span>, dir <span class='op'>=</span> <span class='fl'>1</span>, conf.level <span class='op'>=</span> <span class='fl'>0.95</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -173,10 +178,11 @@
     <p>The mean direction and cone of confidence are displayed as red and cyan lines respectively. If non-directional data is provided it must follow the right-hand rule.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='no'>dip.dir</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>12</span>,<span class='fl'>18</span>,<span class='fl'>22</span>,<span class='fl'>15</span>,<span class='fl'>10</span>,<span class='fl'>20</span>)
-<span class='no'>strike</span> <span class='kw'>=</span> <span class='fu'><a href='d2s.html'>d2s</a></span>(<span class='no'>dip.dir</span>)
-<span class='no'>dip</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>42</span>,<span class='fl'>40</span>,<span class='fl'>48</span>,<span class='fl'>30</span>,<span class='fl'>42</span>,<span class='fl'>30</span>)
-<span class='fu'>rose_diag_3D</span>(<span class='no'>dip.dir</span>, <span class='no'>dip</span>)</div><div class='img'><img src='rose_diag_3D-1.png' alt='' width='700' height='433' /></div><div class='input'>
+    <pre class="examples"><div class='input'><span class='va'>dip.dir</span> <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>12</span>,<span class='fl'>18</span>,<span class='fl'>22</span>,<span class='fl'>15</span>,<span class='fl'>10</span>,<span class='fl'>20</span><span class='op'>)</span>
+<span class='va'>strike</span> <span class='op'>=</span> <span class='fu'><a href='d2s.html'>d2s</a></span><span class='op'>(</span><span class='va'>dip.dir</span><span class='op'>)</span>
+<span class='va'>dip</span> <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>42</span>,<span class='fl'>40</span>,<span class='fl'>48</span>,<span class='fl'>30</span>,<span class='fl'>42</span>,<span class='fl'>30</span><span class='op'>)</span>
+<span class='fu'>rose_diag_3D</span><span class='op'>(</span><span class='va'>dip.dir</span>, <span class='va'>dip</span><span class='op'>)</span>
+</div><div class='img'><img src='rose_diag_3D-1.png' alt='' width='700' height='433' /></div><div class='input'>
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
@@ -189,11 +195,11 @@
 
       <footer>
       <div class="copyright">
-  <p>Developed by Maximiliano Garnier-Villarreal.</p>
+  <p><p>Developed by Maximiliano Garnier-Villarreal.</p></p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.9000.</p>
+  <p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 1.6.1.9001.</p></p>
 </div>
 
       </footer>
@@ -201,6 +207,8 @@
 
   
 
+
+  
 
   </body>
 </html>

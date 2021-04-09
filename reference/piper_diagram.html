@@ -45,6 +45,8 @@
 
 
 
+
+
 <!-- mathjax -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script>
@@ -56,9 +58,18 @@
 
 
 
+<!-- dependencies from examples -->
+
+
+  
+
+  
+
   </head>
 
   <body data-spy="scroll" data-target="#toc">
+    
+
     <div class="container template-reference-topic">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
@@ -79,12 +90,6 @@
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li>
-  <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
-     
-  </a>
-</li>
-<li>
   <a href="../reference/index.html">Reference</a>
 </li>
 <li class="dropdown">
@@ -111,8 +116,8 @@
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li>
-  <a href="http://github.com/maxgav13/GMisc/">
-    <span class="fab fa fab fa-github fa-lg"></span>
+  <a href="https://github.com/maxgav13/GMisc/">
+    <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -130,7 +135,7 @@
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Piper diagram</h1>
-    <small class="dont-index">Source: <a href='http://github.com/maxgav13/GMisc/blob/master/R/piper_diagram.R'><code>R/piper_diagram.R</code></a></small>
+    <small class="dont-index">Source: <a href='https://github.com/maxgav13/GMisc/blob/master/R/piper_diagram.R'><code>R/piper_diagram.R</code></a></small>
     <div class="hidden name"><code>piper_diagram.Rd</code></div>
     </div>
 
@@ -138,7 +143,7 @@
     <p>Plots hydrochemical data into a Piper diagram.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>piper_diagram</span>(<span class='no'>data</span>, <span class='kw'>group</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
+    <pre class="usage"><span class='fu'>piper_diagram</span><span class='op'>(</span><span class='va'>data</span>, group <span class='op'>=</span> <span class='cn'>NULL</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -158,8 +163,18 @@
     <p>ggplot object</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='no'>data</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a></span>(<span class='kw'>Group</span> <span class='kw'>=</span> <span class='st'>'Test'</span>,<span class='kw'>Ca</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>120</span>,<span class='fl'>150</span>,<span class='fl'>110</span>,<span class='fl'>52.6</span>), <span class='kw'>Mg</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>78</span>,<span class='fl'>160</span>,<span class='fl'>110</span>,<span class='fl'>28</span>), <span class='kw'>Na</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>210</span>,<span class='fl'>590</span>,<span class='fl'>340</span>,<span class='fl'>51.6</span>), <span class='kw'>K</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>4.2</span>,<span class='fl'>2</span>,<span class='fl'>3.6</span>,<span class='fl'>2.3</span>), <span class='kw'>HCO3</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>181</span>,<span class='fl'>181</span>,<span class='fl'>189</span>,<span class='fl'>151</span>), <span class='kw'>CO3</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>Cl</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>220</span>,<span class='fl'>744</span>,<span class='fl'>476</span>,<span class='fl'>72.2</span>), <span class='kw'>SO4</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>560</span>,<span class='fl'>1020</span>,<span class='fl'>584</span>,<span class='fl'>126</span>))
-<span class='fu'>piper_diagram</span>(<span class='no'>data</span>, <span class='st'>'Group'</span>)</div><div class='img'><img src='piper_diagram-1.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'>piper_diagram</span>(<span class='no'>data</span>)</div><div class='img'><img src='piper_diagram-2.png' alt='' width='700' height='433' /></div><div class='input'>
+    <pre class="examples"><div class='input'><span class='va'>data</span> <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a></span><span class='op'>(</span>Group <span class='op'>=</span> <span class='st'>'Test'</span>,
+                  Ca <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>120</span>,<span class='fl'>150</span>,<span class='fl'>110</span>,<span class='fl'>52.6</span><span class='op'>)</span>,
+                  Mg <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>78</span>,<span class='fl'>160</span>,<span class='fl'>110</span>,<span class='fl'>28</span><span class='op'>)</span>,
+                  Na <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>210</span>,<span class='fl'>590</span>,<span class='fl'>340</span>,<span class='fl'>51.6</span><span class='op'>)</span>,
+                  K <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>4.2</span>,<span class='fl'>2</span>,<span class='fl'>3.6</span>,<span class='fl'>2.3</span><span class='op'>)</span>,
+                  HCO3 <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>181</span>,<span class='fl'>181</span>,<span class='fl'>189</span>,<span class='fl'>151</span><span class='op'>)</span>,
+                  CO3 <span class='op'>=</span> <span class='fl'>0</span>,
+                  Cl <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>220</span>,<span class='fl'>744</span>,<span class='fl'>476</span>,<span class='fl'>72.2</span><span class='op'>)</span>,
+                  SO4 <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>560</span>,<span class='fl'>1020</span>,<span class='fl'>584</span>,<span class='fl'>126</span><span class='op'>)</span><span class='op'>)</span>
+<span class='fu'>piper_diagram</span><span class='op'>(</span><span class='va'>data</span>, <span class='st'>'Group'</span><span class='op'>)</span>
+</div><div class='img'><img src='piper_diagram-1.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'>piper_diagram</span><span class='op'>(</span><span class='va'>data</span><span class='op'>)</span>
+</div><div class='img'><img src='piper_diagram-2.png' alt='' width='700' height='433' /></div><div class='input'>
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
@@ -172,11 +187,11 @@
 
       <footer>
       <div class="copyright">
-  <p>Developed by Maximiliano Garnier-Villarreal.</p>
+  <p><p>Developed by Maximiliano Garnier-Villarreal.</p></p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.9000.</p>
+  <p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 1.6.1.9001.</p></p>
 </div>
 
       </footer>
@@ -184,6 +199,8 @@
 
   
 
+
+  
 
   </body>
 </html>

@@ -45,6 +45,8 @@
 
 
 
+
+
 <!-- mathjax -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script>
@@ -56,9 +58,18 @@
 
 
 
+<!-- dependencies from examples -->
+
+
+  
+
+  
+
   </head>
 
   <body data-spy="scroll" data-target="#toc">
+    
+
     <div class="container template-reference-topic">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
@@ -79,12 +90,6 @@
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li>
-  <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
-     
-  </a>
-</li>
-<li>
   <a href="../reference/index.html">Reference</a>
 </li>
 <li class="dropdown">
@@ -111,8 +116,8 @@
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li>
-  <a href="http://github.com/maxgav13/GMisc/">
-    <span class="fab fa fab fa-github fa-lg"></span>
+  <a href="https://github.com/maxgav13/GMisc/">
+    <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -130,7 +135,7 @@
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Stereonet (poles)</h1>
-    <small class="dont-index">Source: <a href='http://github.com/maxgav13/GMisc/blob/master/R/stereo_pole.R'><code>R/stereo_pole.R</code></a></small>
+    <small class="dont-index">Source: <a href='https://github.com/maxgav13/GMisc/blob/master/R/stereo_pole.R'><code>R/stereo_pole.R</code></a></small>
     <div class="hidden name"><code>stereo_pole.Rd</code></div>
     </div>
 
@@ -138,7 +143,7 @@
     <p>Draws the poles to planes (great circles) on an equal area stereonet.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>stereo_pole</span>(<span class='no'>dir</span>, <span class='no'>dip</span>, <span class='kw'>points.col</span> <span class='kw'>=</span> <span class='st'>"blue"</span>, <span class='kw'>points.shape</span> <span class='kw'>=</span> <span class='fl'>3</span>, <span class='kw'>add</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</pre>
+    <pre class="usage"><span class='fu'>stereo_pole</span><span class='op'>(</span><span class='va'>dir</span>, <span class='va'>dip</span>, points.col <span class='op'>=</span> <span class='st'>"blue"</span>, points.shape <span class='op'>=</span> <span class='fl'>3</span>, add <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -173,9 +178,10 @@
     <p>This can be added to a stereonet from <code><a href='stereo_plane.html'>stereo_plane()</a></code></p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='no'>dip.dir</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/Uniform.html'>runif</a></span>(<span class='kw'>min</span> <span class='kw'>=</span> <span class='fl'>120</span>, <span class='kw'>max</span> <span class='kw'>=</span> <span class='fl'>170</span>, <span class='kw'>n</span> <span class='kw'>=</span> <span class='fl'>20</span>)
-<span class='no'>dip</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/Uniform.html'>runif</a></span>(<span class='kw'>min</span> <span class='kw'>=</span> <span class='fl'>10</span>, <span class='kw'>max</span> <span class='kw'>=</span> <span class='fl'>60</span>, <span class='kw'>n</span> <span class='kw'>=</span> <span class='fl'>20</span>)
-<span class='fu'>stereo_pole</span>(<span class='no'>dip.dir</span>, <span class='no'>dip</span>)</div><div class='img'><img src='stereo_pole-1.png' alt='' width='700' height='433' /></div><div class='output co'>#&gt; $x
+    <pre class="examples"><div class='input'><span class='va'>dip.dir</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/Uniform.html'>runif</a></span><span class='op'>(</span>min <span class='op'>=</span> <span class='fl'>120</span>, max <span class='op'>=</span> <span class='fl'>170</span>, n <span class='op'>=</span> <span class='fl'>20</span><span class='op'>)</span>
+<span class='va'>dip</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/Uniform.html'>runif</a></span><span class='op'>(</span>min <span class='op'>=</span> <span class='fl'>10</span>, max <span class='op'>=</span> <span class='fl'>60</span>, n <span class='op'>=</span> <span class='fl'>20</span><span class='op'>)</span>
+<span class='fu'>stereo_pole</span><span class='op'>(</span><span class='va'>dip.dir</span>, <span class='va'>dip</span><span class='op'>)</span>
+</div><div class='img'><img src='stereo_pole-1.png' alt='' width='700' height='433' /></div><div class='output co'>#&gt; $x
 #&gt;  [1] -0.06014288 -0.26569379 -0.26780282 -0.10154703 -0.16294549 -0.22707333
 #&gt;  [7] -0.24157755 -0.37186547 -0.31360531 -0.36233084 -0.39838070 -0.17674788
 #&gt; [13] -0.22505506 -0.37762762 -0.14612076 -0.20531451 -0.05872750 -0.58631224
@@ -185,7 +191,9 @@
 #&gt;  [1] 0.1387858 0.1583270 0.2138819 0.2159213 0.2946087 0.3495594 0.4099490
 #&gt;  [8] 0.4909585 0.2435973 0.5142813 0.4485323 0.2250601 0.3479944 0.5418281
 #&gt; [15] 0.2724575 0.6444430 0.1835226 0.3617237 0.6853096 0.3925468
-#&gt; </div><div class='input'><span class='fu'><a href='stereo_plane.html'>stereo_plane</a></span>(<span class='no'>dip.dir</span>, <span class='no'>dip</span>, <span class='kw'>dir</span> <span class='kw'>=</span> <span class='st'>"dip"</span>)</div><div class='input'><span class='fu'>stereo_pole</span>(<span class='no'>dip.dir</span>, <span class='no'>dip</span>, <span class='kw'>add</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</div><div class='img'><img src='stereo_pole-2.png' alt='' width='700' height='433' /></div><div class='output co'>#&gt; $x
+#&gt; </div><div class='input'><span class='fu'><a href='stereo_plane.html'>stereo_plane</a></span><span class='op'>(</span><span class='va'>dip.dir</span>, <span class='va'>dip</span>, dir <span class='op'>=</span> <span class='st'>"dip"</span><span class='op'>)</span>
+</div><div class='input'><span class='fu'>stereo_pole</span><span class='op'>(</span><span class='va'>dip.dir</span>, <span class='va'>dip</span>, add <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span>
+</div><div class='img'><img src='stereo_pole-2.png' alt='' width='700' height='433' /></div><div class='output co'>#&gt; $x
 #&gt;  [1] -0.06014288 -0.26569379 -0.26780282 -0.10154703 -0.16294549 -0.22707333
 #&gt;  [7] -0.24157755 -0.37186547 -0.31360531 -0.36233084 -0.39838070 -0.17674788
 #&gt; [13] -0.22505506 -0.37762762 -0.14612076 -0.20531451 -0.05872750 -0.58631224
@@ -208,11 +216,11 @@
 
       <footer>
       <div class="copyright">
-  <p>Developed by Maximiliano Garnier-Villarreal.</p>
+  <p><p>Developed by Maximiliano Garnier-Villarreal.</p></p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.9000.</p>
+  <p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 1.6.1.9001.</p></p>
 </div>
 
       </footer>
@@ -220,6 +228,8 @@
 
   
 
+
+  
 
   </body>
 </html>
