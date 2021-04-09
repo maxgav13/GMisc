@@ -80,7 +80,7 @@
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
+    <span class="fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -111,8 +111,8 @@
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li>
-  <a href="http://github.com/maxgav13/GMisc/">
-    <span class="fab fa fab fa-github fa-lg"></span>
+  <a href="https://github.com/maxgav13/GMisc/">
+    <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -130,7 +130,7 @@
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Confidence interval for standard deviation of a sample</h1>
-    <small class="dont-index">Source: <a href='http://github.com/maxgav13/GMisc/blob/master/R/ci_chisq.R'><code>R/ci_chisq.R</code></a></small>
+    <small class="dont-index">Source: <a href='https://github.com/maxgav13/GMisc/blob/master/R/ci_chisq.R'><code>R/ci_chisq.R</code></a></small>
     <div class="hidden name"><code>ci_chisq.Rd</code></div>
     </div>
 
@@ -138,7 +138,7 @@
     <p>Calculates the confidence interval for the standard deviation of a sample (ChiSquare distribution).</p>
     </div>
 
-    <pre class="usage"><span class='fu'>ci_chisq</span>(<span class='no'>s</span>, <span class='no'>n</span>, <span class='kw'>conf.level</span> <span class='kw'>=</span> <span class='fl'>0.95</span>, <span class='kw'>digits</span> <span class='kw'>=</span> <span class='fl'>2</span>)</pre>
+    <pre class="usage"><span class='fu'>ci_chisq</span><span class='op'>(</span><span class='va'>s</span>, <span class='va'>n</span>, conf.level <span class='op'>=</span> <span class='fl'>0.95</span>, digits <span class='op'>=</span> <span class='fl'>2</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -163,15 +163,18 @@
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>A data frame with the standard deviation and variance, degrees of freedom, and lower and upper ends of the confidence interval</p>
+    <p>A tibble with the standard deviation and variance, degrees of freedom, and lower and upper ends of the confidence interval</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='no'>s</span> <span class='kw'>&lt;-</span> <span class='fl'>0.535</span>
-<span class='no'>n</span> <span class='kw'>&lt;-</span> <span class='fl'>10</span>
-<span class='fu'>ci_chisq</span>(<span class='no'>s</span>, <span class='no'>n</span>)</div><div class='output co'>#&gt;   stat value df lower upper
-#&gt; 1   sd  0.54  9  0.37  0.98
-#&gt; 2  var  0.29  9  0.14  0.95</div><div class='input'>
-</div></pre>
+    <pre class="examples"><div class='input'><span class='va'>s</span> <span class='op'>&lt;-</span> <span class='fl'>0.535</span>
+<span class='va'>n</span> <span class='op'>&lt;-</span> <span class='fl'>10</span>
+<span class='fu'>ci_chisq</span><span class='op'>(</span><span class='va'>s</span>, <span class='va'>n</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 2 x 5</span><span>
+#&gt;   stat  value    df lower upper
+#&gt;   </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>
+#&gt; </span><span style='color: #BCBCBC;'>1</span><span> sd    0.54      9  0.37  0.98
+#&gt; </span><span style='color: #BCBCBC;'>2</span><span> var   0.290     9  0.14  0.95</div><div class='input'>
+</div></span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -187,7 +190,7 @@
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

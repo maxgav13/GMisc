@@ -7,7 +7,6 @@
 #' @return A data frame with Gini index before and after the split, as well as the gain and gain percent
 #' @references Kuhn, M. & Johnson, K. (2013). Applied Predictive Modeling. Springer.
 #' @references  Witten, I. H., Frank, E. & Hall, M. A. (2011). Data Mining: Practical Machine Learning Tools and Techniques. Elsevier.
-#' @import stats
 #' @examples
 #' Gini(mtcars$mpg, mtcars$cyl, 15)
 #' Gini(mtcars$mpg, mtcars$cyl, 21)

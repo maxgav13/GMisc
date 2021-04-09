@@ -18,6 +18,6 @@ Calculates dip directions from strike directions .
 \examples{
 x <- runif(min = 120, max = 170, n = 20)
 dip.dir <- s2d(x)
-strike <- d2s(strike)
+strike <- d2s(dip.dir)
 
 }

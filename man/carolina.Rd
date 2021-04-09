@@ -4,7 +4,9 @@
 \name{carolina}
 \alias{carolina}
 \title{Data for directional examples}
-\format{A vector or angular measurements}
+\format{
+A vector or angular measurements
+}
 \description{
 Non-directional data of 99 "Carolina bays" - ellipsoidal depressions on southern USA.
 }

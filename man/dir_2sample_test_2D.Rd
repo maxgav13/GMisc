@@ -16,7 +16,7 @@ dir_2sample_test_2D(x, y, dir = 1, conf.level = 0.95)
 \item{conf.level}{Confidence level for the F-statistic calculation and p-value interpretation (Default is 0.95)}
 }
 \value{
-A list with the F-statistic, the critical value of F, the p-value, and the interpretation of these values
+A list with the F-statistic, the critical value of F, the degrees of freedom, the p-value, and the interpretation of these values
 }
 \description{
 Performes the two-sample test, for the 2D case, for a pair of angle measurements to determine if they could belong to the same population (event).
@@ -25,8 +25,12 @@ Performes the two-sample test, for the 2D case, for a pair of angle measurements
 Directional data refers to dipping planes or lines, data expressed as dip direction (trend). Non-directional data refers to strike or lineations expressed as azimuths that can take two angles (i.e. 45 or 225)
 }
 \examples{
-x = c(255, 239, 222, 231, 199, 271, 222, 274, 228, 246, 177, 199, 257, 201, 237, 209, 216, 180, 182, 250, 219, 196, 197, 246, 218, 235, 232, 243, 232, 180, 231, 254, 242, 149, 212, 210, 230, 205, 220, 268)
-y = c(225, 208, 172, 198, 204, 183, 190, 212, 247, 127, 167, 234, 217, 192, 212, 171, 169, 210, 245, 222, 185, 227, 193, 178, 187, 182, 194, 217, 168, 211, 234, 204, 221, 198, 261, 228, 146, 201, 146, 231)
+x = c(255, 239, 222, 231, 199, 271, 222, 274, 228, 246, 177, 199,
+  257, 201, 237, 209, 216, 180, 182, 250, 219, 196, 197, 246, 218, 235,
+  232, 243, 232, 180, 231, 254, 242, 149, 212, 210, 230, 205, 220, 268)
+y = c(225, 208, 172, 198, 204, 183, 190, 212, 247, 127, 167, 234,
+  217, 192, 212, 171, 169, 210, 245, 222, 185, 227, 193, 178, 187, 182,
+  194, 217, 168, 211, 234, 204, 221, 198, 261, 228, 146, 201, 146, 231)
 dir_2sample_test_2D(x, y)
 
 }

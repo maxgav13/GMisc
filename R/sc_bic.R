@@ -4,10 +4,7 @@
 #' @param h Percent of data points per layer
 #' @export
 #' @return A ggplot and plotly objects showing the BIC statistic
-#' @import stats
 #' @import ggplot2
-#' @import strucchange
-#' @import zoo
 #' @details The example data given is intended to show the structure needed for input data. The user should follow this structure, which in general corresponds with a data frame with a sequence in the first column and the observed/measured values in the second column
 #' @examples
 #' sc_bic(DPM_data, h = 0.1)
@@ -17,8 +14,8 @@ sc_bic = function(x, h = 0.1) {
   dat = x
   nombres = names(dat)
 
-  dat.ts = zoo(dat[[2]],dat[[1]])
-  bp = breakpoints(dat.ts ~ 1, h = h)
+  dat.ts = zoo::zoo(dat[[2]],dat[[1]])
+  bp = strucchange::breakpoints(dat.ts ~ 1, h = h)
 
   rss = as.data.frame(t(summary(bp)$RSS))
   rss = cbind(Breakpoints=rownames(rss), rss)

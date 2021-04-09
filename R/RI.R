@@ -5,7 +5,6 @@
 #' @export
 #' @return ggplot and plotly objects showing the RI statistic and lines marking the critical values of 0.7 and 0.8, and suggested boundaries
 #' @references Mora, R. (2013). Uso de metodos estadisticos para la determinacion de capas homogeneas de suelos volcanicos en un sitio de las laderas del Volcan Irazu, Cartago, Costa Rica. - Rev. Geol. Amer. Central, 49: 101-108.
-#' @import stats
 #' @import ggplot2
 #' @details The example data given is intended to show the structure needed for input data. The user should follow this structure, which in general corresponds with a data frame with a sequence in the first column and the observed/measured values in the second column
 #' @examples
@@ -21,10 +20,10 @@ RI = function(x, k = 6) {
   RI = NULL
 
   for (i in (n+1):(length(wadj)-n)) {
-    S1 = var(wadj[(i-(n-1)):(i)], na.rm = TRUE)
-    S2 = var(wadj[(i+1):(i+n)], na.rm = TRUE)
+    S1 = stats::var(wadj[(i-(n-1)):(i)], na.rm = TRUE)
+    S2 = stats::var(wadj[(i+1):(i+n)], na.rm = TRUE)
     SC = (n * (S1 + S2)) / (2 * n - 1)
-    SB = var(wadj[(i-(n-1)):(i+n)], na.rm = TRUE)
+    SB = stats::var(wadj[(i-(n-1)):(i+n)], na.rm = TRUE)
     RI[i] = round(SB / (SB + SC),3)
   }
   DF = data.frame(k, RI)
@@ -32,8 +31,17 @@ RI = function(x, k = 6) {
   row.names(DF) = 1:nrow(DF)
   Data$RI = DF$RI
 
-  bounds.7 = Data[c(0,diff(sign(diff(Data$RI))))<0 & Data$RI>=.7,nombres[1]] %>% as.data.frame() %>% tidyr::drop_na() %>% unlist() %>% as.vector()
-  bounds.8 = Data[c(0,diff(sign(diff(Data$RI))))<0 & Data$RI>=.8,nombres[1]] %>% as.data.frame() %>% tidyr::drop_na() %>% unlist() %>% as.vector()
+  bounds.7 = Data[c(0,diff(sign(diff(Data$RI))))<0 & Data$RI>=.7,nombres[1]] %>%
+    as.data.frame() %>%
+    tidyr::drop_na() %>%
+    unlist() %>%
+    as.vector()
+
+  bounds.8 = Data[c(0,diff(sign(diff(Data$RI))))<0 & Data$RI>=.8,nombres[1]] %>%
+    as.data.frame() %>%
+    tidyr::drop_na() %>%
+    unlist() %>%
+    as.vector()
 
   q = ggplot(Data, aes_string("RI", nombres[1])) +
     geom_path(na.rm = T) +

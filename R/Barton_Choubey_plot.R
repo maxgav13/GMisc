@@ -4,7 +4,6 @@
 #' @param units The units to use in the plot, either "kPa" or "MPa". Default is "kPa". If "MPa" is desired you can use units = "" or units = "MPa"
 #' @export
 #' @return A ggplot object for the Barton-Choubey criterion
-#' @import stats
 #' @import ggplot2
 #' @references Barton, N. & Choubey, V. (1977). The shear strength of rock joints in theory and practice. Rock Mechanichs, 10: 1-54.
 #' @examples

@@ -3,6 +3,9 @@
 \name{similarity_coef}
 \alias{similarity_coef}
 \title{Similarity Coefficient}
+\usage{
+similarity_coef(x, samp.names = NULL, digits = 3)
+}
 \arguments{
 \item{x}{A data frame of observations in rows and features (variables) in columns. Features must be non-zero and positive.}
 

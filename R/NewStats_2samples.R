@@ -11,9 +11,7 @@
 #' @export
 #' @return A ggplot object
 #' @references Cumming, G. (2014). The New Statistics: Why and How - Psychological Science, 25(1): 7-29.
-#' @import stats
 #' @import ggplot2
-#' @import cowplot
 #' @details The labels of the plot are generic but they can be customised using the \code{labs()} and \code{scale_x_discrete(labels = c())} functions. For the dependent samples case the two means are joined by a line, to indicate the dependency
 #' @examples
 #' set.seed(101)
@@ -38,11 +36,11 @@ NewStats_2samples = function(x, y, dep = FALSE, conf.level = 0.95, col.x = 'blue
 
   lower = c(mean_cl_normal(G1, conf.int = conf.level)[2],
             mean_cl_normal(G2, conf.int = conf.level)[2],
-            t.test(G1, G2, paired = dep, conf.level = conf.level)$conf.int[1])
+            stats::t.test(G1, G2, paired = dep, conf.level = conf.level)$conf.int[1])
 
   upper = c(mean_cl_normal(G1)[3],
             mean_cl_normal(G2)[3],
-            t.test(G1, G2, paired = dep, conf.level = conf.level)$conf.int[2])
+            stats::t.test(G1, G2, paired = dep, conf.level = conf.level)$conf.int[2])
 
   estimates = data.frame(group = factor(c('1','2','3'),labels = c('G1', 'G2', 'Difference')),
                          point = pointEst,

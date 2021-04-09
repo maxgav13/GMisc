@@ -6,7 +6,6 @@
 #' @export
 #' @details The options for confidence level are 0.99, 0.975, 0.95, or 0.90
 #' @return A list with the mean resultant length, the critical mean resultant length, and the interpretation of these values
-#' @import stats
 #' @references Davis, J. C. (2002). Statistical and Data Analysis in Geology. 3rd ed. John Wiley & Sons.
 #' @references Swan, A. R. H. & Sandilands, M. (1995). Introduction to Geological Data Analysis. Blackwell Science.
 #' @references Borradaile, G. (2003). Statistics of Earth Science Data. Springer.

@@ -8,8 +8,6 @@
 #' @export
 #' @details This can be added to a stereonet from \code{stereo_plane()}
 #' @return A stereonet plot
-#' @import stats
-#' @import RFOC
 #' @examples
 #' dip.dir <- runif(min = 120, max = 170, n = 20)
 #' dip <- runif(min = 10, max = 60, n = 20)
@@ -22,8 +20,8 @@ stereo_pole = function(dir, dip, points.col = "blue", points.shape = 3, add = FA
   dir = ifelse(dir >= 180, dir - 180, dir + 180)
 
   if (add == FALSE) {
-    net(col = gray(0.85), lwd = .5)
-    qpoint(dir, dip, col = points.col, pch = points.shape, PLOT = add)
+    RFOC::net(col = gray(0.85), lwd = .5)
+    RFOC::qpoint(dir, dip, col = points.col, pch = points.shape, PLOT = add)
   }
-  qpoint(dir, dip, col = points.col, pch = points.shape, PLOT = TRUE)
+  RFOC::qpoint(dir, dip, col = points.col, pch = points.shape, PLOT = TRUE)
 }

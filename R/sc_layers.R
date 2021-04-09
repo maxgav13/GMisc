@@ -5,12 +5,7 @@
 #' @param breaks An integer giving the number of breakpoints to use (from 'Strucchange')
 #' @export
 #' @return A ggplot and plotly objects showing the layered model, another showing the confidence intervals, and a summary table
-#' @import stats
 #' @import ggplot2
-#' @import strucchange
-#' @import dplyr
-#' @import DescTools
-#' @import heplots
 #' @examples
 #' sc_layers(DPM_data, h = 0.1, breaks = 2)
 #'
@@ -19,20 +14,20 @@ sc_layers = function(x, h = 0.1, breaks) {
   dat = x
   nom = names(dat)
 
-  dat.ts = zoo(dat[[2]],dat[[1]])
-  bp = breakpoints(dat.ts ~ 1, h = h)
-  breaks = dat[round(breakdates(bp, breaks = breaks)*nrow(dat)),1]
+  dat.ts = zoo::zoo(dat[[2]],dat[[1]])
+  bp = strucchange::breakpoints(dat.ts ~ 1, h = h)
+  breaks = dat[round(strucchange::breakdates(bp, breaks = breaks)*nrow(dat)),1]
 
   grouping = cut(dat[[nom[1]]],
                  breaks = c(min(dat[1]), breaks, max(dat[1])),
                  include.lowest = T)
   dat$boundaries = grouping
 
-  ydata = dat %>% select(-1,-boundaries) %>% as.matrix()
-  xdata = dat %>% select(boundaries) %>% as.matrix()
-  mod = lm(ydata ~ xdata)
+  ydata = dat %>% dplyr::select(-1,-boundaries) %>% as.matrix()
+  xdata = dat %>% dplyr::select(boundaries) %>% as.matrix()
+  mod = stats::lm(ydata ~ xdata)
 
-  ES = round(etasq(mod)[[1]][1],3)
+  ES = round(DescTools::EtaSq(mod)[[1]],3)
 
   q = ggplot(dat, aes_string(nom[2], nom[1], col = "boundaries")) +
     geom_path(size = .75) +
@@ -53,18 +48,19 @@ sc_layers = function(x, h = 0.1, breaks) {
   p2 = plotly::ggplotly(q2, dynamicTicks = T)
 
   Summary = dat %>%
-    group_by(boundaries) %>%
-    summarise_at(vars(nom[2]),
-                 funs(Obs = n(),
-                      Mean = signif(mean(.),3),
-                      SD = signif(sd(.),3),
-                      Min = signif(min(.),3),
-                      Max = signif(max(.),3),
-                      CI.lwr = signif(MeanCI(.)[[2]],3),
-                      CI.upr = signif(MeanCI(.)[[3]],3)
-                 )
+    dplyr::group_by(boundaries) %>%
+    dplyr::summarise_at(dplyr::vars(nom[2]),
+                        .funs = list(
+                          Obs = ~ dplyr::n(),
+                          Mean = ~ signif(mean(.),3),
+                          SD = ~ signif(stats::sd(.),3),
+                          Min = ~ signif(min(.),3),
+                          Max = ~ signif(max(.),3),
+                          CI.lwr = ~ signif(DescTools::MeanCI(.)[[2]],3),
+                          CI.upr = ~ signif(DescTools::MeanCI(.)[[3]],3)
+                        )
     ) %>%
-    mutate(MoE = signif(qt(.975,Obs-1)*SD/sqrt(Obs),3)) %>%
+    dplyr::mutate(MoE = signif(stats::qt(.975,Obs-1)*SD/sqrt(Obs),3)) %>%
     as.data.frame()
 
   return(list(LayersGG=q, LayersLY=p, StatsGG=q2, StatsLY=p2, Summary=Summary, ES=ES))

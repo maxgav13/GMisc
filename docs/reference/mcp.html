@@ -80,7 +80,7 @@
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
+    <span class="fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -111,8 +111,8 @@
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li>
-  <a href="http://github.com/maxgav13/GMisc/">
-    <span class="fab fa fab fa-github fa-lg"></span>
+  <a href="https://github.com/maxgav13/GMisc/">
+    <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -130,7 +130,7 @@
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Multiple change-point analysis for layer boundary determination</h1>
-    <small class="dont-index">Source: <a href='http://github.com/maxgav13/GMisc/blob/master/R/mcp.R'><code>R/mcp.R</code></a></small>
+    <small class="dont-index">Source: <a href='https://github.com/maxgav13/GMisc/blob/master/R/mcp.R'><code>R/mcp.R</code></a></small>
     <div class="hidden name"><code>mcp.Rd</code></div>
     </div>
 
@@ -138,7 +138,7 @@
     <p>Performs multiple change-point analysis in univariate or multivariate data, to find layer boundaries in a perforation log.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>mcp</span>(<span class='no'>data</span>, <span class='kw'>R</span> <span class='kw'>=</span> <span class='fl'>199</span>, <span class='kw'>alpha</span> <span class='kw'>=</span> <span class='fl'>2</span>, <span class='kw'>sig.level</span> <span class='kw'>=</span> <span class='fl'>0.01</span>, <span class='kw'>min.perc</span> <span class='kw'>=</span> <span class='fl'>15</span>)</pre>
+    <pre class="usage"><span class='fu'>mcp</span><span class='op'>(</span><span class='va'>data</span>, R <span class='op'>=</span> <span class='fl'>199</span>, alpha <span class='op'>=</span> <span class='fl'>2</span>, sig.level <span class='op'>=</span> <span class='fl'>0.01</span>, min.perc <span class='op'>=</span> <span class='fl'>15</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -176,59 +176,56 @@
     <p>Nicholas A. James, David S. Matteson (2014). ecp: An R Package for Nonparametric Multiple Change Point Analysis of Multivariate Data, Journal of Statistical Software, 62(7), 1-25.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'>mcp</span>(<span class='no'>CPTu_data</span>, <span class='kw'>R</span> <span class='kw'>=</span> <span class='fl'>199</span>, <span class='kw'>alpha</span> <span class='kw'>=</span> <span class='fl'>2</span>, <span class='kw'>sig.level</span> <span class='kw'>=</span> <span class='fl'>.01</span>, <span class='kw'>min.perc</span> <span class='kw'>=</span> <span class='fl'>15</span>) <span class='co'># multivariate example</span></div><div class='output co'>#&gt; <span class='warning'>Warning: longer object length is not a multiple of shorter object length</span></div><div class='output co'>#&gt; <span class='warning'>Warning: longer object length is not a multiple of shorter object length</span></div><div class='output co'>#&gt; <span class='warning'>Warning: longer object length is not a multiple of shorter object length</span></div><div class='output co'>#&gt; <span class='warning'>Warning: longer object length is not a multiple of shorter object length</span></div><div class='output co'>#&gt; <span class='warning'>Warning: longer object length is not a multiple of shorter object length</span></div><div class='output co'>#&gt; <span class='warning'>Warning: longer object length is not a multiple of shorter object length</span></div><div class='output co'>#&gt; <span class='warning'>Warning: longer object length is not a multiple of shorter object length</span></div><div class='output co'>#&gt; <span class='warning'>Warning: longer object length is not a multiple of shorter object length</span></div><div class='output co'>#&gt; $LayersGG</div><div class='img'><img src='mcp-1.png' alt='' width='700' height='433' /></div><div class='output co'>#&gt; 
+    <pre class="examples"><div class='input'><span class='fu'>mcp</span><span class='op'>(</span><span class='va'>CPTu_data</span>, R <span class='op'>=</span> <span class='fl'>199</span>, alpha <span class='op'>=</span> <span class='fl'>2</span>, sig.level <span class='op'>=</span> <span class='fl'>.01</span>, min.perc <span class='op'>=</span> <span class='fl'>15</span><span class='op'>)</span> <span class='co'># multivariate example</span>
+</div><div class='output co'>#&gt; <span class='warning'>Warning: longer object length is not a multiple of shorter object length</span></div><div class='output co'>#&gt; <span class='warning'>Warning: longer object length is not a multiple of shorter object length</span></div><div class='output co'>#&gt; <span class='warning'>Warning: longer object length is not a multiple of shorter object length</span></div><div class='output co'>#&gt; <span class='warning'>Warning: longer object length is not a multiple of shorter object length</span></div><div class='output co'>#&gt; <span class='warning'>Warning: longer object length is not a multiple of shorter object length</span></div><div class='output co'>#&gt; <span class='warning'>Warning: longer object length is not a multiple of shorter object length</span></div><div class='output co'>#&gt; <span class='warning'>Warning: longer object length is not a multiple of shorter object length</span></div><div class='output co'>#&gt; <span class='warning'>Warning: longer object length is not a multiple of shorter object length</span></div><div class='output co'>#&gt; $LayersGG</div><div class='img'><img src='mcp-1.png' alt='' width='700' height='433' /></div><div class='output co'>#&gt; 
 #&gt; $LayersLY
 #&gt; 
 #&gt; $StatsGG</div><div class='img'><img src='mcp-2.png' alt='' width='700' height='433' /></div><div class='output co'>#&gt; 
 #&gt; $StatsLY
 #&gt; 
 #&gt; $Summary
-#&gt;    Layer Property Obs        Mean          SD    Min     Max      CI.lwr
-#&gt; 1      1       qc 181    1.955635   0.7648023   0.75    5.01    1.843463
-#&gt; 2      1       fs 181   81.946464  36.8579357   0.53  165.57   76.540544
-#&gt; 3      1        u 181   86.860884  94.2024354 -37.34  357.68   73.044298
-#&gt; 4      2       qc  86    6.410930   1.9445160   2.69   10.57    5.994025
-#&gt; 5      2       fs  86  317.027209  86.1008543 121.44  509.30  298.567148
-#&gt; 6      2        u  86  579.552326 459.6038591  53.93 2040.22  481.013055
-#&gt; 7      3       qc 132    3.652803   1.4188767   2.38   14.21    3.408496
-#&gt; 8      3       fs 132  176.634621  49.7732777  56.02  270.74  168.064481
-#&gt; 9      3        u 132  204.542803 163.9706545 -54.77  690.04  176.309751
-#&gt; 10     4       qc 174    4.902529   2.4828134   2.68   22.62    4.531022
-#&gt; 11     4       fs 174  153.322299  88.9658803 -22.25  466.61  140.010226
-#&gt; 12     4        u 174 1226.327471 607.5535068 -31.81 2532.48 1135.418499
-#&gt;         CI.upr        MoE    Interval
-#&gt; 1     2.067808  0.1121729 [0.12,3.74]
-#&gt; 2    87.352384  5.4059200 [0.12,3.74]
-#&gt; 3   100.677470 13.8165857 [0.12,3.74]
-#&gt; 4     6.827835  0.4169051 (3.74,5.46]
-#&gt; 5   335.487271 18.4600612 (3.74,5.46]
-#&gt; 6   678.091596 98.5392707 (3.74,5.46]
-#&gt; 7     3.897110  0.2443073  (5.46,8.1]
-#&gt; 8   185.204762  8.5701403  (5.46,8.1]
-#&gt; 9   232.775855 28.2330517  (5.46,8.1]
-#&gt; 10    5.274035  0.3715064  (8.1,11.6]
-#&gt; 11  166.634372 13.3120731  (8.1,11.6]
-#&gt; 12 1317.236443 90.9089718  (8.1,11.6]
+#&gt;    Layer Property Obs    Mean      SD    Min     Max  CI.lwr  CI.upr        MoE
+#&gt; 1      1       qc 181    1.96   0.765   0.75    5.01    1.84    2.07  0.1122019
+#&gt; 2      1       fs 181   81.90  36.900   0.53  166.00   76.50   87.40  5.4120895
+#&gt; 3      1        u 181   86.90  94.200 -37.30  358.00   73.00  101.00 13.8162285
+#&gt; 4      2       qc  86    6.41   1.940   2.69   10.60    5.99    6.83  0.4159369
+#&gt; 5      2       fs  86  317.00  86.100 121.00  509.00  299.00  335.00 18.4598781
+#&gt; 6      2        u  86  580.00 460.000  53.90 2040.00  481.00  678.00 98.6242035
+#&gt; 7      3       qc 132    3.65   1.420   2.38   14.20    3.41    3.90  0.2445007
+#&gt; 8      3       fs 132  177.00  49.800  56.00  271.00  168.00  185.00  8.5747415
+#&gt; 9      3        u 132  205.00 164.000 -54.80  690.00  176.00  233.00 28.2381045
+#&gt; 10     4       qc 174    4.90   2.480   2.68   22.60    4.53    5.27  0.3710854
+#&gt; 11     4       fs 174  153.00  89.000 -22.20  467.00  140.00  167.00 13.3171785
+#&gt; 12     4        u 174 1230.00 608.000 -31.80 2530.00 1140.00 1320.00 90.9757811
+#&gt;       Interval
+#&gt; 1  [0.12,3.74]
+#&gt; 2  [0.12,3.74]
+#&gt; 3  [0.12,3.74]
+#&gt; 4  (3.74,5.46]
+#&gt; 5  (3.74,5.46]
+#&gt; 6  (3.74,5.46]
+#&gt; 7   (5.46,8.1]
+#&gt; 8   (5.46,8.1]
+#&gt; 9   (5.46,8.1]
+#&gt; 10  (8.1,11.6]
+#&gt; 11  (8.1,11.6]
+#&gt; 12  (8.1,11.6]
 #&gt; 
 #&gt; $ES
 #&gt; [1] 0.405
-#&gt; </div><div class='input'><span class='fu'>mcp</span>(<span class='no'>DPM_data</span>, <span class='kw'>R</span> <span class='kw'>=</span> <span class='fl'>199</span>, <span class='kw'>alpha</span> <span class='kw'>=</span> <span class='fl'>2</span>, <span class='kw'>sig.level</span> <span class='kw'>=</span> <span class='fl'>.01</span>, <span class='kw'>min.perc</span> <span class='kw'>=</span> <span class='fl'>15</span>) <span class='co'># univariate example</span></div><div class='output co'>#&gt; $LayersGG</div><div class='img'><img src='mcp-3.png' alt='' width='700' height='433' /></div><div class='output co'>#&gt; 
+#&gt; </div><div class='input'><span class='fu'>mcp</span><span class='op'>(</span><span class='va'>DPM_data</span>, R <span class='op'>=</span> <span class='fl'>199</span>, alpha <span class='op'>=</span> <span class='fl'>2</span>, sig.level <span class='op'>=</span> <span class='fl'>.01</span>, min.perc <span class='op'>=</span> <span class='fl'>15</span><span class='op'>)</span> <span class='co'># univariate example</span>
+</div><div class='output co'>#&gt; $LayersGG</div><div class='img'><img src='mcp-3.png' alt='' width='700' height='433' /></div><div class='output co'>#&gt; 
 #&gt; $LayersLY
 #&gt; 
 #&gt; $StatsGG</div><div class='img'><img src='mcp-4.png' alt='' width='700' height='433' /></div><div class='output co'>#&gt; 
 #&gt; $StatsLY
 #&gt; 
 #&gt; $Summary
-#&gt;   Layer Property Obs      Mean        SD Min Max   CI.lwr    CI.upr       MoE
-#&gt; 1     1    Blows  28  4.964286 2.1855102   0  10 4.116833  5.811738 0.8474524
-#&gt; 2     2    Blows  30  7.566667 0.8976342   6   9 7.231485  7.901849 0.3351821
-#&gt; 3     3    Blows  28  8.607143 1.1968875   7  11 8.143038  9.071247 0.4641045
-#&gt; 4     4    Blows  15 10.400000 1.1212238   8  12 9.779087 11.020913 0.6209131
-#&gt;    Interval
-#&gt; 1   [0,2.8]
-#&gt; 2 (2.8,5.8]
-#&gt; 3 (5.8,8.6]
-#&gt; 4  (8.6,10]
+#&gt;   Layer Property Obs  Mean    SD Min Max CI.lwr CI.upr       MoE  Interval
+#&gt; 1     1    Blows  28  4.96 2.190   0  10   4.12   5.81 0.8491933   [0,2.8]
+#&gt; 2     2    Blows  30  7.57 0.898   6   9   7.23   7.90 0.3353187 (2.8,5.8]
+#&gt; 3     3    Blows  28  8.61 1.200   7  11   8.14   9.07 0.4653114 (5.8,8.6]
+#&gt; 4     4    Blows  15 10.40 1.120   8  12   9.78  11.00 0.6202353  (8.6,10]
 #&gt; 
 #&gt; $ES
 #&gt; [1] 0.62
@@ -249,7 +246,7 @@
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

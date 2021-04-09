@@ -7,9 +7,6 @@
 #' @export
 #' @return A comparison table and graph
 #' @references ASTM (1995). Standard Test Method for Determination of the Point Load Strength Index of Rock.
-#' @import stats
-#' @import dplyr
-#' @import MASS
 #' @import ggplot2
 #' @name UCS
 #' @examples
@@ -39,16 +36,16 @@ UCS = function(W, D, P, digits = 2) {
   # UCS.t = I50.t * 23
 
   # regresion robusta
-  fit.r = rlm(P ~ De, data = dat.UCS)
+  fit.r = MASS::rlm(P ~ De, data = dat.UCS)
   # summary(fit.r)
-  P50.r = predict(fit.r, newdata = dat.50)
+  P50.r = stats::predict(fit.r, newdata = dat.50)
   I50.r = (P50.r / 3183.1) * 1000
   UCS.r = I50.r * 23
 
   # regresion normal
-  fit.g = lm(P ~ De, data = dat.UCS)
+  fit.g = stats::lm(P ~ De, data = dat.UCS)
   # summary(fit.g)
-  P50.g = predict(fit.g, newdata = dat.50)
+  P50.g = stats::predict(fit.g, newdata = dat.50)
   I50.g = (P50.g / 3183.1) * 1000
   UCS.g = I50.g * 23
 
@@ -67,10 +64,10 @@ UCS = function(W, D, P, digits = 2) {
           axis.title = element_text(size = 14),
           axis.text = element_text(size = 12))
 
-  UCS = c(mean(I50), median(I50)) * 23
+  UCS = c(mean(I50), stats::median(I50)) * 23
 
   UCS.res = data.frame(Method = c('Gaussian','Robust','Corrected (mean)','Corrected (median)'),
-                       I50 = round(c(I50.g,I50.r,mean(I50),median(I50)),digits = digits),
+                       I50 = round(c(I50.g,I50.r,mean(I50),stats::median(I50)),digits = digits),
                        UCS = round(c(UCS.g,UCS.r,UCS[1],UCS[2]),digits = digits))
 
   names(UCS.res) = c('Method', 'I50 [MPa]', 'UCS [MPa]')

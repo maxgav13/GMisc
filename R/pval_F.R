@@ -7,7 +7,6 @@
 #' @param side To either get a two-tail or one-tail p-value (Default is "two")
 #' @export
 #' @return P-value
-#' @import stats
 #' @examples
 #' s1 <- 3.1
 #' n1 <- 15
@@ -20,9 +19,9 @@ pval_F <- function (s1, n1, s2, n2, side = c("two", "one")) {
   df2 = n2-1
   f = s1^2/s2^2
   if (f < 1) {
-    pval = pf(f, df1, df2, lower.tail = T) * 2
+    pval = stats::pf(f, df1, df2, lower.tail = T) * 2
   } else {
-    pval = pf(f, df1, df2, lower.tail = F) * 2
+    pval = stats::pf(f, df1, df2, lower.tail = F) * 2
   }
   if (any(side == "two")) {
     pval = (signif(pval, 3))

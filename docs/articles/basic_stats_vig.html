@@ -39,7 +39,7 @@
       <ul class="nav navbar-nav">
 <li>
   <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
+    <span class="fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -70,8 +70,8 @@
       </ul>
 <ul class="nav navbar-nav navbar-right">
 <li>
-  <a href="http://github.com/maxgav13/GMisc/">
-    <span class="fab fa fab fa-github fa-lg"></span>
+  <a href="https://github.com/maxgav13/GMisc/">
+    <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -85,15 +85,15 @@
 
       
 
-      </header><div class="row">
+      </header><script src="basic_stats_vig_files/header-attrs-2.7/header-attrs.js"></script><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>Basic statistics</h1>
                         <h4 class="author">Maximiliano Garnier Villarreal</h4>
             
-            <h4 class="date">2020-06-08</h4>
+            <h4 class="date">2021-04-09</h4>
       
-      <small class="dont-index">Source: <a href="http://github.com/maxgav13/GMisc/blob/master/vignettes/basic_stats_vig.Rmd"><code>vignettes/basic_stats_vig.Rmd</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/maxgav13/GMisc/blob/master/vignettes/basic_stats_vig.Rmd"><code>vignettes/basic_stats_vig.Rmd</code></a></small>
       <div class="hidden name"><code>basic_stats_vig.Rmd</code></div>
 
     </div>
@@ -128,17 +128,23 @@
 <a href="#one-sample-z-test" class="anchor"></a>One-sample Z-test</h2>
 <p>This has the form:</p>
 <p><span class="math display">\[\bar{x} \pm z_{\alpha/2} \frac{\sigma}{\sqrt{n}}\]</span> The function for computing it is <code>ci_z</code>, with arguments <code>x</code> for the sample mean, <code>sig</code> for the population standard deviation, <code>n</code> for the sample size, and <code>conf.level</code> for the desired confidence level:</p>
-<div class="sourceCode" id="cb1"><html><body><pre class="r"><span class="fu"><a href="../reference/ci_z.html">ci_z</a></span>(<span class="kw">x</span> <span class="kw">=</span> <span class="fl">80</span>, <span class="kw">sig</span> <span class="kw">=</span> <span class="fl">15</span>, <span class="kw">n</span> <span class="kw">=</span> <span class="fl">20</span>, <span class="kw">conf.level</span> <span class="kw">=</span> <span class="fl">0.95</span>)</pre></body></html></div>
-<pre><code>##   mean lower upper
-## 1   80 73.43 86.57</code></pre>
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="../reference/ci_z.html">ci_z</a></span><span class="op">(</span>x <span class="op">=</span> <span class="fl">80</span>, sig <span class="op">=</span> <span class="fl">15</span>, n <span class="op">=</span> <span class="fl">20</span>, conf.level <span class="op">=</span> <span class="fl">0.95</span><span class="op">)</span></code></pre></div>
+<pre><code>## # A tibble: 1 x 3
+##    mean lower upper
+##   &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+## 1    80  73.4  86.6</code></pre>
 </div>
 <div id="two-sample-z-test" class="section level2">
 <h2 class="hasAnchor">
 <a href="#two-sample-z-test" class="anchor"></a>Two-sample Z-test</h2>
 <p>This has the form:</p>
 <p><span class="math display">\[\left(\bar{x}_1-\bar{x}_2\right) \pm z_{\alpha/2} {\sqrt{\frac{\sigma^2_1}{n_1} + \frac{\sigma^2_2}{n_2}}}\]</span> The function for computing it is <code>ci_z2</code>, with arguments <code>x1</code> for the mean of sample 1, <code>sig1</code> for the population 1 standard deviation, <code>n1</code> for the sample size of 1, <code>x2</code> for the mean of sample 2, <code>sig2</code> for the population 2 standard deviation, <code>n2</code> for the sample size of 2, and <code>conf.level</code> for the desired confidence level:</p>
-<div class="sourceCode" id="cb3"><html><body><pre class="r"><span class="fu"><a href="../reference/ci_z2.html">ci_z2</a></span>(<span class="kw">x1</span> <span class="kw">=</span> <span class="fl">42</span>, <span class="kw">sig1</span> <span class="kw">=</span> <span class="fl">8</span>, <span class="kw">n1</span> <span class="kw">=</span> <span class="fl">75</span>, <span class="kw">x2</span> <span class="kw">=</span> <span class="fl">36</span>, <span class="kw">sig2</span> <span class="kw">=</span> <span class="fl">6</span>, <span class="kw">n2</span> <span class="kw">=</span> <span class="fl">50</span>, <span class="kw">conf.level</span> <span class="kw">=</span> <span class="fl">0.95</span>)</pre></body></html></div>
-<pre><code>##   mean_diff lower upper
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="../reference/ci_z2.html">ci_z2</a></span><span class="op">(</span>x1 <span class="op">=</span> <span class="fl">42</span>, sig1 <span class="op">=</span> <span class="fl">8</span>, n1 <span class="op">=</span> <span class="fl">75</span>, x2 <span class="op">=</span> <span class="fl">36</span>, sig2 <span class="op">=</span> <span class="fl">6</span>, n2 <span class="op">=</span> <span class="fl">50</span>, conf.level <span class="op">=</span> <span class="fl">0.95</span><span class="op">)</span></code></pre></div>
+<pre><code>## # A tibble: 1 x 3
+##   mean_diff lower upper
+##       &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
 ## 1         6  3.54  8.46</code></pre>
 </div>
 <div id="one-sample-t-test" class="section level2">
@@ -146,9 +152,12 @@
 <a href="#one-sample-t-test" class="anchor"></a>One-sample t-test</h2>
 <p>This has the form:</p>
 <p><span class="math display">\[\bar{x} \pm t_{\alpha/2,v} \frac{s}{\sqrt{n}}\]</span> The function for computing it is <code>ci_t</code>, with arguments <code>x</code> for the sample mean, <code>s</code> for the sample standard deviation, <code>n</code> for the sample size, and <code>conf.level</code> for the desired confidence level:</p>
-<div class="sourceCode" id="cb5"><html><body><pre class="r"><span class="fu"><a href="../reference/ci_t.html">ci_t</a></span>(<span class="kw">x</span> <span class="kw">=</span> <span class="fl">80</span>, <span class="kw">s</span> <span class="kw">=</span> <span class="fl">15</span>, <span class="kw">n</span> <span class="kw">=</span> <span class="fl">20</span>, <span class="kw">conf.level</span> <span class="kw">=</span> <span class="fl">0.95</span>)</pre></body></html></div>
-<pre><code>##   mean df lower upper
-## 1   80 19 72.98 87.02</code></pre>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="../reference/ci_t.html">ci_t</a></span><span class="op">(</span>x <span class="op">=</span> <span class="fl">80</span>, s <span class="op">=</span> <span class="fl">15</span>, n <span class="op">=</span> <span class="fl">20</span>, conf.level <span class="op">=</span> <span class="fl">0.95</span><span class="op">)</span></code></pre></div>
+<pre><code>## # A tibble: 1 x 4
+##    mean    df lower upper
+##   &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+## 1    80    19  73.0  87.0</code></pre>
 </div>
 <div id="two-sample-t-test" class="section level2">
 <h2 class="hasAnchor">
@@ -156,29 +165,38 @@
 <p>This has the general form:</p>
 <p><span class="math display">\[\left(\bar{x}_1-\bar{x}_2\right) \pm t_{\alpha/2,v} {\sqrt{\frac{s^2_1}{n_1} + \frac{s^2_2}{n_2}}}\]</span></p>
 <p>The function for computing it is <code>ci_t2</code>, with arguments <code>x1</code> for the mean of sample 1, <code>s1</code> for the sample 1 standard deviation, <code>n1</code> for the sample size of 1, <code>x2</code> for the mean of sample 2, <code>s2</code> for the sample 2 standard deviation, <code>n2</code> for the sample size of 2, and <code>conf.level</code> for the desired confidence level:</p>
-<div class="sourceCode" id="cb7"><html><body><pre class="r"><span class="fu"><a href="../reference/ci_t2.html">ci_t2</a></span>(<span class="kw">x1</span> <span class="kw">=</span> <span class="fl">42</span>, <span class="kw">s1</span> <span class="kw">=</span> <span class="fl">8</span>, <span class="kw">n1</span> <span class="kw">=</span> <span class="fl">75</span>, <span class="kw">x2</span> <span class="kw">=</span> <span class="fl">36</span>, <span class="kw">s2</span> <span class="kw">=</span> <span class="fl">6</span>, <span class="kw">n2</span> <span class="kw">=</span> <span class="fl">50</span>, <span class="kw">conf.level</span> <span class="kw">=</span> <span class="fl">0.95</span>)</pre></body></html></div>
-<pre><code>##   mean_diff     df lower upper
-## 1         6 121.22  3.52  8.48</code></pre>
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="../reference/ci_t2.html">ci_t2</a></span><span class="op">(</span>x1 <span class="op">=</span> <span class="fl">42</span>, s1 <span class="op">=</span> <span class="fl">8</span>, n1 <span class="op">=</span> <span class="fl">75</span>, x2 <span class="op">=</span> <span class="fl">36</span>, s2 <span class="op">=</span> <span class="fl">6</span>, n2 <span class="op">=</span> <span class="fl">50</span>, conf.level <span class="op">=</span> <span class="fl">0.95</span><span class="op">)</span></code></pre></div>
+<pre><code>## # A tibble: 1 x 4
+##   mean_diff    df lower upper
+##       &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+## 1         6  121.  3.52  8.48</code></pre>
 </div>
 <div id="one-sample-chi2-test" class="section level2">
 <h2 class="hasAnchor">
 <a href="#one-sample-chi2-test" class="anchor"></a>One-sample <span class="math inline">\(\chi^2\)</span>-test</h2>
 <p>This has the form:</p>
 <p><span class="math display">\[\frac{(n-1)s^2}{\chi^2_{\alpha/2,v}} &lt; \sigma^2 &lt; \frac{(n-1)s^2}{\chi^2_{1-\alpha/2,v}}\]</span> The function for computing it is <code>ci_chisq</code>, with arguments <code>s</code> for the sample standard deviation, <code>n</code> for the sample size, and <code>conf.level</code> for the desired confidence level:</p>
-<div class="sourceCode" id="cb9"><html><body><pre class="r"><span class="fu"><a href="../reference/ci_chisq.html">ci_chisq</a></span>(<span class="kw">s</span> <span class="kw">=</span> <span class="fl">0.535</span>, <span class="kw">n</span> <span class="kw">=</span> <span class="fl">10</span>, <span class="kw">conf.level</span> <span class="kw">=</span> <span class="fl">0.95</span>)</pre></body></html></div>
-<pre><code>##   stat value df lower upper
-## 1   sd  0.54  9  0.37  0.98
-## 2  var  0.29  9  0.14  0.95</code></pre>
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="../reference/ci_chisq.html">ci_chisq</a></span><span class="op">(</span>s <span class="op">=</span> <span class="fl">0.535</span>, n <span class="op">=</span> <span class="fl">10</span>, conf.level <span class="op">=</span> <span class="fl">0.95</span><span class="op">)</span></code></pre></div>
+<pre><code>## # A tibble: 2 x 5
+##   stat  value    df lower upper
+##   &lt;chr&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+## 1 sd    0.54      9  0.37  0.98
+## 2 var   0.290     9  0.14  0.95</code></pre>
 </div>
 <div id="two-sample-f-test-ratio-of-variances" class="section level2">
 <h2 class="hasAnchor">
 <a href="#two-sample-f-test-ratio-of-variances" class="anchor"></a>Two-sample F-test (Ratio of variances)</h2>
 <p>This has the form:</p>
 <p><span class="math display">\[\frac{s^2_1}{s^2_2} \frac{1}{F_{\alpha/2(v_1,v_2)}} &lt; \frac{\sigma^2_1}{\sigma^2_2} &lt; \frac{s^2_1}{s^2_2} F_{\alpha/2(v_2,v_1)}\]</span> The function for computing it is <code>ci_F</code>, with arguments <code>s1</code> for the sample 1 standard deviation, <code>n1</code> for the sample size of 1, <code>s2</code> for the sample 2 standard deviation, <code>n2</code> for the sample size of 2, and <code>conf.level</code> for the desired confidence level:</p>
-<div class="sourceCode" id="cb11"><html><body><pre class="r"><span class="fu"><a href="../reference/ci_F.html">ci_F</a></span>(<span class="kw">s1</span> <span class="kw">=</span> <span class="fl">3.1</span>, <span class="kw">n1</span> <span class="kw">=</span> <span class="fl">15</span>, <span class="kw">s2</span> <span class="kw">=</span> <span class="fl">0.8</span>, <span class="kw">n2</span> <span class="kw">=</span> <span class="fl">12</span>, <span class="kw">conf.level</span> <span class="kw">=</span> <span class="fl">0.95</span>)</pre></body></html></div>
-<pre><code>##   stat ratio df1 df2 lower upper
-## 1   sd  3.88  14  11  2.11  6.82
-## 2  var 15.02  14  11  4.47 46.47</code></pre>
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="../reference/ci_F.html">ci_F</a></span><span class="op">(</span>s1 <span class="op">=</span> <span class="fl">3.1</span>, n1 <span class="op">=</span> <span class="fl">15</span>, s2 <span class="op">=</span> <span class="fl">0.8</span>, n2 <span class="op">=</span> <span class="fl">12</span>, conf.level <span class="op">=</span> <span class="fl">0.95</span><span class="op">)</span></code></pre></div>
+<pre><code>## # A tibble: 2 x 6
+##   stat  ratio   df1   df2 lower upper
+##   &lt;chr&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+## 1 sd     3.88    14    11  2.11  6.82
+## 2 var   15.0     14    11  4.47 46.5</code></pre>
 </div>
 </div>
 <div id="p-values" class="section level1">
@@ -203,7 +221,7 @@
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

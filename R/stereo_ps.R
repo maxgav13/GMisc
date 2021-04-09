@@ -4,8 +4,6 @@
 #' @param dip A vector of dip angles in degrees
 #' @export
 #' @return A stereonet plot of principal stresses
-#' @import stats
-#' @import RFOC
 #' @examples
 #' dir <- runif(min = 30, max = 80, n = 20)
 #' dip <- runif(min = 10, max = 60, n = 20)
@@ -16,6 +14,6 @@ stereo_ps = function(dir, dip) {
 
   r = dir_stats_ps(dir, dip)
 
-  qpoint(r[1,], 90-r[2,], pch = 18, col = 6, lab = c("1", "2", "3"), cex = 1.5)
+  RFOC::qpoint(r[1,], 90-r[2,], pch = 18, col = 6, lab = c("1", "2", "3"), cex = 1.5)
 
 }

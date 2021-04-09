@@ -80,7 +80,7 @@
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
+    <span class="fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -111,8 +111,8 @@
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li>
-  <a href="http://github.com/maxgav13/GMisc/">
-    <span class="fab fa fab fa-github fa-lg"></span>
+  <a href="https://github.com/maxgav13/GMisc/">
+    <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -130,7 +130,7 @@
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Directional statistics test of uniformity (3D)</h1>
-    <small class="dont-index">Source: <a href='http://github.com/maxgav13/GMisc/blob/master/R/dir_unif_test_3D.R'><code>R/dir_unif_test_3D.R</code></a></small>
+    <small class="dont-index">Source: <a href='https://github.com/maxgav13/GMisc/blob/master/R/dir_unif_test_3D.R'><code>R/dir_unif_test_3D.R</code></a></small>
     <div class="hidden name"><code>dir_unif_test_3D.Rd</code></div>
     </div>
 
@@ -138,7 +138,7 @@
     <p>Performes the uniformity test, for the 3D case, for a set of angle measurements to determine if they come from a uniform distribution (no prefered mean direction).</p>
     </div>
 
-    <pre class="usage"><span class='fu'>dir_unif_test_3D</span>(<span class='no'>dir</span>, <span class='no'>dip</span>, <span class='kw'>conf.level</span> <span class='kw'>=</span> <span class='fl'>0.95</span>)</pre>
+    <pre class="usage"><span class='fu'>dir_unif_test_3D</span><span class='op'>(</span><span class='va'>dir</span>, <span class='va'>dip</span>, conf.level <span class='op'>=</span> <span class='fl'>0.95</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -170,9 +170,10 @@
 <p>Borradaile, G. (2003). Statistics of Earth Science Data. Springer.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='no'>dir</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>12</span>,<span class='fl'>18</span>,<span class='fl'>22</span>,<span class='fl'>15</span>,<span class='fl'>10</span>,<span class='fl'>20</span>)
-<span class='no'>dip</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>42</span>,<span class='fl'>40</span>,<span class='fl'>48</span>,<span class='fl'>30</span>,<span class='fl'>42</span>,<span class='fl'>30</span>)
-<span class='fu'>dir_unif_test_3D</span>(<span class='no'>dir</span>, <span class='no'>dip</span>)</div><div class='output co'>#&gt; $R
+    <pre class="examples"><div class='input'><span class='va'>dir</span> <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>12</span>,<span class='fl'>18</span>,<span class='fl'>22</span>,<span class='fl'>15</span>,<span class='fl'>10</span>,<span class='fl'>20</span><span class='op'>)</span>
+<span class='va'>dip</span> <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>42</span>,<span class='fl'>40</span>,<span class='fl'>48</span>,<span class='fl'>30</span>,<span class='fl'>42</span>,<span class='fl'>30</span><span class='op'>)</span>
+<span class='fu'>dir_unif_test_3D</span><span class='op'>(</span><span class='va'>dir</span>, <span class='va'>dip</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; $R
 #&gt; [1] 0.992
 #&gt; 
 #&gt; $Rcrit
@@ -197,7 +198,7 @@
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

@@ -7,9 +7,7 @@
 #' @param plotk A string for choosing what to plot (Default is "all")
 #' @export
 #' @return ggplot and plotly objects with the residual data
-#' @import stats
 #' @import ggplot2
-#' @import tidyr
 #' @examples
 #' data(nautilus)
 #' k = c(3, 5, 7, 9)
@@ -20,13 +18,13 @@
 moving_filter_plot_r = function(x, xlab = "X", ylab = "Residual data",filterlab = "Filter", plotk = "all") {
 
   if (any(plotk == "all")) {
-    df = x$Residual %>% select_at(names(.))
+    df = x$Residual %>% dplyr::select_at(names(.))
   } else {
     zz = plotk
-    df = x$Residual %>% select_at(c("x",zz))
+    df = x$Residual %>% dplyr::select_at(c("x",zz))
   }
 
-  df = df %>% gather(filtro, y_val, -x)
+  df = tidyr::pivot_longer(df, cols = -x, names_to = 'filtro', values_to = 'y_val')
   df$filtro = factor(df$filtro, levels = unique(df$filtro))
 
   r = ggplot(df, aes(x = x, y = y_val, group = filtro, col = filtro)) +

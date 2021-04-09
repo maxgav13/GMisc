@@ -18,7 +18,15 @@ ggplot object
 Plots hydrochemical data into a Piper diagram.
 }
 \examples{
-data = data.frame(Group = 'Test',Ca = c(120,150,110,52.6), Mg = c(78,160,110,28), Na = c(210,590,340,51.6), K = c(4.2,2,3.6,2.3), HCO3 = c(181,181,189,151), CO3 = 0, Cl = c(220,744,476,72.2), SO4 = c(560,1020,584,126))
+data = data.frame(Group = 'Test',
+                  Ca = c(120,150,110,52.6),
+                  Mg = c(78,160,110,28),
+                  Na = c(210,590,340,51.6),
+                  K = c(4.2,2,3.6,2.3),
+                  HCO3 = c(181,181,189,151),
+                  CO3 = 0,
+                  Cl = c(220,744,476,72.2),
+                  SO4 = c(560,1020,584,126))
 piper_diagram(data, 'Group')
 piper_diagram(data)
 

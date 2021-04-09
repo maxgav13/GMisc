@@ -24,7 +24,7 @@ ci_z2(x1, sig1, n1, x2, sig2, n2, conf.level = 0.95, digits = 2)
 \item{digits}{Number of digits to round to (Default is 2)}
 }
 \value{
-A data frame with the difference of means, and lower and upper ends of the confidence interval
+A tibble with the difference of means, and lower and upper ends of the confidence interval
 }
 \description{
 Calculates the confidence interval for the difference of the mean between 2 samples (Z distribution).

@@ -3,7 +3,6 @@
 #' @param x A vector of continuous values
 #' @export
 #' @return A vector of probabilities
-#' @import stats
 #' @examples
 #' x = seq(-3,3,.5)
 #' inv_logit(x)

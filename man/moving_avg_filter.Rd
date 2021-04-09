@@ -14,7 +14,7 @@ moving_avg_filter(x, y, k)
 \item{k}{A numeric vector with the widths of the windows to use for the filter (must be an odd number)}
 }
 \value{
-A list with two data frames: one with the filtered results plus the original data, and one with the residuals
+A list with two tibbles: one with the filtered results plus the original data, and one with the residuals
 }
 \description{
 Filters data using moving averages of diferent window sizes.

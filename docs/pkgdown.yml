@@ -1,10 +1,10 @@
-pandoc: 2.3.1
-pkgdown: 1.5.1
+pandoc: 2.11.4
+pkgdown: 1.6.1
 pkgdown_sha: ~
 articles:
   basic_stats_vig: basic_stats_vig.html
   directional_stats_vig: directional_stats_vig.html
   rock_mechanics_vig: rock_mechanics_vig.html
   soil_mechanics_vig: soil_mechanics_vig.html
-last_built: 2020-06-08T13:03Z
+last_built: 2021-04-09T16:45Z
 

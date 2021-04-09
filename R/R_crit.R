@@ -6,7 +6,6 @@
 #' @export
 #' @return Mean resultant length's critical value for a given sample size
 #' @references Davis, J. C. (2002). Statistical and Data Analysis in Geology. 3rd ed. John Wiley & Sons.
-#' @import stats
 #' @details The result of this function is mostly to be used with \code{dir_unif_test_xD()}, but can be used as standalone. The options for confidence level are 0.99, 0.975, 0.95, or 0.90
 #' @examples
 #' R_crit(10)

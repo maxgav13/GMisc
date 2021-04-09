@@ -5,10 +5,7 @@
 #' @param nl The minimum number of points per layer to be considered
 #' @export
 #' @return A ggplot and plotly objects showing the AIC and eta-squared statistics, and a data frame with all the data and possible layer models
-#' @import stats
 #' @import ggplot2
-#' @import changepoint
-#' @import sjstats
 #' @details The example data given is intended to show the structure needed for input data. The user should follow this structure, which in general corresponds with a data frame with a sequence in the first column and the observed/measured values in the second column
 #' @examples
 #' cp_aic_eta(DPM_data, m = 10, nl = 3)
@@ -21,14 +18,14 @@ cp_aic_eta = function(x, m = 10, nl = 3) {
   etas = NULL
   aic = NULL
   for (i in 1:m) {
-    cpt = cpt.meanvar(datos[[2]], method = "BinSeg", penalty = "MBIC", Q = i, minseglen = nl)
-    breaks = datos[[1]][cpts(cpt)]
+    cpt = changepoint::cpt.meanvar(datos[[2]], method = "BinSeg", penalty = "MBIC", Q = i, minseglen = nl)
+    breaks = datos[[1]][changepoint::cpts(cpt)]
     grouping = cut(datos[[1]],
                    breaks = c(min(datos[[1]]), breaks, max(datos[[1]])),
                    include.lowest = T)
     datos[[i+2]] = grouping
-    etas[i] = round(eta_sq(aov(datos[[2]] ~ datos[[i+2]]))$etasq,3)
-    aic[i] = round(AIC(aov(datos[[2]] ~ datos[[i+2]])),2)
+    etas[i] = round(DescTools::EtaSq(stats::aov(datos[[2]] ~ datos[[i+2]]))[[1]],3)
+    aic[i] = round(stats::AIC(stats::aov(datos[[2]] ~ datos[[i+2]])),2)
     names(datos)[[i+2]] = paste("B", i, sep = "")
   }
   stats_df = data.frame(breaks = rep(1:m,2), stat = rep(c("eta","AIC"),each = m), stat_value = c(etas,aic))
@@ -43,5 +40,5 @@ cp_aic_eta = function(x, m = 10, nl = 3) {
 
   p = plotly::ggplotly(q)
 
-  return(list(GGPLOT=q, PLOTLY=p, Data=datos))
+  return(list(GGPLOT=q, PLOTLY=p, Data=tibble::tibble(datos)))
 }

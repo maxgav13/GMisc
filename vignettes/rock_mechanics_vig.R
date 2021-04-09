@@ -1,6 +1,6 @@
 ## ----setup, include=FALSE-----------------------------------------------------
 library(GMisc)
-library(tidyverse)
+library(ggplot2)
 
 load('../inst/HB_D.rda')
 load('../inst/HB_mi_mr.rda')
@@ -55,7 +55,7 @@ height = 40
 unit.weight = 18.6
 HB = Hoek_Brown(sig.ci, GSI, mi, MR, D, height, unit.weight)
 HB %>% 
-  pluck('Results') %>% 
+  purrr::pluck('Results') %>% 
   as.data.frame()
 
 ## -----------------------------------------------------------------------------

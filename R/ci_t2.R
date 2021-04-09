@@ -10,8 +10,7 @@
 #' @param conf.level Confidence level to use for the confidence interval (Default is 0.95)
 #' @param digits Number of digits to round to (Default is 2)
 #' @export
-#' @return A data frame with the difference of means, degrees of freedom, and lower and upper ends of the confidence interval
-#' @import stats
+#' @return A tibble with the difference of means, degrees of freedom, and lower and upper ends of the confidence interval
 #' @examples
 #' x1 <- 90
 #' s1 <- 15
@@ -31,11 +30,11 @@ ci_t2 <- function (x1, s1, n1, x2, s2, n2, var.equal = FALSE, conf.level = .95, 
     v <- (s1^2/n1 + s2^2/n2)^2 / (((s1^2/n1)^2)/(n1-1) + ((s2^2/n2)^2)/(n2-1))
   }
 
-  upper <- (x1-x2) + qt(1-alpha/2, df = v) * stderr
-  lower <- (x1-x2) + qt(alpha/2, df = v) * stderr
-  DF <- data.frame(mean_diff = round(x1-x2, digits),
-                   df = round(v, digits),
-                   lower = round(lower, digits),
-                   upper = round(upper, digits))
+  upper <- (x1-x2) + stats::qt(1-alpha/2, df = v) * stderr
+  lower <- (x1-x2) + stats::qt(alpha/2, df = v) * stderr
+  DF <- tibble::tibble(mean_diff = round(x1-x2, digits),
+                       df = round(v, digits),
+                       lower = round(lower, digits),
+                       upper = round(upper, digits))
   DF
 }

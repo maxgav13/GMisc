@@ -4,11 +4,6 @@
 #' @param probs Desired quantiles to display
 #' @export
 #' @return A tibble with summary statistics
-#' @import stats
-#' @import dplyr
-#' @import tidyr
-#' @import tibble
-#' @import DescTools
 #' @examples
 #' x1 <- rnorm(100, 30, 6)
 #' x2 <- data.frame(N = rnorm(100, 30, 6), T = rt(100, 10, 30))
@@ -17,25 +12,25 @@
 #'
 post_summary <- function(x, probs = c(.025,.5,.975)){
   if (is.data.frame(x) == TRUE) {
-    x = select_if(x, is.numeric)
+    x = dplyr::select_if(x, is.numeric)
     res = rbind.data.frame(mean = apply(x, 2, mean, na.rm = T),
-                           median = apply(x, 2, median, na.rm = T),
-                           sd = apply(x, 2, sd, na.rm = T),
-                           mad = apply(x, 2, mad, na.rm = T),
-                           IQR = apply(x, 2, IQR, na.rm = T),
-                           cv = apply(x, 2, CoefVar, na.rm = T),
-                           apply(x, 2, quantile, probs = probs, na.rm = T))  %>%
-      rownames_to_column('stat') %>%
-      as_tibble()
+                           median = apply(x, 2, stats::median, na.rm = T),
+                           sd = apply(x, 2, stats::sd, na.rm = T),
+                           mad = apply(x, 2, stats::mad, na.rm = T),
+                           IQR = apply(x, 2, stats::IQR, na.rm = T),
+                           cv = apply(x, 2, DescTools::CoefVar, na.rm = T),
+                           apply(x, 2, stats::quantile, probs = probs, na.rm = T))  %>%
+      tibble::rownames_to_column('stat') %>%
+      tibble::as_tibble()
   } else if (is.vector(x) == TRUE) {
     res <- c(mean = mean(x, na.rm = T),
-             median = median(x, na.rm = T),
-             sd = sd(x, na.rm = T),
-             mad = mad(x, na.rm = T),
-             IQR = IQR(x, na.rm = T),
-             cv = CoefVar(x, na.rm = T),
-             quantile(x, probs = probs, na.rm = T)) %>%
-      enframe(name = 'stat')
+             median = stats::median(x, na.rm = T),
+             sd = stats::sd(x, na.rm = T),
+             mad = stats::mad(x, na.rm = T),
+             IQR = stats::IQR(x, na.rm = T),
+             cv = DescTools::CoefVar(x, na.rm = T),
+             stats::quantile(x, probs = probs, na.rm = T)) %>%
+      tibble::enframe(name = 'stat')
   }
 
   return(res)

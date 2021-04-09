@@ -4,10 +4,8 @@
 #' @param y A numeric vector with the data to filter
 #' @param k A numeric vector with the widths of the windows to use for the filter (must be an odd number)
 #' @export
-#' @return A list with two data frames: one with the filtered results plus the original data, and one with the residuals
+#' @return A list with two tibbles: one with the filtered results plus the original data, and one with the residuals
 #' @details The weigths for the window lengths are calculated in a way that farther observations from the central (estimated) value are given a lesser weight than observations near de central value
-#' @import stats
-#' @importFrom zoo rollapply
 #' @references Swan, A. R. H. & Sandilands, M. (1995). Introduction to Geological Data Analysis. Blackwell Science.
 #' @examples
 #' data(nautilus)
@@ -40,13 +38,13 @@ moving_wt_filter = function(x, y, k) {
     # win = W[[i]]
     win = Wf[[i]]
     wadj[[i]] = c(rep(NA, floor(k[i]/2)), v, rep(NA, floor(k[i]/2))) # agrega NAs en los extremos para facilitar los calculos
-    filt[[i]] = rollapply(wadj[[i]], k[i], function(x) weighted.mean(x, w = win, na.rm = TRUE), fill = NA) # media movil
+    filt[[i]] = zoo::rollapply(wadj[[i]], k[i], function(x) weighted.mean(x, w = win, na.rm = TRUE), fill = NA) # media movil
     finalfilt[[i]] = filt[[i]][!is.na(filt[[i]])] # remueve NAs
     wf[[i]] = v - finalfilt[[i]] # calcula datos residuales
   }
-  finalfiltdf = data.frame(x = d, y = v, cbind.data.frame(finalfilt))
+  finalfiltdf = tibble::tibble(data.frame(x = d, y = v, cbind.data.frame(finalfilt)))
   names(finalfiltdf) = c("x","y", paste("k",k, sep = "_"))
-  wfdf = data.frame(x = d, cbind.data.frame(wf))
+  wfdf = tibble::tibble(data.frame(x = d, cbind.data.frame(wf)))
   names(wfdf) = c("x", paste("k",k, sep = "_"))
   return(list(Filtered = finalfiltdf, Residual = wfdf))
 }

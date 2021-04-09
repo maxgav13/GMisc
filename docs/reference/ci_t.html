@@ -80,7 +80,7 @@
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
+    <span class="fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -111,8 +111,8 @@
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li>
-  <a href="http://github.com/maxgav13/GMisc/">
-    <span class="fab fa fab fa-github fa-lg"></span>
+  <a href="https://github.com/maxgav13/GMisc/">
+    <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -130,7 +130,7 @@
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Confidence interval for mean (unknown sigma)</h1>
-    <small class="dont-index">Source: <a href='http://github.com/maxgav13/GMisc/blob/master/R/ci_t.R'><code>R/ci_t.R</code></a></small>
+    <small class="dont-index">Source: <a href='https://github.com/maxgav13/GMisc/blob/master/R/ci_t.R'><code>R/ci_t.R</code></a></small>
     <div class="hidden name"><code>ci_t.Rd</code></div>
     </div>
 
@@ -138,7 +138,7 @@
     <p>Calculates the confidence interval for the mean with unknown standard deviation, using the t-statistic (t distribution).</p>
     </div>
 
-    <pre class="usage"><span class='fu'>ci_t</span>(<span class='no'>x</span>, <span class='no'>s</span>, <span class='no'>n</span>, <span class='kw'>conf.level</span> <span class='kw'>=</span> <span class='fl'>0.95</span>, <span class='kw'>digits</span> <span class='kw'>=</span> <span class='fl'>2</span>)</pre>
+    <pre class="usage"><span class='fu'>ci_t</span><span class='op'>(</span><span class='va'>x</span>, <span class='va'>s</span>, <span class='va'>n</span>, conf.level <span class='op'>=</span> <span class='fl'>0.95</span>, digits <span class='op'>=</span> <span class='fl'>2</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -167,18 +167,21 @@
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>A data frame with the mean, degrees of freedom, and lower and upper ends of the confidence interval</p>
+    <p>A tibble with the mean, degrees of freedom, and lower and upper ends of the confidence interval</p>
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
     <p>It can work for dependent (paired) samples using the mean and standard deviation of differences</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='no'>x</span> <span class='kw'>&lt;-</span> <span class='fl'>80</span>
-<span class='no'>s</span> <span class='kw'>&lt;-</span> <span class='fl'>15</span>
-<span class='no'>n</span> <span class='kw'>&lt;-</span> <span class='fl'>20</span>
-<span class='fu'>ci_t</span>(<span class='no'>x</span>, <span class='no'>s</span>, <span class='no'>n</span>)</div><div class='output co'>#&gt;   mean df lower upper
-#&gt; 1   80 19 72.98 87.02</div><div class='input'>
-</div></pre>
+    <pre class="examples"><div class='input'><span class='va'>x</span> <span class='op'>&lt;-</span> <span class='fl'>80</span>
+<span class='va'>s</span> <span class='op'>&lt;-</span> <span class='fl'>15</span>
+<span class='va'>n</span> <span class='op'>&lt;-</span> <span class='fl'>20</span>
+<span class='fu'>ci_t</span><span class='op'>(</span><span class='va'>x</span>, <span class='va'>s</span>, <span class='va'>n</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 1 x 4</span><span>
+#&gt;    mean    df lower upper
+#&gt;   </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>
+#&gt; </span><span style='color: #BCBCBC;'>1</span><span>    80    19  73.0  87.0</div><div class='input'>
+</div></span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -194,7 +197,7 @@
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

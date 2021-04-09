@@ -7,7 +7,6 @@
 #' @export
 #' @return A data frame with the mean direction, mean dip angle, mean resultant length, spherical variance, concentration parameter, and cone of confidence
 #' @references Borradaile, G. (2003). Statistics of Earth Science Data. Springer.
-#' @import stats
 #' @examples
 #' dir = c(12,18,22,15,10,20)
 #' dip = c(42,40,48,30,42,30)
@@ -53,7 +52,7 @@ dir_stats_3D = function(dir, dip, conf.level = 0.95) {
   cono_sup = ifelse(cono_sup > 360, cono_sup - 360, cono_sup)
   cono_inf = ifelse(cono_inf < 0, 360 + cono_inf, cono_inf)
 
-  dir.stats = data.frame(Mean.Dir = round(meandirtrue, 1), MeanDip = round(meandip, 1), R = signif(Rbar, 3), Sph.Var = signif(ss, 3),
-                         Conc.Param = signif(k, 3), Cone.lower = round(cono_inf, 1), Cone.upper = round(cono_sup, 1), Cone = round(cono, 2))
+  dir.stats = data.frame(Mean.Dir = round(meandirtrue, 1), MeanDip = round(meandip, 1), R = signif(Rbar, 4), Sph.Var = signif(ss, 4),
+                         Conc.Param = signif(k, 4), Cone.lower = round(cono_inf, 1), Cone.upper = round(cono_sup, 1), Cone = round(cono, 2))
   return(dir.stats)
 }

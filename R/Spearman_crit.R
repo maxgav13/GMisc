@@ -5,7 +5,6 @@
 #' @export
 #' @return Spearman's critical value for a given sample size
 #' @references Swan, A. R. H. & Sandilands, M. (1995). Introduction to Geological Data Analysis. Blackwell Science.
-#' @import stats
 #' @details The result of this function can be used to estimate the statistical signficance of Spearman's correlation coeficient. The options for confidence level are 0.99, 0.95, or 0.90
 #' @examples
 #' Spearman_crit(10)

@@ -4,7 +4,9 @@
 \name{Klimmeridge}
 \alias{Klimmeridge}
 \title{Klimmeridge shale organic matter content}
-\format{A data frame with organic matter content in sucesive intervals}
+\format{
+A data frame with organic matter content in sucesive intervals
+}
 \description{
 Dataset of measurements of the organic matter content (%) in succesive intervals from the Klimmeridge shale.
 }

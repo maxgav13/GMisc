@@ -7,13 +7,8 @@
 #' @param footing Type of footing for which to calculate the stresses (Default is "strip")
 #' @export
 #' @return A stress distribution plot for the desired footing
-#' @import stats
 #' @import geotech
-#' @import dplyr
-#' @import tidyr
 #' @import ggplot2
-#' @import plotly
-#' @import pracma
 #' @references Holtz, R. D., Kovacs, W. D. & Sheahan, T. C. (2011). An Introduction to Geotechnical Engineering. Prentice Hall.
 #' @details The stresses are calculated using the solutions from Boussinesq. The parameter \code{L} only applies for rectangular footings, otherwise is not considered, thus the default value of \code{NULL}. For rectangular footings the length (\code{L}) can be varied, while for the other footing shapes the width \code{B} can be varied. For circular footings the width is equal to the radius (\code{B=R})
 #' @examples
@@ -85,10 +80,11 @@ induced_stress = function(qs, B, L = NULL, z.end, footing = c("strip", "square",
     if (length(L) == 1) {
       sz = data.frame(sig.z = sig.z, d = z, L = L)
     } else {
-      sz = bind_rows(sig.z)
+      sz = dplyr::bind_rows(sig.z)
       sz = data.frame(sz, d = z)
       names(sz)[1:length(L)] = paste("L=",L*2, sep = "")
-      sz = sz %>% gather(L,sig.z,-d)
+      sz = tidyr::pivot_longer(sz,cols = -d,
+                               names_to = 'L', values_to = 'sig.z')
     }
 
     if (length(L) > 1) {
@@ -126,18 +122,18 @@ induced_stress = function(qs, B, L = NULL, z.end, footing = c("strip", "square",
     I.z = list()
     if (length(B) == 1) {
       if (any(footing == "strip")) {
-        I.z = interp1(b.z, I.bz, M, method = method)
+        I.z = pracma::interp1(b.z, I.bz, M, method = method)
       } else if (footing == "square") {
-        I.z = interp1(a.z, I.az, M, method = method)
+        I.z = pracma::interp1(a.z, I.az, M, method = method)
       } else if (footing == "circular") {
         I.z = 1 - (1 / (1 + (M)^2))^(3/2)
       }
     } else {
       for (i in 1:length(B)) {
         if (any(footing == "strip")) {
-          I.z[[i]] = interp1(b.z, I.bz, M[[i]], method = method)
+          I.z[[i]] = pracma::interp1(b.z, I.bz, M[[i]], method = method)
         } else if (footing == "square") {
-          I.z[[i]] = interp1(a.z, I.az, M[[i]], method = method)
+          I.z[[i]] = pracma::interp1(a.z, I.az, M[[i]], method = method)
         } else if (footing == "circular") {
           I.z[[i]] = 1 - (1 / (1 + (M[[i]])^2))^(3/2)
         }
@@ -159,10 +155,11 @@ induced_stress = function(qs, B, L = NULL, z.end, footing = c("strip", "square",
     if (length(B) == 1) {
       sz = data.frame(sig.z = sig.z, d = z, B = B)
     } else {
-      sz = bind_rows(sig.z)
+      sz = dplyr::bind_rows(sig.z)
       sz = data.frame(sz, d = z)
       names(sz)[1:length(B)] = paste("B=",B, sep = "")
-      sz = sz %>% gather(B,sig.z,-d)
+      sz = tidyr::pivot_longer(sz, cols = -d,
+                               names_to = "B", values_to = 'sig.z')
     }
 
     if (any(footing == "strip")) {
@@ -196,5 +193,5 @@ induced_stress = function(qs, B, L = NULL, z.end, footing = c("strip", "square",
               legend.title = element_text(size = 12))
     }
   }
-  return(list(Plot = q, Plotly = ggplotly(q, dynamicTicks = T)))
+  return(list(Plot = q, Plotly = plotly::ggplotly(q, dynamicTicks = T)))
 }

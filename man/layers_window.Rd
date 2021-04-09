@@ -9,7 +9,7 @@ layers_window(x, breaks)
 \arguments{
 \item{x}{A data frame containing the location variable (depth or distance) in the first column, and the value(s) of interest in the rest of the columns}
 
-\item{breaks}{A vector containg the breakpoints (from 'RI', 'Cohen d' or 'Mahalanobis D2')}
+\item{breaks}{A vector containing the breakpoints (from 'RI', 'Cohen d' or 'Mahalanobis D2')}
 }
 \value{
 A ggplot and plotly objects showing the layered model, another showing the confidence intervals, and a summary table

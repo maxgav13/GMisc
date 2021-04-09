@@ -18,7 +18,7 @@ Barton_Choubey(JRC, JCS, phi.r, unit.weight, depth)
 \item{depth}{The depth, in meters, to which calculate the parameters}
 }
 \value{
-A list with 3 data frames: data (normal stress and shear stress), stress level point, and parameters (c and phi). All stress values are in MPa
+A list with 3 tibbles: data (normal stress and shear stress), stress level point, and parameters (c and phi). All stress values are in MPa
 }
 \description{
 Calculates the Barton-Choubey criterion for the given data and for the given level of stress (unit weight and depth).

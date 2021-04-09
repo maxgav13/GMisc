@@ -7,7 +7,6 @@
 #' @param side To either get a two-tail or one-tail p-value (Default is "two")
 #' @export
 #' @return P-value
-#' @import stats
 #' @examples
 #' x <- 2.6
 #' sig <- 0.3
@@ -17,7 +16,7 @@
 #'
 pval_z = function(x, sig, n, mu = 0, side = c("two", "one")) {
   z = (x - mu) / (sig/sqrt(n))
-  pval = pnorm(abs(z), lower.tail = F) * 2
+  pval = stats::pnorm(abs(z), lower.tail = F) * 2
   if (any(side == "two")) {
     pval = (signif(pval, 3))
   } else {

@@ -80,7 +80,7 @@
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
+    <span class="fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -111,8 +111,8 @@
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li>
-  <a href="http://github.com/maxgav13/GMisc/">
-    <span class="fab fa fab fa-github fa-lg"></span>
+  <a href="https://github.com/maxgav13/GMisc/">
+    <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -130,7 +130,7 @@
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Draws the Mohr circles for a direct shear set of results</h1>
-    <small class="dont-index">Source: <a href='http://github.com/maxgav13/GMisc/blob/master/R/DS_Mohr_plot.R'><code>R/DS_Mohr_plot.R</code></a></small>
+    <small class="dont-index">Source: <a href='https://github.com/maxgav13/GMisc/blob/master/R/DS_Mohr_plot.R'><code>R/DS_Mohr_plot.R</code></a></small>
     <div class="hidden name"><code>DS_Mohr_plot.Rd</code></div>
     </div>
 
@@ -138,13 +138,13 @@
     <p>Draws the Mohr circles along with the Mohr-Coulomb failure envelope for a set of direct shear lab test results, and annotates the graph with the values of cohesion and friction angle.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>DS_Mohr_plot</span>(<span class='no'>sign</span>, <span class='no'>tau</span>, <span class='kw'>units</span> <span class='kw'>=</span> <span class='st'>"kPa"</span>)</pre>
+    <pre class="usage"><span class='fu'>DS_Mohr_plot</span><span class='op'>(</span><span class='va'>sig.n</span>, <span class='va'>tau</span>, units <span class='op'>=</span> <span class='st'>"kPa"</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>sign</th>
+      <th>sig.n</th>
       <td><p>A numeric vector of the normal stress values</p></td>
     </tr>
     <tr>
@@ -167,9 +167,10 @@
 <p>Gonzalez de Vallejo, L. I. (2004). Ingenieria Geologica. Prentice Hall.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='no'>sign</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>80</span>,<span class='fl'>237</span>,<span class='fl'>395</span>)
-<span class='no'>tau</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>127</span>,<span class='fl'>345</span>,<span class='fl'>475</span>)
-<span class='fu'>DS_Mohr_plot</span>(<span class='no'>sign</span>, <span class='no'>tau</span>)</div><div class='img'><img src='DS_Mohr_plot-1.png' alt='' width='700' height='433' /></div><div class='input'>
+    <pre class="examples"><div class='input'><span class='va'>sig.n</span> <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>80</span>,<span class='fl'>237</span>,<span class='fl'>395</span><span class='op'>)</span>
+<span class='va'>tau</span> <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>127</span>,<span class='fl'>345</span>,<span class='fl'>475</span><span class='op'>)</span>
+<span class='fu'>DS_Mohr_plot</span><span class='op'>(</span><span class='va'>sig.n</span>, <span class='va'>tau</span><span class='op'>)</span>
+</div><div class='img'><img src='DS_Mohr_plot-1.png' alt='' width='700' height='433' /></div><div class='input'>
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
@@ -186,7 +187,7 @@
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

@@ -5,7 +5,6 @@
 #' @export
 #' @return ggplot and plotly objects showing the Mahalanobis D2 statistic and lines marking the critical values at 0.95, 0.99, and 0.999, and suggested boundaries
 #' @references Davis, J. C. (2002). Statistical and Data Analysis in Geology. 3rd ed. John Wiley & Sons.
-#' @import stats
 #' @import ggplot2
 #' @details The example data given is intended to show the structure needed for input data. The user should follow this structure, which in general corresponds with a data frame with a sequence in the first column and the observed/measured values in the second, third, and fourth columns
 #' @examples
@@ -30,8 +29,8 @@ T2_stat = function(x, k = 50) {
   for (i in floor(n+n.2/2):(nrow(wadj)-floor(n+n.2/2))) {
     s1 = wadj[(i-(n-1)):(i),]
     s2 = wadj[(i+1):(i+n),]
-    S1 = cov(s1, use = "na.or.complete")
-    S2 = cov(s2, use = "na.or.complete")
+    S1 = stats::cov(s1, use = "na.or.complete")
+    S2 = stats::cov(s2, use = "na.or.complete")
     Sp = ((n - 1) * S1 + (n - 1) * S2) / (n + n - 2)
     D = colMeans(s1, na.rm = T) - colMeans(s2, na.rm = T)
     D2[i] = round(as.numeric(D %*% solve(Sp) %*% D),3)
@@ -39,7 +38,7 @@ T2_stat = function(x, k = 50) {
     f[i] = (n + n - m - 1) / ((n + n - 2) * m) * T2stat[i]
   }
 
-  DF1 = na.omit(data.frame(k, T2stat, D2, f))
+  DF1 = stats::na.omit(data.frame(k, T2stat, D2, f))
   if (n.2 %% 2 == 0) {
     NADF2.a = data.frame(rep(NA,floor(n-n.2/2-1)),rep(NA,floor(n-n.2/2-1)),rep(NA,floor(n-n.2/2-1)),rep(NA,floor(n-n.2/2-1)))
   } else {
@@ -55,12 +54,26 @@ T2_stat = function(x, k = 50) {
 
   df1 = m
   df2 = n + n - m - 1
-  chi = qchisq(c(0.95, 0.99, 0.999), df1)
+  chi = stats::qchisq(c(0.95, 0.99, 0.999), df1)
   Stats = data.frame(k = k, df1 = df1, df2 = df2)
 
-  bounds.95 = Data[c(0,diff(sign(diff(Data$D2))))<0 & Data$D2>=chi[1],nombres[1]] %>% as.data.frame() %>% tidyr::drop_na() %>% unlist() %>% as.vector()
-  bounds.99 = Data[c(0,diff(sign(diff(Data$D2))))<0 & Data$D2>=chi[2],nombres[1]] %>% as.data.frame() %>% tidyr::drop_na() %>% unlist() %>% as.vector()
-  bounds.999 = Data[c(0,diff(sign(diff(Data$D2))))<0 & Data$D2>=chi[3],nombres[1]] %>% as.data.frame() %>% tidyr::drop_na() %>% unlist() %>% as.vector()
+  bounds.95 = Data[c(0,diff(sign(diff(Data$D2))))<0 & Data$D2>=chi[1],nombres[1]] %>%
+    as.data.frame() %>%
+    tidyr::drop_na() %>%
+    unlist() %>%
+    as.vector()
+
+  bounds.99 = Data[c(0,diff(sign(diff(Data$D2))))<0 & Data$D2>=chi[2],nombres[1]] %>%
+    as.data.frame() %>%
+    tidyr::drop_na() %>%
+    unlist() %>%
+    as.vector()
+
+  bounds.999 = Data[c(0,diff(sign(diff(Data$D2))))<0 & Data$D2>=chi[3],nombres[1]] %>%
+    as.data.frame() %>%
+    tidyr::drop_na() %>%
+    unlist() %>%
+    as.vector()
 
   q = ggplot(Data, aes_string("D2", nombres[1])) +
     geom_path(na.rm = T) +

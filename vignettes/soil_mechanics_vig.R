@@ -1,6 +1,5 @@
 ## ----setup, include=FALSE-----------------------------------------------------
 library(GMisc)
-library(tidyverse)
 
 knitr::opts_chunk$set(
   echo = TRUE,
@@ -53,10 +52,10 @@ z.end = 8
 induced_stress(qs, B, L, z.end, footing = "rectangular")$Plotly
 
 ## ----warning=FALSE------------------------------------------------------------
-DS_plot(sign = c(80,237,395), tau = c(127,345,475))
+DS_plot(sig.n = c(80,237,395), tau = c(127,345,475))
 
 ## ----warning=FALSE, message=FALSE---------------------------------------------
-DS_Mohr_plot(sign = c(80,237,395), tau = c(127,345,475))
+DS_Mohr_plot(sig.n = c(80,237,395), tau = c(127,345,475))
 
 ## -----------------------------------------------------------------------------
 sigx = 143.6

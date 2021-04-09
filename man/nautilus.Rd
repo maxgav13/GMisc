@@ -4,7 +4,9 @@
 \name{nautilus}
 \alias{nautilus}
 \title{Data for moving average filter}
-\format{A data frame with growth line spacing data from a Silurian nautiloid}
+\format{
+A data frame with growth line spacing data from a Silurian nautiloid
+}
 \description{
 Example data to be used with the \code{moving_avg_filter()} function.
 }

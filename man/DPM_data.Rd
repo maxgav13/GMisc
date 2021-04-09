@@ -4,7 +4,9 @@
 \name{DPM_data}
 \alias{DPM_data}
 \title{Example data for calculation of RI coefficient or T-statistic}
-\format{A data frame with results from a DPM survey log. Depth in meters in the first column, and SPT value in the second column}
+\format{
+A data frame with results from a DPM survey log. Depth in meters in the first column, and SPT value in the second column
+}
 \description{
 Example data from a DPM survey log.
 }

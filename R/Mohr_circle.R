@@ -11,8 +11,7 @@
 #' @references Coduto, D. P. (1999). Geotechnical Engineering - Principles and Practices. Prentice Hall.
 #' @references Holtz, R. D., Kovacs, W. D. & Sheahan, T. C. (2011). An Introduction to Geotechnical Engineering. Prentice Hall.
 #' @references Gonzalez de Vallejo, L. I. (2004). Ingenieria Geologica. Prentice Hall.
-#' @import stats
-#' @import tidyverse
+#' @import ggplot2
 #' @examples
 #' sigx = 143.6
 #' sigy = 100.5

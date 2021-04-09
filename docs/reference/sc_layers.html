@@ -80,7 +80,7 @@
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
+    <span class="fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -111,8 +111,8 @@
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li>
-  <a href="http://github.com/maxgav13/GMisc/">
-    <span class="fab fa fab fa-github fa-lg"></span>
+  <a href="https://github.com/maxgav13/GMisc/">
+    <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -130,7 +130,7 @@
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Plots a layered model and summarizes the statistics for each layer from a Strucchange result</h1>
-    <small class="dont-index">Source: <a href='http://github.com/maxgav13/GMisc/blob/master/R/sc_layers.R'><code>R/sc_layers.R</code></a></small>
+    <small class="dont-index">Source: <a href='https://github.com/maxgav13/GMisc/blob/master/R/sc_layers.R'><code>R/sc_layers.R</code></a></small>
     <div class="hidden name"><code>sc_layers.Rd</code></div>
     </div>
 
@@ -138,7 +138,7 @@
     <p>Given a number of breakpoints, plots a layered model of one variable against distance, plots the confidence intervals for each layer, and gives a summary table.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>sc_layers</span>(<span class='no'>x</span>, <span class='kw'>h</span> <span class='kw'>=</span> <span class='fl'>0.1</span>, <span class='no'>breaks</span>)</pre>
+    <pre class="usage"><span class='fu'>sc_layers</span><span class='op'>(</span><span class='va'>x</span>, h <span class='op'>=</span> <span class='fl'>0.1</span>, <span class='va'>breaks</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -162,7 +162,8 @@
     <p>A ggplot and plotly objects showing the layered model, another showing the confidence intervals, and a summary table</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'>sc_layers</span>(<span class='no'>DPM_data</span>, <span class='kw'>h</span> <span class='kw'>=</span> <span class='fl'>0.1</span>, <span class='kw'>breaks</span> <span class='kw'>=</span> <span class='fl'>2</span>)</div><div class='output co'>#&gt; $LayersGG</div><div class='img'><img src='sc_layers-1.png' alt='' width='700' height='433' /></div><div class='output co'>#&gt; 
+    <pre class="examples"><div class='input'><span class='fu'>sc_layers</span><span class='op'>(</span><span class='va'>DPM_data</span>, h <span class='op'>=</span> <span class='fl'>0.1</span>, breaks <span class='op'>=</span> <span class='fl'>2</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; $LayersGG</div><div class='img'><img src='sc_layers-1.png' alt='' width='700' height='433' /></div><div class='output co'>#&gt; 
 #&gt; $LayersLY
 #&gt; 
 #&gt; $StatsGG</div><div class='img'><img src='sc_layers-2.png' alt='' width='700' height='433' /></div><div class='output co'>#&gt; 
@@ -193,7 +194,7 @@
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

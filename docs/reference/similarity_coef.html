@@ -80,7 +80,7 @@
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
+    <span class="fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -111,8 +111,8 @@
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li>
-  <a href="http://github.com/maxgav13/GMisc/">
-    <span class="fab fa fab fa-github fa-lg"></span>
+  <a href="https://github.com/maxgav13/GMisc/">
+    <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -130,7 +130,7 @@
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Similarity Coefficient</h1>
-    <small class="dont-index">Source: <a href='http://github.com/maxgav13/GMisc/blob/master/R/similarity_coef.R'><code>R/similarity_coef.R</code></a></small>
+    <small class="dont-index">Source: <a href='https://github.com/maxgav13/GMisc/blob/master/R/similarity_coef.R'><code>R/similarity_coef.R</code></a></small>
     <div class="hidden name"><code>similarity_coef.Rd</code></div>
     </div>
 
@@ -138,6 +138,7 @@
     <p>Calculates the similarity coeficient between observations based on their features (columns). Coefficient ranges between 0 and 1, with values close to 1 indicating more similarity.</p>
     </div>
 
+    <pre class="usage"><span class='fu'>similarity_coef</span><span class='op'>(</span><span class='va'>x</span>, samp.names <span class='op'>=</span> <span class='cn'>NULL</span>, digits <span class='op'>=</span> <span class='fl'>3</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -164,8 +165,9 @@
     <p>Borchardt, G.A. (1974). The SIMAN Coefficient for Similarity Analysis. Classification Society Bulletin, 3(2), 2–8.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='no'>dat</span> <span class='kw'>=</span> <span class='no'>iris</span>[<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>1</span>,<span class='fl'>2</span>,<span class='fl'>51</span>,<span class='fl'>52</span>,<span class='fl'>101</span>,<span class='fl'>102</span>),]
-<span class='fu'>similarity_coef</span>(<span class='no'>dat</span>)</div><div class='output co'>#&gt;         1     2    51    52   101   102
+    <pre class="examples"><div class='input'><span class='va'>dat</span> <span class='op'>=</span> <span class='va'>iris</span><span class='op'>[</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>1</span>,<span class='fl'>2</span>,<span class='fl'>51</span>,<span class='fl'>52</span>,<span class='fl'>101</span>,<span class='fl'>102</span><span class='op'>)</span>,<span class='op'>]</span>
+<span class='fu'>similarity_coef</span><span class='op'>(</span><span class='va'>dat</span><span class='op'>)</span>
+</div><div class='output co'>#&gt;         1     2    51    52   101   102
 #&gt; 1   1.000 0.954 0.521 0.539 0.516 0.508
 #&gt; 2   0.954 1.000 0.520 0.537 0.500 0.531
 #&gt; 51  0.521 0.520 1.000 0.951 0.803 0.833
@@ -188,7 +190,7 @@
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

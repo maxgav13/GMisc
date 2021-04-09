@@ -3,7 +3,6 @@
 #' @param x A numeric vector
 #' @export
 #' @return The coefficient of variation for the given vector
-#' @import stats
 #' @examples
 #' x = rnorm(50, 150, 30)
 #' coef_var(x)
@@ -11,6 +10,6 @@
 #' apply(z, 2, coef_var)
 #'
 coef_var = function(x) {
-  cv = round(sd(x, na.rm = T) / mean(x, na.rm = T), 3)
+  cv = round(stats::sd(x, na.rm = T) / mean(x, na.rm = T), 3)
   cv
 }

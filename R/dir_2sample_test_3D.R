@@ -6,8 +6,7 @@
 #' @param i2 A vector of dip measurements in degrees for sample 2
 #' @param conf.level Confidence level for the F-statistic calculation and p-value interpretation (Default is 0.95)
 #' @export
-#' @return A list with the F-statistic, the critical value of F, the p-value, and the interpretation of these values
-#' @import stats
+#' @return A list with the F-statistic, the critical value of F, the degrees of freedom, the p-value, and the interpretation of these values
 #' @references Borradaile, G. (2003). Statistics of Earth Science Data. Springer.
 #' @examples
 #' d1 = c(12,18,22,15,10,20)
@@ -29,14 +28,16 @@ dir_2sample_test_3D = function(d1, i1, d2, i2, conf.level = 0.95) {
   R2 = r2$R * length(d2)
   Rt = r3$R * length(dc)
 
+  df2 = 2 * (length(dc) - 2)
   f = ((length(dc) - 2) * (R1 + R2 - Rt)) / (length(dc) - R1 - R2)
-  fcrit = qf(conf.level, 2, 2 * (length(dc) - 2))
-  p = pf(f, 2, 2 * (length(dc) - 2), lower.tail = F)
+  fcrit = stats::qf(conf.level, 2, df2)
+  p = stats::pf(f, 2, df2, lower.tail = F)
 
   interpretation = ifelse(f > fcrit,
                           paste("Reject H0 and conclude that the two samples could not come from the same population with the same mean direction and mean dip angle"),
-                          paste("Do not reject H0 and conclude that there is not enough evidence that the two samples could not come from the same population with the same mean direction and mean dip angle"))
+                          paste("Do not reject H0 and conclude that there is not enough evidence that the two samples could come from the same population with the same mean direction and mean dip angle"))
 
   return(list(f = round(f, 2), fcrit = round(fcrit, 2),
+              df1 = 2, df2 = df2,
               p_value = signif(p, 3), interpretation = interpretation))
 }

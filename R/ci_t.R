@@ -6,9 +6,8 @@
 #' @param conf.level Confidence level to use for the confidence interval (Default is 0.95)
 #' @param digits Number of digits to round to (Default is 2)
 #' @export
-#' @return A data frame with the mean, degrees of freedom, and lower and upper ends of the confidence interval
+#' @return A tibble with the mean, degrees of freedom, and lower and upper ends of the confidence interval
 #' @details It can work for dependent (paired) samples using the mean and standard deviation of differences
-#' @import stats
 #' @examples
 #' x <- 80
 #' s <- 15
@@ -18,11 +17,11 @@
 ci_t <- function (x, s, n, conf.level = .95, digits = 2){
   alpha <- 1 - conf.level
   stderr <- s/sqrt(n)
-  upper <- x + qt(1-alpha/2, df = n-1) * stderr
-  lower <- x + qt(alpha/2, df = n-1) * stderr
-  DF <- data.frame(mean = x,
-                   df = n-1,
-                   lower = round(lower, digits),
-                   upper = round(upper, digits))
+  upper <- x + stats::qt(1-alpha/2, df = n-1) * stderr
+  lower <- x + stats::qt(alpha/2, df = n-1) * stderr
+  DF <- tibble::tibble(mean = x,
+                       df = n-1,
+                       lower = round(lower, digits),
+                       upper = round(upper, digits))
   DF
 }

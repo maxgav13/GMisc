@@ -6,9 +6,6 @@
 #' @return A tibble with the statistic (Q), degrees of freedom (nu), p-value, and null hypothesis (H0)
 #' @references Pawlowsky-Hlahn, V., Egozcue, J.J & Tolosna-Delgado, R. (2015). Modeling and analysis of compositional data. John Wiley & Sons.
 #' @references Aitchison, J. (1986). The statistical analysis of compositional data. Chapman and Hall.
-#' @import stats
-#' @import compositions
-#' @import tidyverse
 #' @name CoDA_2Group_All
 #' @examples
 #' data("Hongite", package = 'compositions')
@@ -16,9 +13,9 @@
 #' CoDA_2Group_All(Hongite,Kongite)
 #'
 CoDA_2Group_All = function(comp1, comp2) {
-  res = bind_rows(CoDA_2Group_H1(comp1,comp2),
-                  CoDA_2Group_H2(comp1,comp2),
-                  CoDA_2Group_H3(comp1,comp2))
+  res = dplyr::bind_rows(CoDA_2Group_H1(comp1,comp2),
+                         CoDA_2Group_H2(comp1,comp2),
+                         CoDA_2Group_H3(comp1,comp2))
 
   return(res)
 }

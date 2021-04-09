@@ -4,13 +4,17 @@
 #' @param group Grouping variable in the data frame, name in quotes. If not provided the samples will be numbered sequentially
 #' @export
 #' @return ggplot object
-#' @import stats
 #' @import ggplot2
-#' @import dplyr
-#' @import forcats
-#' @import compositions
 #' @examples
-#' data = data.frame(Group = 'Test',Ca = c(120,150,110,52.6), Mg = c(78,160,110,28), Na = c(210,590,340,51.6), K = c(4.2,2,3.6,2.3), HCO3 = c(181,181,189,151), CO3 = 0, Cl = c(220,744,476,72.2), SO4 = c(560,1020,584,126))
+#' data = data.frame(Group = 'Test',
+#'                   Ca = c(120,150,110,52.6),
+#'                   Mg = c(78,160,110,28),
+#'                   Na = c(210,590,340,51.6),
+#'                   K = c(4.2,2,3.6,2.3),
+#'                   HCO3 = c(181,181,189,151),
+#'                   CO3 = 0,
+#'                   Cl = c(220,744,476,72.2),
+#'                   SO4 = c(560,1020,584,126))
 #' piper_diagram(data, 'Group')
 #' piper_diagram(data)
 #'
@@ -114,13 +118,17 @@ piper_diagram = function(data, group = NULL) {
 
   dat = data
 
-  cations = dat %>% select(Ca,Mg,Na,K) %>% mutate(Ca=Ca/20,Mg=Mg/12,
-                                                  Na=Na/23,K=K/39)
-  cations = clo(cations,total = 100) %>% as.data.frame()
+  cations = dat %>%
+    dplyr::select(Ca,Mg,Na,K) %>%
+    dplyr::mutate(Ca=Ca/20,Mg=Mg/12,Na=Na/23,K=K/39)
 
-  anions = dat %>% select(SO4,Cl,HCO3,CO3) %>% mutate(SO4=SO4/48,Cl=Cl/35,
-                                                      HCO3=HCO3/61,CO3=CO3/30)
-  anions = clo(anions,total = 100) %>% as.data.frame()
+  cations = compositions::clo(cations,total = 100) %>% as.data.frame()
+
+  anions = dat %>%
+    dplyr::select(SO4,Cl,HCO3,CO3) %>%
+    dplyr::mutate(SO4=SO4/48,Cl=Cl/35,HCO3=HCO3/61,CO3=CO3/30)
+
+  anions = compositions::clo(anions,total = 100) %>% as.data.frame()
 
   if(is.null(group)){
     dat2 = cbind(cations,anions)
@@ -130,7 +138,7 @@ piper_diagram = function(data, group = NULL) {
                                                  SO4 = SO4))
   } else {
     grp = group
-    dat[grp] = as_factor(dat[[grp]])
+    dat[grp] = forcats::as_factor(dat[[grp]])
     dat2 = cbind(Group=dat[grp],cations,anions)
     piper_data <- with(dat2,transform_piper_data(Ca = Ca,
                                                  Mg = Mg,

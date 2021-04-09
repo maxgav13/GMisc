@@ -8,13 +8,7 @@
 #' @export
 #' @return ggplot and plotly objects showing the layer distinction, statistical summary of the layers, and a summary table
 #' @references Nicholas A. James, David S. Matteson (2014). ecp: An R Package for Nonparametric Multiple Change Point Analysis of Multivariate Data, Journal of Statistical Software, 62(7), 1-25.
-#' @import stats
 #' @import ggplot2
-#' @import dplyr
-#' @import tidyr
-#' @import forcats
-#' @import ecp
-#' @import heplots
 #' @details The example data given is intended to show the structure needed for input data. The user should follow this structure, which in general corresponds with a data frame with a sequence in the first column and the observed/measured values in the rest of the columns
 #' @examples
 #' mcp(CPTu_data, R = 199, alpha = 2, sig.level = .01, min.perc = 15) # multivariate example
@@ -28,7 +22,7 @@ mcp = function(data, R = 199, alpha = 2, sig.level = .01, min.perc = 15) {
 
   min.size = round(min.perc/100 * nrow(dat_ecp0))
 
-  DivOutput <- e.divisive(dat_ecp, R = R, alpha = alpha, sig.lvl = sig.level, min.size = min.size)
+  DivOutput <- ecp::e.divisive(dat_ecp, R = R, alpha = alpha, sig.lvl = sig.level, min.size = min.size)
   ks = length(DivOutput$estimates)
   brks = dat_ecp0[DivOutput$estimates[c(-1,-ks)],1]
   bounds = cut(dat_ecp0[[1]],
@@ -38,14 +32,15 @@ mcp = function(data, R = 199, alpha = 2, sig.level = .01, min.perc = 15) {
 
   dat_ecp0$Layer = factor(grps)
   dat_ecp0$Bounds = bounds
-  data_ecp0_tidy = gather(dat_ecp0, Property, Value, -c(noms.ecp[1],'Layer','Bounds')) %>%
-    mutate(Property = as_factor(Property))
+  data_ecp0_tidy = tidyr::pivot_longer(dat_ecp0, cols = -c(noms.ecp[1],'Layer','Bounds'),
+                                       names_to = 'Property', values_to = 'Value') %>%
+    dplyr::mutate(Property = forcats::as_factor(Property))
 
-  ydata = dat_ecp0 %>% select(-1,-Layer,-Bounds) %>% as.matrix()
-  xdata = dat_ecp0 %>% select(Layer) %>% as.matrix()
-  mod = lm(ydata ~ xdata)
+  ydata = dat_ecp0 %>% dplyr::select(-1,-Layer,-Bounds) %>% as.matrix()
+  xdata = dat_ecp0 %>% dplyr::select(Layer) %>% as.matrix()
+  mod = stats::lm(ydata ~ xdata)
 
-  ES = round(etasq(mod)[[1]][1],3)
+  ES = round(heplots::etasq(mod)[[1]][1],3)
 
   q = ggplot(data = data_ecp0_tidy, aes_string(x = 'Value', y = noms.ecp[1])) +
     geom_path(aes(group=1,col=Layer),size=.75) +
@@ -68,19 +63,20 @@ mcp = function(data, R = 199, alpha = 2, sig.level = .01, min.perc = 15) {
   p2 = plotly::ggplotly(q2)
 
   Summary = data_ecp0_tidy %>%
-    group_by(Layer,Property) %>%
-    summarise_at(vars(Value),
-                 funs(Obs = n(),
-                      Mean = mean(.),
-                      SD = sd(.),
-                      Min = min(.),
-                      Max = max(.),
-                      CI.lwr = MeanCI(.)[[2]],
-                      CI.upr = MeanCI(.)[[3]]
-                 )
+    dplyr::group_by(Layer,Property) %>%
+    dplyr::summarise_at(dplyr::vars(Value),
+                        .funs = list(
+                          Obs = ~ dplyr::n(),
+                          Mean = ~ signif(mean(.),3),
+                          SD = ~ signif(stats::sd(.),3),
+                          Min = ~ signif(min(.),3),
+                          Max = ~ signif(max(.),3),
+                          CI.lwr = ~ signif(DescTools::MeanCI(.)[[2]],3),
+                          CI.upr = ~ signif(DescTools::MeanCI(.)[[3]],3)
+                        )
     ) %>%
-    mutate(MoE = qt(.975,Obs-1)*SD/sqrt(Obs),
-           Interval = levels(data_ecp0_tidy$Bounds)[levels(data_ecp0_tidy$Layer) == Layer]) %>%
+    dplyr::mutate(MoE = stats::qt(.975,Obs-1)*SD/sqrt(Obs),
+                  Interval = levels(data_ecp0_tidy$Bounds)[levels(data_ecp0_tidy$Layer) == Layer]) %>%
     as.data.frame()
 
   return(list(LayersGG=q, LayersLY=p, StatsGG=q2, StatsLY=p2, Summary=Summary, ES=ES))

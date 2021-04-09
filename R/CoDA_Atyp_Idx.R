@@ -5,9 +5,6 @@
 #' @export
 #' @return A matrix with the atypicality index or indices.
 #' @references Aitchison, J. (1986). The statistical analysis of compositional data. Chapman and Hall.
-#' @import stats
-#' @import compositions
-#' @import tidyverse
 #' @name CoDA_Atyp_Idx
 #' @examples
 #' data("Hongite", package = 'compositions')
@@ -18,9 +15,9 @@
 CoDA_Atyp_Idx = function(comp, sample = NULL) {
 
   n1 = nrow(comp)
-  A = alr(acomp(comp)) %>% unclass()
+  A = compositions::alr(compositions::acomp(comp)) %>% unclass()
   Amu = colMeans(A)
-  Acov = var(A)*((n1-1)/n1)
+  Acov = stats::var(A)*((n1-1)/n1)
   N = nrow(comp)
   D = ncol(A)
   k = (N*(N-D))/((N^2-1)*D)
@@ -28,18 +25,18 @@ CoDA_Atyp_Idx = function(comp, sample = NULL) {
   if (is.null(sample)) {
     ai = matrix(0,nrow = N,ncol = 1)
     for (i in seq_len(N)) {
-      xalr = alr(acomp(comp[i,])) %>% unclass()
-      Amu = colMeans(alr(acomp(comp[-i,])))
-      Acov = var(alr(acomp(comp[-i,])))
+      xalr = compositions::alr(compositions::acomp(comp[i,])) %>% unclass()
+      Amu = colMeans(compositions::alr(compositions::acomp(comp[-i,])))
+      Acov = stats::var(compositions::alr(compositions::acomp(comp[-i,])))
       k = ((N-1)*(N-1-D))/(((N-1)^2-1)*D)
       ai0 = (t(xalr-Amu) %*% solve(Acov) %*% (xalr-Amu)) * k
-      ai[i,] = pf(ai0,D,N-D-1) %>% round(4)
+      ai[i,] = stats::pf(ai0,D,N-D-1) %>% round(4)
     }
   } else {
     x = sample
-    xalr = alr(acomp(x)) %>% unclass()
+    xalr = compositions::alr(compositions::acomp(x)) %>% unclass()
     ai0 = (t(xalr-Amu) %*% solve(Acov) %*% (xalr-Amu)) * k
-    ai = pf(ai0,D,N-D) %>% round(4)
+    ai = stats::pf(ai0,D,N-D) %>% round(4)
   }
   return(ai)
 }

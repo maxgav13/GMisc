@@ -6,9 +6,6 @@
 #' @export
 #' @return A ggplot object
 #' @references Grimstad, E. & Barton, N. (1993). Updating the Q-System for NMT. Proc. int. symp. on sprayed concrete - modern use of wet mixed sprayed concrete for underground supports, 46-66. Oslo, Norway.
-#' @import stats
-#' @import png
-#' @import grid
 #' @import ggplot2
 #' @examples
 #' De = 9
@@ -16,8 +13,8 @@
 #' Q_93(Q, De)
 Q_93 = function(Q, De, dot.col = 'blue') {
 
-  img = readPNG(system.file("Q_94.png", package = "GMisc"))
-  g = rasterGrob(img, width = unit(1,"npc"), height = unit(1,"npc"), interpolate = FALSE)
+  img = png::readPNG(system.file("Q_94.png", package = "GMisc"))
+  g = grid::rasterGrob(img, width = unit(1,"npc"), height = unit(1,"npc"), interpolate = FALSE)
 
   df = data.frame(x = Q, y = De)
   p = ggplot(df) +

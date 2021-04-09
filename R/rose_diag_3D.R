@@ -7,7 +7,6 @@
 #' @param conf.level Confidence level to use for the cone of confidence (Default is 0.95)
 #' @export
 #' @return A ggplot obejct
-#' @import stats
 #' @import ggplot2
 #' @details The mean direction and cone of confidence are displayed as red and cyan lines respectively. If non-directional data is provided it must follow the right-hand rule.
 #' @examples

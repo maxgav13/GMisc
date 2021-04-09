@@ -80,7 +80,7 @@
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
+    <span class="fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -111,8 +111,8 @@
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li>
-  <a href="http://github.com/maxgav13/GMisc/">
-    <span class="fab fa fab fa-github fa-lg"></span>
+  <a href="https://github.com/maxgav13/GMisc/">
+    <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -130,7 +130,7 @@
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Directional statistics two-sample test (2D)</h1>
-    <small class="dont-index">Source: <a href='http://github.com/maxgav13/GMisc/blob/master/R/dir_2sample_test_2D.R'><code>R/dir_2sample_test_2D.R</code></a></small>
+    <small class="dont-index">Source: <a href='https://github.com/maxgav13/GMisc/blob/master/R/dir_2sample_test_2D.R'><code>R/dir_2sample_test_2D.R</code></a></small>
     <div class="hidden name"><code>dir_2sample_test_2D.Rd</code></div>
     </div>
 
@@ -138,7 +138,7 @@
     <p>Performes the two-sample test, for the 2D case, for a pair of angle measurements to determine if they could belong to the same population (event).</p>
     </div>
 
-    <pre class="usage"><span class='fu'>dir_2sample_test_2D</span>(<span class='no'>x</span>, <span class='no'>y</span>, <span class='kw'>dir</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>conf.level</span> <span class='kw'>=</span> <span class='fl'>0.95</span>)</pre>
+    <pre class="usage"><span class='fu'>dir_2sample_test_2D</span><span class='op'>(</span><span class='va'>x</span>, <span class='va'>y</span>, dir <span class='op'>=</span> <span class='fl'>1</span>, conf.level <span class='op'>=</span> <span class='fl'>0.95</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -163,7 +163,7 @@
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>A list with the F-statistic, the critical value of F, the p-value, and the interpretation of these values</p>
+    <p>A list with the F-statistic, the critical value of F, the degrees of freedom, the p-value, and the interpretation of these values</p>
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
     <p>Directional data refers to dipping planes or lines, data expressed as dip direction (trend). Non-directional data refers to strike or lineations expressed as azimuths that can take two angles (i.e. 45 or 225)</p>
@@ -172,16 +172,27 @@
     <p>Swan, A. R. H. &amp; Sandilands, M. (1995). Introduction to Geological Data Analysis. Blackwell Science.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='no'>x</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>255</span>, <span class='fl'>239</span>, <span class='fl'>222</span>, <span class='fl'>231</span>, <span class='fl'>199</span>, <span class='fl'>271</span>, <span class='fl'>222</span>, <span class='fl'>274</span>, <span class='fl'>228</span>, <span class='fl'>246</span>, <span class='fl'>177</span>, <span class='fl'>199</span>, <span class='fl'>257</span>, <span class='fl'>201</span>, <span class='fl'>237</span>, <span class='fl'>209</span>, <span class='fl'>216</span>, <span class='fl'>180</span>, <span class='fl'>182</span>, <span class='fl'>250</span>, <span class='fl'>219</span>, <span class='fl'>196</span>, <span class='fl'>197</span>, <span class='fl'>246</span>, <span class='fl'>218</span>, <span class='fl'>235</span>, <span class='fl'>232</span>, <span class='fl'>243</span>, <span class='fl'>232</span>, <span class='fl'>180</span>, <span class='fl'>231</span>, <span class='fl'>254</span>, <span class='fl'>242</span>, <span class='fl'>149</span>, <span class='fl'>212</span>, <span class='fl'>210</span>, <span class='fl'>230</span>, <span class='fl'>205</span>, <span class='fl'>220</span>, <span class='fl'>268</span>)
-<span class='no'>y</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>225</span>, <span class='fl'>208</span>, <span class='fl'>172</span>, <span class='fl'>198</span>, <span class='fl'>204</span>, <span class='fl'>183</span>, <span class='fl'>190</span>, <span class='fl'>212</span>, <span class='fl'>247</span>, <span class='fl'>127</span>, <span class='fl'>167</span>, <span class='fl'>234</span>, <span class='fl'>217</span>, <span class='fl'>192</span>, <span class='fl'>212</span>, <span class='fl'>171</span>, <span class='fl'>169</span>, <span class='fl'>210</span>, <span class='fl'>245</span>, <span class='fl'>222</span>, <span class='fl'>185</span>, <span class='fl'>227</span>, <span class='fl'>193</span>, <span class='fl'>178</span>, <span class='fl'>187</span>, <span class='fl'>182</span>, <span class='fl'>194</span>, <span class='fl'>217</span>, <span class='fl'>168</span>, <span class='fl'>211</span>, <span class='fl'>234</span>, <span class='fl'>204</span>, <span class='fl'>221</span>, <span class='fl'>198</span>, <span class='fl'>261</span>, <span class='fl'>228</span>, <span class='fl'>146</span>, <span class='fl'>201</span>, <span class='fl'>146</span>, <span class='fl'>231</span>)
-<span class='fu'>dir_2sample_test_2D</span>(<span class='no'>x</span>, <span class='no'>y</span>)</div><div class='output co'>#&gt; $f
-#&gt; [1] 12.26
+    <pre class="examples"><div class='input'><span class='va'>x</span> <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>255</span>, <span class='fl'>239</span>, <span class='fl'>222</span>, <span class='fl'>231</span>, <span class='fl'>199</span>, <span class='fl'>271</span>, <span class='fl'>222</span>, <span class='fl'>274</span>, <span class='fl'>228</span>, <span class='fl'>246</span>, <span class='fl'>177</span>, <span class='fl'>199</span>,
+  <span class='fl'>257</span>, <span class='fl'>201</span>, <span class='fl'>237</span>, <span class='fl'>209</span>, <span class='fl'>216</span>, <span class='fl'>180</span>, <span class='fl'>182</span>, <span class='fl'>250</span>, <span class='fl'>219</span>, <span class='fl'>196</span>, <span class='fl'>197</span>, <span class='fl'>246</span>, <span class='fl'>218</span>, <span class='fl'>235</span>,
+  <span class='fl'>232</span>, <span class='fl'>243</span>, <span class='fl'>232</span>, <span class='fl'>180</span>, <span class='fl'>231</span>, <span class='fl'>254</span>, <span class='fl'>242</span>, <span class='fl'>149</span>, <span class='fl'>212</span>, <span class='fl'>210</span>, <span class='fl'>230</span>, <span class='fl'>205</span>, <span class='fl'>220</span>, <span class='fl'>268</span><span class='op'>)</span>
+<span class='va'>y</span> <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>225</span>, <span class='fl'>208</span>, <span class='fl'>172</span>, <span class='fl'>198</span>, <span class='fl'>204</span>, <span class='fl'>183</span>, <span class='fl'>190</span>, <span class='fl'>212</span>, <span class='fl'>247</span>, <span class='fl'>127</span>, <span class='fl'>167</span>, <span class='fl'>234</span>,
+  <span class='fl'>217</span>, <span class='fl'>192</span>, <span class='fl'>212</span>, <span class='fl'>171</span>, <span class='fl'>169</span>, <span class='fl'>210</span>, <span class='fl'>245</span>, <span class='fl'>222</span>, <span class='fl'>185</span>, <span class='fl'>227</span>, <span class='fl'>193</span>, <span class='fl'>178</span>, <span class='fl'>187</span>, <span class='fl'>182</span>,
+  <span class='fl'>194</span>, <span class='fl'>217</span>, <span class='fl'>168</span>, <span class='fl'>211</span>, <span class='fl'>234</span>, <span class='fl'>204</span>, <span class='fl'>221</span>, <span class='fl'>198</span>, <span class='fl'>261</span>, <span class='fl'>228</span>, <span class='fl'>146</span>, <span class='fl'>201</span>, <span class='fl'>146</span>, <span class='fl'>231</span><span class='op'>)</span>
+<span class='fu'>dir_2sample_test_2D</span><span class='op'>(</span><span class='va'>x</span>, <span class='va'>y</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; $f
+#&gt; [1] 12.6
 #&gt; 
 #&gt; $fcrit
 #&gt; [1] 3.96
 #&gt; 
+#&gt; $df1
+#&gt; [1] 1
+#&gt; 
+#&gt; $df2
+#&gt; [1] 78
+#&gt; 
 #&gt; $p_value
-#&gt; [1] 0.000768
+#&gt; [1] 0.000658
 #&gt; 
 #&gt; $interpretation
 #&gt; [1] "Reject H0 and conclude that the two samples could not come from the same population with the same mean direction"
@@ -202,7 +213,7 @@
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

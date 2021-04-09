@@ -3,7 +3,6 @@
 #' @param x Angle in degrees
 #' @export
 #' @return Angle in radians
-#' @import stats
 #' @examples
 #' rads(45)
 #'

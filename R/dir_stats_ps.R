@@ -5,7 +5,6 @@
 #' @details This always considers a plane expressed as dip direction and dip angle, it could be a bedding plane or a fault plane
 #' @export
 #' @return A data frame with the dip direction and dip angle for the principal stresses
-#' @import stats
 #' @examples
 #' dir = c(12,18,22,15,10,20)
 #' dip = c(42,40,48,30,42,30)

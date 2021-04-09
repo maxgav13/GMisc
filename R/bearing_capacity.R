@@ -12,10 +12,6 @@
 #' @param footing Type of footing for which to calculate the bearing capacity (Default is "strip")
 #' @export
 #' @return A data frame with the solution (Depth in rows, Width in columns) and the respective plot
-#' @import stats
-#' @import geotech
-#' @import dplyr
-#' @import tidyr
 #' @import ggplot2
 #' @references Day, R. W. (2010). Foundation Engineering Handbook. McGraw Hill.
 #' @details The \code{B} and \code{D} parameters can be vectors for multiple cases comparisons or single values for a single case estimates. If  \code{FS = 1} then \code{qa = qu}.
@@ -38,9 +34,9 @@
 #'
 bearing_capacity = function(B, D, L = NULL, gamma.h, gamma.s, tau0, phi, wl, FS, footing = c("strip", "square", "rectangular","circular")) {
 
-  Ng = Ngamma(phi)
-  Nq = Nq(phi)
-  Nc = Nc(phi)
+  Ng = geotech::Ngamma(phi)
+  Nq = geotech::Nq(phi)
+  Nc = geotech::Nc(phi)
 
   sc = ifelse(any(footing == "strip"), 1, ifelse(footing == "rectangular", 1 + 0.3 * (B / L), 1.3))
   sg = ifelse(any(footing == "strip"), 1, ifelse(footing == "cicrular", 0.6, 0.8))
@@ -61,7 +57,9 @@ bearing_capacity = function(B, D, L = NULL, gamma.h, gamma.s, tau0, phi, wl, FS,
 
   BD$qa = BD$qu / FS
 
-  BD_spread = BD %>% select(B, D, qa) %>% spread(B, qa)
+  BD_spread = BD %>%
+    dplyr::select(B, D, qa) %>%
+    tidyr::pivot_wider(names_from = B, values_from = qa)
   noms = names(BD_spread)
   names(BD_spread) = c('D/B',noms[2:length(noms)])
 

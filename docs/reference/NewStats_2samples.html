@@ -80,7 +80,7 @@
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
+    <span class="fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -111,8 +111,8 @@
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li>
-  <a href="http://github.com/maxgav13/GMisc/">
-    <span class="fab fa fab fa-github fa-lg"></span>
+  <a href="https://github.com/maxgav13/GMisc/">
+    <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -130,7 +130,7 @@
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>New Statistics two samples (idependent &amp; dependent)</h1>
-    <small class="dont-index">Source: <a href='http://github.com/maxgav13/GMisc/blob/master/R/NewStats_2samples.R'><code>R/NewStats_2samples.R</code></a></small>
+    <small class="dont-index">Source: <a href='https://github.com/maxgav13/GMisc/blob/master/R/NewStats_2samples.R'><code>R/NewStats_2samples.R</code></a></small>
     <div class="hidden name"><code>NewStats_2samples.Rd</code></div>
     </div>
 
@@ -138,16 +138,16 @@
     <p>It plots the two samples and the difference between them with their confidence intervals (CI), based on the two samples being independent or dependent.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>NewStats_2samples</span>(
-  <span class='no'>x</span>,
-  <span class='no'>y</span>,
-  <span class='kw'>dep</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-  <span class='kw'>conf.level</span> <span class='kw'>=</span> <span class='fl'>0.95</span>,
-  <span class='kw'>col.x</span> <span class='kw'>=</span> <span class='st'>"blue"</span>,
-  <span class='kw'>col.y</span> <span class='kw'>=</span> <span class='st'>"green3"</span>,
-  <span class='kw'>col.diff</span> <span class='kw'>=</span> <span class='st'>"red"</span>,
-  <span class='kw'>ylab.diff</span> <span class='kw'>=</span> <span class='st'>"Difference"</span>
-)</pre>
+    <pre class="usage"><span class='fu'>NewStats_2samples</span><span class='op'>(</span>
+  <span class='va'>x</span>,
+  <span class='va'>y</span>,
+  dep <span class='op'>=</span> <span class='cn'>FALSE</span>,
+  conf.level <span class='op'>=</span> <span class='fl'>0.95</span>,
+  col.x <span class='op'>=</span> <span class='st'>"blue"</span>,
+  col.y <span class='op'>=</span> <span class='st'>"green3"</span>,
+  col.diff <span class='op'>=</span> <span class='st'>"red"</span>,
+  ylab.diff <span class='op'>=</span> <span class='st'>"Difference"</span>
+<span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -197,11 +197,13 @@
     <p>Cumming, G. (2014). The New Statistics: Why and How - Psychological Science, 25(1): 7-29.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/Random.html'>set.seed</a></span>(<span class='fl'>101</span>)
-<span class='no'>x</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/stats/Normal.html'>rnorm</a></span>(<span class='fl'>20</span>, <span class='fl'>15</span>, <span class='fl'>7</span>)
-<span class='no'>y</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/stats/Normal.html'>rnorm</a></span>(<span class='fl'>20</span>, <span class='fl'>10</span>, <span class='fl'>5</span>)
-<span class='no'>y1</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/stats/Normal.html'>rnorm</a></span>(<span class='fl'>20</span>,<span class='no'>x</span>/<span class='fl'>1.1</span>,<span class='fl'>2</span>)
-<span class='fu'>NewStats_2samples</span>(<span class='no'>x</span>, <span class='no'>y</span>, <span class='kw'>dep</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</div><div class='img'><img src='NewStats_2samples-1.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'>NewStats_2samples</span>(<span class='no'>x</span>, <span class='no'>y1</span>, <span class='kw'>dep</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</div><div class='img'><img src='NewStats_2samples-2.png' alt='' width='700' height='433' /></div><div class='input'>
+    <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/Random.html'>set.seed</a></span><span class='op'>(</span><span class='fl'>101</span><span class='op'>)</span>
+<span class='va'>x</span> <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/stats/Normal.html'>rnorm</a></span><span class='op'>(</span><span class='fl'>20</span>, <span class='fl'>15</span>, <span class='fl'>7</span><span class='op'>)</span>
+<span class='va'>y</span> <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/stats/Normal.html'>rnorm</a></span><span class='op'>(</span><span class='fl'>20</span>, <span class='fl'>10</span>, <span class='fl'>5</span><span class='op'>)</span>
+<span class='va'>y1</span> <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/stats/Normal.html'>rnorm</a></span><span class='op'>(</span><span class='fl'>20</span>,<span class='va'>x</span><span class='op'>/</span><span class='fl'>1.1</span>,<span class='fl'>2</span><span class='op'>)</span>
+<span class='fu'>NewStats_2samples</span><span class='op'>(</span><span class='va'>x</span>, <span class='va'>y</span>, dep <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span>
+</div><div class='img'><img src='NewStats_2samples-1.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'>NewStats_2samples</span><span class='op'>(</span><span class='va'>x</span>, <span class='va'>y1</span>, dep <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span>
+</div><div class='img'><img src='NewStats_2samples-2.png' alt='' width='700' height='433' /></div><div class='input'>
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
@@ -218,7 +220,7 @@
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

@@ -8,8 +8,6 @@
 #' @export
 #' @details If "strike" is given it assumes it is using the 'right-hand-rule'. This can be added to a stereonet from \code{stereo_pole()}
 #' @return A stereonet plot
-#' @import stats
-#' @import RFOC
 #' @examples
 #' strike <- runif(min = 30, max = 80, n = 20)
 #' dip.dir <- s2d(strike)
@@ -27,10 +25,10 @@ stereo_plane = function(az, dip, dir = c("strike", "dip"), col = "blue", add = F
     az = d2s(az)
   }
   if (add == TRUE) {
-    par(new = TRUE)
+    graphics::par(new = TRUE)
   }
-  net(col = gray(0.85), lwd = .5)
+  RFOC::net(col = gray(0.85), lwd = .5)
   for (i in 1:length(dip)) {
-    lowplane(az = az[i], dip = dip[i], col = col)
+    RFOC::lowplane(az = az[i], dip = dip[i], col = col)
   }
 }

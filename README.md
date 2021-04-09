@@ -6,15 +6,15 @@ This package is intendend mainly as a teaching and research tool for geology rel
 
 ## Installation
 
-Two ways of installing the package are available in case one doesn't work
+1. `install.packages("remotes")`
 
-* `devtools::install_github("maxgav13/GMisc")` or
-
-* `remotes::install_url(url='https://github.com/maxgav13/GMisc/archive/master.zip',INSTALL_opt='--no-multiarch')`
+2. `remotes::install_github("maxgav13/GMisc", build_vignettes = TRUE)`
 
 Additional packages that are also useful can be installed using:
 
 * `GMisc::additional_pks()`
+
+It is also recommended to have installed the necessary compiling tools: Xcode for Mac or Rtools for Windows.
 
 ## Extras
 
@@ -26,7 +26,7 @@ Some of the main functionalities have been implemented in shiny apps:
 
 * [Directional Statistics](https://maximiliano-01.shinyapps.io/directional/): Used to analyze directional data (strike, dip, lineations, etc.) with some basic plots, and one and two sample statistics.
 
-* [Geotechnical Engineering / Soil Mechanics](https://maximiliano-01.shinyapps.io/geotech/): Mostly for teaching concepts in soil mechanics (bearing capacity and induced stress).
+* [Geotechnical Engineering / Soil Mechanics](https://maximiliano-01.shinyapps.io/soil_mechanics/): Mostly for teaching concepts in soil mechanics (bearing capacity and induced stress).
 
 * [Geostatistical Analysis](https://maximiliano-01.shinyapps.io/geostatistics/): Takes the user in a workflow on how to perform a geostatistical analysis.
 

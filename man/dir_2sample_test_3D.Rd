@@ -18,7 +18,7 @@ dir_2sample_test_3D(d1, i1, d2, i2, conf.level = 0.95)
 \item{conf.level}{Confidence level for the F-statistic calculation and p-value interpretation (Default is 0.95)}
 }
 \value{
-A list with the F-statistic, the critical value of F, the p-value, and the interpretation of these values
+A list with the F-statistic, the critical value of F, the degrees of freedom, the p-value, and the interpretation of these values
 }
 \description{
 Performes the two-sample test, for the 3D case, for a pair of angular measurements to determine if they could belong to the same population (event).

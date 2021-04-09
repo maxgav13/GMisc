@@ -20,7 +20,7 @@ ci_F(s1, n1, s2, n2, conf.level = 0.95, digits = 2)
 \item{digits}{Number of digits to round to (Default is 2)}
 }
 \value{
-A data frame with the ratio of standard deviations and variances, degrees of freedom for both samples, and lower and upper ends of the confidence interval
+A tibble with the ratio of standard deviations and variances, degrees of freedom for both samples, and lower and upper ends of the confidence interval
 }
 \description{
 Calculates the confidence interval for the ratio of the standard deviation of 2 samples (F distribution).

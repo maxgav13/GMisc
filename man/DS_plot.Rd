@@ -4,10 +4,10 @@
 \alias{DS_plot}
 \title{Draws the results for a direct shear test}
 \usage{
-DS_plot(sign, tau, units = "kPa")
+DS_plot(sig.n, tau, units = "kPa")
 }
 \arguments{
-\item{sign}{A numeric vector of the normal stress values}
+\item{sig.n}{A numeric vector of the normal stress values}
 
 \item{tau}{A numeric vector of the shear stress values}
 
@@ -20,9 +20,9 @@ A ggplot of the direct shear test results
 Draws the sigma-tau pairs along with the Mohr-Coulomb failure envelope for a set of direct shear lab test results, and annotates the graph with the values of cohesion and friction angle.
 }
 \examples{
-sign = c(80,237,395)
+sig.n = c(80,237,395)
 tau = c(127,345,475)
-DS_plot(sign, tau)
+DS_plot(sig.n, tau)
 
 }
 \references{

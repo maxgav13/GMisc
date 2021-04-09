@@ -7,8 +7,7 @@
 #' @param depth The depth, in meters, to which calculate the parameters
 #' @export
 #' @references Barton, N. & Choubey, V. (1977). The shear strength of rock joints in theory and practice. Rock Mechanichs, 10: 1-54.
-#' @return A list with 3 data frames: data (normal stress and shear stress), stress level point, and parameters (c and phi). All stress values are in MPa
-#' @import stats
+#' @return A list with 3 tibbles: data (normal stress and shear stress), stress level point, and parameters (c and phi). All stress values are in MPa
 #' @examples
 #' JRC = 10
 #' JCS = 30
@@ -22,12 +21,12 @@ Barton_Choubey = function(JRC, JCS, phi.r, unit.weight, depth) {
   # phi.r = phi.b - JRC * log10(JCS/sig.n)
   x = seq(0.01, 3*sig.n, 0.01)
   tau = x * tan(rads(phi.r + JRC * log10(JCS/x)))
-  spl = smooth.spline(tau ~ x)
-  pred0 = predict(spl, x = sig.n, deriv = 0)
-  pred1 = predict(spl, x = sig.n, deriv = 1)
+  spl = stats::smooth.spline(tau ~ x)
+  pred0 = stats::predict(spl, x = sig.n, deriv = 0)
+  pred1 = stats::predict(spl, x = sig.n, deriv = 1)
   c = signif(pred0$y - (pred1$y * sig.n), 3)
   phi = signif(degs(atan(pred1$y)), 3)
-  return(list(dat = data.frame(sig_n = round(x,3), tau = round(tau,3)),
-              stress.level = data.frame(pred0),
-              parameters = data.frame(c, phi)))
+  return(list(dat = tibble::tibble(sig_n = round(x,3), tau = round(tau,3)),
+              stress.level = tibble::tibble(data.frame(pred0)),
+              parameters = tibble::tibble(c, phi)))
 }

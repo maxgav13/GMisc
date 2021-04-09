@@ -14,7 +14,6 @@
 #' @references Hoek, E., Carranza-Torres, C. & Corkum, B. (2002). Hoek-Brown Failure Criterion - 2002 Edition. Proc. NARMS-TAC Conference, Toronto. 267-273.
 #' @references Hoek, E. & Marinos, P. (2007). A brief history of the development of the Hoek-Brown criterion. Soils and Rocks, No. 2.
 #' @return A list with a list of the resulting parameters of the rock mass and 3 data frames: Shear envelopes for Mohr-Coulomb and Hoek-Brown criteria, Principal stresses envelopes for Mohr-Coulomb and Hoek-Brown criteria, and stress level for the given height and unit weight
-#' @import stats
 #' @examples
 #' sig.ci = 16
 #' GSI = 75
@@ -85,15 +84,17 @@ Hoek_Brown = function(sig.ci, GSI, mi, MR, D, height, unit.weight, use = c("gene
   sig.1.HB[1] = 0
   sig.1.MC[1] = 0
 
-  MC = data.frame(round(sig.n,3), round(tau.HB,3), round(tau.MC,3), round(tau.MC.inst,3))
+  MC = tibble::tibble(round(sig.n,3), round(tau.HB,3), round(tau.MC,3), round(tau.MC.inst,3))
   names(MC) = c("sig.n", "Hoek-Brown", "Mohr-Coulomb", "Stress level")
-  MC.tidy = gather(MC, key = "crit", value = "tau", -sig.n)
+  MC.tidy = tidyr::pivot_longer(MC, cols = -sig.n,
+                                names_to = "crit", values_to = "tau")
 
-  prin.stress = data.frame(round(sig.3,3), round(sig.1.HB,3), round(sig.1.MC,3))
+  prin.stress = tibble::tibble(round(sig.3,3), round(sig.1.HB,3), round(sig.1.MC,3))
   names(prin.stress) = c("sig.3", "Hoek-Brown", "Mohr-Coulomb")
-  prin.stress.tidy = gather(prin.stress, key = "crit", value = "sig.1", -sig.3)
+  prin.stress.tidy = tidyr::pivot_longer(prin.stress, cols = -sig.3,
+                                         names_to = "crit", values_to = "sig.1")
 
-  stress.level = data.frame(sig.n.inst, tau.inst, crit = "Stress level")
+  stress.level = tibble::tibble(sig.n.inst, tau.inst, crit = "Stress level")
   names(stress.level) = c("sign", "tau", "crit")
 
   lista = list(Results = list(sig.ci = sig.ci, GSI = GSI, mi = mi, D = D, mb = mb, s = s, a = a, MR = MR, Ei = Ei,

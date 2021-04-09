@@ -13,9 +13,7 @@
 #' @export
 #' @return A ggplot object
 #' @references Cumming, G. & Calin-Jageman, R.J. (2017). Introduction to the New Statistics: Estimation, Open Science, and Beyond. New York: Routledge.
-#' @import stats
 #' @import ggplot2
-#' @import cowplot
 #' @examples
 #' dat = data.frame(mean = c(37.5,31.9,41.2,33.4,29.9,38.2),
 #'                  sd = c(10,13.5,14.8,10,8.7,10),
@@ -95,7 +93,7 @@ NewStats_contrasts = function(dat, g1, g2, conf.level = 0.95, col.g1 = 'blue', c
       my_theme+
       labs(x='', y='')
 
-  q = plot_grid(p1, p2, labels = c('A', 'B'))
+  q = cowplot::plot_grid(p1, p2, labels = c('A', 'B'))
 
   return(q)
 }

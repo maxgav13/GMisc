@@ -80,7 +80,7 @@
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
+    <span class="fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -111,8 +111,8 @@
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li>
-  <a href="http://github.com/maxgav13/GMisc/">
-    <span class="fab fa fab fa-github fa-lg"></span>
+  <a href="https://github.com/maxgav13/GMisc/">
+    <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -130,7 +130,7 @@
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Bearing capacity</h1>
-    <small class="dont-index">Source: <a href='http://github.com/maxgav13/GMisc/blob/master/R/bearing_capacity.R'><code>R/bearing_capacity.R</code></a></small>
+    <small class="dont-index">Source: <a href='https://github.com/maxgav13/GMisc/blob/master/R/bearing_capacity.R'><code>R/bearing_capacity.R</code></a></small>
     <div class="hidden name"><code>bearing_capacity.Rd</code></div>
     </div>
 
@@ -138,18 +138,18 @@
     <p>Calculates and plots the allowable bearing capacity for different footings.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>bearing_capacity</span>(
-  <span class='no'>B</span>,
-  <span class='no'>D</span>,
-  <span class='kw'>L</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='no'>gamma.h</span>,
-  <span class='no'>gamma.s</span>,
-  <span class='no'>tau0</span>,
-  <span class='no'>phi</span>,
-  <span class='no'>wl</span>,
-  <span class='no'>FS</span>,
-  <span class='kw'>footing</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"strip"</span>, <span class='st'>"square"</span>, <span class='st'>"rectangular"</span>, <span class='st'>"circular"</span>)
-)</pre>
+    <pre class="usage"><span class='fu'>bearing_capacity</span><span class='op'>(</span>
+  <span class='va'>B</span>,
+  <span class='va'>D</span>,
+  L <span class='op'>=</span> <span class='cn'>NULL</span>,
+  <span class='va'>gamma.h</span>,
+  <span class='va'>gamma.s</span>,
+  <span class='va'>tau0</span>,
+  <span class='va'>phi</span>,
+  <span class='va'>wl</span>,
+  <span class='va'>FS</span>,
+  footing <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"strip"</span>, <span class='st'>"square"</span>, <span class='st'>"rectangular"</span>, <span class='st'>"circular"</span><span class='op'>)</span>
+<span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -210,53 +210,62 @@ For a coarse-grained soil (gravels, sands, and non-plastic silts) usually TSA = 
     <p>Day, R. W. (2010). Foundation Engineering Handbook. McGraw Hill.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='no'>B</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/seq.html'>seq</a></span>(<span class='fl'>0.5</span>, <span class='fl'>2</span>, <span class='fl'>0.25</span>)
-<span class='no'>D</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/seq.html'>seq</a></span>(<span class='fl'>0</span>, <span class='fl'>2</span>, <span class='fl'>0.25</span>)
-<span class='no'>L</span> <span class='kw'>=</span> <span class='kw'>NULL</span>
-<span class='no'>gamma.h</span> <span class='kw'>=</span> <span class='fl'>15.5</span>
-<span class='no'>gamma.s</span> <span class='kw'>=</span> <span class='fl'>18.5</span>
-<span class='no'>tau0</span> <span class='kw'>=</span> <span class='fl'>10</span>
-<span class='no'>phi</span> <span class='kw'>=</span> <span class='fl'>30</span>
-<span class='no'>FS</span> <span class='kw'>=</span> <span class='fl'>3</span>
-<span class='no'>wl</span> <span class='kw'>=</span> <span class='fl'>1</span>
-<span class='fu'>bearing_capacity</span>(<span class='no'>B</span>, <span class='no'>D</span>, <span class='no'>L</span>, <span class='no'>gamma.h</span>, <span class='no'>gamma.s</span>, <span class='no'>tau0</span>, <span class='no'>phi</span>, <span class='no'>wl</span>, <span class='no'>FS</span>)</div><div class='output co'>#&gt; $Result
-#&gt;    D/B    0.5   0.75      1   1.25    1.5   1.75      2
-#&gt; 1 0.00 149.86 162.85 175.84 160.31 167.59 174.88 182.16
-#&gt; 2 0.25 178.86 191.85 182.02 189.31 196.60 203.88 211.17
-#&gt; 3 0.50 207.87 203.74 211.03 218.32 225.60 232.89 240.17
-#&gt; 4 0.75 225.46 232.75 240.04 247.32 254.61 261.89 269.18
-#&gt; 5 1.00 254.47 261.75 269.04 276.33 283.61 290.90 298.19
-#&gt; 6 1.25 219.78 227.07 234.36 241.64 248.93 256.21 263.50
-#&gt; 7 1.50 236.05 243.34 250.62 257.91 265.20 272.48 279.77
-#&gt; 8 1.75 252.32 259.60 266.89 274.18 281.46 288.75 296.04
-#&gt; 9 2.00 268.59 275.87 283.16 290.44 297.73 305.02 312.30
+    <pre class="examples"><div class='input'><span class='va'>B</span> <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/seq.html'>seq</a></span><span class='op'>(</span><span class='fl'>0.5</span>, <span class='fl'>2</span>, <span class='fl'>0.25</span><span class='op'>)</span>
+<span class='va'>D</span> <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/seq.html'>seq</a></span><span class='op'>(</span><span class='fl'>0</span>, <span class='fl'>2</span>, <span class='fl'>0.25</span><span class='op'>)</span>
+<span class='va'>L</span> <span class='op'>=</span> <span class='cn'>NULL</span>
+<span class='va'>gamma.h</span> <span class='op'>=</span> <span class='fl'>15.5</span>
+<span class='va'>gamma.s</span> <span class='op'>=</span> <span class='fl'>18.5</span>
+<span class='va'>tau0</span> <span class='op'>=</span> <span class='fl'>10</span>
+<span class='va'>phi</span> <span class='op'>=</span> <span class='fl'>30</span>
+<span class='va'>FS</span> <span class='op'>=</span> <span class='fl'>3</span>
+<span class='va'>wl</span> <span class='op'>=</span> <span class='fl'>1</span>
+<span class='fu'>bearing_capacity</span><span class='op'>(</span><span class='va'>B</span>, <span class='va'>D</span>, <span class='va'>L</span>, <span class='va'>gamma.h</span>, <span class='va'>gamma.s</span>, <span class='va'>tau0</span>, <span class='va'>phi</span>, <span class='va'>wl</span>, <span class='va'>FS</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; $Result
+#&gt; <span style='color: #949494;'># A tibble: 9 x 8</span><span>
+#&gt;   `D/B` `0.5` `0.75`   `1` `1.25` `1.5` `1.75`   `2`
+#&gt;   </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>  </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>  </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>  </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>
+#&gt; </span><span style='color: #BCBCBC;'>1</span><span>  0     150.   163.  176.   160.  168.   175.  182.
+#&gt; </span><span style='color: #BCBCBC;'>2</span><span>  0.25  179.   192.  182.   189.  197.   204.  211.
+#&gt; </span><span style='color: #BCBCBC;'>3</span><span>  0.5   208.   204.  211.   218.  226.   233.  240.
+#&gt; </span><span style='color: #BCBCBC;'>4</span><span>  0.75  225.   233.  240.   247.  255.   262.  269.
+#&gt; </span><span style='color: #BCBCBC;'>5</span><span>  1     254.   262.  269.   276.  284.   291.  298.
+#&gt; </span><span style='color: #BCBCBC;'>6</span><span>  1.25  220.   227.  234.   242.  249.   256.  264.
+#&gt; </span><span style='color: #BCBCBC;'>7</span><span>  1.5   236.   243.  251.   258.  265.   272.  280.
+#&gt; </span><span style='color: #BCBCBC;'>8</span><span>  1.75  252.   260.  267.   274.  281.   289.  296.
+#&gt; </span><span style='color: #BCBCBC;'>9</span><span>  2     269.   276.  283.   290.  298.   305.  312.
 #&gt; 
-#&gt; $Plot</div><div class='img'><img src='bearing_capacity-1.png' alt='' width='700' height='433' /></div><div class='output co'>#&gt; </div><div class='input'><span class='fu'>bearing_capacity</span>(<span class='no'>B</span>, <span class='no'>D</span>, <span class='no'>L</span>, <span class='no'>gamma.h</span>, <span class='no'>gamma.s</span>, <span class='no'>tau0</span>, <span class='no'>phi</span>, <span class='no'>wl</span>, <span class='no'>FS</span>, <span class='kw'>footing</span> <span class='kw'>=</span> <span class='st'>"square"</span>)</div><div class='output co'>#&gt; $Result
-#&gt;    D/B    0.5   0.75      1   1.25    1.5   1.75      2
-#&gt; 1 0.00 181.82 192.22 202.61 190.18 196.01 201.84 207.67
-#&gt; 2 0.25 210.83 221.22 213.36 219.19 225.02 230.85 236.67
-#&gt; 3 0.50 239.83 236.53 242.36 248.19 254.02 259.85 265.68
-#&gt; 4 0.75 259.71 265.54 271.37 277.20 283.03 288.86 294.68
-#&gt; 5 1.00 288.72 294.55 300.37 306.20 312.03 317.86 323.69
-#&gt; 6 1.25 254.03 259.86 265.69 271.52 277.35 283.18 289.01
-#&gt; 7 1.50 270.30 276.13 281.96 287.79 293.61 299.44 305.27
-#&gt; 8 1.75 286.57 292.40 298.22 304.05 309.88 315.71 321.54
-#&gt; 9 2.00 302.83 308.66 314.49 320.32 326.15 331.98 337.81
+#&gt; $Plot</div><div class='img'><img src='bearing_capacity-1.png' alt='' width='700' height='433' /></div><div class='output co'>#&gt; </div><div class='input'><span class='fu'>bearing_capacity</span><span class='op'>(</span><span class='va'>B</span>, <span class='va'>D</span>, <span class='va'>L</span>, <span class='va'>gamma.h</span>, <span class='va'>gamma.s</span>, <span class='va'>tau0</span>, <span class='va'>phi</span>, <span class='va'>wl</span>, <span class='va'>FS</span>, footing <span class='op'>=</span> <span class='st'>"square"</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; $Result
+#&gt; </span><span style='color: #949494;'># A tibble: 9 x 8</span><span>
+#&gt;   `D/B` `0.5` `0.75`   `1` `1.25` `1.5` `1.75`   `2`
+#&gt;   </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>  </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>  </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>  </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>
+#&gt; </span><span style='color: #BCBCBC;'>1</span><span>  0     182.   192.  203.   190.  196.   202.  208.
+#&gt; </span><span style='color: #BCBCBC;'>2</span><span>  0.25  211.   221.  213.   219.  225.   231.  237.
+#&gt; </span><span style='color: #BCBCBC;'>3</span><span>  0.5   240.   237.  242.   248.  254.   260.  266.
+#&gt; </span><span style='color: #BCBCBC;'>4</span><span>  0.75  260.   266.  271.   277.  283.   289.  295.
+#&gt; </span><span style='color: #BCBCBC;'>5</span><span>  1     289.   295.  300.   306.  312.   318.  324.
+#&gt; </span><span style='color: #BCBCBC;'>6</span><span>  1.25  254.   260.  266.   272.  277.   283.  289.
+#&gt; </span><span style='color: #BCBCBC;'>7</span><span>  1.5   270.   276.  282.   288.  294.   299.  305.
+#&gt; </span><span style='color: #BCBCBC;'>8</span><span>  1.75  287.   292.  298.   304.  310.   316.  322.
+#&gt; </span><span style='color: #BCBCBC;'>9</span><span>  2     303.   309.  314.   320.  326.   332.  338.
 #&gt; 
-#&gt; $Plot</div><div class='img'><img src='bearing_capacity-2.png' alt='' width='700' height='433' /></div><div class='output co'>#&gt; </div><div class='input'><span class='fu'>bearing_capacity</span>(<span class='no'>B</span>, <span class='no'>D</span>, <span class='kw'>L</span> <span class='kw'>=</span> <span class='fl'>3</span>, <span class='no'>gamma.h</span>, <span class='no'>gamma.s</span>, <span class='no'>tau0</span>, <span class='no'>phi</span>, <span class='no'>wl</span>, <span class='no'>FS</span>, <span class='kw'>footing</span> <span class='kw'>=</span> <span class='st'>"rectangular"</span>)</div><div class='output co'>#&gt; $Result
-#&gt;    D/B    0.5   0.75      1   1.25    1.5   1.75      2
-#&gt; 1 0.00 150.86 161.25 171.64 159.21 165.04 170.87 176.70
-#&gt; 2 0.25 179.86 190.25 182.39 188.22 194.05 199.88 205.71
-#&gt; 3 0.50 208.87 205.57 211.39 217.22 223.05 228.88 234.71
-#&gt; 4 0.75 228.74 234.57 240.40 246.23 252.06 257.89 263.72
-#&gt; 5 1.00 257.75 263.58 269.41 275.23 281.06 286.89 292.72
-#&gt; 6 1.25 223.06 228.89 234.72 240.55 246.38 252.21 258.04
-#&gt; 7 1.50 239.33 245.16 250.99 256.82 262.65 268.47 274.30
-#&gt; 8 1.75 255.60 261.43 267.26 273.08 278.91 284.74 290.57
-#&gt; 9 2.00 271.86 277.69 283.52 289.35 295.18 301.01 306.84
+#&gt; $Plot</div><div class='img'><img src='bearing_capacity-2.png' alt='' width='700' height='433' /></div><div class='output co'>#&gt; </div><div class='input'><span class='fu'>bearing_capacity</span><span class='op'>(</span><span class='va'>B</span>, <span class='va'>D</span>, L <span class='op'>=</span> <span class='fl'>3</span>, <span class='va'>gamma.h</span>, <span class='va'>gamma.s</span>, <span class='va'>tau0</span>, <span class='va'>phi</span>, <span class='va'>wl</span>, <span class='va'>FS</span>, footing <span class='op'>=</span> <span class='st'>"rectangular"</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; $Result
+#&gt; </span><span style='color: #949494;'># A tibble: 9 x 8</span><span>
+#&gt;   `D/B` `0.5` `0.75`   `1` `1.25` `1.5` `1.75`   `2`
+#&gt;   </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>  </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>  </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>  </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>
+#&gt; </span><span style='color: #BCBCBC;'>1</span><span>  0     151.   161.  172.   159.  165.   171.  177.
+#&gt; </span><span style='color: #BCBCBC;'>2</span><span>  0.25  180.   190.  182.   188.  194.   200.  206.
+#&gt; </span><span style='color: #BCBCBC;'>3</span><span>  0.5   209.   206.  211.   217.  223.   229.  235.
+#&gt; </span><span style='color: #BCBCBC;'>4</span><span>  0.75  229.   235.  240.   246.  252.   258.  264.
+#&gt; </span><span style='color: #BCBCBC;'>5</span><span>  1     258.   264.  269.   275.  281.   287.  293.
+#&gt; </span><span style='color: #BCBCBC;'>6</span><span>  1.25  223.   229.  235.   241.  246.   252.  258.
+#&gt; </span><span style='color: #BCBCBC;'>7</span><span>  1.5   239.   245.  251.   257.  263.   268.  274.
+#&gt; </span><span style='color: #BCBCBC;'>8</span><span>  1.75  256.   261.  267.   273.  279.   285.  291.
+#&gt; </span><span style='color: #BCBCBC;'>9</span><span>  2     272.   278.  284.   289.  295.   301.  307.
 #&gt; 
 #&gt; $Plot</div><div class='img'><img src='bearing_capacity-3.png' alt='' width='700' height='433' /></div><div class='output co'>#&gt; </div><div class='input'>
-</div></pre>
+</div></span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -272,7 +281,7 @@ For a coarse-grained soil (gravels, sands, and non-plastic silts) usually TSA = 
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

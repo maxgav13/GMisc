@@ -6,8 +6,6 @@
 #' @export
 #' @return A matrix of similarity coefficients
 #' @references Borchardt, G.A. (1974). The SIMAN Coefficient for Similarity Analysis. Classification Society Bulletin, 3(2), 2–8.
-#' @import stats
-#' @import dplyr
 #' @name similarity_coef
 #' @examples
 #' dat = iris[c(1,2,51,52,101,102),]
@@ -23,7 +21,7 @@ similarity_coef = function(x, samp.names = NULL, digits = 3) {
 
   x = x %>%
     as.data.frame() %>%
-    select_if(is.numeric)
+    dplyr::select_if(is.numeric)
   n = nrow(x)
   res = NULL
   key_pairs <- expand.grid(noms, noms)

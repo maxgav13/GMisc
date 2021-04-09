@@ -80,7 +80,7 @@
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
+    <span class="fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -111,8 +111,8 @@
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li>
-  <a href="http://github.com/maxgav13/GMisc/">
-    <span class="fab fa fab fa-github fa-lg"></span>
+  <a href="https://github.com/maxgav13/GMisc/">
+    <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -130,7 +130,7 @@
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Directional statistics two-sample test (3D)</h1>
-    <small class="dont-index">Source: <a href='http://github.com/maxgav13/GMisc/blob/master/R/dir_2sample_test_3D.R'><code>R/dir_2sample_test_3D.R</code></a></small>
+    <small class="dont-index">Source: <a href='https://github.com/maxgav13/GMisc/blob/master/R/dir_2sample_test_3D.R'><code>R/dir_2sample_test_3D.R</code></a></small>
     <div class="hidden name"><code>dir_2sample_test_3D.Rd</code></div>
     </div>
 
@@ -138,7 +138,7 @@
     <p>Performes the two-sample test, for the 3D case, for a pair of angular measurements to determine if they could belong to the same population (event).</p>
     </div>
 
-    <pre class="usage"><span class='fu'>dir_2sample_test_3D</span>(<span class='no'>d1</span>, <span class='no'>i1</span>, <span class='no'>d2</span>, <span class='no'>i2</span>, <span class='kw'>conf.level</span> <span class='kw'>=</span> <span class='fl'>0.95</span>)</pre>
+    <pre class="usage"><span class='fu'>dir_2sample_test_3D</span><span class='op'>(</span><span class='va'>d1</span>, <span class='va'>i1</span>, <span class='va'>d2</span>, <span class='va'>i2</span>, conf.level <span class='op'>=</span> <span class='fl'>0.95</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -167,24 +167,31 @@
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>A list with the F-statistic, the critical value of F, the p-value, and the interpretation of these values</p>
+    <p>A list with the F-statistic, the critical value of F, the degrees of freedom, the p-value, and the interpretation of these values</p>
     <h2 class="hasAnchor" id="references"><a class="anchor" href="#references"></a>References</h2>
 
     <p>Borradaile, G. (2003). Statistics of Earth Science Data. Springer.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='no'>d1</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>12</span>,<span class='fl'>18</span>,<span class='fl'>22</span>,<span class='fl'>15</span>,<span class='fl'>10</span>,<span class='fl'>20</span>)
-<span class='no'>i1</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>42</span>,<span class='fl'>40</span>,<span class='fl'>48</span>,<span class='fl'>30</span>,<span class='fl'>42</span>,<span class='fl'>30</span>)
-<span class='no'>d2</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>111.7</span>,<span class='fl'>109.2</span>,<span class='fl'>185.1</span>,<span class='fl'>83.1</span>,<span class='fl'>235.2</span>,<span class='fl'>226.7</span>)
-<span class='no'>i2</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>40.4</span>,<span class='fl'>31.4</span>,<span class='fl'>25.9</span>,<span class='fl'>26.2</span>,<span class='fl'>27</span>,<span class='fl'>31.5</span>)
-<span class='fu'>dir_2sample_test_3D</span>(<span class='no'>d1</span>, <span class='no'>i1</span>, <span class='no'>d2</span>, <span class='no'>i2</span>)</div><div class='output co'>#&gt; $f
-#&gt; [1] 12.59
+    <pre class="examples"><div class='input'><span class='va'>d1</span> <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>12</span>,<span class='fl'>18</span>,<span class='fl'>22</span>,<span class='fl'>15</span>,<span class='fl'>10</span>,<span class='fl'>20</span><span class='op'>)</span>
+<span class='va'>i1</span> <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>42</span>,<span class='fl'>40</span>,<span class='fl'>48</span>,<span class='fl'>30</span>,<span class='fl'>42</span>,<span class='fl'>30</span><span class='op'>)</span>
+<span class='va'>d2</span> <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>111.7</span>,<span class='fl'>109.2</span>,<span class='fl'>185.1</span>,<span class='fl'>83.1</span>,<span class='fl'>235.2</span>,<span class='fl'>226.7</span><span class='op'>)</span>
+<span class='va'>i2</span> <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>40.4</span>,<span class='fl'>31.4</span>,<span class='fl'>25.9</span>,<span class='fl'>26.2</span>,<span class='fl'>27</span>,<span class='fl'>31.5</span><span class='op'>)</span>
+<span class='fu'>dir_2sample_test_3D</span><span class='op'>(</span><span class='va'>d1</span>, <span class='va'>i1</span>, <span class='va'>d2</span>, <span class='va'>i2</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; $f
+#&gt; [1] 12.54
 #&gt; 
 #&gt; $fcrit
 #&gt; [1] 3.49
 #&gt; 
+#&gt; $df1
+#&gt; [1] 2
+#&gt; 
+#&gt; $df2
+#&gt; [1] 20
+#&gt; 
 #&gt; $p_value
-#&gt; [1] 0.000289
+#&gt; [1] 0.000295
 #&gt; 
 #&gt; $interpretation
 #&gt; [1] "Reject H0 and conclude that the two samples could not come from the same population with the same mean direction and mean dip angle"
@@ -205,7 +212,7 @@
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

@@ -18,7 +18,7 @@ ci_z(x, sig, n, conf.level = 0.95, digits = 2)
 \item{digits}{Number of digits to round to (Default is 2)}
 }
 \value{
-A data frame with the mean, and lower and upper ends of the confidence interval
+A tibble with the mean, and lower and upper ends of the confidence interval
 }
 \description{
 Calculates the confidence interval for the mean with known standard deviation, using the Z-statistic (normal distribution).

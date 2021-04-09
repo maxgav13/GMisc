@@ -3,7 +3,6 @@
 #' @param HB The result from running \code{Hoek_Brown()}
 #' @export
 #' @return A list with two ggplot objects for the Hoek-Brown criterion (principal stresses and normal-shear stresses)
-#' @import stats
 #' @import ggplot2
 #' @references Hoek, E. & Brown, E. T. (1980). Empirical strength criterion for rock masses. J. Geotech. Eng. Div. ASCE 106 (GT9): 1013-1035.
 #' @references Hoek, E., Carranza-Torres, C. & Corkum, B. (2002). Hoek-Brown Failure Criterion - 2002 Edition. Proc. NARMS-TAC Conference, Toronto. 267-273.
