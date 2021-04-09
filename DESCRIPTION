@@ -38,6 +38,12 @@ Imports:
     magrittr,
     CircStats,
     heplots,
-    purrr
-Suggests: knitr, rmarkdown, prettydoc, DT, grDevices, Hmisc
+    purrr,
+    prettydoc
+Suggests: 
+    knitr,
+    rmarkdown,
+    DT,
+    grDevices,
+    Hmisc
 VignetteBuilder: knitr, rmarkdown
