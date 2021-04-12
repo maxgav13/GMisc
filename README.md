@@ -4,6 +4,10 @@
 
 This package is intendend mainly as a teaching and research tool for geology related areas (soil mechanics, rock mechanics, directional stats, hydrogeochem, etc., and more to come) for courses and projects at the Geology Department ([Escuela Centroamericana de Geologia](geologia.ucr.ac.cr)) of the University of Costa Rica ([Universidad de Costa Rica](ucr.ac.cr)). There is a website for the package ([GMisc](https://maxgav13.github.io/GMisc/)) that is easier to navigate and more user fiendly.
 
+## Citation
+
+Cite package with: [![DOI](https://zenodo.org/badge/117134256.svg)](https://zenodo.org/badge/latestdoi/117134256)
+
 ## Installation
 
 1. `install.packages("remotes")`
