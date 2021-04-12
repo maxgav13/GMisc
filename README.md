@@ -6,7 +6,7 @@ This package is intendend mainly as a teaching and research tool for geology rel
 
 ## Citation
 
-Cite package with: [![DOI](https://zenodo.org/badge/117134256.svg)](https://zenodo.org/badge/latestdoi/117134256)
+Cite package with: https://doi.org/10.5281/zenodo.4681268
 
 ## Installation
 
