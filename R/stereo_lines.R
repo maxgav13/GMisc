@@ -20,7 +20,7 @@ stereo_lines = function(dir, dip, points.shape = 3, points.col = "blue", add = F
     graphics::par(new = TRUE)
   }
 
-  RFOC::net(col = gray(0.85), lwd = .5)
+  RFOC::net(col = grDevices::gray(0.85), lwd = .5)
   RFOC::focpoint(dir, dip, pch = points.shape, col = points.col)
 }
 

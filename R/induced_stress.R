@@ -7,7 +7,6 @@
 #' @param footing Type of footing for which to calculate the stresses (Default is "strip")
 #' @export
 #' @return A stress distribution plot for the desired footing
-#' @import geotech
 #' @import ggplot2
 #' @references Holtz, R. D., Kovacs, W. D. & Sheahan, T. C. (2011). An Introduction to Geotechnical Engineering. Prentice Hall.
 #' @details The stresses are calculated using the solutions from Boussinesq. The parameter \code{L} only applies for rectangular footings, otherwise is not considered, thus the default value of \code{NULL}. For rectangular footings the length (\code{L}) can be varied, while for the other footing shapes the width \code{B} can be varied. For circular footings the width is equal to the radius (\code{B=R})

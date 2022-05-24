@@ -23,7 +23,8 @@ Calculates the directional (circular) statistics of a sample of directional meas
 Directional data refers to dipping planes or lines, data expressed as dip direction (trend). Non-directional data refers to strike or lineations expressed as azimuths that can take two angles (i.e. 45 or 225)
 }
 \examples{
-x <- c(255, 239, 222, 231, 199, 271, 222, 274, 228, 246, 177, 199, 257, 201, 237, 209, 216)
+x <- c(255, 239, 222, 231, 199, 271, 222, 274, 228,
+       246, 177, 199, 257, 201, 237, 209, 216)
 dir_stats_2D(x)
 # non-directional data example
 dir_stats_2D(carolina, dir = 0)

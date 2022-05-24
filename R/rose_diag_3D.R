@@ -66,7 +66,7 @@ rose_diag_3D = function(az, dip, width = 30, dir = 1, conf.level = 0.95) {
 
   if (dir == 1) {
     plt.dirrose <- ggplot(data.frame(z), aes(z)) +
-      stat_bin(aes(y=sqrt((..count..)/max(..count..)*100^2)),
+      stat_bin(aes(y=sqrt(stat(count)/max(stat(count))*100^2)),
                breaks = (0:n)/n*360, colour = "black", fill = "blue", closed = 'left') +
       scale_x_continuous(breaks = 0:12/12*360, limits = c(0, 360)) +
       # scale_y_continuous(limits = c(0, outer)) +
@@ -85,7 +85,7 @@ rose_diag_3D = function(az, dip, width = 30, dir = 1, conf.level = 0.95) {
             panel.grid.minor = element_blank())
   } else {
     plt.dirrose <- ggplot(data.frame(d2s(z)), aes(d2s(z))) +
-      stat_bin(aes(y=sqrt((..count..)/max(..count..)*100^2)),
+      stat_bin(aes(y=sqrt(stat(count)/max(stat(count))*100^2)),
                breaks = (0:n)/n*360, colour = "black", fill = "blue", closed = 'left') +
       scale_x_continuous(breaks = 0:12/12*360, limits = c(0, 360)) +
       # scale_y_continuous(limits = c(0, outer)) +

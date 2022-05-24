@@ -20,7 +20,7 @@ stereo_mean = function(dir, dip, conf.level = 0.95, mean.col = "red", add = FALS
     graphics::par(new = TRUE)
   }
 
-  RFOC::net(col = gray(0.85), lwd = .5)
+  RFOC::net(col = grDevices::gray(0.85), lwd = .5)
   # stereo_plane(r$Mean.Dir, r$MeanDip, dir = "dip", col = mean.col, add = T)
   RFOC::focpoint(r$Mean.Dir, r$MeanDip, pch = 19, col = mean.col)
   RFOC::addsmallcirc(r$Mean.Dir, 90 - r$MeanDip, r$Cone, col = mean.col)

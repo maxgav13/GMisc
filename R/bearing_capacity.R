@@ -34,9 +34,9 @@
 #'
 bearing_capacity = function(B, D, L = NULL, gamma.h, gamma.s, tau0, phi, wl, FS, footing = c("strip", "square", "rectangular","circular")) {
 
-  Ng = geotech::Ngamma(phi)
-  Nq = geotech::Nq(phi)
-  Nc = geotech::Nc(phi)
+  Ng = Ngamma(phi)
+  Nq = Nq(phi)
+  Nc = Nc(phi)
 
   sc = ifelse(any(footing == "strip"), 1, ifelse(footing == "rectangular", 1 + 0.3 * (B / L), 1.3))
   sg = ifelse(any(footing == "strip"), 1, ifelse(footing == "cicrular", 0.6, 0.8))

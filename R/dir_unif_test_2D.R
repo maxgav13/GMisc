@@ -10,8 +10,10 @@
 #' @references Swan, A. R. H. & Sandilands, M. (1995). Introduction to Geological Data Analysis. Blackwell Science.
 #' @references Borradaile, G. (2003). Statistics of Earth Science Data. Springer.
 #' @examples
-#' x = c(255, 239, 222, 231, 199, 271, 222, 274, 228, 246, 177, 199, 257, 201, 237, 209, 216, 180, 182, 250,
-#'   219, 196, 197, 246, 218, 235, 232, 243, 232, 180, 231, 254, 242, 149, 212, 210, 230, 205, 220, 268)
+#' x = c(255, 239, 222, 231, 199, 271, 222, 274, 228, 246,
+#'       177, 199, 257, 201, 237, 209, 216, 180, 182, 250,
+#'       219, 196, 197, 246, 218, 235, 232, 243, 232, 180,
+#'       231, 254, 242, 149, 212, 210, 230, 205, 220, 268)
 #' dir_unif_test_2D(x)
 #'
 dir_unif_test_2D = function(x, dir = 1, conf.level = 0.95) {

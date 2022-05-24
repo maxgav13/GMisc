@@ -26,8 +26,10 @@ Directional data refers to dipping planes or lines, data expressed as dip direct
 The mean direction and cone of confidence are displayed as red and cyan lines respectively.
 }
 \examples{
-x = c(255, 239, 222, 231, 199, 271, 222, 274, 228, 246, 177, 199, 257, 201, 237, 209, 216, 180, 182, 250,
-  219, 196, 197, 246, 218, 235, 232, 243, 232, 180, 231, 254, 242, 149, 212, 210, 230, 205, 220, 268)
+x = c(255, 239, 222, 231, 199, 271, 222, 274, 228, 246,
+      177, 199, 257, 201, 237, 209, 216, 180, 182, 250,
+      219, 196, 197, 246, 218, 235, 232, 243, 232, 180,
+      231, 254, 242, 149, 212, 210, 230, 205, 220, 268)
 rose_diag_2D(x, width = 30, dir = 1)
 # non-directional data example
 rose_diag_2D(carolina, width = 10, dir = 0)

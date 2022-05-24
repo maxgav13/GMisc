@@ -10,7 +10,8 @@
 #' @references Swan, A. R. H. & Sandilands, M. (1995). Introduction to Geological Data Analysis. Blackwell Science.
 #' @references Borradaile, G. (2003). Statistics of Earth Science Data. Springer.
 #' @examples
-#' x <- c(255, 239, 222, 231, 199, 271, 222, 274, 228, 246, 177, 199, 257, 201, 237, 209, 216)
+#' x <- c(255, 239, 222, 231, 199, 271, 222, 274, 228,
+#'        246, 177, 199, 257, 201, 237, 209, 216)
 #' dir_stats_2D(x)
 #' # non-directional data example
 #' dir_stats_2D(carolina, dir = 0)

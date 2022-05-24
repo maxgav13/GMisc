@@ -20,7 +20,7 @@ stereo_pole = function(dir, dip, points.col = "blue", points.shape = 3, add = FA
   dir = ifelse(dir >= 180, dir - 180, dir + 180)
 
   if (add == FALSE) {
-    RFOC::net(col = gray(0.85), lwd = .5)
+    RFOC::net(col = grDevices::gray(0.85), lwd = .5)
     RFOC::qpoint(dir, dip, col = points.col, pch = points.shape, PLOT = add)
   }
   RFOC::qpoint(dir, dip, col = points.col, pch = points.shape, PLOT = TRUE)

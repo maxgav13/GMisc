@@ -1,0 +1,261 @@
+---
+title: "Classification Diagrams"
+author: "Maximiliano Garnier Villarreal"
+date: "`r Sys.Date()`"
+output:
+  prettydoc::html_pretty:
+    theme: cayman
+    highlight: github
+    toc: true
+vignette: >
+  %\VignetteIndexEntry{Classification Diagrams}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include=FALSE}
+library(kableExtra)
+library(GMisc)
+library(plotly)
+library(tidyverse)
+
+knitr::opts_chunk$set(
+  echo = TRUE,
+  message = FALSE,
+  warning = FALSE,
+  error = FALSE,
+  fig.align = "center",
+  out.width = "80%"
+)
+```
+
+# Diagrams
+
+This document shows how to display and use different classification diagrams that are used frequently in geosciences, these are (diagram - function):
+
+-   QAP - `ternary_qap()`
+
+-   QAP for gabbros - `ternary_qap_g()`
+
+-   QAP for mafic rocks - `ternary_qap_m()`
+
+-   QAP for ultramafic rocks - `ternary_qap_um()`
+
+-   QtFL for provenance - `ternary_qfl()`
+
+-   QmFLt for provenance - `ternary_qmflt()`
+
+-   AFM - `ternary_afm()`
+
+-   Pyroclastic rocks - `ternary_pyroclastic()`
+
+-   Folk for sandstone classification - `ternary_folk()`
+
+-   Shepard for soil classification - `ternary_shepard()`
+
+-   Total Alkali Silica (TAS) - `TAS()`
+
+-   Piper diagram - `piper_diagram()`
+
+# Basic use
+
+## Static
+
+A simple static diagram without data can be obtained by just calling the respective function. The result is a **ggplot** object. For the ternary diagramas is based on the **ggtern** package.
+
+```{r}
+#| fig.cap: Static Folk ternary diagram for sandstones
+
+ternary_folk()
+```
+
+## Dynamic
+
+To obtain a dynamic diagram the `output` argument must be set to `'plotly'`, resulting in a **plotly** object.
+
+```{r}
+#| fig.cap: Dynamic QAP ternary diagram for mafic rocks
+
+ternary_qap_m(output = 'plotly')
+```
+
+```{r}
+#| fig.cap: Dynamic TAS diagram
+
+TAS(output = 'plotly')
+```
+
+## Add your data!!
+
+To add your own data to the diagram a new table must be created (imported), where the names of the columns should preferably match the names of the axes for the corresponding diagram, or map them accordingly. To do this check the [Names](#tb-names) section where the respective names are given for each diagram, and to what axis they have to be mapped to.
+
+**In the case of the ternary diagrams, the sample (row) totals (adding the three components) are not required to add-up to 100%, this is done internally.**
+
+Adding some data is demostrated here by ploting two points on the QtFL and TAS diagrams, first by ploting the data in a static diagram (**ggplot**), and then ploting the same data in the dynamic diagram (**plotly**).
+
+In the data for the ternary diagram (`d`) the first sample (point) adds-up to a 100 but the second one does not, showing the point made above.
+
+```{r}
+d = tibble(sample=c('a','b'),
+           qt=c(40,30),
+           f=c(40,20),
+           l=c(20,10))
+
+d2 = tibble(silica=c(58,70), 
+            alkali=c(8,4))
+```
+
+```{r}
+#| echo: false
+d %>% 
+  kable(caption = 'Samples for QtFL diagram') %>% 
+  kable_classic(full_width=F)
+```
+
+```{r}
+#| echo: false
+d2 %>% 
+  kable(caption = 'Samples for TAS diagram') %>% 
+  kable_classic(full_width=F)
+```
+
+### Static
+
+For the **ggplot** object, data can be added using the function `geom_point`, where the only argument that is required is `data`, the rest can be omitted or modified.
+
+```{r}
+#| fig.cap: Static QtFL ternary diagram for provenance, with user's data.
+
+ternary_qtfl() + 
+  geom_point(data = d,
+             color = 'coral',
+             size = 3,
+             shape = 3,
+             alpha = .7)
+```
+
+```{r}
+#| fig.cap: Static TAS diagram, with user's data.
+
+TAS() + 
+  geom_point(aes(x=silica, y=alkali),
+             data = d2,
+             color = 'coral',
+             size = 3,
+             shape = 3,
+             alpha = .7)
+```
+
+### Dynamic
+
+For the **plotly** object it is a bit different for the bivariate and ternary diagrams.
+
+For the ternary diagrams, data can be added using the function `add_trace`, where the arguments `data`, `a`, `b`, `c`, `type = "scatterternary"`, and `mode = "markers"` are required, the rest can be changed. The vertices `a`, `b`, and `c`, correspond to the top, bottom left, and bottom right of the respective ternary diagram. The `name` is what gets displayed in the legend, and the `marker` defines the appearance.
+
+```{r}
+#| fig.cap: Dynamic QtFL ternary diagram for provenance, with user's data.
+
+ternary_qtfl(output = 'plotly') %>% 
+  add_trace(a = ~qt, b = ~f, c = ~l,
+            data = d,
+            name = 'My data',
+            type = "scatterternary",
+            mode = "markers",
+            marker = list(size = 8,
+                          color = 'green',
+                          symbol = 4,
+                          opacity = .7),
+            hovertemplate = paste0('Qt: %{a}<br>',
+                                   'F: %{b}<br>',
+                                   'L: %{c}'))
+```
+
+For the bivariate diagrams, data can be added using the function `add_markers`, where the arguments `data`, `x`, and `y` are required, the rest can be changed. The `name` is what gets displayed in the legend, and the `marker` defines the appearance. The `layout(showlegend = TRUE)` forces the legend to show up.
+
+```{r}
+#| fig.cap: Dynamic TAS diagram, with user's data.
+
+TAS('plotly') %>%
+  add_markers(x = ~silica, y = ~alkali,
+              data = d2,
+              name = "My data",
+              marker = list(size=8,color='orange',symbol=3,opacity=.9)) %>%
+  layout(showlegend = TRUE)
+```
+
+### Piper diagram
+
+The Piper diagram is a special case since the data needs pre-processing in order to be plotted on the `piper_diagram()` function. The following example shows how to do this by using the `piper_data_prep()` function. This diagram is only available as static (**ggplot**) object.
+
+```{r}
+d3 = data.frame(Group = c('A','A','B','B'),
+                Ca = c(120,150,110,52.6),
+                Mg = c(78,160,110,28),
+                Na = c(210,590,340,51.6),
+                K = c(4.2,2,3.6,2.3),
+                HCO3 = c(181,181,189,151),
+                CO3 = 0,
+                Cl = c(220,744,476,72.2),
+                SO4 = c(560,1020,584,126))
+
+piper_data = piper_data_prep(d3)
+piper_data %>% 
+  kable(caption = 'Processed sample data for Piper diagram') %>% 
+  kable_classic(full_width=F)
+```
+
+Once the data is transformed it can be plotted using the `x` and `y` values as the coordinates. As with the other diagrams, further customization of the resulting object is posible.
+
+```{r}
+#| fig.cap: Piper diagram, with user's data.
+
+piper_diagram() +
+   geom_point(aes(x,y,col=Group,shape=Group),
+              size=3,
+              data = piper_data) +
+   scale_color_brewer('Group',palette = 'Dark2') +
+   scale_shape_manual('Group',values = c(3,21))
+```
+
+## Names {#tb-names}
+
+These are the suggested names that your data should have for you to be able to plot your data in the corresponding diagram, focusing on the ternary diagrams. For the TAS diagram the names of the axes are `x` and `y`. Other names can be used but they must be mapped to the corresponding axis.
+
+```{r}
+#| echo: false
+
+diagrams.tern = tibble(
+    diagram = c('afm','folk','pyroclastic','qap_g','qap_m','qap_um','qap','qmflt','qtfl','shepard'),
+    x = c('a','f','lapilli','cpx','ol','opx','a','f','f','sand'),
+    y = c('f','q','bb','p','p','ol','q','qm','qt','clay'),
+    z = c('m','r','ash','opx','px','cpx','p','lt','l','silt'),
+    a = c('~f','~q','~bb','~p','~p','~ol','~q','~qm','~qt','~clay'),
+    b = c('~a','~f','~lapilli','~cpx','~ol','~opx','~a','~f','~f','~sand'),
+    c = c('~m','~r','~ash','~opx','px','~cpx','~p','~lt','~l','~silt')
+)
+
+diagrams.tern %>% 
+  kable(caption = 'Mapping of the data to the respective axis for both outputs, for the ternary diagrams.') %>% 
+  add_header_above(c('','ggplot'=3,'plotly'=3)) %>% 
+  kable_classic()
+```
+
+## Español (Spanish)
+
+Todos los diagramas se pueden generar en español, para ello es necesario usar el argumento `language` y ponerlo igual a `'es'`, por defecto se despliegan en inglés (`'en'`). [A spanish version is available for all the diagrams, to display this version the `language` argument must be set to `'es'`, by default is set to english (`'en'`).]
+
+```{r}
+#| fig.cap: Diagrama ternario de Shepard para la clasificación de suelos, en español
+
+ternary_shepard(language = 'es')
+```
+
+```{r}
+#| fig.cap: Diagrama TAS, en español
+
+TAS(language = 'es')
+```
+
+# Conclusion
+
+This is very basic and quick introduction on how to use the functions to plot diagrams used in geosciences. Further customization of the diagramas can be achived by manipulating the **ggplot** or **plotly** objects, specially when adding your own data.

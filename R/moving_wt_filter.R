@@ -38,7 +38,7 @@ moving_wt_filter = function(x, y, k) {
     # win = W[[i]]
     win = Wf[[i]]
     wadj[[i]] = c(rep(NA, floor(k[i]/2)), v, rep(NA, floor(k[i]/2))) # agrega NAs en los extremos para facilitar los calculos
-    filt[[i]] = zoo::rollapply(wadj[[i]], k[i], function(x) weighted.mean(x, w = win, na.rm = TRUE), fill = NA) # media movil
+    filt[[i]] = zoo::rollapply(wadj[[i]], k[i], function(x) stats::weighted.mean(x, w = win, na.rm = TRUE), fill = NA) # media movil
     finalfilt[[i]] = filt[[i]][!is.na(filt[[i]])] # remueve NAs
     wf[[i]] = v - finalfilt[[i]] # calcula datos residuales
   }

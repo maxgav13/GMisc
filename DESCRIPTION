@@ -1,6 +1,6 @@
 Package: GMisc
 Title: Miscellaneous Functions for Geology (and its areas)
-Version: 0.2
+Version: 0.3
 Date: 2021-04-07
 Author: Maximiliano Garnier-Villarreal <max.garnier.villa@gmail.com>
 Maintainer: Maximiliano Garnier-Villarreal <max.garnier.villa@gmail.com>
@@ -26,7 +26,6 @@ Imports:
     tibble,
     RFOC,
     stringr,
-    geotech,
     pracma,
     changepoint,
     strucchange,
@@ -40,10 +39,14 @@ Imports:
     heplots,
     purrr,
     prettydoc,
-    DT
+    DT,
+    ggtern,
+    viridisLite,
+    utils,
+    grDevices,
+    kableExtra
 Suggests: 
     knitr,
     rmarkdown,
-    grDevices,
     Hmisc
 VignetteBuilder: knitr, rmarkdown

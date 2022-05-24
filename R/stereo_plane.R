@@ -27,7 +27,7 @@ stereo_plane = function(az, dip, dir = c("strike", "dip"), col = "blue", add = F
   if (add == TRUE) {
     graphics::par(new = TRUE)
   }
-  RFOC::net(col = gray(0.85), lwd = .5)
+  RFOC::net(col = grDevices::gray(0.85), lwd = .5)
   for (i in 1:length(dip)) {
     RFOC::lowplane(az = az[i], dip = dip[i], col = col)
   }

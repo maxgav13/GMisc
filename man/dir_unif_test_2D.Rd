@@ -23,8 +23,10 @@ Performes the uniformity test, for the 2D case, for a set of angle measurements 
 Directional data refers to dipping planes or lines, data expressed as dip direction (trend). Non-directional data refers to strike or lineations expressed as azimuths that can take two angles (i.e. 45 or 225). The options for confidence level are 0.99, 0.975, 0.95, or 0.90
 }
 \examples{
-x = c(255, 239, 222, 231, 199, 271, 222, 274, 228, 246, 177, 199, 257, 201, 237, 209, 216, 180, 182, 250,
-  219, 196, 197, 246, 218, 235, 232, 243, 232, 180, 231, 254, 242, 149, 212, 210, 230, 205, 220, 268)
+x = c(255, 239, 222, 231, 199, 271, 222, 274, 228, 246,
+      177, 199, 257, 201, 237, 209, 216, 180, 182, 250,
+      219, 196, 197, 246, 218, 235, 232, 243, 232, 180,
+      231, 254, 242, 149, 212, 210, 230, 205, 220, 268)
 dir_unif_test_2D(x)
 
 }

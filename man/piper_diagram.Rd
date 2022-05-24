@@ -4,30 +4,57 @@
 \alias{piper_diagram}
 \title{Piper diagram}
 \usage{
-piper_diagram(data, group = NULL)
+piper_diagram(output = c("ggplot", "plotly"))
 }
 \arguments{
-\item{data}{A data frame containing the concentrations of cations (Ca,Mg,Na,K) and anions (SO4,Cl,HCO3,CO3) in mg/L}
-
-\item{group}{Grouping variable in the data frame, name in quotes. If not provided the samples will be numbered sequentially}
+\item{output}{The output format: "ggplot" or "plotly" (default is "ggplot")}
 }
 \value{
-ggplot object
+Piper diagram for hydrochemical data in the desired format (object)
 }
 \description{
-Plots hydrochemical data into a Piper diagram.
+\code{piper_diagram()} draws either a static or interactive ternary diagram. It is a base diagram where data can be ploted.
+}
+\details{
+For ploting data the \code{piper_data_prep()} function should be used to transform the data in the proper format. After that the data has \code{x} and \code{y} coordinates, and these are the ones to use when ploting the data on \code{piper_diagram()}.
 }
 \examples{
-data = data.frame(Group = 'Test',
-                  Ca = c(120,150,110,52.6),
-                  Mg = c(78,160,110,28),
-                  Na = c(210,590,340,51.6),
-                  K = c(4.2,2,3.6,2.3),
-                  HCO3 = c(181,181,189,151),
-                  CO3 = 0,
-                  Cl = c(220,744,476,72.2),
-                  SO4 = c(560,1020,584,126))
-piper_diagram(data, 'Group')
-piper_diagram(data)
+library(ggplot2)
+library(plotly)
+
+d = data.frame(Group = c('A','A','B','B'),
+               Ca = c(120,150,110,52.6),
+               Mg = c(78,160,110,28),
+               Na = c(210,590,340,51.6),
+               K = c(4.2,2,3.6,2.3),
+               HCO3 = c(181,181,189,151),
+               CO3 = 0,
+               Cl = c(220,744,476,72.2),
+               SO4 = c(560,1020,584,126))
+
+piper_data = piper_data_prep(d)
+
+# adding data to ggplot object
+piper_diagram() +
+  geom_point(aes(x,y,col=Group,shape=Group),
+             size=3,
+             data = piper_data) +
+  scale_color_brewer('Group',palette = 'Dark2') +
+  scale_shape_manual('Group',values = c(3,21))
+
+# adding data to plotly object
+piper_diagram(output = 'plotly') \%>\%
+  add_markers(data = piper_data,
+              x = ~x, y = ~y,
+              color = piper_data[['Group']],
+              colors = 'Dark2',
+              symbol = ~get('Group'),
+              # symbols = c(3,5),
+              symbols = c('+','o'),
+              text = ~paste("Group: ", Group, '<br>ID:', ID),
+              marker = list(size=10)) \%>\%
+   layout(showlegend = T,
+          legend = list(x = 0.1, y = 0.9,
+                        title=list(text='<b> Group </b>')))
 
 }
