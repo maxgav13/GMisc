@@ -70,7 +70,9 @@ piper_diagram <- function(opacity = 0.6) {
   polygons <- merge(values, positions)
 
   ##Left Ternary Plot##
-  ids2 <- factor(c("05", "06", "07", "08"))
+  # ids2 <- factor(c("05", "06", "07", "08"))
+  ids2 <- factor(c("Calcium", "No dominant type",
+                   "Sodium and potassium", "Magnesium"))
   values2 <- data.frame(
     id = ids2,
     value = c(5,6,7,8))
@@ -87,7 +89,9 @@ piper_diagram <- function(opacity = 0.6) {
   polygons2 <- merge(values2, positions2)
 
   ##Right Ternary Plot##
-  ids3 <- factor(c("09", "10", "11", "12"))
+  # ids3 <- factor(c("09", "10", "11", "12"))
+  ids3 <- factor(c("Bicarbonate", "No dominant type",
+                   "Chloride", "Sulphate"))
   values3 <- data.frame(
     id = ids3,
     value = c(9,10,11,12))
@@ -103,8 +107,12 @@ piper_diagram <- function(opacity = 0.6) {
         43.3015,43.3015,86.603))
   polygons3 <- merge(values3, positions3)
 
+  polygons_all = dplyr::bind_rows(polygons,polygons2,polygons3)
 
   p <- ggplot() +
+    geom_polygon(data=polygons_all,
+                 aes(x=x,y=y,fill=id,group=value),
+                 alpha = opacity,color='black',size=.5) +
     ## left hand ternary plot
     # geom_polygon(data=polygons2, aes(x=x,y=y,fill=id,group=id)) +
     geom_segment(aes(x=0,y=0, xend=100, yend=0)) +
@@ -152,9 +160,9 @@ piper_diagram <- function(opacity = 0.6) {
           panel.grid.minor = element_blank(),
           panel.border = element_blank(), axis.ticks = element_blank(),
           axis.text.x = element_blank(), axis.text.y = element_blank(),
-          axis.title.x = element_blank(), axis.title.y = element_blank())
+          axis.title.x = element_blank(), axis.title.y = element_blank()) +
 
-
+    scale_fill_brewer('Type',palette = 'Set3')
 
   if (any(output == 'ggplot')) {
     p = p +

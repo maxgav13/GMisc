@@ -36,9 +36,11 @@ Barton_Choubey_plot = function(BC, units = "kPa") {
   }
 
   if (units == "kPa") {
-    q = ggplot(BC$dat, aes(sig_n*unit.factor, tau*unit.factor)) +
+    q = ggplot(BC$dat, aes(.data$sig_n*unit.factor, .data$tau*unit.factor)) +
       geom_line(col = "red") +
-      geom_point(data = BC$stress.level, aes(x*unit.factor, y*unit.factor), col = "blue", size = 2) +
+      geom_point(data = BC$stress.level, aes(.data$x*unit.factor,
+                                             .data$y*unit.factor),
+                 col = "blue", size = 2) +
       stat_function(fun = shear, col = "blue") +
       labs(x = expression(paste("Normal stress ", sigma, " (kPa)")),
            y = expression(paste("Shear stress ", tau, " (kPa)"))) +
@@ -50,9 +52,9 @@ Barton_Choubey_plot = function(BC, units = "kPa") {
       theme(axis.title = element_text(size = 16),
             axis.text = element_text(size = 14))
   } else {
-    q = ggplot(BC$dat, aes(sig_n, tau)) +
+    q = ggplot(BC$dat, aes(.data$sig_n, .data$tau)) +
       geom_line(col = "red") +
-      geom_point(data = BC$stress.level, aes(x, y), col = "blue", size = 2) +
+      geom_point(data = BC$stress.level, aes(.data$x, .data$y), col = "blue", size = 2) +
       stat_function(fun = shear, col = "blue") +
       labs(x = expression(paste("Normal stress ", sigma, " (MPa)")),
            y = expression(paste("Shear stress ", tau, " (MPa)"))) +
