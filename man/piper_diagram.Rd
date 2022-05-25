@@ -4,23 +4,22 @@
 \alias{piper_diagram}
 \title{Piper diagram}
 \usage{
-piper_diagram(output = c("ggplot", "plotly"))
+piper_diagram(opacity = 0.6)
 }
 \arguments{
-\item{output}{The output format: "ggplot" or "plotly" (default is "ggplot")}
+\item{opacity}{Transparency level (default is 0.6)}
 }
 \value{
-Piper diagram for hydrochemical data in the desired format (object)
+Piper diagram for hydrochemical data
 }
 \description{
-\code{piper_diagram()} draws either a static or interactive ternary diagram. It is a base diagram where data can be ploted.
+\code{piper_diagram()} draws a static Piper diagram with the water facies. It is a base diagram where data can be plotted.
 }
 \details{
-For ploting data the \code{piper_data_prep()} function should be used to transform the data in the proper format. After that the data has \code{x} and \code{y} coordinates, and these are the ones to use when ploting the data on \code{piper_diagram()}.
+For ploting data the \code{piper_data_prep()} function should be used to transform the data in the proper format. After that the data has \code{x} and \code{y} coordinates, and these are the ones to use when plotting the data on \code{piper_diagram()}.
 }
 \examples{
 library(ggplot2)
-library(plotly)
 
 d = data.frame(Group = c('A','A','B','B'),
                Ca = c(120,150,110,52.6),
@@ -34,27 +33,12 @@ d = data.frame(Group = c('A','A','B','B'),
 
 piper_data = piper_data_prep(d)
 
-# adding data to ggplot object
+# adding data
 piper_diagram() +
   geom_point(aes(x,y,col=Group,shape=Group),
              size=3,
              data = piper_data) +
   scale_color_brewer('Group',palette = 'Dark2') +
   scale_shape_manual('Group',values = c(3,21))
-
-# adding data to plotly object
-piper_diagram(output = 'plotly') \%>\%
-  add_markers(data = piper_data,
-              x = ~x, y = ~y,
-              color = piper_data[['Group']],
-              colors = 'Dark2',
-              symbol = ~get('Group'),
-              # symbols = c(3,5),
-              symbols = c('+','o'),
-              text = ~paste("Group: ", Group, '<br>ID:', ID),
-              marker = list(size=10)) \%>\%
-   layout(showlegend = T,
-          legend = list(x = 0.1, y = 0.9,
-                        title=list(text='<b> Group </b>')))
 
 }

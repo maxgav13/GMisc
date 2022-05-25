@@ -15,7 +15,7 @@ TAS(output = c("ggplot", "plotly"), language = c("en", "es"))
 TAS diagram in the desired format (object)
 }
 \description{
-\code{TAS()} draws either a static or interactive diagram, in english or spanish. It is a base diagram where data can be ploted.
+\code{TAS()} draws either a static or interactive diagram, in english or spanish. It is a base diagram where data can be plotted.
 }
 \details{
 The examples show basic usage and how to add data, which can be more customizable. In general, just map the silica content to the x-axis and alkali content to the y-axis.
@@ -24,20 +24,22 @@ The examples show basic usage and how to add data, which can be more customizabl
 library(ggplot2)
 library(plotly)
 
-mydata = data.frame(silica=c(58,50,70), alkali=c(8,4,5))
+d = data.frame(silica=c(58,50,70), alkali=c(8,4,5))
 
 TAS()
 TAS('plotly')
 
 # adding data to ggplot object
-TAS(language = 'es') + geom_point(aes(x=silica, y=alkali), data=mydata)
+TAS(language = 'es') +
+  geom_point(aes(x=silica, y=alkali), data=d)
 
 # adding data to plotly object
 TAS('plotly') \%>\%
-add_markers(x=~silica, y=~alkali,
-            data = mydata,
-            name = "My data",
-            marker = list(size=8,color='orange',symbol=3,opacity=.9)) \%>\%
-layout(showlegend = TRUE)
+  add_markers(x=~silica, y=~alkali,
+              data = d,
+              name = "My data",
+              marker = list(size=8,color='orange',
+                            symbol=3,opacity=.9)) \%>\%
+  layout(showlegend = TRUE)
 
 }

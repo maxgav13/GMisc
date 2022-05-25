@@ -1,6 +1,6 @@
 ---
 title: "Classification Diagrams"
-author: "Maximiliano Garnier Villarreal"
+author: "Maximiliano Garnier-Villarreal"
 date: "`r Sys.Date()`"
 output:
   prettydoc::html_pretty:
@@ -17,7 +17,7 @@ vignette: >
 library(kableExtra)
 library(GMisc)
 library(plotly)
-library(tidyverse)
+library(ggplot2)
 
 knitr::opts_chunk$set(
   echo = TRUE,

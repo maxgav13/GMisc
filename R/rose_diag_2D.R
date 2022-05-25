@@ -28,8 +28,12 @@ rose_diag_2D = function(x, width = 30, dir = 1, conf.level = 0.95) {
       z = x
     }
 
+  n = 360/width
+  nt = length(x)
+
   r = dir_stats_2D(x, dir = dir, conf.level = conf.level)
-  labelmeandir = bquote("Mean Direction = "~.(format(r$Mean.Dir, 1))*degree*''%+-%''*.(format(round(r$Cone, 1)))*degree)
+  labelmeandir = bquote("Mean Direction = "~.(format(r$Mean.Dir, 1))*degree*''%+-%''*.(format(round(r$Cone, 1)))*degree~', N ='~.(nt))
+  labelmeandir2 = paste0('Mean direction = ',format(r$Mean.Dir, 1)," (",format(round(r$Cone, 1)),")",', N = ', nt)
 
   cone = c(r$Cone.lower, r$Mean.Dir, r$Cone.upper)
 
@@ -52,9 +56,6 @@ rose_diag_2D = function(x, width = 30, dir = 1, conf.level = 0.95) {
   # q = hist(x, breaks = seq(0, 360, width))
   # outer = (max(q$counts) %/% 2 + 1) * 2
 
-  n = 360/width
-  nt = length(x)
-
   if (dir == 1) {
     plt.dirrose <- ggplot(data.frame(z), aes(z)) +
       stat_bin(aes(y=sqrt(stat(count)/max(stat(count))*100^2)),
@@ -65,10 +66,11 @@ rose_diag_2D = function(x, width = 30, dir = 1, conf.level = 0.95) {
                  col = c('cyan', 'red', 'cyan'), size = c(0.75, 1, 0.75)) +
       scale_y_continuous('', labels = NULL) +
       # labs(y = paste('Frequency of measurements (n = ', nt, ')')) +
-      labs(caption = labelmeandir, title = paste('N = ', nt)) +
+      labs(title = labelmeandir) +
       coord_polar() +
       theme_bw() +
-      theme(axis.title.x = element_blank(),
+      theme(title = element_text(size = 8),
+            axis.title.x = element_blank(),
             panel.border = element_blank(),
             axis.ticks.y = element_blank(),
             axis.title.y = element_text(size=8, face = "plain", hjust = 0.9, vjust = 1.3),
@@ -85,10 +87,11 @@ rose_diag_2D = function(x, width = 30, dir = 1, conf.level = 0.95) {
                  size = c(0.75, 1, 0.75, 0.75, 1, 0.75)) +
       scale_y_continuous('', labels = NULL) +
       # labs(y = paste('Frequency of measurements (n = ', nt, ')')) +
-      labs(caption = labelmeandir, title = paste('N = ', nt)) +
+      labs(title = labelmeandir) +
       coord_polar() +
       theme_bw() +
-      theme(axis.title.x = element_blank(),
+      theme(title = element_text(size = 8),
+            axis.title.x = element_blank(),
             panel.border = element_blank(),
             axis.ticks.y = element_blank(),
             axis.title.y = element_text(size=8, face = "plain", hjust = 0.9, vjust = 1.3),

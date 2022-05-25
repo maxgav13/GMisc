@@ -21,11 +21,11 @@ ternary_qap(
 QAP ternary diagram for plutonic and volcanic rocks in the desired format (object)
 }
 \description{
-\code{ternary_qap()} draws either a static or interactive ternary diagram, in english or spanish. It is a base diagram where data can be ploted.
+\code{ternary_qap()} draws either a static or interactive ternary diagram, in english or spanish. It is a base diagram where data can be plotted.
 }
 \details{
-For ploting data on the ggplot object it would be easier if the names of the dataframe are "a", "q", and "p", that way it gets mapped automatically, if not make sure to use "aes(x=a,y=q,z=p)".
-For ploting on the plotly object the mapping of the new data should be as shown in the example: \code{a = ~q, b = ~a, c = ~p}, where \code{a} refers to the top ("q"), \code{b} refers to the bottom left ("a"), and \code{c} refers to the bottom right ("p").
+For plotting data on the ggplot object it would be easier if the names of the dataframe are "a", "q", and "p", that way it gets mapped automatically, if not make sure to use "aes(x=a,y=q,z=p)".
+For plotting on the plotly object the mapping of the new data should be as shown in the example: \code{a = ~q, b = ~a, c = ~p}, where \code{a} refers to the top ("q"), \code{b} refers to the bottom left ("a"), and \code{c} refers to the bottom right ("p").
 The examples show basic usage and how to add data, which can be more customizable.
 }
 \examples{
@@ -41,14 +41,15 @@ ternary_qap() + geom_point(data = d)
 
 # adding data to plotly object
 ternary_qap('plotly') \%>\%
-add_trace(a = ~q, b = ~a, c = ~p,
-          data = d,
-          name = 'My data',
-          type = "scatterternary",
-          mode = "markers",
-          marker = list(size=8,color='coral',symbol=3,opacity=.9),
-          hovertemplate = paste0('Q: \%{a}<br>',
-                                 'A: \%{b}<br>',
-                                 'P: \%{c}'))
+  add_trace(a = ~q, b = ~a, c = ~p,
+            data = d,
+            name = 'My data',
+            type = "scatterternary",
+            mode = "markers",
+            marker = list(size=8,color='coral',
+                          symbol=3,opacity=.9),
+            hovertemplate = paste0('Q: \%{a}<br>',
+                                   'A: \%{b}<br>',
+                                   'P: \%{c}'))
 
 }

@@ -21,11 +21,11 @@ ternary_shepard(
 Shepard's ternary diagram for soils in the desired format (object)
 }
 \description{
-\code{ternary_shepard()} draws either a static or interactive ternary diagram, in english or spanish. It is a base diagram where data can be ploted.
+\code{ternary_shepard()} draws either a static or interactive ternary diagram, in english or spanish. It is a base diagram where data can be plotted.
 }
 \details{
-For ploting data on the ggplot object it would be easier if the names of the dataframe are "sand", "clay", and "silt", that way it gets mapped automatically, if not make sure to use "aes(x=sand,y=clay,z=silt)".
-For ploting on the plotly object the mapping of the new data should be as shown in the example: \code{a = ~clay, b = ~sand, c = ~silt}, where \code{a} refers to the top ("clay"), \code{b} refers to the bottom left ("sand"), and \code{c} refers to the bottom right ("silt").
+For plotting data on the ggplot object it would be easier if the names of the dataframe are "sand", "clay", and "silt", that way it gets mapped automatically, if not make sure to use "aes(x=sand,y=clay,z=silt)".
+For plotting on the plotly object the mapping of the new data should be as shown in the example: \code{a = ~clay, b = ~sand, c = ~silt}, where \code{a} refers to the top ("clay"), \code{b} refers to the bottom left ("sand"), and \code{c} refers to the bottom right ("silt").
 The examples show basic usage and how to add data, which can be more customizable.
 }
 \examples{
@@ -41,14 +41,15 @@ ternary_shepard() + geom_point(data = d)
 
 # adding data to plotly object
 ternary_shepard('plotly') \%>\%
-add_trace(a = ~clay, b = ~sand, c = ~silt,
-          data = d,
-          name = 'My data',
-          type = "scatterternary",
-          mode = "markers",
-          marker = list(size=8,color='blue',symbol=3,opacity=.9),
-          hovertemplate = paste0('Clay: \%{a}<br>',
-                                 'Sand: \%{b}<br>',
-                                 'Silt: \%{c}'))
+  add_trace(a = ~clay, b = ~sand, c = ~silt,
+            data = d,
+            name = 'My data',
+            type = "scatterternary",
+            mode = "markers",
+            marker = list(size=8,color='blue',
+                          symbol=3,opacity=.9),
+            hovertemplate = paste0('Clay: \%{a}<br>',
+                                   'Sand: \%{b}<br>',
+                                   'Silt: \%{c}'))
 
 }

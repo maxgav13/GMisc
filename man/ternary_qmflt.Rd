@@ -21,11 +21,11 @@ ternary_qmflt(
 QmFLt ternary diagram for provenance analysis in the desired format (object)
 }
 \description{
-\code{ternary_qmflt()} draws either a static or interactive ternary diagram, in english or spanish. It is a base diagram where data can be ploted.
+\code{ternary_qmflt()} draws either a static or interactive ternary diagram, in english or spanish. It is a base diagram where data can be plotted.
 }
 \details{
-For ploting data on the ggplot object it would be easier if the names of the dataframe are "f", "qm", and "lt", that way it gets mapped automatically, if not make sure to use "aes(x=f,y=qm,z=lt)".
-For ploting on the plotly object the mapping of the new data should be as shown in the example: \code{a = ~qm, b = ~f, c = ~lt}, where \code{a} refers to the top ("qm"), \code{b} refers to the bottom left ("f"), and \code{c} refers to the bottom right ("lt").
+For plotting data on the ggplot object it would be easier if the names of the dataframe are "f", "qm", and "lt", that way it gets mapped automatically, if not make sure to use "aes(x=f,y=qm,z=lt)".
+For plotting on the plotly object the mapping of the new data should be as shown in the example: \code{a = ~qm, b = ~f, c = ~lt}, where \code{a} refers to the top ("qm"), \code{b} refers to the bottom left ("f"), and \code{c} refers to the bottom right ("lt").
 The examples show basic usage and how to add data, which can be more customizable.
 }
 \examples{
@@ -41,14 +41,15 @@ ternary_qmflt() + geom_point(data = d)
 
 # adding data to plotly object
 ternary_qmflt('plotly') \%>\%
-add_trace(a = ~qm, b = ~f, c = ~lt,
-          data = d,
-          name = 'My data',
-          type = "scatterternary",
-          mode = "markers",
-          marker = list(size=8,color='coral',symbol=3,opacity=.9),
-          hovertemplate = paste0('Qm: \%{a}<br>',
-                                 'F: \%{b}<br>',
-                                 'Lt: \%{c}'))
+  add_trace(a = ~qm, b = ~f, c = ~lt,
+            data = d,
+            name = 'My data',
+            type = "scatterternary",
+            mode = "markers",
+            marker = list(size=8,color='coral',
+                          symbol=3,opacity=.9),
+            hovertemplate = paste0('Qm: \%{a}<br>',
+                                   'F: \%{b}<br>',
+                                   'Lt: \%{c}'))
 
 }

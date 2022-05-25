@@ -30,9 +30,11 @@
 #'              size=3,
 #'              data = piper_data) +
 #'   scale_color_brewer('Group',palette = 'Dark2') +
-#'   scale_shape_manual('Group',values = c(3,21)
+#'   scale_shape_manual('Group',values = c(3,21))
 #'
 piper_diagram <- function(opacity = 0.6) {
+
+  output = 'ggplot'
 
   grid1p1 <<- data.frame(x1 = c(20,40,60,80), x2= c(10,20,30,40),y1 = c(0,0,0,0), y2 = c(17.3206,34.6412,51.9618, 69.2824))
   grid1p2 <<- data.frame(x1 = c(20,40,60,80), x2= c(60,70,80,90),y1 = c(0,0,0,0), y2 = c(69.2824, 51.9618,34.6412,17.3206))

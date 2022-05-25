@@ -15,11 +15,11 @@ ternary_afm(output = c("ggplot", "plotly"), language = c("en", "es"))
 AFM ternary diagram in the desired format (object)
 }
 \description{
-\code{ternary_afm()} draws either a static or interactive ternary diagram, in english or spanish. It is a base diagram where data can be ploted.
+\code{ternary_afm()} draws either a static or interactive ternary diagram, in english or spanish. It is a base diagram where data can be plotted.
 }
 \details{
-For ploting data on the ggplot object it would be easier if the names of the dataframe are "a", "f", and "m", that way it gets mapped automatically, if not make sure to use "aes(x=a,y=f,z=m)".
-For ploting on the plotly object the mapping of the new data should be as shown in the example: \code{a = ~f, b = ~a, c = ~m}, where \code{a} refers to the top ("f"), \code{b} refers to the bottom left ("a"), and \code{c} refers to the bottom right ("m").
+For plotting data on the ggplot object it would be easier if the names of the dataframe are "a", "f", and "m", that way it gets mapped automatically, if not make sure to use "aes(x=a,y=f,z=m)".
+For plotting on the plotly object the mapping of the new data should be as shown in the example: \code{a = ~f, b = ~a, c = ~m}, where \code{a} refers to the top ("f"), \code{b} refers to the bottom left ("a"), and \code{c} refers to the bottom right ("m").
 The examples show basic usage and how to add data, which can be more customizable.
 }
 \examples{
@@ -35,15 +35,16 @@ ternary_afm() + geom_point(data = d)
 
 # adding data to plotly object
 ternary_afm('plotly') \%>\%
-add_trace(a = ~f, b = ~a, c = ~m,
-          data = d,
-          name = 'My data',
-          type = "scatterternary",
-          mode = "markers",
-          marker = list(size=8,color='coral',symbol=3,opacity=.9),
-          hovertemplate = paste0('F: \%{a}<br>',
-                                 'A: \%{b}<br>',
-                                 'M: \%{c}')) \%>\%
-layout(showlegend = TRUE)
+  add_trace(a = ~f, b = ~a, c = ~m,
+            data = d,
+            name = 'My data',
+            type = "scatterternary",
+            mode = "markers",
+            marker = list(size=8,color='coral',
+                          symbol=3,opacity=.9),
+            hovertemplate = paste0('F: \%{a}<br>',
+                                   'A: \%{b}<br>',
+                                   'M: \%{c}')) \%>\%
+  layout(showlegend = TRUE)
 
 }

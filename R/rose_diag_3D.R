@@ -31,10 +31,15 @@ rose_diag_3D = function(az, dip, width = 30, dir = 1, conf.level = 0.95) {
     z = x
   }
 
+  n = 360/width
+  nt = length(x)
+
   p = dir_stats_3D(d2s(x), dip, conf.level = conf.level)
   r = dir_stats_3D(x, dip, conf.level = conf.level)
-  labelmeandir = bquote("Mean Dip Direction = "~.(format(r$Mean.Dir, 1))*degree*''%+-%''*.(format(round(r$Cone, 1)))*degree~'& Mean Dip Angle ='~.(format(r$MeanDip, 1))*degree)
-  labelmeanstrike = bquote("Mean Strike Direction = "~.(format(p$Mean.Dir, 1))*degree*''%+-%''*.(format(round(r$Cone, 1)))*degree~'& Mean Dip Angle ='~.(format(r$MeanDip, 1))*degree)
+  labelmeandir = bquote("Mean Dip Direction = "~.(format(r$Mean.Dir, 1))*degree*''%+-%''*.(format(round(r$Cone, 1)))*degree~'& Mean Dip Angle ='~.(format(r$MeanDip, 1))*degree~', N ='~.(nt))
+  labelmeanstrike = bquote("Mean Strike Direction = "~.(format(p$Mean.Dir, 1))*degree*''%+-%''*.(format(round(r$Cone, 1)))*degree~'& Mean Dip Angle ='~.(format(r$MeanDip, 1))*degree~', N ='~.(nt))
+
+  labelmeandir2 = paste0('Mean direction = ',format(r$Mean.Dir, 1)," (",format(round(r$Cone, 1)),")",', N = ', nt)
 
   if (dir == 0) {
     if (p$Cone.lower > 180 & p$Cone.upper < 360 & p$Cone.upper > 180) {
@@ -61,8 +66,6 @@ rose_diag_3D = function(az, dip, width = 30, dir = 1, conf.level = 0.95) {
   # q = hist(x, breaks = seq(0, 360, width))
   # outer = (max(q$counts) %/% 2 + 1) * 2
 
-  n = 360/width
-  nt = length(x)
 
   if (dir == 1) {
     plt.dirrose <- ggplot(data.frame(z), aes(z)) +
@@ -74,10 +77,11 @@ rose_diag_3D = function(az, dip, width = 30, dir = 1, conf.level = 0.95) {
                  col=c('cyan', 'red', 'cyan'), size = c(0.75, 1, 0.75)) +
       scale_y_continuous('', labels = NULL) +
       # labs(y = paste('Frequency of measurements (n = ', nt, ')')) +
-      labs(caption = labelmeandir, title = paste('N = ', nt)) +
+      labs(title = labelmeandir) +
       coord_polar() +
       theme_bw() +
-      theme(axis.title.x = element_blank(),
+      theme(title = element_text(size = 8),
+            axis.title.x = element_blank(),
             panel.border = element_blank(),
             axis.ticks.y = element_blank(),
             axis.title.y = element_text(size=8, face = "plain", hjust = 0.9, vjust = 1.3),
@@ -94,10 +98,11 @@ rose_diag_3D = function(az, dip, width = 30, dir = 1, conf.level = 0.95) {
                  size = c(0.75, 1, 0.75, 0.75, 1, 0.75)) +
       scale_y_continuous('', labels = NULL) +
       # labs(y = paste('Frequency of measurements (n = ', nt, ')')) +
-      labs(caption = labelmeanstrike, title = paste('N = ', nt)) +
+      labs(title = labelmeanstrike) +
       coord_polar() +
       theme_bw() +
-      theme(axis.title.x = element_blank(),
+      theme(title = element_text(size = 8),
+            axis.title.x = element_blank(),
             panel.border = element_blank(),
             axis.ticks.y = element_blank(),
             axis.title.y = element_text(size=8, face = "plain", hjust = 0.9, vjust = 1.3),

@@ -21,11 +21,11 @@ ternary_pyroclastic(
 Ternary diagram for pyroclastic rocks in the desired format (object)
 }
 \description{
-\code{ternary_pyroclastic()} draws either a static or interactive ternary diagram, in english or spanish. It is a base diagram where data can be ploted.
+\code{ternary_pyroclastic()} draws either a static or interactive ternary diagram, in english or spanish. It is a base diagram where data can be plotted.
 }
 \details{
-For ploting data on the ggplot object it would be easier if the names of the dataframe are "lapilli", "bb", and "ash", that way it gets mapped automatically, if not make sure to use "aes(x=lapilli,y=bb,z=ash)".
-For ploting on the plotly object the mapping of the new data should be as shown in the example: \code{a = ~bb, b = ~lapilli, c = ~ash}, where \code{a} refers to the top ("bb"), \code{b} refers to the bottom left ("lapilli"), and \code{c} refers to the bottom right ("ash").
+For plotting data on the ggplot object it would be easier if the names of the dataframe are "lapilli", "bb", and "ash", that way it gets mapped automatically, if not make sure to use "aes(x=lapilli,y=bb,z=ash)".
+For plotting on the plotly object the mapping of the new data should be as shown in the example: \code{a = ~bb, b = ~lapilli, c = ~ash}, where \code{a} refers to the top ("bb"), \code{b} refers to the bottom left ("lapilli"), and \code{c} refers to the bottom right ("ash").
 The examples show basic usage and how to add data, which can be more customizable.
 }
 \examples{
@@ -41,14 +41,15 @@ ternary_pyroclastic() + geom_point(data = d)
 
 # adding data to plotly object
 ternary_pyroclastic('plotly') \%>\%
-add_trace(a = ~bb, b = ~lapilli, c = ~ash,
-          data = d,
-          name = 'My data',
-          type = "scatterternary",
-          mode = "markers",
-          marker = list(size=8,color='cyan',symbol=3,opacity=.9),
-          hovertemplate = paste0('BB: \%{a}<br>',
-                                 'Lapilli: \%{b}<br>',
-                                 'Ash: \%{c}'))
+  add_trace(a = ~bb, b = ~lapilli, c = ~ash,
+            data = d,
+            name = 'My data',
+            type = "scatterternary",
+            mode = "markers",
+            marker = list(size=8,color='cyan',
+                          symbol=3,opacity=.9),
+            hovertemplate = paste0('BB: \%{a}<br>',
+                                   'Lapilli: \%{b}<br>',
+                                   'Ash: \%{c}'))
 
 }

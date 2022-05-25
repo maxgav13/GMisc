@@ -21,11 +21,11 @@ ternary_qap_um(
 QAP ternary diagram for ultramafic rocks in the desired format (object)
 }
 \description{
-\code{ternary_qap_um()} draws either a static or interactive ternary diagram, in english or spanish. It is a base diagram where data can be ploted.
+\code{ternary_qap_um()} draws either a static or interactive ternary diagram, in english or spanish. It is a base diagram where data can be plotted.
 }
 \details{
-For ploting data on the ggplot object it would be easier if the names of the dataframe are "opx", "ol", and "cpx", that way it gets mapped automatically, if not make sure to use "aes(x=opx,y=ol,z=cpx)".
-For ploting on the plotly object the mapping of the new data should be as shown in the example: \code{a = ~ol, b = ~opx, c = ~cpx}, where \code{a} refers to the top ("ol"), \code{b} refers to the bottom left ("opx"), and \code{c} refers to the bottom right ("cpx").
+For plotting data on the ggplot object it would be easier if the names of the dataframe are "opx", "ol", and "cpx", that way it gets mapped automatically, if not make sure to use "aes(x=opx,y=ol,z=cpx)".
+For plotting on the plotly object the mapping of the new data should be as shown in the example: \code{a = ~ol, b = ~opx, c = ~cpx}, where \code{a} refers to the top ("ol"), \code{b} refers to the bottom left ("opx"), and \code{c} refers to the bottom right ("cpx").
 The examples show basic usage and how to add data, which can be more customizable.
 }
 \examples{
@@ -41,14 +41,15 @@ ternary_qap_um() + geom_point(data = d)
 
 # adding data to plotly object
 ternary_qap_um('plotly') \%>\%
-add_trace(a = ~ol, b = ~opx, c = ~cpx,
-          data = d,
-          name = 'My data',
-          type = "scatterternary",
-          mode = "markers",
-          marker = list(size=8,color='coral',symbol=3,opacity=.9),
-          hovertemplate = paste0('Ol: \%{a}<br>',
-                                 'Opx: \%{b}<br>',
-                                 'Cpx: \%{c}'))
+  add_trace(a = ~ol, b = ~opx, c = ~cpx,
+            data = d,
+            name = 'My data',
+            type = "scatterternary",
+            mode = "markers",
+            marker = list(size=8,color='coral',
+                          symbol=3,opacity=.9),
+            hovertemplate = paste0('Ol: \%{a}<br>',
+                                   'Opx: \%{b}<br>',
+                                   'Cpx: \%{c}'))
 
 }

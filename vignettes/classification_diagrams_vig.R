@@ -82,6 +82,30 @@ TAS('plotly') %>%
   layout(showlegend = TRUE)
 
 ## -----------------------------------------------------------------------------
+d3 = data.frame(Group = c('A','A','B','B'),
+                Ca = c(120,150,110,52.6),
+                Mg = c(78,160,110,28),
+                Na = c(210,590,340,51.6),
+                K = c(4.2,2,3.6,2.3),
+                HCO3 = c(181,181,189,151),
+                CO3 = 0,
+                Cl = c(220,744,476,72.2),
+                SO4 = c(560,1020,584,126))
+
+piper_data = piper_data_prep(d3)
+piper_data %>% 
+  kable(caption = 'Processed sample data for Piper diagram') %>% 
+  kable_classic(full_width=F)
+
+## -----------------------------------------------------------------------------
+piper_diagram() +
+   geom_point(aes(x,y,col=Group,shape=Group),
+              size=3,
+              data = piper_data) +
+   scale_color_brewer('Group',palette = 'Dark2') +
+   scale_shape_manual('Group',values = c(3,21))
+
+## -----------------------------------------------------------------------------
 diagrams.tern = tibble(
     diagram = c('afm','folk','pyroclastic','qap_g','qap_m','qap_um','qap','qmflt','qtfl','shepard'),
     x = c('a','f','lapilli','cpx','ol','opx','a','f','f','sand'),
@@ -94,7 +118,7 @@ diagrams.tern = tibble(
 
 diagrams.tern %>% 
   kable(caption = 'Mapping of the data to the respective axis for both outputs, for the ternary diagrams.') %>% 
-  add_header_above(c('','ggplot2'=3,'plotly'=3)) %>% 
+  add_header_above(c('','ggplot'=3,'plotly'=3)) %>% 
   kable_classic()
 
 ## -----------------------------------------------------------------------------
