@@ -21,7 +21,7 @@ sc_bic = function(x, h = 0.1) {
   rss = cbind(Breakpoints=rownames(rss), rss)
   rss$Breakpoints=0:(nrow(rss)-1)
 
-  q = ggplot(rss,aes(Breakpoints,BIC)) +
+  q = ggplot(rss,aes(.data$Breakpoints,.data$BIC)) +
     geom_line(size = .5, col = 4) +
     geom_point(size = 2, shape = 19, col = 4) +
     labs(x = "Number of breakpoints", y = "BIC") +

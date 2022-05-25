@@ -18,7 +18,7 @@
 moving_filter_plot_r = function(x, xlab = "X", ylab = "Residual data",filterlab = "Filter", plotk = "all") {
 
   if (any(plotk == "all")) {
-    df = x$Residual %>% dplyr::select_at(names(.))
+    df = x$Residual
   } else {
     zz = plotk
     df = x$Residual %>% dplyr::select_at(c("x",zz))
@@ -27,7 +27,8 @@ moving_filter_plot_r = function(x, xlab = "X", ylab = "Residual data",filterlab 
   df = tidyr::pivot_longer(df, cols = -x, names_to = 'filtro', values_to = 'y_val')
   df$filtro = factor(df$filtro, levels = unique(df$filtro))
 
-  r = ggplot(df, aes(x = x, y = y_val, group = filtro, col = filtro)) +
+  r = ggplot(df, aes(x = x, y = .data$y_val,
+                     group = .data$filtro, col = .data$filtro)) +
     geom_line(size = 0.5) +
     labs(x = xlab, y = ylab, col = filterlab) +
     theme_bw()

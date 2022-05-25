@@ -23,8 +23,8 @@ sc_layers = function(x, h = 0.1, breaks) {
                  include.lowest = T)
   dat$boundaries = grouping
 
-  ydata = dat %>% dplyr::select(-1,-boundaries) %>% as.matrix()
-  xdata = dat %>% dplyr::select(boundaries) %>% as.matrix()
+  ydata = dat %>% dplyr::select(-1,-.data$boundaries) %>% as.matrix()
+  xdata = dat %>% dplyr::select(.data$boundaries) %>% as.matrix()
   mod = stats::lm(ydata ~ xdata)
 
   ES = round(DescTools::EtaSq(mod)[[1]],3)
@@ -48,7 +48,7 @@ sc_layers = function(x, h = 0.1, breaks) {
   p2 = plotly::ggplotly(q2, dynamicTicks = T)
 
   Summary = dat %>%
-    dplyr::group_by(boundaries) %>%
+    dplyr::group_by(.data$boundaries) %>%
     dplyr::summarise_at(dplyr::vars(nom[2]),
                         .funs = list(
                           Obs = ~ dplyr::n(),
@@ -60,7 +60,7 @@ sc_layers = function(x, h = 0.1, breaks) {
                           CI.upr = ~ signif(DescTools::MeanCI(.)[[3]],3)
                         )
     ) %>%
-    dplyr::mutate(MoE = signif(stats::qt(.975,Obs-1)*SD/sqrt(Obs),3)) %>%
+    dplyr::mutate(MoE = signif(stats::qt(.975,.data$Obs-1)*.data$SD/sqrt(.data$Obs),3)) %>%
     as.data.frame()
 
   return(list(LayersGG=q, LayersLY=p, StatsGG=q2, StatsLY=p2, Summary=Summary, ES=ES))

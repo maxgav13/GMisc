@@ -19,7 +19,7 @@
 moving_filter_plot_f = function(x, xlab = "X", ylab = "Data", filterlab = "Filter & data", plotk = "all") {
 
   if (any(plotk == "all")) {
-    df = x$Filtered %>% dplyr::select_at(names(.))
+    df = x$Filtered
   } else {
     zz = plotk
     df = x$Filtered %>% dplyr::select_at(c("x",zz))
@@ -28,7 +28,8 @@ moving_filter_plot_f = function(x, xlab = "X", ylab = "Data", filterlab = "Filte
   df = tidyr::pivot_longer(df, cols = -x, names_to = 'filtro', values_to = 'y_val')
   df$filtro = factor(df$filtro, levels = unique(df$filtro))
 
-  f = ggplot(df, aes(x = x, y = y_val, group = filtro, col = filtro)) +
+  f = ggplot(df, aes(x = x, y = .data$y_val,
+                     group = .data$filtro, col = .data$filtro)) +
     geom_line(size = 0.5) +
     labs(x = xlab, y = ylab, col = filterlab) +
     theme_bw()
