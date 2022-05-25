@@ -56,8 +56,8 @@ piper_diagram <- function(language = c('en','es'),
   ##Upper Diamond##
   ids <- factor(c("Sodium Bicarbonate", "Sodium Chloride",
                   "Calcium Bicarbonate", "Calcium Sulfate"))
-  ids.es <- factor(c("Bicarbonatada sódica", "Clorurada sódica",
-                     "Bicarbonatada magnésica", "Clorurada cálcica"
+  ids.es <- factor(c("Bicarbonatada s\u00f3dica", "Clorurada s\u00f3dica",
+                     "Bicarbonatada magn\u00e9sica", "Clorurada c\u00e1lcica"
                      # ,'Mixed','Mixed'
   ))
   values <- data.frame(
@@ -81,8 +81,8 @@ piper_diagram <- function(language = c('en','es'),
   # ids2 <- factor(c("05", "06", "07", "08"))
   ids2 <- factor(c("Calcium", "No dominant type",
                    "Sodium and potassium", "Magnesium"))
-  ids2.es <- factor(c("Cálcica", "No dominante",
-                      "Sódica", "Magnésica"))
+  ids2.es <- factor(c("C\u00e1lcica", "No dominante",
+                      "S\u00f3dica", "Magn\u00e9sica"))
   values2 <- data.frame(
     id = ids2,
     id.es = ids2.es,

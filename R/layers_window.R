@@ -21,10 +21,10 @@ layers_window = function(x, breaks) {
   dat$boundaries = grouping
   dat_tidy = tidyr::pivot_longer(dat, cols = -c(nom[1],'boundaries'),
                                  names_to = 'Property', values_to = 'Value') %>%
-    dplyr::mutate(Property = forcats::as_factor(Property))
+    dplyr::mutate(Property = forcats::as_factor(.data$Property))
 
-  ydata = dat %>% dplyr::select(-1,-boundaries) %>% as.matrix()
-  xdata = dat %>% dplyr::select(boundaries) %>% as.matrix()
+  ydata = dat %>% dplyr::select(-1,-.data$boundaries) %>% as.matrix()
+  xdata = dat %>% dplyr::select(.data$boundaries) %>% as.matrix()
   mod = stats::lm(ydata ~ xdata)
 
   ES = round(heplots::etasq(mod)[[1]][1],3)
@@ -32,7 +32,7 @@ layers_window = function(x, breaks) {
   q = ggplot(dat_tidy, aes_string('Value', nom[1], col = "boundaries")) +
     geom_path(aes(group=1),size = .75) +
     scale_y_reverse() +
-    facet_grid(~Property,scales = 'free_x') +
+    facet_grid(~.data$Property,scales = 'free_x') +
     labs(x = '', y = nom[1], col = 'Layers') +
     theme_bw()
 
@@ -50,8 +50,8 @@ layers_window = function(x, breaks) {
   p2 = plotly::ggplotly(q2)
 
   Summary = dat_tidy %>%
-    dplyr::group_by(boundaries,Property) %>%
-    dplyr::summarise_at(dplyr::vars(Value),
+    dplyr::group_by(.data$boundaries,.data$Property) %>%
+    dplyr::summarise_at(dplyr::vars(.data$Value),
                         .funs = list(
                           Obs = ~ dplyr::n(),
                           Mean = ~ signif(mean(.),3),
@@ -62,7 +62,7 @@ layers_window = function(x, breaks) {
                           CI.upr = ~ signif(DescTools::MeanCI(.)[[3]],3)
                         )
     ) %>%
-    dplyr::mutate(MoE = signif(stats::qt(.975,Obs-1)*SD/sqrt(Obs),3)) %>%
+    dplyr::mutate(MoE = signif(stats::qt(.975,.data$Obs-1)*.data$SD/sqrt(.data$Obs),3)) %>%
     as.data.frame()
 
   return(list(LayersGG=q, LayersLY=p, StatsGG=q2, StatsLY=p2, Summary=Summary, ES=ES))

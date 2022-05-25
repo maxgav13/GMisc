@@ -34,18 +34,18 @@ mcp = function(data, R = 199, alpha = 2, sig.level = .01, min.perc = 15) {
   dat_ecp0$Bounds = bounds
   data_ecp0_tidy = tidyr::pivot_longer(dat_ecp0, cols = -c(noms.ecp[1],'Layer','Bounds'),
                                        names_to = 'Property', values_to = 'Value') %>%
-    dplyr::mutate(Property = forcats::as_factor(Property))
+    dplyr::mutate(Property = forcats::as_factor(.data$Property))
 
-  ydata = dat_ecp0 %>% dplyr::select(-1,-Layer,-Bounds) %>% as.matrix()
-  xdata = dat_ecp0 %>% dplyr::select(Layer) %>% as.matrix()
+  ydata = dat_ecp0 %>% dplyr::select(-1,-.data$Layer,-.data$Bounds) %>% as.matrix()
+  xdata = dat_ecp0 %>% dplyr::select(.data$Layer) %>% as.matrix()
   mod = stats::lm(ydata ~ xdata)
 
   ES = round(heplots::etasq(mod)[[1]][1],3)
 
   q = ggplot(data = data_ecp0_tidy, aes_string(x = 'Value', y = noms.ecp[1])) +
-    geom_path(aes(group=1,col=Layer),size=.75) +
+    geom_path(aes(group=1,col=.data$Layer),size=.75) +
     scale_y_reverse() +
-    facet_grid(~Property,scales = 'free_x') +
+    facet_grid(~.data$Property,scales = 'free_x') +
     theme_bw() +
     labs(x='', y='Depth [m]', col='Layer')
 
@@ -56,15 +56,15 @@ mcp = function(data, R = 199, alpha = 2, sig.level = .01, min.perc = 15) {
                  geom = "pointrange",
                  #color = "red",
                  size=.75) +
-    facet_wrap(~Property,scales = 'free_y') +
+    facet_wrap(~.data$Property,scales = 'free_y') +
     labs(x = 'Layer', y = '', col = 'Layer') +
     theme_bw()
 
   p2 = plotly::ggplotly(q2)
 
   Summary = data_ecp0_tidy %>%
-    dplyr::group_by(Layer,Property) %>%
-    dplyr::summarise_at(dplyr::vars(Value),
+    dplyr::group_by(.data$Layer,.data$Property) %>%
+    dplyr::summarise_at(dplyr::vars(.data$Value),
                         .funs = list(
                           Obs = ~ dplyr::n(),
                           Mean = ~ signif(mean(.),3),
@@ -75,7 +75,7 @@ mcp = function(data, R = 199, alpha = 2, sig.level = .01, min.perc = 15) {
                           CI.upr = ~ signif(DescTools::MeanCI(.)[[3]],3)
                         )
     ) %>%
-    dplyr::mutate(MoE = stats::qt(.975,Obs-1)*SD/sqrt(Obs),
+    dplyr::mutate(MoE = stats::qt(.975,.data$Obs-1)*.data$SD/sqrt(.data$Obs),
                   Interval = levels(data_ecp0_tidy$Bounds)[levels(data_ecp0_tidy$Layer) == Layer]) %>%
     as.data.frame()
 
