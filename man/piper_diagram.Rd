@@ -4,16 +4,18 @@
 \alias{piper_diagram}
 \title{Piper diagram}
 \usage{
-piper_diagram(opacity = 0.5)
+piper_diagram(language = c("en", "es"), opacity = 0.5)
 }
 \arguments{
+\item{language}{The language to be displayed: "en" for english or "es" for spanish (deafult is "en")}
+
 \item{opacity}{Transparency level (default is 0.5)}
 }
 \value{
 Piper diagram for hydrochemical data
 }
 \description{
-\code{piper_diagram()} draws a static Piper diagram with the water facies. It is a base diagram where data can be plotted.
+\code{piper_diagram()} draws a static Piper diagram with the water types It is a base diagram where data can be plotted.
 }
 \details{
 For ploting data the \code{piper_data_prep()} function should be used to transform the data in the proper format. After that the data has \code{x} and \code{y} coordinates, and these are the ones to use when plotting the data on \code{piper_diagram()}.

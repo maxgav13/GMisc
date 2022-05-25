@@ -1,5 +1,6 @@
 #' @title Piper diagram
-#' @description \code{piper_diagram()} draws a static Piper diagram with the water facies. It is a base diagram where data can be plotted.
+#' @description \code{piper_diagram()} draws a static Piper diagram with the water types It is a base diagram where data can be plotted.
+#' @param language The language to be displayed: "en" for english or "es" for spanish (deafult is "en")
 #' @param opacity Transparency level (default is 0.5)
 #'
 #' @export
@@ -32,33 +33,40 @@
 #'   scale_color_brewer('Group',palette = 'Dark2') +
 #'   scale_shape_manual('Group',values = c(3,21))
 #'
-piper_diagram <- function(opacity = 0.5) {
+piper_diagram <- function(language = c('en','es'),
+                          opacity = 0.5) {
 
   output = 'ggplot'
 
-  grid1p1 <<- data.frame(x1 = c(20,40,60,80), x2= c(10,20,30,40),y1 = c(0,0,0,0), y2 = c(17.3206,34.6412,51.9618, 69.2824))
-  grid1p2 <<- data.frame(x1 = c(20,40,60,80), x2= c(60,70,80,90),y1 = c(0,0,0,0), y2 = c(69.2824, 51.9618,34.6412,17.3206))
-  grid1p3 <<- data.frame(x1 = c(10,20,30,40), x2= c(90,80,70,60),y1 = c(17.3206,34.6412,51.9618, 69.2824), y2 = c(17.3206,34.6412,51.9618, 69.2824))
-  grid2p1 <<- grid1p1
+  grid1p1 <- data.frame(x1 = c(20,40,60,80), x2= c(10,20,30,40),y1 = c(0,0,0,0), y2 = c(17.3206,34.6412,51.9618, 69.2824))
+  grid1p2 <- data.frame(x1 = c(20,40,60,80), x2= c(60,70,80,90),y1 = c(0,0,0,0), y2 = c(69.2824, 51.9618,34.6412,17.3206))
+  grid1p3 <- data.frame(x1 = c(10,20,30,40), x2= c(90,80,70,60),y1 = c(17.3206,34.6412,51.9618, 69.2824), y2 = c(17.3206,34.6412,51.9618, 69.2824))
+  grid2p1 <- grid1p1
   grid2p1$x1 <- grid2p1$x1+120
   grid2p1$x2 <- grid2p1$x2+120
-  grid2p2 <<- grid1p2
+  grid2p2 <- grid1p2
   grid2p2$x1 <- grid2p2$x1+120
   grid2p2$x2 <- grid2p2$x2+120
-  grid2p3 <<- grid1p3
+  grid2p3 <- grid1p3
   grid2p3$x1 <- grid2p3$x1+120
   grid2p3$x2 <- grid2p3$x2+120
-  grid3p1 <<- data.frame(x1=c(100,90, 80, 70),y1=c(34.6412, 51.9618, 69.2824, 86.603), x2=c(150, 140, 130, 120), y2=c(121.2442,138.5648,155.8854,173.2060))
-  grid3p2 <<- data.frame(x1=c(70, 80, 90, 100),y1=c(121.2442,138.5648,155.8854,173.2060), x2=c(120, 130, 140, 150), y2=c(34.6412, 51.9618, 69.2824, 86.603))
+  grid3p1 <- data.frame(x1=c(100,90, 80, 70),y1=c(34.6412, 51.9618, 69.2824, 86.603), x2=c(150, 140, 130, 120), y2=c(121.2442,138.5648,155.8854,173.2060))
+  grid3p2 <- data.frame(x1=c(70, 80, 90, 100),y1=c(121.2442,138.5648,155.8854,173.2060), x2=c(120, 130, 140, 150), y2=c(34.6412, 51.9618, 69.2824, 86.603))
 
   ##Upper Diamond##
   ids <- factor(c("Sodium Bicarbonate", "Sodium Chloride",
                   "Calcium Bicarbonate", "Calcium Sulfate"))
+  ids.es <- factor(c("Bicarbonatada sódica", "Clorurada sódica",
+                     "Bicarbonatada magnésica", "Clorurada cálcica"
+                     # ,'Mixed','Mixed'
+  ))
   values <- data.frame(
     id = ids,
+    id.es = ids.es,
     value = c(1,2,3,4))
   positions <- data.frame(
     id=rep(ids, each = 4),
+    id.es=rep(ids.es, each = 4),
     x=c(110,85,110,135,
         135,110,135,160,
         85,60,85,110,
@@ -73,11 +81,15 @@ piper_diagram <- function(opacity = 0.5) {
   # ids2 <- factor(c("05", "06", "07", "08"))
   ids2 <- factor(c("Calcium", "No dominant type",
                    "Sodium and potassium", "Magnesium"))
+  ids2.es <- factor(c("Cálcica", "No dominante",
+                      "Sódica", "Magnésica"))
   values2 <- data.frame(
     id = ids2,
+    id.es = ids2.es,
     value = c(5,6,7,8))
   positions2 <- data.frame(
     id=rep(ids2, each = 3),
+    id.es=rep(ids2.es, each = 3),
     x=c(50,0,25,
         50,25,75,
         100,50,75,
@@ -92,11 +104,15 @@ piper_diagram <- function(opacity = 0.5) {
   # ids3 <- factor(c("09", "10", "11", "12"))
   ids3 <- factor(c("Bicarbonate", "No dominant type",
                    "Chloride", "Sulphate"))
+  ids3.es <- factor(c("Bicarbonatada", "No dominante",
+                      "Clorurada", "Sulfatada"))
   values3 <- data.frame(
     id = ids3,
+    id.es = ids3.es,
     value = c(9,10,11,12))
   positions3 <- data.frame(
     id=rep(ids3, each = 3),
+    id.es=rep(ids3.es, each = 3),
     x=c(170,120,145,
         170,145,195,
         220,170,195,
@@ -109,10 +125,22 @@ piper_diagram <- function(opacity = 0.5) {
 
   polygons_all = dplyr::bind_rows(polygons,polygons2,polygons3)
 
-  p <- ggplot() +
-    geom_polygon(data=polygons_all,
-                 aes(x=x,y=y,fill=id,group=value),
-                 alpha = opacity,color='black',size=.5) +
+  if (any(language == 'en')) {
+    p <- ggplot() +
+      geom_polygon(data=polygons_all,
+                   aes(x=x,y=y,fill=id,group=value),
+                   alpha = opacity,color='black',size=.5) +
+      scale_fill_brewer('Type',palette = 'Set3')
+
+  } else if (any(output == 'ggplot' & language == 'es')) {
+    p <- ggplot() +
+      geom_polygon(data=polygons_all,
+                   aes(x=x,y=y,fill=id.es,group=value),
+                   alpha = opacity,color='black',size=.5) +
+      scale_fill_brewer('Tipo',palette = 'Set3')
+  }
+
+  p <- p +
     ## left hand ternary plot
     # geom_polygon(data=polygons2, aes(x=x,y=y,fill=id,group=id)) +
     geom_segment(aes(x=0,y=0, xend=100, yend=0)) +
@@ -160,9 +188,7 @@ piper_diagram <- function(opacity = 0.5) {
           panel.grid.minor = element_blank(),
           panel.border = element_blank(), axis.ticks = element_blank(),
           axis.text.x = element_blank(), axis.text.y = element_blank(),
-          axis.title.x = element_blank(), axis.title.y = element_blank()) +
-
-    scale_fill_brewer('Type',palette = 'Set3')
+          axis.title.x = element_blank(), axis.title.y = element_blank())
 
   if (any(output == 'ggplot')) {
     p = p +
