@@ -6,6 +6,7 @@
 #'
 #' @return Ternary diagram for pyroclastic rocks in the desired format (object)
 #' @export
+#' @importFrom ggplot2 .data
 #'
 #' @details For plotting data on the ggplot object it would be easier if the names of the dataframe are "lapilli", "bb", and "ash", that way it gets mapped automatically, if not make sure to use "aes(x=lapilli,y=bb,z=ash)".
 #' For plotting on the plotly object the mapping of the new data should be as shown in the example: \code{a = ~bb, b = ~lapilli, c = ~ash}, where \code{a} refers to the top ("bb"), \code{b} refers to the bottom left ("lapilli"), and \code{c} refers to the bottom right ("ash").
@@ -71,7 +72,8 @@ ternary_pyroclastic = function(output = c('ggplot','plotly'),
     0,25,75,"Tuff","Toba",
     0,0,100,"Tuff","Toba",
     25,0,75,"Tuff","Toba") %>%
-    dplyr::mutate(dplyr::across(Label:Label.es,forcats::as_factor))
+    dplyr::mutate(dplyr::across(.data$Label:.data$Label.es,
+                                forcats::as_factor))
 
   # reusable function for creating annotation object
   label <- function(txt) {
@@ -107,9 +109,11 @@ ternary_pyroclastic = function(output = c('ggplot','plotly'),
 
 
   if (any(output == 'ggplot' & language == 'en')) {
-    pyro <- ggtern::ggtern(data=tb.pyro,ggtern::aes(lapilli,bb,ash)) +
-      ggplot2::geom_polygon(aes(fill=Label,color=Label,
-                                group=Label),
+    pyro <- ggtern::ggtern(data=tb.pyro,
+                           ggtern::aes(.data$lapilli,.data$bb,.data$ash)) +
+      ggplot2::geom_polygon(aes(fill=.data$Label,
+                                color=.data$Label,
+                                group=.data$Label),
                             alpha=opacity) +
       ggtern::theme_arrowdefault() +
       ggtern::theme_clockwise() +
@@ -121,9 +125,11 @@ ternary_pyroclastic = function(output = c('ggplot','plotly'),
                     L="Lapilli\n(2-64 mm)",
                     R="Ash\n(< 2 mm)")
   } else if (any(output == 'ggplot' & language == 'es')) {
-    pyro <- ggtern::ggtern(data=tb.pyro,ggtern::aes(lapilli,bb,ash)) +
-      ggplot2::geom_polygon(aes(fill=Label.es,color=Label.es,
-                                group=Label.es),
+    pyro <- ggtern::ggtern(data=tb.pyro,
+                           ggtern::aes(.data$lapilli,.data$bb,.data$ash)) +
+      ggplot2::geom_polygon(aes(fill=.data$Label.es,
+                                color=.data$Label.es,
+                                group=.data$Label.es),
                             alpha=opacity) +
       ggtern::theme_arrowdefault() +
       ggtern::theme_clockwise() +

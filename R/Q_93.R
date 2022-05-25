@@ -19,7 +19,7 @@ Q_93 = function(Q, De, dot.col = 'blue') {
   df = data.frame(x = Q, y = De)
   p = ggplot(df) +
     annotation_custom(g, -3, 3, -.001, 2.29) +
-    geom_point(aes(x, y), color = dot.col, size = 3) +
+    geom_point(aes(.data$x, .data$y), color = dot.col, size = 3) +
     scale_x_log10("Rock Mass Quality, Q",
                   breaks = c(.001,.004,.01,.04,.1,.4,1,4,10,40,100,400),
                   labels = c(".001",".004",".01",".04",".1",".4","1","4","10","40","100","400"),

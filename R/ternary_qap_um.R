@@ -6,6 +6,7 @@
 #'
 #' @return QAP ternary diagram for ultramafic rocks in the desired format (object)
 #' @export
+#' @importFrom ggplot2 .data
 #'
 #' @details For plotting data on the ggplot object it would be easier if the names of the dataframe are "opx", "ol", and "cpx", that way it gets mapped automatically, if not make sure to use "aes(x=opx,y=ol,z=cpx)".
 #' For plotting on the plotly object the mapping of the new data should be as shown in the example: \code{a = ~ol, b = ~opx, c = ~cpx}, where \code{a} refers to the top ("ol"), \code{b} refers to the bottom left ("opx"), and \code{c} refers to the bottom right ("cpx").
@@ -79,7 +80,8 @@ ternary_qap_um = function(output = c('ggplot','plotly'),
     0,   10,   90,         "Clinopyroxenite",           "Clinopiroxenita",
     0,    0,  100,         "Clinopyroxenite",           "Clinopiroxenita"
   ) %>%
-    dplyr::mutate(dplyr::across(Label.en:Label.es,forcats::as_factor))
+    dplyr::mutate(dplyr::across(.data$Label.en:.data$Label.es,
+                                forcats::as_factor))
 
   # reusable function for creating annotation object
   label <- function(txt) {
@@ -110,9 +112,11 @@ ternary_qap_um = function(output = c('ggplot','plotly'),
   QAP_UM.pal = viridisLite::viridis(10,direction = -1,option = 'D')
 
   if (any(output == 'ggplot' & language == 'en')) {
-    QAP_UM <- ggtern::ggtern(data=tb.QAP_UM,ggtern::aes(opx,ol,cpx)) +
-      ggplot2::geom_polygon(aes(fill=Label.en,color=Label.en,
-                                group=Label.en),
+    QAP_UM <- ggtern::ggtern(data=tb.QAP_UM,
+                             ggtern::aes(.data$opx,.data$ol,.data$cpx)) +
+      ggplot2::geom_polygon(aes(fill=.data$Label.en,
+                                color=.data$Label.en,
+                                group=.data$Label.en),
                             alpha=opacity) +
       ggtern::theme_arrowdefault() +
       ggtern::theme_clockwise() +
@@ -122,9 +126,11 @@ ternary_qap_um = function(output = c('ggplot','plotly'),
                     L="Opx",
                     R="Cpx")
   } else if (any(output == 'ggplot' & language == 'es')) {
-    QAP_UM <- ggtern::ggtern(data=tb.QAP_UM,ggtern::aes(opx,ol,cpx)) +
-      ggplot2::geom_polygon(aes(fill=Label.es,color=Label.es,
-                                group=Label.es),
+    QAP_UM <- ggtern::ggtern(data=tb.QAP_UM,
+                             ggtern::aes(.data$opx,.data$ol,.data$cpx)) +
+      ggplot2::geom_polygon(aes(fill=.data$Label.es,
+                                color=.data$Label.es,
+                                group=.data$Label.es),
                             alpha=opacity) +
       ggtern::theme_arrowdefault() +
       ggtern::theme_clockwise() +

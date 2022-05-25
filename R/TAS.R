@@ -6,7 +6,8 @@
 #' @return TAS diagram in the desired format (object)
 #' @export
 #'
-#'@details The examples show basic usage and how to add data, which can be more customizable. In general, just map the silica content to the x-axis and alkali content to the y-axis.
+#' @importFrom ggplot2 .data
+#' @details The examples show basic usage and how to add data, which can be more customizable. In general, just map the silica content to the x-axis and alkali content to the y-axis.
 #'
 #' @examples
 #' library(ggplot2)
@@ -77,7 +78,7 @@ TAS = function(output = c('ggplot','plotly'),
                                 text6,text7,text8,text9,text10,
                                 text11,text12,text13,text14,text15,
                                 .id = 'zona') %>%
-    dplyr::rename(name = text) %>%
+    dplyr::rename(name = .data$text) %>%
     dplyr::mutate(name.es = c('Basalto\u000apicr\u00edtico','Basalto','Andesita\u000abas\u00e1ltica',
                               'Andesita','Dacita','Riolita',
                               'Traquita\u000aTraquidacita','Traqui-\u000aandesita',
@@ -91,15 +92,15 @@ TAS = function(output = c('ggplot','plotly'),
                             lines15,lines1,
                             .id = 'zona') %>%
     dplyr::left_join(clssf %>% dplyr::as_tibble(), by = 'zona') %>%
-    dplyr::left_join(TAS.labels %>% dplyr::select(-c(x,y,zona)),
+    dplyr::left_join(TAS.labels %>% dplyr::select(-c(.data$x,.data$y,.data$zona)),
                      by = c('name')) %>%
-    dplyr::mutate(name = forcats::as_factor(name),
-                  name.es = forcats::as_factor(name.es))
+    dplyr::mutate(name = forcats::as_factor(.data$name),
+                  name.es = forcats::as_factor(.data$name.es))
 
   TAS.line = tibble::tibble(x=c(39.2,40,43.2,45,48,50,53.7,55,60,65,77.4),
                             y=c(0,0.4,2,2.8,4,4.75,6,6.4,8,8.8,10))
 
-  TAS_base.gg = ggplot(tb.TAS,aes(x,y)) +
+  TAS_base.gg = ggplot(tb.TAS,aes(.data$x,.data$y)) +
     scale_x_continuous(breaks = seq(37,79,4),expand = c(0,0)) +
     scale_y_continuous(breaks = 1:15,expand = c(0,0)) +
     theme_classic() +
@@ -107,9 +108,9 @@ TAS = function(output = c('ggplot','plotly'),
 
   if (any(output == 'ggplot' & language == 'en')) {
     TAS = TAS_base.gg +
-      geom_polygon(aes(group=name),fill='white',col='black') +
+      geom_polygon(aes(group=.data$name),fill='white',col='black') +
       geom_line(data = TAS.line, col='darkred') +
-      geom_text(aes(label = name),data = TAS.labels,size=2) +
+      geom_text(aes(label = .data$name),data = TAS.labels,size=2) +
       annotate('text', label = 'Alkaline',
                x=73, y=13, col='darkred',size=3) +
       annotate('text', label = 'Subalkaline\u000a/Tholeiitic',
@@ -119,9 +120,9 @@ TAS = function(output = c('ggplot','plotly'),
 
   } else if (any(output == 'ggplot' & language == 'es')) {
     TAS = TAS_base.gg +
-      geom_polygon(aes(group=name),fill='white',col='black') +
+      geom_polygon(aes(group=.data$name),fill='white',col='black') +
       geom_line(data = TAS.line, col='darkred') +
-      geom_text(aes(label = name.es),data = TAS.labels,size=2) +
+      geom_text(aes(label = .data$name.es),data = TAS.labels,size=2) +
       annotate('text', label = 'Alcalina',
                x=73, y=13, col='darkred',size=3) +
       annotate('text', label = 'Subalcalina\u000a/Tole\u00edtica',

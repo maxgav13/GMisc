@@ -6,6 +6,7 @@
 #'
 #' @return QAP ternary diagram for gabbroic rocks in the desired format (object)
 #' @export
+#' @importFrom ggplot2 .data
 #'
 #' @details For plotting data on the ggplot object it would be easier if the names of the dataframe are "cpx", "p", and "opx", that way it gets mapped automatically, if not make sure to use "aes(x=cpx,y=p,z=opx)".
 #' For plotting on the plotly object the mapping of the new data should be as shown in the example: \code{a = ~p, b = ~cpx, c = ~opx}, where \code{a} refers to the top ("p"), \code{b} refers to the bottom left ("cpx"), and \code{c} refers to the bottom right ("opx").
@@ -69,7 +70,8 @@ ternary_qap_g = function(output = c('ggplot','plotly'),
     0,   10,   90,      "Orthopyroxenite",         "Ortopiroxenita",
     0,    0,  100,      "Orthopyroxenite",         "Ortopiroxenita"
   ) %>%
-    dplyr::mutate(dplyr::across(Label.en:Label.es,forcats::as_factor))
+    dplyr::mutate(dplyr::across(.data$Label.en:.data$Label.es,
+                                forcats::as_factor))
 
 
   # reusable function for creating annotation object
@@ -101,9 +103,11 @@ ternary_qap_g = function(output = c('ggplot','plotly'),
   QAP_G.pal = viridisLite::viridis(8,direction = -1,option = 'G')
 
   if (any(output == 'ggplot' & language == 'en')) {
-    QAP_G <- ggtern::ggtern(data=tb.QAP_G,ggtern::aes(cpx,p,opx)) +
-      ggplot2::geom_polygon(aes(fill=Label.en,col=Label.en,
-                                group=Label.en),
+    QAP_G <- ggtern::ggtern(data=tb.QAP_G,
+                            ggtern::aes(.data$cpx,.data$p,.data$opx)) +
+      ggplot2::geom_polygon(aes(fill=.data$Label.en,
+                                col=.data$Label.en,
+                                group=.data$Label.en),
                             alpha=opacity) +
       ggtern::theme_arrowdefault() +
       ggtern::theme_clockwise() +
@@ -113,9 +117,11 @@ ternary_qap_g = function(output = c('ggplot','plotly'),
                     L="Cpx",
                     R="Opx")
   } else if (any(output == 'ggplot' & language == 'es')) {
-    QAP_G <- ggtern::ggtern(data=tb.QAP_G,ggtern::aes(cpx,p,opx)) +
-      ggplot2::geom_polygon(aes(fill=Label.es,col=Label.es,
-                                group=Label.es),
+    QAP_G <- ggtern::ggtern(data=tb.QAP_G,
+                            ggtern::aes(.data$cpx,.data$p,.data$opx)) +
+      ggplot2::geom_polygon(aes(fill=.data$Label.es,
+                                col=.data$Label.es,
+                                group=.data$Label.es),
                             alpha=opacity) +
       ggtern::theme_arrowdefault() +
       ggtern::theme_clockwise() +

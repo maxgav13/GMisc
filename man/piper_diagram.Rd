@@ -4,10 +4,10 @@
 \alias{piper_diagram}
 \title{Piper diagram}
 \usage{
-piper_diagram(opacity = 0.6)
+piper_diagram(opacity = 0.5)
 }
 \arguments{
-\item{opacity}{Transparency level (default is 0.6)}
+\item{opacity}{Transparency level (default is 0.5)}
 }
 \value{
 Piper diagram for hydrochemical data

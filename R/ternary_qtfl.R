@@ -6,6 +6,7 @@
 #'
 #' @return QtFL ternary diagram for provenance analysis in the desired format (object)
 #' @export
+#' @importFrom ggplot2 .data
 #'
 #' @details For plotting data on the ggplot object it would be easier if the names of the dataframe are "f", "qt", and "l", that way it gets mapped automatically, if not make sure to use "aes(x=f,y=qt,z=l)".
 #' For plotting on the plotly object the mapping of the new data should be as shown in the example: \code{a = ~qt, b = ~f, c = ~l}, where \code{a} refers to the top ("qt"), \code{b} refers to the bottom left ("f"), and \code{c} refers to the bottom right ("l").
@@ -71,7 +72,8 @@ ternary_qtfl = function(output = c('ggplot','plotly'),
     0,     50,     50,          "Undissected Arc",      "Arco no disectado",
     0,      0,    100,          "Undissected Arc",      "Arco no disectado"
   ) %>%
-    dplyr::mutate(dplyr::across(Label:Label.es,forcats::as_factor))
+    dplyr::mutate(dplyr::across(.data$Label:.data$Label.es,
+                                forcats::as_factor))
 
 
   # reusable function for creating annotation object
@@ -105,9 +107,11 @@ ternary_qtfl = function(output = c('ggplot','plotly'),
               "#BFAED2", "#DAB7A3", "#B21C3F")
 
   if (any(output == 'ggplot' & language == 'en')) {
-    QFL <- ggtern::ggtern(data=tb.QFL,ggtern::aes(f,qt,l)) +
-      ggplot2::geom_polygon(ggplot2::aes(fill=Label,color=Label,
-                                         group=Label),
+    QFL <- ggtern::ggtern(data=tb.QFL,
+                          ggtern::aes(.data$f,.data$qt,.data$l)) +
+      ggplot2::geom_polygon(ggplot2::aes(fill=.data$Label,
+                                         color=.data$Label,
+                                         group=.data$Label),
                             alpha=opacity) +
       ggtern::theme_arrowdefault() +
       ggtern::theme_clockwise() +
@@ -120,9 +124,11 @@ ternary_qtfl = function(output = c('ggplot','plotly'),
                     L="F",
                     R="L")
   } else if (any(output == 'ggplot' & language == 'es')) {
-    QFL <- ggtern::ggtern(data=tb.QFL,ggtern::aes(f,qt,l)) +
-      ggplot2::geom_polygon(ggplot2::aes(fill=Label.es,color=Label.es,
-                                         group=Label.es),
+    QFL <- ggtern::ggtern(data=tb.QFL,
+                          ggtern::aes(.data$f,.data$qt,.data$l)) +
+      ggplot2::geom_polygon(ggplot2::aes(fill=.data$Label.es,
+                                         color=.data$Label.es,
+                                         group=.data$Label.es),
                             alpha=opacity) +
       ggtern::theme_arrowdefault() +
       ggtern::theme_clockwise() +

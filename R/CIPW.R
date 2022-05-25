@@ -4,6 +4,7 @@
 #'
 #' @return Summar table for the CIPW norm, with all the minerals and their percent weight, as well as separate tables for the ferromagentic minerals and its components
 #' @export
+#' @importFrom ggplot2 .data
 #' @details The names of the oxides must be: SiO2, TiO2, Al2O3, Fe2O3, FeO, MnO, MgO, CaO, Na2O, K2O, P2O5. If any of the major oxides is not present just use 0 for their percent weight
 #' @examples
 #' d = data.frame(O = c('SiO2', 'TiO2', 'Al2O3', 'Fe2O3', 'FeO',
@@ -70,7 +71,7 @@ CIPW = function(data) {
       MF = rep(c('M','F'),3),
       MF_prop = rep(c(M,F),3),
       MW = c(216.55,248.09,100.39,131.93,140.7,203.78),
-      Result = c(mgdi,fedi,en,fs,fo,fa)/MW,
+      Result = c(mgdi,fedi,en,fs,fo,fa)/.data$MW,
       Perc_W = c(mgdi,fedi,en,fs,fo,fa)
     )
 
@@ -84,7 +85,7 @@ CIPW = function(data) {
 
   dat = dat %>%
     dplyr::left_join(cipw.mw, by = 'Oxide') %>%
-    dplyr::mutate(mol.prop = Perc_W/MW)
+    dplyr::mutate(mol.prop = .data$Perc_W/.data$MW)
 
   # molar proportions
   mol.prop = dat$mol.prop %>%
@@ -403,16 +404,16 @@ CIPW = function(data) {
                         names_to = 'Abbr',
                         values_to = 'Result') %>%
     dplyr::left_join(cipw.min, by = 'Abbr') %>%
-    dplyr::relocate(Mineral) %>%
-    dplyr::mutate(Perc_W = (Result * MW) %>% round(2),
-                  Result = Result %>% round(4)) %>%
-    dplyr::filter(Perc_W > 0)
+    dplyr::relocate(.data$Mineral) %>%
+    dplyr::mutate(Perc_W = (.data$Result * .data$MW) %>% round(2),
+                  Result = .data$Result %>% round(4)) %>%
+    dplyr::filter(.data$Perc_W > 0)
 
   parts.summary = parts %>%
-    dplyr::group_by(Mineral) %>%
-    dplyr::summarise(MW = sum(MW*MF_prop),
-                     Result = sum(Result),
-                     Perc_W = sum(Perc_W))
+    dplyr::group_by(.data$Mineral) %>%
+    dplyr::summarise(MW = sum(.data$MW * .data$MF_prop),
+                     Result = sum(.data$Result),
+                     Perc_W = sum(.data$Perc_W))
 
   return(list(CIPW = CIPW,
               parts = parts,

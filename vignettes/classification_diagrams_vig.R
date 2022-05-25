@@ -2,7 +2,7 @@
 library(kableExtra)
 library(GMisc)
 library(plotly)
-library(tidyverse)
+library(ggplot2)
 
 knitr::opts_chunk$set(
   echo = TRUE,
@@ -23,13 +23,13 @@ ternary_qap_m(output = 'plotly')
 TAS(output = 'plotly')
 
 ## -----------------------------------------------------------------------------
-d = tibble(sample=c('a','b'),
-           qt=c(40,30),
-           f=c(40,20),
-           l=c(20,10))
+d = data.frame(sample=c('a','b'),
+               qt=c(40,30),
+               f=c(40,20),
+               l=c(20,10))
 
-d2 = tibble(silica=c(58,70), 
-            alkali=c(8,4))
+d2 = data.frame(silica=c(58,70), 
+                alkali=c(8,4))
 
 ## -----------------------------------------------------------------------------
 d %>% 
@@ -106,7 +106,7 @@ piper_diagram() +
    scale_shape_manual('Group',values = c(3,21))
 
 ## -----------------------------------------------------------------------------
-diagrams.tern = tibble(
+diagrams.tern = data.frame(
     diagram = c('afm','folk','pyroclastic','qap_g','qap_m','qap_um','qap','qmflt','qtfl','shepard'),
     x = c('a','f','lapilli','cpx','ol','opx','a','f','f','sand'),
     y = c('f','q','bb','p','p','ol','q','qm','qt','clay'),

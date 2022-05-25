@@ -50,13 +50,13 @@ NewStats_2samples = function(x, y, dep = FALSE, conf.level = 0.95, col.x = 'blue
   tweak = estimates$point[1] - estimates$point[3]
   estimates[3,2:4] = estimates[3,2:4] + tweak
 
-  q = ggplot(estimates,aes(group,point))+
+  q = ggplot(estimates,aes(.data$group,.data$point))+
     # geom_errorbar(aes(ymin=lower,ymax=upper),width=.1)+
-    geom_pointrange(aes(ymin=lower,ymax=upper,shape=(group=='Difference')),col=c(col.x,col.y,col.diff),size=1)+
+    geom_pointrange(aes(ymin=lower,ymax=upper,shape=(.data$group=='Difference')),col=c(col.x,col.y,col.diff),size=1)+
     scale_y_continuous(sec.axis = sec_axis(~.-tweak,name=ylab.diff))+
-    geom_segment(aes(x=1,xend=4,y=point[1],yend=point[1]),linetype=3, size=.6)+
-    geom_segment(aes(x=2,xend=4,y=point[2],yend=point[2]),linetype=3, size=.6)+
-    {if (dep==TRUE) geom_segment(aes(x=1,xend=2,y=point[1],yend=point[2]))}+
+    geom_segment(aes(x=1,xend=4,y=.data$point[1],yend=.data$point[1]),linetype=3, size=.6)+
+    geom_segment(aes(x=2,xend=4,y=.data$point[2],yend=.data$point[2]),linetype=3, size=.6)+
+    {if (dep==TRUE) geom_segment(aes(x=1,xend=2,y=.data$point[1],yend=.data$point[2]))}+
     theme_bw()+
     my_theme+
     labs(x='', y='Values')

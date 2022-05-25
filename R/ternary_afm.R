@@ -5,6 +5,7 @@
 #'
 #' @return AFM ternary diagram in the desired format (object)
 #' @export
+#' @importFrom ggplot2 .data
 #'
 #' @details For plotting data on the ggplot object it would be easier if the names of the dataframe are "a", "f", and "m", that way it gets mapped automatically, if not make sure to use "aes(x=a,y=f,z=m)".
 #' For plotting on the plotly object the mapping of the new data should be as shown in the example: \code{a = ~f, b = ~a, c = ~m}, where \code{a} refers to the top ("f"), \code{b} refers to the bottom left ("a"), and \code{c} refers to the bottom right ("m").
@@ -98,7 +99,8 @@ ternary_afm = function(output = c('ggplot','plotly'),
 
 
   if (any(output == 'ggplot' & language == 'en')) {
-    AFM <- ggtern::ggtern(data=tb.AFM,ggtern::aes(a,f,m)) +
+    AFM <- ggtern::ggtern(data=tb.AFM,
+                          ggtern::aes(.data$a,.data$f,.data$m)) +
       ggplot2::geom_path(color = 'darkred') +
       ggtern::annotate('text', label = 'Tholeiitic',
                        x=20, y=70, z=15, col='darkred',size=3) +
@@ -112,7 +114,8 @@ ternary_afm = function(output = c('ggplot','plotly'),
                     L="A",
                     R="M")
   } else if (any(output == 'ggplot' & language == 'es')) {
-    AFM <- ggtern::ggtern(data=tb.AFM,ggtern::aes(a,f,m)) +
+    AFM <- ggtern::ggtern(data=tb.AFM,
+                          ggtern::aes(.data$a,.data$f,.data$m)) +
       ggplot2::geom_path(color = 'darkred') +
       ggtern::annotate('text', label = 'Tole\u00edtica',
                        x=20, y=70, z=15, col='darkred',size=3) +

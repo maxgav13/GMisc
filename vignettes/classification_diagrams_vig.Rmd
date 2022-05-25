@@ -96,13 +96,13 @@ Adding some data is demostrated here by ploting two points on the QtFL and TAS d
 In the data for the ternary diagram (`d`) the first sample (point) adds-up to a 100 but the second one does not, showing the point made above.
 
 ```{r}
-d = tibble(sample=c('a','b'),
-           qt=c(40,30),
-           f=c(40,20),
-           l=c(20,10))
+d = data.frame(sample=c('a','b'),
+               qt=c(40,30),
+               f=c(40,20),
+               l=c(20,10))
 
-d2 = tibble(silica=c(58,70), 
-            alkali=c(8,4))
+d2 = data.frame(silica=c(58,70), 
+                alkali=c(8,4))
 ```
 
 ```{r}
@@ -224,7 +224,7 @@ These are the suggested names that your data should have for you to be able to p
 ```{r}
 #| echo: false
 
-diagrams.tern = tibble(
+diagrams.tern = data.frame(
     diagram = c('afm','folk','pyroclastic','qap_g','qap_m','qap_um','qap','qmflt','qtfl','shepard'),
     x = c('a','f','lapilli','cpx','ol','opx','a','f','f','sand'),
     y = c('f','q','bb','p','p','ol','q','qm','qt','clay'),

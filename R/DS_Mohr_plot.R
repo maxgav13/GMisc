@@ -75,7 +75,7 @@ DS_Mohr_plot <- function(sig.n, tau, units = 'kPa') {
   gstm = ggplot()+geom_line(aes(x,y),col="red")+
     coord_fixed(xlim=c(0,C[length(C)]+1.25*R[length(R)]),
                 ylim=c(0,1.25*R[length(R)]))+
-    geom_line(data=MOHR,aes(X,Y,group=cir),col="blue")+
+    geom_line(data=MOHR,aes(.data$X,.data$Y,group=.data$cir),col="blue")+
     labs(x=paste0('Normal stress (',units,')'),
          y=paste0('Shear stress (',units,')')) +
     # labs(x=TeX(str_glue('$\\sigma$ ({units})')),

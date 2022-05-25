@@ -19,7 +19,8 @@
 #' Hoek_Brown_plot(HB)
 #'
 Hoek_Brown_plot = function(HB) {
-  p = ggplot(HB$princ.stress, aes(sig.3, sig.1, group = crit, col = crit)) +
+  p = ggplot(HB$princ.stress, aes(.data$sig.3, .data$sig.1,
+                                  group = .data$crit, col = .data$crit)) +
     geom_vline(xintercept = 0, size = 0.2) +
     geom_hline(yintercept = 0, size = 0.2) +
     geom_line(size = 0.3) +
@@ -37,11 +38,13 @@ Hoek_Brown_plot = function(HB) {
   labelphi.inst = sprintf("phi*minute == %0.1f*degree", HB$Results$phi.h)
   labelc.inst = sprintf("c*minute == %0.3f~MPa", HB$Results$c.h)
 
-  q = ggplot(HB$shear, aes(sig.n, tau, group = crit, col = crit)) +
+  q = ggplot(HB$shear, aes(.data$sig.n, .data$tau,
+                           group = .data$crit, col = .data$crit)) +
     geom_vline(xintercept = 0, size = 0.2) +
     geom_hline(yintercept = 0, size = 0.2) +
     geom_line(size = 0.5) +
-    geom_point(data = HB$stress.level, aes(sign, tau), col = "red", size = 2) +
+    geom_point(data = HB$stress.level, aes(.data$sign, .data$tau),
+               col = "red", size = 2) +
     coord_fixed(ratio = .5) +
     labs(x = expression(paste(sigma[n], " (MPa)")),
          y = expression(paste(tau, " (MPa)"))) +

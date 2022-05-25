@@ -6,6 +6,7 @@
 #'
 #' @return QAP ternary diagram for plutonic and volcanic rocks in the desired format (object)
 #' @export
+#' @importFrom ggplot2 .data
 #'
 #' @details For plotting data on the ggplot object it would be easier if the names of the dataframe are "a", "q", and "p", that way it gets mapped automatically, if not make sure to use "aes(x=a,y=q,z=p)".
 #' For plotting on the plotly object the mapping of the new data should be as shown in the example: \code{a = ~q, b = ~a, c = ~p}, where \code{a} refers to the top ("q"), \code{b} refers to the bottom left ("a"), and \code{c} refers to the bottom right ("p").
@@ -126,7 +127,7 @@ ternary_qap = function(output = c('ggplot','plotly'),
     5,    0,   95,   "10",                      "Diorite / Gabbro / Anorthosite",                            "Diorita / Gabro / Anortosita",                             "Andesite / Basalt",                           "Andesita / Basalto",
     5,  9.5, 85.5,   "10",                      "Diorite / Gabbro / Anorthosite",                            "Diorita / Gabro / Anortosita",                             "Andesite / Basalt",                           "Andesita / Basalto"
   ) %>%
-    dplyr::mutate(forcats::as_factor(Label))
+    dplyr::mutate(forcats::as_factor(.data$Label))
 
   Labs.QAP = data.frame(
     q = c(93.3333333333333,75,40,40,40,40,40,
@@ -169,10 +170,11 @@ ternary_qap = function(output = c('ggplot','plotly'),
   )
 
   if (any(output == 'ggplot')) {
-    QAP <- ggtern::ggtern(data=tb.QAP,ggtern::aes(a,q,p)) +
-      ggplot2::geom_polygon(fill='white',aes(group=Label),
+    QAP <- ggtern::ggtern(data=tb.QAP,
+                          ggtern::aes(.data$a,.data$q,.data$p)) +
+      ggplot2::geom_polygon(fill='white',aes(group=.data$Label),
                             color="black",alpha=0.05) +
-      ggplot2::geom_text(data=Labs.QAP,aes(label=Label),size=2.5,color="black") +
+      ggplot2::geom_text(data=Labs.QAP,aes(label=.data$Label),size=2.5,color="black") +
       ggplot2::theme_bw() +
       ggtern::theme_arrowdefault() +
       ggtern::theme_clockwise() +

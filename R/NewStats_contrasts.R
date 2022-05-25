@@ -37,8 +37,8 @@ NewStats_contrasts = function(dat, g1, g2, conf.level = 0.95, col.g1 = 'blue', c
     dat$lower[i]=ci_t(dat[i,1],dat[i,2],dat[i,3],conf.level = conf.level)$lower
   }
 
-  G1 = subset(dat,grp %in% g1)
-  G2 = subset(dat,grp %in% g2)
+  G1 = dplyr::filter(dat,.data$grp %in% g1)
+  G2 = dplyr::filter(dat,.data$grp %in% g2)
 
   for (i in 1:nrow(dat)) {
     if (isTRUE(any(dat$grp[i]==g1))){
@@ -54,9 +54,10 @@ NewStats_contrasts = function(dat, g1, g2, conf.level = 0.95, col.g1 = 'blue', c
   dat$contrast = as.factor(dat$contrast)
   n.contrast = length(levels(dat$contrast))
 
-  p1 = ggplot(dat, aes(grp, mean)) +
+  p1 = ggplot(dat, aes(.data$grp, .data$mean)) +
       # geom_errorbar(aes(ymin = lower, ymax = upper), width = 0.2) +
-      geom_pointrange(size=1, aes(ymin = lower, ymax = upper, col=contrast)) +
+      geom_pointrange(size=1, aes(ymin = lower, ymax = upper,
+                                  col=.data$contrast)) +
       theme_bw() +
       my_theme +
       labs(x='', y=ylab)+
@@ -83,12 +84,12 @@ NewStats_contrasts = function(dat, g1, g2, conf.level = 0.95, col.g1 = 'blue', c
   tweak = estimates$point[1] - estimates$point[3]
   estimates[3,2:4] = estimates[3,2:4] + tweak
 
-  p2 = ggplot(estimates,aes(group,point))+
+  p2 = ggplot(estimates,aes(.data$group, .data$point))+
       # geom_errorbar(aes(ymin=lower,ymax=upper),width=.1)+
-      geom_pointrange(aes(ymin=lower,ymax=upper,shape=(group=='Difference')),col=c(col.g1,col.g2,col.diff),size=1)+
+      geom_pointrange(aes(ymin=lower,ymax=upper,shape=(.data$group=='Difference')),col=c(col.g1,col.g2,col.diff),size=1)+
       scale_y_continuous(sec.axis = sec_axis(~.-tweak,name=ylab.diff), limits = c(layer_scales(p1)$y$range$range))+
-      geom_segment(aes(x=1,xend=4,y=point[1],yend=point[1]),linetype=3, size=.6)+
-      geom_segment(aes(x=2,xend=4,y=point[2],yend=point[2]),linetype=3, size=.6)+
+      geom_segment(aes(x=1,xend=4,y=.data$point[1],yend=.data$point[1]),linetype=3, size=.6)+
+      geom_segment(aes(x=2,xend=4,y=.data$point[2],yend=.data$point[2]),linetype=3, size=.6)+
       theme_bw()+
       my_theme+
       labs(x='', y='')

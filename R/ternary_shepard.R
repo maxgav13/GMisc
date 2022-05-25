@@ -6,6 +6,7 @@
 #'
 #' @return Shepard's ternary diagram for soils in the desired format (object)
 #' @export
+#' @importFrom ggplot2 .data
 #'
 #' @details For plotting data on the ggplot object it would be easier if the names of the dataframe are "sand", "clay", and "silt", that way it gets mapped automatically, if not make sure to use "aes(x=sand,y=clay,z=silt)".
 #' For plotting on the plotly object the mapping of the new data should be as shown in the example: \code{a = ~clay, b = ~sand, c = ~silt}, where \code{a} refers to the top ("clay"), \code{b} refers to the bottom left ("sand"), and \code{c} refers to the bottom right ("silt").
@@ -84,7 +85,8 @@ ternary_shepard = function(output = c('ggplot','plotly'),
     0,     0,     1,               "Silt",                   "Limo",
     0,  0.25,  0.75,               "Silt",                   "Limo"
   ) %>%
-    dplyr::mutate(dplyr::across(Label:Label.es,forcats::as_factor))
+    dplyr::mutate(dplyr::across(.data$Label:.data$Label.es,
+                                forcats::as_factor))
 
   # reusable function for creating annotation object
   label <- function(txt) {
@@ -120,9 +122,11 @@ ternary_shepard = function(output = c('ggplot','plotly'),
 
 
   if (any(output == 'ggplot' & language == 'en')) {
-    Shepard <- ggtern::ggtern(data=tb.Shepard,ggtern::aes(sand,clay,silt)) +
-      ggplot2::geom_polygon(aes(fill=Label,color=Label,
-                                group=Label),
+    Shepard <- ggtern::ggtern(data=tb.Shepard,
+                              ggtern::aes(.data$sand,.data$clay,.data$silt)) +
+      ggplot2::geom_polygon(aes(fill=.data$Label,
+                                color=.data$Label,
+                                group=.data$Label),
                             alpha=opacity) +
       ggtern::theme_arrowdefault() +
       ggtern::theme_clockwise() +
@@ -135,9 +139,11 @@ ternary_shepard = function(output = c('ggplot','plotly'),
                     L="Sand",
                     R="Silt")
   } else if (any(output == 'ggplot' & language == 'es')) {
-    Shepard <- ggtern::ggtern(data=tb.Shepard,ggtern::aes(sand,clay,silt)) +
-      ggplot2::geom_polygon(aes(fill=Label.es,color=Label.es,
-                                group=Label.es),
+    Shepard <- ggtern::ggtern(data=tb.Shepard,
+                              ggtern::aes(.data$sand,.data$clay,.data$silt)) +
+      ggplot2::geom_polygon(aes(fill=.data$Label.es,
+                                color=.data$Label.es,
+                                group=.data$Label.es),
                             alpha=opacity) +
       ggtern::theme_arrowdefault() +
       ggtern::theme_clockwise() +

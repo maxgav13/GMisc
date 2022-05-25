@@ -72,7 +72,7 @@ additional_pks <- function (){
   utils::install.packages("devtools")
   utils::install.packages("modelsummary")
   utils::install.packages("GGally")
-  remotes:install_github("ramnathv/tidymetrics")
+  remotes::install_github("ramnathv/tidymetrics")
   remotes::install_github('crsh/papaja')
   remotes::install_github('gitrman/itns')
   remotes::install_github('easystats/easystats')

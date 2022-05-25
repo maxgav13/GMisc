@@ -81,5 +81,5 @@ piper_data_prep <- function(data) {
     dplyr::as_tibble() %>%
     dplyr::left_join(data, by = 'ID') %>%
     dplyr::mutate(ID = forcats::as_factor(ID)) %>%
-    dplyr::mutate(across(where(is.character), forcats::as_factor))
+    dplyr::mutate(dplyr::across(where(is.character), forcats::as_factor))
 }

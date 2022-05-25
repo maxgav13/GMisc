@@ -1,6 +1,6 @@
 #' @title Piper diagram
 #' @description \code{piper_diagram()} draws a static Piper diagram with the water facies. It is a base diagram where data can be plotted.
-#' @param opacity Transparency level (default is 0.6)
+#' @param opacity Transparency level (default is 0.5)
 #'
 #' @export
 #' @return Piper diagram for hydrochemical data
@@ -32,7 +32,7 @@
 #'   scale_color_brewer('Group',palette = 'Dark2') +
 #'   scale_shape_manual('Group',values = c(3,21))
 #'
-piper_diagram <- function(opacity = 0.6) {
+piper_diagram <- function(opacity = 0.5) {
 
   output = 'ggplot'
 

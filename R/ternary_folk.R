@@ -6,6 +6,7 @@
 #'
 #' @return Folk's ternary diagram for sandstones in the desired format (object)
 #' @export
+#' @importFrom ggplot2 .data
 #'
 #' @details For plotting data on the ggplot object it would be easier if the names of the dataframe are "f", "q", and "r", that way it gets mapped automatically, if not make sure to use "aes(x=f,y=q,z=r)".
 #' For plotting on the plotly object the mapping of the new data should be as shown in the example: \code{a = ~q, b = ~f, c = ~r}, where \code{a} refers to the top ("q"), \code{b} refers to the bottom left ("f"), and \code{c} refers to the bottom right ("r").
@@ -70,7 +71,8 @@ ternary_folk = function(output = c('ggplot','plotly'),
     0,     0,   100,             "Litharenite",              "Litarenita",
     75,     0,    25,             "Litharenite",              "Litarenita"
   ) %>%
-    dplyr::mutate(dplyr::across(Label:Label.es,forcats::as_factor))
+    dplyr::mutate(dplyr::across(.data$Label:.data$Label.es,
+                                forcats::as_factor))
 
 
   # reusable function for creating annotation object
@@ -103,9 +105,11 @@ ternary_folk = function(output = c('ggplot','plotly'),
                "#2F4996", "#D3C6E2", "#EBD1C0", "#564E37")
 
   if (any(output == 'ggplot' & language == 'en')) {
-    Folk <- ggtern::ggtern(data=tb.Folk,ggtern::aes(f,q,r)) +
-      ggplot2::geom_polygon(ggplot2::aes(fill=Label,color=Label,
-                                         group=Label),
+    Folk <- ggtern::ggtern(data=tb.Folk,
+                           ggtern::aes(.data$f,.data$q,.data$r)) +
+      ggplot2::geom_polygon(ggplot2::aes(fill=.data$Label,
+                                         color=.data$Label,
+                                         group=.data$Label),
                             alpha=opacity) +
       ggtern::theme_arrowdefault() +
       ggtern::theme_clockwise() +
@@ -118,9 +122,11 @@ ternary_folk = function(output = c('ggplot','plotly'),
                     L="F",
                     R="R")
   } else if (any(output == 'ggplot' & language == 'es')) {
-    Folk <- ggtern::ggtern(data=tb.Folk,ggtern::aes(f,q,r)) +
-      ggplot2::geom_polygon(ggplot2::aes(fill=Label.es,color=Label.es,
-                                         group=Label.es),
+    Folk <- ggtern::ggtern(data=tb.Folk,
+                           ggtern::aes(.data$f,.data$q,.data$r)) +
+      ggplot2::geom_polygon(ggplot2::aes(fill=.data$Label.es,
+                                         color=.data$Label.es,
+                                         group=.data$Label.es),
                             alpha=opacity) +
       ggtern::theme_arrowdefault() +
       ggtern::theme_clockwise() +
