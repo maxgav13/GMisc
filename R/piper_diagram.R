@@ -128,14 +128,14 @@ piper_diagram <- function(language = c('en','es'),
   if (any(language == 'en')) {
     p <- ggplot() +
       geom_polygon(data=polygons_all,
-                   aes(x=x,y=y,fill=id,group=value),
+                   aes(x=.data$x,y=.data$y,fill=.data$id,group=.data$value),
                    alpha = opacity,color='black',size=.5) +
       scale_fill_brewer('Type',palette = 'Set3')
 
   } else if (any(output == 'ggplot' & language == 'es')) {
     p <- ggplot() +
       geom_polygon(data=polygons_all,
-                   aes(x=x,y=y,fill=id.es,group=value),
+                   aes(x=.data$x,y=.data$y,fill=.data$id.es,group=.data$value),
                    alpha = opacity,color='black',size=.5) +
       scale_fill_brewer('Tipo',palette = 'Set3')
   }
@@ -158,14 +158,14 @@ piper_diagram <- function(language = c('en','es'),
     geom_segment(aes(x=110,y=17.3206, xend=160, yend=103.9236)) +
     geom_segment(aes(x=110,y=17.3206, xend=60, yend=103.9236)) +
     ## Add grid lines to the plots
-    geom_segment(aes(x=x1, y=y1, yend=y2, xend=x2), data=grid1p1, linetype = "dashed", size = 0.25, colour = "grey50") +
-    geom_segment(aes(x=x1, y=y1, yend=y2, xend=x2), data=grid1p2, linetype = "dashed", size = 0.25, colour = "grey50") +
-    geom_segment(aes(x=x1, y=y1, yend=y2, xend=x2), data=grid1p3, linetype = "dashed", size = 0.25, colour = "grey50") +
-    geom_segment(aes(x=x1, y=y1, yend=y2, xend=x2), data=grid2p1, linetype = "dashed", size = 0.25, colour = "grey50") +
-    geom_segment(aes(x=x1, y=y1, yend=y2, xend=x2), data=grid2p2, linetype = "dashed", size = 0.25, colour = "grey50") +
-    geom_segment(aes(x=x1, y=y1, yend=y2, xend=x2), data=grid2p3, linetype = "dashed", size = 0.25, colour = "grey50") +
-    geom_segment(aes(x=x1, y=y1, yend=y2, xend=x2), data=grid3p1, linetype = "dashed", size = 0.25, colour = "grey50") +
-    geom_segment(aes(x=x1, y=y1, yend=y2, xend=x2), data=grid3p2, linetype = "dashed", size = 0.25, colour = "grey50") +
+    geom_segment(aes(x=.data$x1, y=.data$y1, yend=.data$y2, xend=.data$x2), data=grid1p1, linetype = "dashed", size = 0.25, colour = "grey50") +
+    geom_segment(aes(x=.data$x1, y=.data$y1, yend=.data$y2, xend=.data$x2), data=grid1p2, linetype = "dashed", size = 0.25, colour = "grey50") +
+    geom_segment(aes(x=.data$x1, y=.data$y1, yend=.data$y2, xend=.data$x2), data=grid1p3, linetype = "dashed", size = 0.25, colour = "grey50") +
+    geom_segment(aes(x=.data$x1, y=.data$y1, yend=.data$y2, xend=.data$x2), data=grid2p1, linetype = "dashed", size = 0.25, colour = "grey50") +
+    geom_segment(aes(x=.data$x1, y=.data$y1, yend=.data$y2, xend=.data$x2), data=grid2p2, linetype = "dashed", size = 0.25, colour = "grey50") +
+    geom_segment(aes(x=.data$x1, y=.data$y1, yend=.data$y2, xend=.data$x2), data=grid2p3, linetype = "dashed", size = 0.25, colour = "grey50") +
+    geom_segment(aes(x=.data$x1, y=.data$y1, yend=.data$y2, xend=.data$x2), data=grid3p1, linetype = "dashed", size = 0.25, colour = "grey50") +
+    geom_segment(aes(x=.data$x1, y=.data$y1, yend=.data$y2, xend=.data$x2), data=grid3p2, linetype = "dashed", size = 0.25, colour = "grey50") +
 
     ### Labels and grid values
 
@@ -193,13 +193,13 @@ piper_diagram <- function(language = c('en','es'),
   if (any(output == 'ggplot')) {
     p = p +
       geom_text(aes(17,50, label="Mg"), angle=60, size=4, parse=TRUE) +
-      geom_text(aes(82.5,50, label="Na + K"), angle=-60, size=4) +
+      geom_text(aes(82.5,50, label="Na + K"), angle=-60, size=4, nudge_x = -5) +
       geom_text(aes(50,-10, label="Ca"), size=4, parse=TRUE) +
 
 
       geom_text(aes(170,-10, label="Cl"), size=4, parse=TRUE) +
       geom_text(aes(205,50, label="SO[4]"), angle=-60, size=4, parse=TRUE) +
-      geom_text(aes(137.5,50, label="CO[3]~+~HCO[3]"), angle=60, size=4, parse=TRUE) +
+      geom_text(aes(137.5,50, label="CO[3]~+~HCO[3]"), angle=60, size=4, parse=TRUE, nudge_x = 5) +
       geom_text(aes(72.5,150, label="SO[4]~+~Cl"), angle=60, size=4, parse=TRUE) +
       geom_text(aes(147.5,150, label="Ca~+~Mg"), angle=-60, size=4, parse=TRUE)
 
@@ -224,9 +224,7 @@ piper_diagram <- function(language = c('en','es'),
                          y = c(50,50,-10,-10,50,50,150,150),
                          textangle = c(-60,60,0,0,60,-60,-60,60),
                          "showarrow"=F, font=list(size = 12, color = "black")
-        ),
-        showlegend = ifelse(is.null(data),F,T),
-        legend = list(x = 0.1, y = 0.9))
+        ))
 
   }
 
