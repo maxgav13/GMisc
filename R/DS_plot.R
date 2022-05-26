@@ -60,7 +60,7 @@ DS_plot <- function(sig.n, tau, units = 'kPa') {
     Mohr[[i]] = data.frame(X=circ_x[,i],Y=circ_y[,i],cir=i)
   }
   #MOHR = do.call(rbind,Mohr)
-  MOHR = data.table::rbindlist(Mohr)
+  MOHR = dplyr::bind_rows(Mohr,.id = 'circ')
   MOHR$cir = as.factor(MOHR$cir)
 
   # Text to annotate with phi and c parameters
