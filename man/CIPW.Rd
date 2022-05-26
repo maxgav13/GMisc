@@ -7,10 +7,10 @@
 CIPW(data)
 }
 \arguments{
-\item{data}{A dataframe (tibble) with the major oxides in the first column and their percent weight in the secon column}
+\item{data}{A dataframe (tibble) with the major oxides in the first column and their percent weight in the second column}
 }
 \value{
-Summar table for the CIPW norm, with all the minerals and their percent weight, as well as separate tables for the ferromagentic minerals and its components
+Summary table for the CIPW norm, with all the minerals and their percent weight, as well as separate tables for the ferromagentic minerals and its components
 }
 \description{
 \code{CIPW()} calculates the mineral composition of an igneous rock sample, based on ther major oxides and weight percent

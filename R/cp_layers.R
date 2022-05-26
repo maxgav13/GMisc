@@ -24,7 +24,7 @@ cp_layers = function(x, breaks) {
     ES = round(DescTools::EtaSq(mod)[[1]],3)
 
   q = ggplot(datos, aes_string(nom[2], nom[1], col = nom[3])) +
-    geom_path(size = .75) +
+    geom_path(size = .5) +
     scale_y_reverse() +
     labs(x = nom[2], y = "Depth [m]", col = 'Layers') +
     theme_bw()
@@ -35,7 +35,7 @@ cp_layers = function(x, breaks) {
     stat_summary(fun.data = mean_cl_normal,
                  geom = "pointrange",
                  color = "red",
-                 size=.75) +
+                 size=.5) +
     theme_bw() +
     theme(axis.text.x = element_text(angle = 45, vjust = 1, hjust=1))
 
@@ -43,17 +43,17 @@ cp_layers = function(x, breaks) {
 
   Summary = datos %>%
     dplyr::group_by(.data$Layers) %>%
-    dplyr::summarise_at(dplyr::vars(nom[2]),
-                        .funs = list(
-                          Obs = ~ dplyr::n(),
-                          Mean = ~ signif(mean(.),3),
-                          SD = ~ signif(stats::sd(.),3),
-                          Min = ~ signif(min(.),3),
-                          Max = ~ signif(max(.),3),
-                          CI.lwr = ~ signif(DescTools::MeanCI(.)[[2]],3),
-                          CI.upr = ~ signif(DescTools::MeanCI(.)[[3]],3)
-                        )
-    ) %>%
+    dplyr::summarise(dplyr::across(nom[2],
+                                   .fns = list(
+                                     Obs = ~ dplyr::n(),
+                                     Mean = ~ signif(mean(.),3),
+                                     SD = ~ signif(stats::sd(.),3),
+                                     Min = ~ signif(min(.),3),
+                                     Max = ~ signif(max(.),3),
+                                     CI.lwr = ~ signif(DescTools::MeanCI(.)[[2]],3),
+                                     CI.upr = ~ signif(DescTools::MeanCI(.)[[3]],3)
+                                   )
+                                   ,.names = '{.fn}')) %>%
     dplyr::mutate(MoE = signif(stats::qt(.975,.data$Obs-1)*.data$SD/sqrt(.data$Obs),3)) %>%
     as.data.frame()
 

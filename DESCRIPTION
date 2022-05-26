@@ -36,15 +36,14 @@ Imports:
     CircStats,
     heplots,
     purrr,
-    prettydoc,
-    DT,
     ggtern,
     viridisLite,
     utils,
     grDevices,
-    kableExtra
 Suggests: 
     knitr,
     rmarkdown,
-    Hmisc
+    Hmisc,
+    kableExtra,
+    DT
 VignetteBuilder: knitr, rmarkdown

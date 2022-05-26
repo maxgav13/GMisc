@@ -22,7 +22,7 @@ moving_filter_plot_f = function(x, xlab = "X", ylab = "Data", filterlab = "Filte
     df = x$Filtered
   } else {
     zz = plotk
-    df = x$Filtered %>% dplyr::select_at(c("x",zz))
+    df = x$Filtered %>% dplyr::select(c("x",zz))
   }
 
   df = tidyr::pivot_longer(df, cols = -x, names_to = 'filtro', values_to = 'y_val')

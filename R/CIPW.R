@@ -1,8 +1,8 @@
 #' CIPW Norm
 #' @description \code{CIPW()} calculates the mineral composition of an igneous rock sample, based on ther major oxides and weight percent
-#' @param data A dataframe (tibble) with the major oxides in the first column and their percent weight in the secon column
+#' @param data A dataframe (tibble) with the major oxides in the first column and their percent weight in the second column
 #'
-#' @return Summar table for the CIPW norm, with all the minerals and their percent weight, as well as separate tables for the ferromagentic minerals and its components
+#' @return Summary table for the CIPW norm, with all the minerals and their percent weight, as well as separate tables for the ferromagentic minerals and its components
 #' @export
 #' @importFrom ggplot2 .data
 #' @details The names of the oxides must be: SiO2, TiO2, Al2O3, Fe2O3, FeO, MnO, MgO, CaO, Na2O, K2O, P2O5. If any of the major oxides is not present just use 0 for their percent weight

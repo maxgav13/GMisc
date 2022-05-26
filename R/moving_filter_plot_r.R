@@ -21,7 +21,7 @@ moving_filter_plot_r = function(x, xlab = "X", ylab = "Residual data",filterlab 
     df = x$Residual
   } else {
     zz = plotk
-    df = x$Residual %>% dplyr::select_at(c("x",zz))
+    df = x$Residual %>% dplyr::select(c("x",zz))
   }
 
   df = tidyr::pivot_longer(df, cols = -x, names_to = 'filtro', values_to = 'y_val')

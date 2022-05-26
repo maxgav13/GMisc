@@ -43,7 +43,7 @@ mcp = function(data, R = 199, alpha = 2, sig.level = .01, min.perc = 15) {
   ES = round(heplots::etasq(mod)[[1]][1],3)
 
   q = ggplot(data = data_ecp0_tidy, aes_string(x = 'Value', y = noms.ecp[1])) +
-    geom_path(aes(group=1,col=.data$Layer),size=.75) +
+    geom_path(aes(group=1,col=.data$Layer),size=.5) +
     scale_y_reverse() +
     facet_grid(~.data$Property,scales = 'free_x') +
     theme_bw() +
@@ -55,7 +55,7 @@ mcp = function(data, R = 199, alpha = 2, sig.level = .01, min.perc = 15) {
     stat_summary(fun.data = mean_cl_normal,
                  geom = "pointrange",
                  #color = "red",
-                 size=.75) +
+                 size=.5) +
     facet_wrap(~.data$Property,scales = 'free_y') +
     labs(x = 'Layer', y = '', col = 'Layer') +
     theme_bw()
@@ -64,17 +64,17 @@ mcp = function(data, R = 199, alpha = 2, sig.level = .01, min.perc = 15) {
 
   Summary = data_ecp0_tidy %>%
     dplyr::group_by(.data$Layer,.data$Property) %>%
-    dplyr::summarise_at(dplyr::vars(.data$Value),
-                        .funs = list(
-                          Obs = ~ dplyr::n(),
-                          Mean = ~ signif(mean(.),3),
-                          SD = ~ signif(stats::sd(.),3),
-                          Min = ~ signif(min(.),3),
-                          Max = ~ signif(max(.),3),
-                          CI.lwr = ~ signif(DescTools::MeanCI(.)[[2]],3),
-                          CI.upr = ~ signif(DescTools::MeanCI(.)[[3]],3)
-                        )
-    ) %>%
+    dplyr::summarise(dplyr::across(.data$Value,
+                                   .fns = list(
+                                     Obs = ~ dplyr::n(),
+                                     Mean = ~ signif(mean(.),3),
+                                     SD = ~ signif(stats::sd(.),3),
+                                     Min = ~ signif(min(.),3),
+                                     Max = ~ signif(max(.),3),
+                                     CI.lwr = ~ signif(DescTools::MeanCI(.)[[2]],3),
+                                     CI.upr = ~ signif(DescTools::MeanCI(.)[[3]],3)
+                                   )
+                                   ,.names = '{.fn}')) %>%
     dplyr::mutate(MoE = stats::qt(.975,.data$Obs-1)*.data$SD/sqrt(.data$Obs),
                   Interval = levels(data_ecp0_tidy$Bounds)[levels(data_ecp0_tidy$Layer) == .data$Layer]) %>%
     as.data.frame()
