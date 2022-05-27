@@ -92,7 +92,7 @@ induced_stress = function(qs, B, L = NULL, z.end, footing = c("strip", "square",
         scale_y_reverse() +
         theme_bw() +
         labs(x = "Stress (kPa)", y = "Depth (m)", col = "Length (m)") +
-        ggtitle(paste("Induced stress under a", footing, "footing ")) +
+        ggtitle(paste("Induced stress under a", footing[1], "footing ")) +
         theme(axis.title = element_text(size = 16),
               axis.text = element_text(size = 14),
               legend.text = element_text(size = 12))
@@ -102,7 +102,7 @@ induced_stress = function(qs, B, L = NULL, z.end, footing = c("strip", "square",
         scale_y_reverse() +
         theme_bw() +
         labs(x = "Stress (kPa)", y = "Depth (m)", col = "Length (m)") +
-        ggtitle(paste("Induced stress under a", footing, "footing ")) +
+        ggtitle(paste("Induced stress under a", footing[1], "footing ")) +
         theme(axis.title = element_text(size = 16),
               axis.text = element_text(size = 14),
               legend.text = element_text(size = 12))
@@ -174,7 +174,7 @@ induced_stress = function(qs, B, L = NULL, z.end, footing = c("strip", "square",
         scale_y_reverse() +
         theme_bw() +
         labs(x = "Stress (kPa)", y = "Depth (m)", col = texto)  +
-        ggtitle(paste("Induced stress under a", footing, "footing ")) +
+        ggtitle(paste("Induced stress under a", footing[1], "footing ")) +
         theme(axis.title = element_text(size = 16),
               axis.text = element_text(size = 14),
               legend.text = element_text(size = 12),
@@ -185,7 +185,7 @@ induced_stress = function(qs, B, L = NULL, z.end, footing = c("strip", "square",
         scale_y_reverse() +
         theme_bw() +
         labs(x = "Stress (kPa)", y = "Depth (m)", col = texto) +
-        ggtitle(paste("Induced stress under a", footing, "footing ")) +
+        ggtitle(paste("Induced stress under a", footing[1], "footing ")) +
         theme(axis.title = element_text(size = 16),
               axis.text = element_text(size = 14),
               legend.text = element_text(size = 12),
