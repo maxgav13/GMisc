@@ -72,7 +72,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">GMisc</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3</span>
       </span>
     </div>
 
@@ -88,7 +88,7 @@
   <a href="../reference/index.html">Reference</a>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Articles
      
     <span class="caret"></span>
@@ -96,6 +96,9 @@
   <ul class="dropdown-menu" role="menu">
     <li>
       <a href="../articles/basic_stats_vig.html">Basic statistics</a>
+    </li>
+    <li>
+      <a href="../articles/classification_diagrams_vig.html">Classification Diagrams</a>
     </li>
     <li>
       <a href="../articles/directional_stats_vig.html">Directional statistics</a>
@@ -177,27 +180,27 @@
 <span class='va'>dip</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/Uniform.html'>runif</a></span><span class='op'>(</span>min <span class='op'>=</span> <span class='fl'>10</span>, max <span class='op'>=</span> <span class='fl'>60</span>, n <span class='op'>=</span> <span class='fl'>20</span><span class='op'>)</span>
 <span class='fu'>stereo_pole</span><span class='op'>(</span><span class='va'>dip.dir</span>, <span class='va'>dip</span><span class='op'>)</span>
 </div><div class='img'><img src='stereo_pole-1.png' alt='' width='700' height='433' /></div><div class='output co'>#&gt; $x
-#&gt;  [1] -0.06014288 -0.26569379 -0.26780282 -0.10154703 -0.16294549 -0.22707333
-#&gt;  [7] -0.24157755 -0.37186547 -0.31360531 -0.36233084 -0.39838070 -0.17674788
-#&gt; [13] -0.22505506 -0.37762762 -0.14612076 -0.20531451 -0.05872750 -0.58631224
-#&gt; [19] -0.15030906 -0.25825773
+#&gt;  [1] -0.26625257 -0.10295111 -0.28932942 -0.23018702 -0.07772999 -0.04308744
+#&gt;  [7] -0.15299482 -0.35943596 -0.15918209 -0.48551328 -0.16114046 -0.17786993
+#&gt; [13] -0.06748998 -0.05902373 -0.19050435 -0.24358120 -0.35933455 -0.42927491
+#&gt; [19] -0.22392486 -0.13172188
 #&gt; 
 #&gt; $y
-#&gt;  [1] 0.1387858 0.1583270 0.2138819 0.2159213 0.2946087 0.3495594 0.4099490
-#&gt;  [8] 0.4909585 0.2435973 0.5142813 0.4485323 0.2250601 0.3479944 0.5418281
-#&gt; [15] 0.2724575 0.6444430 0.1835226 0.3617237 0.6853096 0.3925468
+#&gt;  [1] 0.3238909 0.3043326 0.3325374 0.3961455 0.3147355 0.2428903 0.2097568
+#&gt;  [8] 0.5754808 0.3421636 0.3654102 0.1842941 0.5181177 0.2243330 0.1184067
+#&gt; [15] 0.3423092 0.3912741 0.5872107 0.5159161 0.5817264 0.4979647
 #&gt; </div><div class='input'><span class='fu'><a href='stereo_plane.html'>stereo_plane</a></span><span class='op'>(</span><span class='va'>dip.dir</span>, <span class='va'>dip</span>, dir <span class='op'>=</span> <span class='st'>"dip"</span><span class='op'>)</span>
 </div><div class='input'><span class='fu'>stereo_pole</span><span class='op'>(</span><span class='va'>dip.dir</span>, <span class='va'>dip</span>, add <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span>
 </div><div class='img'><img src='stereo_pole-2.png' alt='' width='700' height='433' /></div><div class='output co'>#&gt; $x
-#&gt;  [1] -0.06014288 -0.26569379 -0.26780282 -0.10154703 -0.16294549 -0.22707333
-#&gt;  [7] -0.24157755 -0.37186547 -0.31360531 -0.36233084 -0.39838070 -0.17674788
-#&gt; [13] -0.22505506 -0.37762762 -0.14612076 -0.20531451 -0.05872750 -0.58631224
-#&gt; [19] -0.15030906 -0.25825773
+#&gt;  [1] -0.26625257 -0.10295111 -0.28932942 -0.23018702 -0.07772999 -0.04308744
+#&gt;  [7] -0.15299482 -0.35943596 -0.15918209 -0.48551328 -0.16114046 -0.17786993
+#&gt; [13] -0.06748998 -0.05902373 -0.19050435 -0.24358120 -0.35933455 -0.42927491
+#&gt; [19] -0.22392486 -0.13172188
 #&gt; 
 #&gt; $y
-#&gt;  [1] 0.1387858 0.1583270 0.2138819 0.2159213 0.2946087 0.3495594 0.4099490
-#&gt;  [8] 0.4909585 0.2435973 0.5142813 0.4485323 0.2250601 0.3479944 0.5418281
-#&gt; [15] 0.2724575 0.6444430 0.1835226 0.3617237 0.6853096 0.3925468
+#&gt;  [1] 0.3238909 0.3043326 0.3325374 0.3961455 0.3147355 0.2428903 0.2097568
+#&gt;  [8] 0.5754808 0.3421636 0.3654102 0.1842941 0.5181177 0.2243330 0.1184067
+#&gt; [15] 0.3423092 0.3912741 0.5872107 0.5159161 0.5817264 0.4979647
 #&gt; </div><div class='input'>
 </div></pre>
   </div>

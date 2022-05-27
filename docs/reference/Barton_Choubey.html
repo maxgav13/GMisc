@@ -72,7 +72,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">GMisc</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3</span>
       </span>
     </div>
 
@@ -88,7 +88,7 @@
   <a href="../reference/index.html">Reference</a>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Articles
      
     <span class="caret"></span>
@@ -96,6 +96,9 @@
   <ul class="dropdown-menu" role="menu">
     <li>
       <a href="../articles/basic_stats_vig.html">Basic statistics</a>
+    </li>
+    <li>
+      <a href="../articles/classification_diagrams_vig.html">Classification Diagrams</a>
     </li>
     <li>
       <a href="../articles/directional_stats_vig.html">Directional statistics</a>
@@ -180,34 +183,34 @@
 <span class='va'>depth</span> <span class='op'>=</span> <span class='fl'>40</span>
 <span class='fu'>Barton_Choubey</span><span class='op'>(</span><span class='va'>JRC</span>, <span class='va'>JCS</span>, <span class='va'>phi.r</span>, <span class='va'>unit.weight</span>, <span class='va'>depth</span><span class='op'>)</span>
 </div><div class='output co'>#&gt; $dat
-#&gt; <span style='color: #949494;'># A tibble: 223 x 2</span><span>
+#&gt; <span style='color: #949494;'># A tibble: 223 × 2</span>
 #&gt;    sig_n   tau
-#&gt;    </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>
-#&gt; </span><span style='color: #BCBCBC;'> 1</span><span>  0.01 0.018
-#&gt; </span><span style='color: #BCBCBC;'> 2</span><span>  0.02 0.032
-#&gt; </span><span style='color: #BCBCBC;'> 3</span><span>  0.03 0.044
-#&gt; </span><span style='color: #BCBCBC;'> 4</span><span>  0.04 0.057
-#&gt; </span><span style='color: #BCBCBC;'> 5</span><span>  0.05 0.068
-#&gt; </span><span style='color: #BCBCBC;'> 6</span><span>  0.06 0.08 
-#&gt; </span><span style='color: #BCBCBC;'> 7</span><span>  0.07 0.091
-#&gt; </span><span style='color: #BCBCBC;'> 8</span><span>  0.08 0.101
-#&gt; </span><span style='color: #BCBCBC;'> 9</span><span>  0.09 0.112
-#&gt; </span><span style='color: #BCBCBC;'>10</span><span>  0.1  0.122
-#&gt; </span><span style='color: #949494;'># … with 213 more rows</span><span>
+#&gt;    <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>
+#&gt; <span style='color: #BCBCBC;'> 1</span>  0.01 0.018
+#&gt; <span style='color: #BCBCBC;'> 2</span>  0.02 0.032
+#&gt; <span style='color: #BCBCBC;'> 3</span>  0.03 0.044
+#&gt; <span style='color: #BCBCBC;'> 4</span>  0.04 0.057
+#&gt; <span style='color: #BCBCBC;'> 5</span>  0.05 0.068
+#&gt; <span style='color: #BCBCBC;'> 6</span>  0.06 0.08 
+#&gt; <span style='color: #BCBCBC;'> 7</span>  0.07 0.091
+#&gt; <span style='color: #BCBCBC;'> 8</span>  0.08 0.101
+#&gt; <span style='color: #BCBCBC;'> 9</span>  0.09 0.112
+#&gt; <span style='color: #BCBCBC;'>10</span>  0.1  0.122
+#&gt; <span style='color: #949494;'># … with 213 more rows</span>
 #&gt; 
 #&gt; $stress.level
-#&gt; </span><span style='color: #949494;'># A tibble: 1 x 2</span><span>
+#&gt; <span style='color: #949494;'># A tibble: 1 × 2</span>
 #&gt;       x     y
-#&gt;   </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>
-#&gt; </span><span style='color: #BCBCBC;'>1</span><span> 0.744 0.671
+#&gt;   <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>
+#&gt; <span style='color: #BCBCBC;'>1</span> 0.744 0.671
 #&gt; 
 #&gt; $parameters
-#&gt; </span><span style='color: #949494;'># A tibble: 1 x 2</span><span>
+#&gt; <span style='color: #949494;'># A tibble: 1 × 2</span>
 #&gt;       c   phi
-#&gt;   </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>
-#&gt; </span><span style='color: #BCBCBC;'>1</span><span> 0.102  37.4
+#&gt;   <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>
+#&gt; <span style='color: #BCBCBC;'>1</span> 0.102  37.4
 #&gt; </div><div class='input'>
-</div></span></pre>
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

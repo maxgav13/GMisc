@@ -72,7 +72,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">GMisc</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3</span>
       </span>
     </div>
 
@@ -88,7 +88,7 @@
   <a href="../reference/index.html">Reference</a>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Articles
      
     <span class="caret"></span>
@@ -96,6 +96,9 @@
   <ul class="dropdown-menu" role="menu">
     <li>
       <a href="../articles/basic_stats_vig.html">Basic statistics</a>
+    </li>
+    <li>
+      <a href="../articles/classification_diagrams_vig.html">Classification Diagrams</a>
     </li>
     <li>
       <a href="../articles/directional_stats_vig.html">Directional statistics</a>
@@ -264,44 +267,44 @@
 #&gt; 
 #&gt; 
 #&gt; $shear
-#&gt; <span style='color: #949494;'># A tibble: 12,564 x 3</span><span>
+#&gt; <span style='color: #949494;'># A tibble: 12,564 × 3</span>
 #&gt;     sig.n crit           tau
-#&gt;     </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>        </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>
-#&gt; </span><span style='color: #BCBCBC;'> 1</span><span> -</span><span style='color: #BB0000;'>0.187</span><span> Hoek-Brown   0.001
-#&gt; </span><span style='color: #BCBCBC;'> 2</span><span> -</span><span style='color: #BB0000;'>0.187</span><span> Mohr-Coulomb 0    
-#&gt; </span><span style='color: #BCBCBC;'> 3</span><span> -</span><span style='color: #BB0000;'>0.187</span><span> Stress level 0    
-#&gt; </span><span style='color: #BCBCBC;'> 4</span><span> -</span><span style='color: #BB0000;'>0.186</span><span> Hoek-Brown   0.011
-#&gt; </span><span style='color: #BCBCBC;'> 5</span><span> -</span><span style='color: #BB0000;'>0.186</span><span> Mohr-Coulomb 1.29 
-#&gt; </span><span style='color: #BCBCBC;'> 6</span><span> -</span><span style='color: #BB0000;'>0.186</span><span> Stress level 0.478
-#&gt; </span><span style='color: #BCBCBC;'> 7</span><span> -</span><span style='color: #BB0000;'>0.185</span><span> Hoek-Brown   0.018
-#&gt; </span><span style='color: #BCBCBC;'> 8</span><span> -</span><span style='color: #BB0000;'>0.185</span><span> Mohr-Coulomb 1.29 
-#&gt; </span><span style='color: #BCBCBC;'> 9</span><span> -</span><span style='color: #BB0000;'>0.185</span><span> Stress level 0.479
-#&gt; </span><span style='color: #BCBCBC;'>10</span><span> -</span><span style='color: #BB0000;'>0.184</span><span> Hoek-Brown   0.024
-#&gt; </span><span style='color: #949494;'># … with 12,554 more rows</span><span>
+#&gt;     <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>        <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>
+#&gt; <span style='color: #BCBCBC;'> 1</span> -<span style='color: #BB0000;'>0.187</span> Hoek-Brown   0.001
+#&gt; <span style='color: #BCBCBC;'> 2</span> -<span style='color: #BB0000;'>0.187</span> Mohr-Coulomb 0    
+#&gt; <span style='color: #BCBCBC;'> 3</span> -<span style='color: #BB0000;'>0.187</span> Stress level 0    
+#&gt; <span style='color: #BCBCBC;'> 4</span> -<span style='color: #BB0000;'>0.186</span> Hoek-Brown   0.011
+#&gt; <span style='color: #BCBCBC;'> 5</span> -<span style='color: #BB0000;'>0.186</span> Mohr-Coulomb 1.29 
+#&gt; <span style='color: #BCBCBC;'> 6</span> -<span style='color: #BB0000;'>0.186</span> Stress level 0.478
+#&gt; <span style='color: #BCBCBC;'> 7</span> -<span style='color: #BB0000;'>0.185</span> Hoek-Brown   0.018
+#&gt; <span style='color: #BCBCBC;'> 8</span> -<span style='color: #BB0000;'>0.185</span> Mohr-Coulomb 1.29 
+#&gt; <span style='color: #BCBCBC;'> 9</span> -<span style='color: #BB0000;'>0.185</span> Stress level 0.479
+#&gt; <span style='color: #BCBCBC;'>10</span> -<span style='color: #BB0000;'>0.184</span> Hoek-Brown   0.024
+#&gt; <span style='color: #949494;'># … with 12,554 more rows</span>
 #&gt; 
 #&gt; $princ.stress
-#&gt; </span><span style='color: #949494;'># A tibble: 8,376 x 3</span><span>
+#&gt; <span style='color: #949494;'># A tibble: 8,376 × 3</span>
 #&gt;     sig.3 crit         sig.1
-#&gt;     </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>        </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>
-#&gt; </span><span style='color: #BCBCBC;'> 1</span><span> -</span><span style='color: #BB0000;'>0.187</span><span> Hoek-Brown   0    
-#&gt; </span><span style='color: #BCBCBC;'> 2</span><span> -</span><span style='color: #BB0000;'>0.187</span><span> Mohr-Coulomb 0    
-#&gt; </span><span style='color: #BCBCBC;'> 3</span><span> -</span><span style='color: #BB0000;'>0.186</span><span> Hoek-Brown   0.113
-#&gt; </span><span style='color: #BCBCBC;'> 4</span><span> -</span><span style='color: #BB0000;'>0.186</span><span> Mohr-Coulomb 5.37 
-#&gt; </span><span style='color: #BCBCBC;'> 5</span><span> -</span><span style='color: #BB0000;'>0.185</span><span> Hoek-Brown   0.231
-#&gt; </span><span style='color: #BCBCBC;'> 6</span><span> -</span><span style='color: #BB0000;'>0.185</span><span> Mohr-Coulomb 5.38 
-#&gt; </span><span style='color: #BCBCBC;'> 7</span><span> -</span><span style='color: #BB0000;'>0.184</span><span> Hoek-Brown   0.323
-#&gt; </span><span style='color: #BCBCBC;'> 8</span><span> -</span><span style='color: #BB0000;'>0.184</span><span> Mohr-Coulomb 5.38 
-#&gt; </span><span style='color: #BCBCBC;'> 9</span><span> -</span><span style='color: #BB0000;'>0.183</span><span> Hoek-Brown   0.402
-#&gt; </span><span style='color: #BCBCBC;'>10</span><span> -</span><span style='color: #BB0000;'>0.183</span><span> Mohr-Coulomb 5.39 
-#&gt; </span><span style='color: #949494;'># … with 8,366 more rows</span><span>
+#&gt;     <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>        <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>
+#&gt; <span style='color: #BCBCBC;'> 1</span> -<span style='color: #BB0000;'>0.187</span> Hoek-Brown   0    
+#&gt; <span style='color: #BCBCBC;'> 2</span> -<span style='color: #BB0000;'>0.187</span> Mohr-Coulomb 0    
+#&gt; <span style='color: #BCBCBC;'> 3</span> -<span style='color: #BB0000;'>0.186</span> Hoek-Brown   0.113
+#&gt; <span style='color: #BCBCBC;'> 4</span> -<span style='color: #BB0000;'>0.186</span> Mohr-Coulomb 5.37 
+#&gt; <span style='color: #BCBCBC;'> 5</span> -<span style='color: #BB0000;'>0.185</span> Hoek-Brown   0.231
+#&gt; <span style='color: #BCBCBC;'> 6</span> -<span style='color: #BB0000;'>0.185</span> Mohr-Coulomb 5.38 
+#&gt; <span style='color: #BCBCBC;'> 7</span> -<span style='color: #BB0000;'>0.184</span> Hoek-Brown   0.323
+#&gt; <span style='color: #BCBCBC;'> 8</span> -<span style='color: #BB0000;'>0.184</span> Mohr-Coulomb 5.38 
+#&gt; <span style='color: #BCBCBC;'> 9</span> -<span style='color: #BB0000;'>0.183</span> Hoek-Brown   0.402
+#&gt; <span style='color: #BCBCBC;'>10</span> -<span style='color: #BB0000;'>0.183</span> Mohr-Coulomb 5.39 
+#&gt; <span style='color: #949494;'># … with 8,366 more rows</span>
 #&gt; 
 #&gt; $stress.level
-#&gt; </span><span style='color: #949494;'># A tibble: 1 x 3</span><span>
+#&gt; <span style='color: #949494;'># A tibble: 1 × 3</span>
 #&gt;    sign   tau crit        
-#&gt;   </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>       
-#&gt; </span><span style='color: #BCBCBC;'>1</span><span> 0.744  1.69 Stress level
+#&gt;   <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>       
+#&gt; <span style='color: #BCBCBC;'>1</span> 0.744  1.69 Stress level
 #&gt; </div><div class='input'>
-</div></span></pre>
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

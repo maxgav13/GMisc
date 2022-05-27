@@ -3,9 +3,8 @@ title: "Soil Mechanics"
 author: "Maximiliano Garnier-Villarreal"
 date: "`r Sys.Date()`"
 output:
-  prettydoc::html_pretty:
-    theme: cayman
-    highlight: github
+  rmarkdown::html_vignette:
+    highlight: pygments
     toc: true
 vignette: >
   %\VignetteIndexEntry{Soil Mechanics}

@@ -72,7 +72,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">GMisc</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3</span>
       </span>
     </div>
 
@@ -88,7 +88,7 @@
   <a href="../reference/index.html">Reference</a>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Articles
      
     <span class="caret"></span>
@@ -96,6 +96,9 @@
   <ul class="dropdown-menu" role="menu">
     <li>
       <a href="../articles/basic_stats_vig.html">Basic statistics</a>
+    </li>
+    <li>
+      <a href="../articles/classification_diagrams_vig.html">Classification Diagrams</a>
     </li>
     <li>
       <a href="../articles/directional_stats_vig.html">Directional statistics</a>
@@ -221,51 +224,51 @@ For a coarse-grained soil (gravels, sands, and non-plastic silts) usually TSA = 
 <span class='va'>wl</span> <span class='op'>=</span> <span class='fl'>1</span>
 <span class='fu'>bearing_capacity</span><span class='op'>(</span><span class='va'>B</span>, <span class='va'>D</span>, <span class='va'>L</span>, <span class='va'>gamma.h</span>, <span class='va'>gamma.s</span>, <span class='va'>tau0</span>, <span class='va'>phi</span>, <span class='va'>wl</span>, <span class='va'>FS</span><span class='op'>)</span>
 </div><div class='output co'>#&gt; $Result
-#&gt; <span style='color: #949494;'># A tibble: 9 x 8</span><span>
+#&gt; <span style='color: #949494;'># A tibble: 9 × 8</span>
 #&gt;   `D/B` `0.5` `0.75`   `1` `1.25` `1.5` `1.75`   `2`
-#&gt;   </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>  </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>  </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>  </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>
-#&gt; </span><span style='color: #BCBCBC;'>1</span><span>  0     150.   163.  176.   160.  168.   175.  182.
-#&gt; </span><span style='color: #BCBCBC;'>2</span><span>  0.25  179.   192.  182.   189.  197.   204.  211.
-#&gt; </span><span style='color: #BCBCBC;'>3</span><span>  0.5   208.   204.  211.   218.  226.   233.  240.
-#&gt; </span><span style='color: #BCBCBC;'>4</span><span>  0.75  225.   233.  240.   247.  255.   262.  269.
-#&gt; </span><span style='color: #BCBCBC;'>5</span><span>  1     254.   262.  269.   276.  284.   291.  298.
-#&gt; </span><span style='color: #BCBCBC;'>6</span><span>  1.25  220.   227.  234.   242.  249.   256.  264.
-#&gt; </span><span style='color: #BCBCBC;'>7</span><span>  1.5   236.   243.  251.   258.  265.   272.  280.
-#&gt; </span><span style='color: #BCBCBC;'>8</span><span>  1.75  252.   260.  267.   274.  281.   289.  296.
-#&gt; </span><span style='color: #BCBCBC;'>9</span><span>  2     269.   276.  283.   290.  298.   305.  312.
+#&gt;   <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>  <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>  <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>  <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>
+#&gt; <span style='color: #BCBCBC;'>1</span>  0     150.   163.  176.   160.  168.   175.  182.
+#&gt; <span style='color: #BCBCBC;'>2</span>  0.25  179.   192.  182.   189.  197.   204.  211.
+#&gt; <span style='color: #BCBCBC;'>3</span>  0.5   208.   204.  211.   218.  226.   233.  240.
+#&gt; <span style='color: #BCBCBC;'>4</span>  0.75  225.   233.  240.   247.  255.   262.  269.
+#&gt; <span style='color: #BCBCBC;'>5</span>  1     254.   262.  269.   276.  284.   291.  298.
+#&gt; <span style='color: #BCBCBC;'>6</span>  1.25  220.   227.  234.   242.  249.   256.  264.
+#&gt; <span style='color: #BCBCBC;'>7</span>  1.5   236.   243.  251.   258.  265.   272.  280.
+#&gt; <span style='color: #BCBCBC;'>8</span>  1.75  252.   260.  267.   274.  281.   289.  296.
+#&gt; <span style='color: #BCBCBC;'>9</span>  2     269.   276.  283.   290.  298.   305.  312.
 #&gt; 
 #&gt; $Plot</div><div class='img'><img src='bearing_capacity-1.png' alt='' width='700' height='433' /></div><div class='output co'>#&gt; </div><div class='input'><span class='fu'>bearing_capacity</span><span class='op'>(</span><span class='va'>B</span>, <span class='va'>D</span>, <span class='va'>L</span>, <span class='va'>gamma.h</span>, <span class='va'>gamma.s</span>, <span class='va'>tau0</span>, <span class='va'>phi</span>, <span class='va'>wl</span>, <span class='va'>FS</span>, footing <span class='op'>=</span> <span class='st'>"square"</span><span class='op'>)</span>
 </div><div class='output co'>#&gt; $Result
-#&gt; </span><span style='color: #949494;'># A tibble: 9 x 8</span><span>
+#&gt; <span style='color: #949494;'># A tibble: 9 × 8</span>
 #&gt;   `D/B` `0.5` `0.75`   `1` `1.25` `1.5` `1.75`   `2`
-#&gt;   </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>  </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>  </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>  </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>
-#&gt; </span><span style='color: #BCBCBC;'>1</span><span>  0     182.   192.  203.   190.  196.   202.  208.
-#&gt; </span><span style='color: #BCBCBC;'>2</span><span>  0.25  211.   221.  213.   219.  225.   231.  237.
-#&gt; </span><span style='color: #BCBCBC;'>3</span><span>  0.5   240.   237.  242.   248.  254.   260.  266.
-#&gt; </span><span style='color: #BCBCBC;'>4</span><span>  0.75  260.   266.  271.   277.  283.   289.  295.
-#&gt; </span><span style='color: #BCBCBC;'>5</span><span>  1     289.   295.  300.   306.  312.   318.  324.
-#&gt; </span><span style='color: #BCBCBC;'>6</span><span>  1.25  254.   260.  266.   272.  277.   283.  289.
-#&gt; </span><span style='color: #BCBCBC;'>7</span><span>  1.5   270.   276.  282.   288.  294.   299.  305.
-#&gt; </span><span style='color: #BCBCBC;'>8</span><span>  1.75  287.   292.  298.   304.  310.   316.  322.
-#&gt; </span><span style='color: #BCBCBC;'>9</span><span>  2     303.   309.  314.   320.  326.   332.  338.
+#&gt;   <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>  <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>  <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>  <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>
+#&gt; <span style='color: #BCBCBC;'>1</span>  0     182.   192.  203.   190.  196.   202.  208.
+#&gt; <span style='color: #BCBCBC;'>2</span>  0.25  211.   221.  213.   219.  225.   231.  237.
+#&gt; <span style='color: #BCBCBC;'>3</span>  0.5   240.   237.  242.   248.  254.   260.  266.
+#&gt; <span style='color: #BCBCBC;'>4</span>  0.75  260.   266.  271.   277.  283.   289.  295.
+#&gt; <span style='color: #BCBCBC;'>5</span>  1     289.   295.  300.   306.  312.   318.  324.
+#&gt; <span style='color: #BCBCBC;'>6</span>  1.25  254.   260.  266.   272.  277.   283.  289.
+#&gt; <span style='color: #BCBCBC;'>7</span>  1.5   270.   276.  282.   288.  294.   299.  305.
+#&gt; <span style='color: #BCBCBC;'>8</span>  1.75  287.   292.  298.   304.  310.   316.  322.
+#&gt; <span style='color: #BCBCBC;'>9</span>  2     303.   309.  314.   320.  326.   332.  338.
 #&gt; 
 #&gt; $Plot</div><div class='img'><img src='bearing_capacity-2.png' alt='' width='700' height='433' /></div><div class='output co'>#&gt; </div><div class='input'><span class='fu'>bearing_capacity</span><span class='op'>(</span><span class='va'>B</span>, <span class='va'>D</span>, L <span class='op'>=</span> <span class='fl'>3</span>, <span class='va'>gamma.h</span>, <span class='va'>gamma.s</span>, <span class='va'>tau0</span>, <span class='va'>phi</span>, <span class='va'>wl</span>, <span class='va'>FS</span>, footing <span class='op'>=</span> <span class='st'>"rectangular"</span><span class='op'>)</span>
 </div><div class='output co'>#&gt; $Result
-#&gt; </span><span style='color: #949494;'># A tibble: 9 x 8</span><span>
+#&gt; <span style='color: #949494;'># A tibble: 9 × 8</span>
 #&gt;   `D/B` `0.5` `0.75`   `1` `1.25` `1.5` `1.75`   `2`
-#&gt;   </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>  </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>  </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>  </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>
-#&gt; </span><span style='color: #BCBCBC;'>1</span><span>  0     151.   161.  172.   159.  165.   171.  177.
-#&gt; </span><span style='color: #BCBCBC;'>2</span><span>  0.25  180.   190.  182.   188.  194.   200.  206.
-#&gt; </span><span style='color: #BCBCBC;'>3</span><span>  0.5   209.   206.  211.   217.  223.   229.  235.
-#&gt; </span><span style='color: #BCBCBC;'>4</span><span>  0.75  229.   235.  240.   246.  252.   258.  264.
-#&gt; </span><span style='color: #BCBCBC;'>5</span><span>  1     258.   264.  269.   275.  281.   287.  293.
-#&gt; </span><span style='color: #BCBCBC;'>6</span><span>  1.25  223.   229.  235.   241.  246.   252.  258.
-#&gt; </span><span style='color: #BCBCBC;'>7</span><span>  1.5   239.   245.  251.   257.  263.   268.  274.
-#&gt; </span><span style='color: #BCBCBC;'>8</span><span>  1.75  256.   261.  267.   273.  279.   285.  291.
-#&gt; </span><span style='color: #BCBCBC;'>9</span><span>  2     272.   278.  284.   289.  295.   301.  307.
+#&gt;   <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>  <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>  <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>  <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>
+#&gt; <span style='color: #BCBCBC;'>1</span>  0     151.   161.  172.   159.  165.   171.  177.
+#&gt; <span style='color: #BCBCBC;'>2</span>  0.25  180.   190.  182.   188.  194.   200.  206.
+#&gt; <span style='color: #BCBCBC;'>3</span>  0.5   209.   206.  211.   217.  223.   229.  235.
+#&gt; <span style='color: #BCBCBC;'>4</span>  0.75  229.   235.  240.   246.  252.   258.  264.
+#&gt; <span style='color: #BCBCBC;'>5</span>  1     258.   264.  269.   275.  281.   287.  293.
+#&gt; <span style='color: #BCBCBC;'>6</span>  1.25  223.   229.  235.   241.  246.   252.  258.
+#&gt; <span style='color: #BCBCBC;'>7</span>  1.5   239.   245.  251.   257.  263.   268.  274.
+#&gt; <span style='color: #BCBCBC;'>8</span>  1.75  256.   261.  267.   273.  279.   285.  291.
+#&gt; <span style='color: #BCBCBC;'>9</span>  2     272.   278.  284.   289.  295.   301.  307.
 #&gt; 
 #&gt; $Plot</div><div class='img'><img src='bearing_capacity-3.png' alt='' width='700' height='433' /></div><div class='output co'>#&gt; </div><div class='input'>
-</div></span></pre>
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

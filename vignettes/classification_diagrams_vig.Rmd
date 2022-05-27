@@ -3,9 +3,8 @@ title: "Classification Diagrams"
 author: "Maximiliano Garnier-Villarreal"
 date: "`r Sys.Date()`"
 output:
-  prettydoc::html_pretty:
-    theme: cayman
-    highlight: github
+  rmarkdown::html_vignette:
+    highlight: pygments
     toc: true
 vignette: >
   %\VignetteIndexEntry{Classification Diagrams}
@@ -109,14 +108,14 @@ d2 = data.frame(silica=c(58,70),
 #| echo: false
 d %>% 
   kable(caption = 'Samples for QtFL diagram') %>% 
-  kable_classic(full_width=F)
+  kable_classic()
 ```
 
 ```{r}
 #| echo: false
 d2 %>% 
   kable(caption = 'Samples for TAS diagram') %>% 
-  kable_classic(full_width=F)
+  kable_classic()
 ```
 
 ### Static
@@ -201,7 +200,7 @@ d3 = data.frame(Group = c('A','A','B','B'),
 piper_data = piper_data_prep(d3)
 piper_data %>% 
   kable(caption = 'Processed sample data for Piper diagram') %>% 
-  kable_classic(full_width=F)
+  kable_classic()
 ```
 
 Once the data is transformed it can be plotted using the `x` and `y` values as the coordinates. As with the other diagrams, further customization of the resulting object is posible.

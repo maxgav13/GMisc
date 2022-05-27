@@ -34,12 +34,12 @@ d2 = data.frame(silica=c(58,70),
 ## -----------------------------------------------------------------------------
 d %>% 
   kable(caption = 'Samples for QtFL diagram') %>% 
-  kable_classic(full_width=F)
+  kable_classic()
 
 ## -----------------------------------------------------------------------------
 d2 %>% 
   kable(caption = 'Samples for TAS diagram') %>% 
-  kable_classic(full_width=F)
+  kable_classic()
 
 ## -----------------------------------------------------------------------------
 ternary_qtfl() + 
@@ -95,7 +95,7 @@ d3 = data.frame(Group = c('A','A','B','B'),
 piper_data = piper_data_prep(d3)
 piper_data %>% 
   kable(caption = 'Processed sample data for Piper diagram') %>% 
-  kable_classic(full_width=F)
+  kable_classic()
 
 ## -----------------------------------------------------------------------------
 piper_diagram() +
