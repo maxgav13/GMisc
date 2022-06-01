@@ -1,7 +1,7 @@
 #' @title Hotelling T2-statistic for layer boundary determination
 #' @description Calculates the T2-statistic and corresponding effect size (Mahalanobis distance) for a perforation log with more than 1 variable. The coefficient is used to find layer boundaries in a perforation log.
 #' @param data A data frame containing the depth of perforation in the first column, and the variables of interest in the rest of the columns, for a CPTu test: point resistance (qc), sleeve friction (fs), and pore-water pressure (u)
-#' @param k The window length for the number of data points to include in the calculation of T2-statistic. Always and even (par) number
+#' @param k The window length for the number of data points to include in the calculation of T2-statistic. Always and even (par) number. Larger values make the resulting statistic smoother
 #' @export
 #' @return ggplot and plotly objects showing the Mahalanobis D2 statistic and lines marking the critical values at 0.95, 0.99, and 0.999, and suggested boundaries
 #' @references Davis, J. C. (2002). Statistical and Data Analysis in Geology. 3rd ed. John Wiley & Sons.

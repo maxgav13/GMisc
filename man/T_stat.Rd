@@ -9,7 +9,7 @@ T_stat(data, k = 6)
 \arguments{
 \item{data}{A data frame containing the depth of perforation in the first column, and the value of interest in the second column}
 
-\item{k}{The window length for the number of data points to include in the calculation of T-statistic. Always and even (par) number}
+\item{k}{The window length for the number of data points to include in the calculation of T-statistic. Always and even (par) number. Larger values make the resulting statistic smoother}
 }
 \value{
 ggplot and plotly objects showing the Cohen's d statistic and lines marking the Cohen's U3 values for 0.95, 0.99, and 0.999, and suggested boundaries

@@ -1,7 +1,7 @@
 #' @title Intraclass Correlation Coefficient for layer boundary determination
 #' @description Calculates the intraclass correlation coefficient (RI) for a perforation log, and shows the locations where this coefficient is higher than 0.7 and 0.8. The coefficient is used to find layer boundaries in a perforation log.
-#' @param x data A data frame containing the depth in the first column, and the value of interest in the second column
-#' @param k The window length for the number of data points to include in the calculation of RI. Always and even (par) number
+#' @param data data A data frame containing the depth in the first column, and the value of interest in the second column
+#' @param k The window length for the number of data points to include in the calculation of RI. Always and even (par) number. Larger values make the resulting statistic smoother
 #' @export
 #' @return ggplot and plotly objects showing the RI statistic and lines marking the critical values of 0.7 and 0.8, and suggested boundaries
 #' @references Mora, R. (2013). Uso de metodos estadisticos para la determinacion de capas homogeneas de suelos volcanicos en un sitio de las laderas del Volcan Irazu, Cartago, Costa Rica. - Rev. Geol. Amer. Central, 49: 101-108.

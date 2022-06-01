@@ -9,7 +9,7 @@ T2_stat(data, k = 50)
 \arguments{
 \item{data}{A data frame containing the depth of perforation in the first column, and the variables of interest in the rest of the columns, for a CPTu test: point resistance (qc), sleeve friction (fs), and pore-water pressure (u)}
 
-\item{k}{The window length for the number of data points to include in the calculation of T2-statistic. Always and even (par) number}
+\item{k}{The window length for the number of data points to include in the calculation of T2-statistic. Always and even (par) number. Larger values make the resulting statistic smoother}
 }
 \value{
 ggplot and plotly objects showing the Mahalanobis D2 statistic and lines marking the critical values at 0.95, 0.99, and 0.999, and suggested boundaries

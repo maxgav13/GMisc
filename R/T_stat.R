@@ -1,7 +1,7 @@
 #' @title T-statistic for layer boundary determination
 #' @description Calculates the T-statistic and Cohen's d effect size for a perforation log. The coefficient is used to find layer boundaries in a perforation log.
 #' @param data A data frame containing the depth of perforation in the first column, and the value of interest in the second column
-#' @param k The window length for the number of data points to include in the calculation of T-statistic. Always and even (par) number
+#' @param k The window length for the number of data points to include in the calculation of T-statistic. Always and even (par) number. Larger values make the resulting statistic smoother
 #' @export
 #' @return ggplot and plotly objects showing the Cohen's d statistic and lines marking the Cohen's U3 values for 0.95, 0.99, and 0.999, and suggested boundaries
 #' @references Mora, R. (2013). Uso de metodos estadisticos para la identifacion de capas de suelos volcanicos con el ensayo del cono de pentracion en los terrenos de la Universidad de Costa Rica, Montes de Oca, San Jose, Costa Rica. - Rev. Geol. Amer. Central, 49: 109-120.

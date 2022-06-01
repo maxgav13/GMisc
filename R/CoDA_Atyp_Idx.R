@@ -48,7 +48,7 @@ CoDA_Atyp_Idx = function(comp, sample = NULL, thres = .95) {
 
   ai = tibble::as_tibble(ai, .name_repair = 'unique') %>%
     purrr::set_names('idx') %>%
-    dplyr::mutate(Atypical = ifelse(idx > thres, 'Yes', 'No'))
+    dplyr::mutate(Atypical = ifelse(.data$idx > thres, 'Yes', 'No'))
 
   return(ai)
 }

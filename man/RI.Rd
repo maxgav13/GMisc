@@ -7,9 +7,9 @@
 RI(data, k = 6)
 }
 \arguments{
-\item{k}{The window length for the number of data points to include in the calculation of RI. Always and even (par) number}
+\item{data}{data A data frame containing the depth in the first column, and the value of interest in the second column}
 
-\item{x}{data A data frame containing the depth in the first column, and the value of interest in the second column}
+\item{k}{The window length for the number of data points to include in the calculation of RI. Always and even (par) number. Larger values make the resulting statistic smoother}
 }
 \value{
 ggplot and plotly objects showing the RI statistic and lines marking the critical values of 0.7 and 0.8, and suggested boundaries
