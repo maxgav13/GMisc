@@ -4,10 +4,10 @@
 \alias{T_stat}
 \title{T-statistic for layer boundary determination}
 \usage{
-T_stat(x, k = 6)
+T_stat(data, k = 6)
 }
 \arguments{
-\item{x}{A data frame containing the depth of perforation in the first column, and the value of interest in the second column}
+\item{data}{A data frame containing the depth of perforation in the first column, and the value of interest in the second column}
 
 \item{k}{The window length for the number of data points to include in the calculation of T-statistic. Always and even (par) number}
 }

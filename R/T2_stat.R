@@ -1,6 +1,6 @@
 #' @title Hotelling T2-statistic for layer boundary determination
 #' @description Calculates the T2-statistic and corresponding effect size (Mahalanobis distance) for a perforation log with more than 1 variable. The coefficient is used to find layer boundaries in a perforation log.
-#' @param x A data frame containing the depth of perforation in the first column, and the variables of interest in the rest of the columns, for a CPTu test: point resistance (qc), sleeve friction (fs), and pore-water pressure (u)
+#' @param data A data frame containing the depth of perforation in the first column, and the variables of interest in the rest of the columns, for a CPTu test: point resistance (qc), sleeve friction (fs), and pore-water pressure (u)
 #' @param k The window length for the number of data points to include in the calculation of T2-statistic. Always and even (par) number
 #' @export
 #' @return ggplot and plotly objects showing the Mahalanobis D2 statistic and lines marking the critical values at 0.95, 0.99, and 0.999, and suggested boundaries
@@ -10,8 +10,8 @@
 #' @examples
 #' T2_stat(CPTu_data, k = 50)
 #'
-T2_stat = function(x, k = 50) {
-  Data = x
+T2_stat = function(data, k = 50) {
+  Data = data
   v = ncol(Data)
   nombres = names(Data)
   w = Data[,-1]
@@ -57,23 +57,27 @@ T2_stat = function(x, k = 50) {
   chi = stats::qchisq(c(0.95, 0.99, 0.999), df1)
   Stats = data.frame(k = k, df1 = df1, df2 = df2)
 
-  bounds.95 = Data[c(0,diff(sign(diff(Data$D2))))<0 & Data$D2>=chi[1],nombres[1]] %>%
-    as.data.frame() %>%
-    tidyr::drop_na() %>%
-    unlist() %>%
-    as.vector()
+  # bounds.95 = Data[c(0,diff(sign(diff(Data$D2))))<0 & Data$D2>=chi[1],nombres[1]] %>%
+  #   as.data.frame() %>%
+  #   tidyr::drop_na() %>%
+  #   unlist() %>%
+  #   as.vector()
 
-  bounds.99 = Data[c(0,diff(sign(diff(Data$D2))))<0 & Data$D2>=chi[2],nombres[1]] %>%
-    as.data.frame() %>%
-    tidyr::drop_na() %>%
-    unlist() %>%
-    as.vector()
+  bounds.95 = Data %>%
+    dplyr::mutate(dif = c(0, diff(sign(diff(.data$D2))),0)) %>%
+    dplyr::filter(.data$dif < 0 & .data$D2 > chi[1]) %>%
+    dplyr::pull(1)
 
-  bounds.999 = Data[c(0,diff(sign(diff(Data$D2))))<0 & Data$D2>=chi[3],nombres[1]] %>%
-    as.data.frame() %>%
-    tidyr::drop_na() %>%
-    unlist() %>%
-    as.vector()
+
+  bounds.99 = Data %>%
+    dplyr::mutate(dif = c(0, diff(sign(diff(.data$D2))),0)) %>%
+    dplyr::filter(.data$dif < 0 & .data$D2 > chi[2]) %>%
+    dplyr::pull(1)
+
+  bounds.999 = Data %>%
+    dplyr::mutate(dif = c(0, diff(sign(diff(.data$D2))),0)) %>%
+    dplyr::filter(.data$dif < 0 & .data$D2 > chi[3]) %>%
+    dplyr::pull(1)
 
   q = ggplot(Data, aes_string("D2", nombres[1])) +
     geom_path(na.rm = T) +

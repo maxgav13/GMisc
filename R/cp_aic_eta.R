@@ -1,6 +1,6 @@
 #' @title Changepoint analysis of different layer models
 #' @description Calculates and plots the AIC and eta-squared statistics for diferent layer models based on a changepoint analysis using the mean and variance.
-#' @param x A data frame containing the location variable (depth or distance) in the first column, and the value of interest in the second column
+#' @param data A data frame containing the location variable (depth or distance) in the first column, and the value of interest in the second column
 #' @param m The maximum number of breakpoints (# layers - 1) to look for
 #' @param nl The minimum number of points per layer to be considered
 #' @export
@@ -10,15 +10,19 @@
 #' @examples
 #' cp_aic_eta(DPM_data, m = 10, nl = 3)
 #'
-cp_aic_eta = function(x, m = 10, nl = 3) {
+cp_aic_eta = function(data, m = 10, nl = 3) {
 
-  datos = x
+  datos = data
   nombres = names(datos)
 
   etas = NULL
   aic = NULL
   for (i in 1:m) {
-    cpt = changepoint::cpt.meanvar(datos[[2]], method = "BinSeg", penalty = "MBIC", Q = i, minseglen = nl)
+    cpt = changepoint::cpt.meanvar(datos[[2]],
+                                   method = "BinSeg",
+                                   penalty = "MBIC",
+                                   Q = i,
+                                   minseglen = nl) %>% suppressWarnings()
     breaks = datos[[1]][changepoint::cpts(cpt)]
     grouping = cut(datos[[1]],
                    breaks = c(min(datos[[1]]), breaks, max(datos[[1]])),

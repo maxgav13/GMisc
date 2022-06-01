@@ -1,6 +1,6 @@
 #' @title Intraclass Correlation Coefficient for layer boundary determination
 #' @description Calculates the intraclass correlation coefficient (RI) for a perforation log, and shows the locations where this coefficient is higher than 0.7 and 0.8. The coefficient is used to find layer boundaries in a perforation log.
-#' @param x A data frame containing the depth of perforation in the first column, and the value of interest in the second column
+#' @param x data A data frame containing the depth in the first column, and the value of interest in the second column
 #' @param k The window length for the number of data points to include in the calculation of RI. Always and even (par) number
 #' @export
 #' @return ggplot and plotly objects showing the RI statistic and lines marking the critical values of 0.7 and 0.8, and suggested boundaries
@@ -10,8 +10,8 @@
 #' @examples
 #' RI(DPM_data, k = 6)
 #'
-RI = function(x, k = 6) {
-  Data = x
+RI = function(data, k = 6) {
+  Data = data
   nombres = names(Data)
   w = Data[[2]]
   n = floor(k/2)
@@ -31,17 +31,21 @@ RI = function(x, k = 6) {
   row.names(DF) = 1:nrow(DF)
   Data$RI = DF$RI
 
-  bounds.7 = Data[c(0,diff(sign(diff(Data$RI))))<0 & Data$RI>=.7,nombres[1]] %>%
-    as.data.frame() %>%
-    tidyr::drop_na() %>%
-    unlist() %>%
-    as.vector()
+  bounds.7 = Data %>%
+    dplyr::mutate(dif = c(0, diff(sign(diff(.data$RI))),0)) %>%
+    dplyr::filter(.data$dif < 0 & .data$RI > .7) %>%
+    dplyr::pull(1)
 
-  bounds.8 = Data[c(0,diff(sign(diff(Data$RI))))<0 & Data$RI>=.8,nombres[1]] %>%
-    as.data.frame() %>%
-    tidyr::drop_na() %>%
-    unlist() %>%
-    as.vector()
+    # Data[Data$RI>=.7,nombres[1]] %>% na.omit() %>% as.vector()
+    # as.data.frame() %>%
+    # tidyr::drop_na() %>%
+    # unlist() %>%
+    # as.vector()
+
+  bounds.8 = Data %>%
+    dplyr::mutate(dif = c(0, diff(sign(diff(.data$RI))),0)) %>%
+    dplyr::filter(.data$dif < 0 & .data$RI > .8) %>%
+    dplyr::pull(1)
 
   q = ggplot(Data, aes_string("RI", nombres[1])) +
     geom_path(na.rm = T) +

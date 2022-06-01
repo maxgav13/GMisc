@@ -4,10 +4,10 @@
 \alias{cp_aic_eta}
 \title{Changepoint analysis of different layer models}
 \usage{
-cp_aic_eta(x, m = 10, nl = 3)
+cp_aic_eta(data, m = 10, nl = 3)
 }
 \arguments{
-\item{x}{A data frame containing the location variable (depth or distance) in the first column, and the value of interest in the second column}
+\item{data}{A data frame containing the location variable (depth or distance) in the first column, and the value of interest in the second column}
 
 \item{m}{The maximum number of breakpoints (# layers - 1) to look for}
 

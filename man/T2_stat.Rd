@@ -4,10 +4,10 @@
 \alias{T2_stat}
 \title{Hotelling T2-statistic for layer boundary determination}
 \usage{
-T2_stat(x, k = 50)
+T2_stat(data, k = 50)
 }
 \arguments{
-\item{x}{A data frame containing the depth of perforation in the first column, and the variables of interest in the rest of the columns, for a CPTu test: point resistance (qc), sleeve friction (fs), and pore-water pressure (u)}
+\item{data}{A data frame containing the depth of perforation in the first column, and the variables of interest in the rest of the columns, for a CPTu test: point resistance (qc), sleeve friction (fs), and pore-water pressure (u)}
 
 \item{k}{The window length for the number of data points to include in the calculation of T2-statistic. Always and even (par) number}
 }

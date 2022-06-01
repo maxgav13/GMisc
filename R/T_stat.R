@@ -1,6 +1,6 @@
 #' @title T-statistic for layer boundary determination
 #' @description Calculates the T-statistic and Cohen's d effect size for a perforation log. The coefficient is used to find layer boundaries in a perforation log.
-#' @param x A data frame containing the depth of perforation in the first column, and the value of interest in the second column
+#' @param data A data frame containing the depth of perforation in the first column, and the value of interest in the second column
 #' @param k The window length for the number of data points to include in the calculation of T-statistic. Always and even (par) number
 #' @export
 #' @return ggplot and plotly objects showing the Cohen's d statistic and lines marking the Cohen's U3 values for 0.95, 0.99, and 0.999, and suggested boundaries
@@ -10,8 +10,8 @@
 #' @examples
 #' T_stat(DPM_data, k = 6)
 #'
-T_stat = function(x, k = 6) {
-  Data = x
+T_stat = function(data, k = 6) {
+  Data = data
   nombres = names(Data)
   w = Data[[2]]
   n = floor(k/2)
@@ -48,23 +48,26 @@ T_stat = function(x, k = 6) {
   # d_crit = c(2.3, 2.88, 3.29, 3.92)
   d_crit = stats::qnorm(c(.95,.99,.999))
 
-  bounds.95 = Data[c(0,diff(sign(diff(Data$d))))<0 & Data$d>=d_crit[1],nombres[1]] %>%
-    as.data.frame() %>%
-    tidyr::drop_na() %>%
-    unlist() %>%
-    as.vector()
+  # bounds.95 = Data[c(0,diff(sign(diff(Data$d))))<0 & Data$d>=d_crit[1],nombres[1]] %>%
+  #   as.data.frame() %>%
+  #   tidyr::drop_na() %>%
+  #   unlist() %>%
+  #   as.vector()
 
-  bounds.99 = Data[c(0,diff(sign(diff(Data$d))))<0 & Data$d>=d_crit[2],nombres[1]] %>%
-    as.data.frame() %>%
-    tidyr::drop_na() %>%
-    unlist() %>%
-    as.vector()
+  bounds.95 = Data %>%
+    dplyr::mutate(dif = c(0, diff(sign(diff(.data$d))),0)) %>%
+    dplyr::filter(.data$dif < 0 & .data$d > d_crit[1]) %>%
+    dplyr::pull(1)
 
-  bounds.999 = Data[c(0,diff(sign(diff(Data$d))))<0 & Data$d>=d_crit[3],nombres[1]] %>%
-    as.data.frame() %>%
-    tidyr::drop_na() %>%
-    unlist() %>%
-    as.vector()
+  bounds.99 = Data %>%
+    dplyr::mutate(dif = c(0, diff(sign(diff(.data$d))),0)) %>%
+    dplyr::filter(.data$dif < 0 & .data$d > d_crit[2]) %>%
+    dplyr::pull(1)
+
+  bounds.999 = Data %>%
+    dplyr::mutate(dif = c(0, diff(sign(diff(.data$d))),0)) %>%
+    dplyr::filter(.data$dif < 0 & .data$d > d_crit[3]) %>%
+    dplyr::pull(1)
 
   q = ggplot(Data, aes_string("d", nombres[1])) +
     geom_path(na.rm = T) +
