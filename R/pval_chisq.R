@@ -1,5 +1,5 @@
-#' @title P-value for proposed standard deviation of a population
-#' @description Calculates the p-value for a proposed standard deviation of a population (ChiSquare distribution).
+#' @title P-value for proposed standard deviation (variance) of a population
+#' @description Calculates the p-value for a proposed standard deviation (variance) of a population (ChiSquare distribution).
 #' @param s Sample standard deviation
 #' @param n Sample size
 #' @param sigma Population standard deviation

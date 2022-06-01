@@ -1,5 +1,5 @@
-#' @title Confidence interval for standard deviation of a sample
-#' @description Calculates the confidence interval for the standard deviation of a sample (ChiSquare distribution).
+#' @title Confidence interval for variance (standard deviation) of a sample
+#' @description Calculates the confidence interval for the variance (standard deviation) of a sample (ChiSquare distribution).
 #' @param s Sample standard deviation
 #' @param n Sample size
 #' @param conf.level Confidence level to use for the confidence interval (Default is 0.95)

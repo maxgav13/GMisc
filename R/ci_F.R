@@ -1,5 +1,5 @@
-#' @title Confidence interval for ratio of standard deviations of 2 samples
-#' @description Calculates the confidence interval for the ratio of the standard deviation of 2 samples (F distribution).
+#' @title Confidence interval for ratio of variances (standard deviations) of 2 samples
+#' @description Calculates the confidence interval for the ratio of the variance (standard deviation) of 2 samples (F distribution).
 #' @param s1 Sample's 1 standard deviation
 #' @param n1 Sample size of sample 1
 #' @param s2 Sample's 2 standard deviation

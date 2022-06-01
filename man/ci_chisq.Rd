@@ -2,7 +2,7 @@
 % Please edit documentation in R/ci_chisq.R
 \name{ci_chisq}
 \alias{ci_chisq}
-\title{Confidence interval for standard deviation of a sample}
+\title{Confidence interval for variance (standard deviation) of a sample}
 \usage{
 ci_chisq(s, n, conf.level = 0.95, digits = 2)
 }
@@ -19,7 +19,7 @@ ci_chisq(s, n, conf.level = 0.95, digits = 2)
 A tibble with the standard deviation and variance, degrees of freedom, and lower and upper ends of the confidence interval
 }
 \description{
-Calculates the confidence interval for the standard deviation of a sample (ChiSquare distribution).
+Calculates the confidence interval for the variance (standard deviation) of a sample (ChiSquare distribution).
 }
 \examples{
 s <- 0.535

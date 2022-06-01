@@ -2,7 +2,7 @@
 % Please edit documentation in R/pval_chisq.R
 \name{pval_chisq}
 \alias{pval_chisq}
-\title{P-value for proposed standard deviation of a population}
+\title{P-value for proposed standard deviation (variance) of a population}
 \usage{
 pval_chisq(s, n, sigma, side = c("two", "one"))
 }
@@ -19,7 +19,7 @@ pval_chisq(s, n, sigma, side = c("two", "one"))
 P-value
 }
 \description{
-Calculates the p-value for a proposed standard deviation of a population (ChiSquare distribution).
+Calculates the p-value for a proposed standard deviation (variance) of a population (ChiSquare distribution).
 }
 \examples{
 s <- 0.535

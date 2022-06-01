@@ -75,9 +75,12 @@ mcp = function(data, R = 199, alpha = 2, sig.level = .01, min.perc = 15) {
                                      CI.upr = ~ signif(DescTools::MeanCI(.)[[3]],3)
                                    )
                                    ,.names = '{.fn}')) %>%
-    dplyr::mutate(MoE = stats::qt(.975,.data$Obs-1)*.data$SD/sqrt(.data$Obs),
-                  Interval = levels(data_ecp0_tidy$Bounds)[levels(data_ecp0_tidy$Layer) == .data$Layer]) %>%
-    as.data.frame()
+    dplyr::mutate(MoE = stats::qt(.975,.data$Obs-1)*.data$SD/sqrt(.data$Obs)
+                  ,Interval = levels(data_ecp0_tidy$Bounds)[levels(data_ecp0_tidy$Layer) == .data$Layer]
+                  ) %>%
+    dplyr::relocate(.data$Interval, .after = .data$Layer) %>%
+    as.data.frame() %>%
+    suppressWarnings()
 
   return(list(LayersGG=q, LayersLY=p, StatsGG=q2, StatsLY=p2, Summary=Summary, ES=ES))
 }

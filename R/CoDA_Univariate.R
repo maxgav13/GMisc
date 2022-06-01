@@ -28,7 +28,8 @@ CoDA_Univariate = function(data, ppm_vars = NULL) {
     dat.ilr = matrix(0,
                      nrow = nrow(data),
                      ncol = ncol(data)) %>%
-      dplyr::as_tibble(.name_repair = 'unique') %>%
+      data.frame() %>%
+      tibble::tibble() %>%
       purrr::set_names(paste0('ilr_', names(data)))
 
     for (i in 1:ncol(data)) {
@@ -73,7 +74,8 @@ CoDA_Univariate = function(data, ppm_vars = NULL) {
     dat.ilr = matrix(0,
                      nrow = nrow(data),
                      ncol = ncol(data)) %>%
-      dplyr::as_tibble() %>%
+      data.frame() %>%
+      tibble::tibble() %>%
       purrr::set_names(paste0('ilr_', names(data)))
 
     for (i in 1:ncol(data)) {

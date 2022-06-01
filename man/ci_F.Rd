@@ -2,7 +2,7 @@
 % Please edit documentation in R/ci_F.R
 \name{ci_F}
 \alias{ci_F}
-\title{Confidence interval for ratio of standard deviations of 2 samples}
+\title{Confidence interval for ratio of variances (standard deviations) of 2 samples}
 \usage{
 ci_F(s1, n1, s2, n2, conf.level = 0.95, digits = 2)
 }
@@ -23,7 +23,7 @@ ci_F(s1, n1, s2, n2, conf.level = 0.95, digits = 2)
 A tibble with the ratio of standard deviations and variances, degrees of freedom for both samples, and lower and upper ends of the confidence interval
 }
 \description{
-Calculates the confidence interval for the ratio of the standard deviation of 2 samples (F distribution).
+Calculates the confidence interval for the ratio of the variance (standard deviation) of 2 samples (F distribution).
 }
 \examples{
 s1 <- 3.1

@@ -4,12 +4,14 @@
 \alias{CoDA_Atyp_Idx}
 \title{CoDA Atypicality Index}
 \usage{
-CoDA_Atyp_Idx(comp, sample = NULL)
+CoDA_Atyp_Idx(comp, sample = NULL, thres = 0.95)
 }
 \arguments{
-\item{comp}{A matrix of observations for a given composition. Entries must be non-zero and positive.}
+\item{comp}{A matrix or data frame of observations for a given composition. Entries must be non-zero and positive.}
 
 \item{sample}{A one sample vector to compare against the given composition.}
+
+\item{thres}{Threshold to classify observation as atypical, from 0 to 1 (Default is 0.95)}
 }
 \value{
 A matrix with the atypicality index or indices.

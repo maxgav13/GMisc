@@ -30,7 +30,7 @@ knitr::opts_chunk$set(
 
 # Diagrams
 
-This document shows how to display and use different classification diagrams that are used frequently in geosciences, these are (diagram - function):
+This document shows how to display and use different classification diagrams that are used frequently in geosciences (for more info on each one you can click the function name to go to the help page) these are (diagram - function):
 
 -   QAP - `ternary_qap()`
 
@@ -40,7 +40,7 @@ This document shows how to display and use different classification diagrams tha
 
 -   QAP for ultramafic rocks - `ternary_qap_um()`
 
--   QtFL for provenance - `ternary_qfl()`
+-   QtFL for provenance - `ternary_qtfl()`
 
 -   QmFLt for provenance - `ternary_qmflt()`
 

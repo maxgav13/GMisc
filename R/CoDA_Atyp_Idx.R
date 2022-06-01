@@ -1,7 +1,8 @@
 #' @title CoDA Atypicality Index
 #' @description Calculates the atypicality index (ranges between 0 and 1, 1 being more atypical/different) for all the observations of a composition or compares one sample to the given composition, using Compositional Data Analysis (CoDA) principles.
-#' @param comp A matrix of observations for a given composition. Entries must be non-zero and positive.
+#' @param comp A matrix or data frame of observations for a given composition. Entries must be non-zero and positive.
 #' @param sample A one sample vector to compare against the given composition.
+#' @param thres Threshold to classify observation as atypical, from 0 to 1 (Default is 0.95)
 #' @export
 #' @return A matrix with the atypicality index or indices.
 #' @references Aitchison, J. (1986). The statistical analysis of compositional data. Chapman and Hall.
@@ -12,7 +13,13 @@
 #' CoDA_Atyp_Idx(Hongite)
 #' CoDA_Atyp_Idx(Hongite, samp)
 #'
-CoDA_Atyp_Idx = function(comp, sample = NULL) {
+CoDA_Atyp_Idx = function(comp, sample = NULL, thres = .95) {
+
+  if (any(class(comp) == "matrix")) {
+    comp = comp
+  } else {
+    comp = as.matrix(comp)
+  }
 
   n1 = nrow(comp)
   A = compositions::alr(compositions::acomp(comp)) %>% unclass()
@@ -38,5 +45,10 @@ CoDA_Atyp_Idx = function(comp, sample = NULL) {
     ai0 = (t(xalr-Amu) %*% solve(Acov) %*% (xalr-Amu)) * k
     ai = stats::pf(ai0,D,N-D) %>% round(4)
   }
+
+  ai = tibble::as_tibble(ai, .name_repair = 'unique') %>%
+    purrr::set_names('idx') %>%
+    dplyr::mutate(Atypical = ifelse(idx > thres, 'Yes', 'No'))
+
   return(ai)
 }

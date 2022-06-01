@@ -1,7 +1,7 @@
 #' @title CoDA Two Group Hypothesis 2
 #' @description Performs the calculations for the hypothesis of equal covariance with different centers for two diferent samples, using Compositional Data Analysis (CoDA) principles.
-#' @param comp1 A matrix of observations for composition 1. Entries must be non-zero and positive.
-#' @param comp2 A matrix of observations for composition 2. Entries must be non-zero and positive.
+#' @param comp1 A matrix or data frame of observations for composition 1. Entries must be non-zero and positive.
+#' @param comp2 A matrix or data frame of observations for composition 2. Entries must be non-zero and positive.
 #' @export
 #' @return A tibble with the statistic (Q), degrees of freedom (nu), p-value, and null hypothesis (H0)
 #' @references Pawlowsky-Hlahn, V., Egozcue, J.J & Tolosna-Delgado, R. (2015). Modeling and analysis of compositional data. John Wiley & Sons.
@@ -13,6 +13,19 @@
 #' CoDA_2Group_H2(Hongite,Kongite)
 #'
 CoDA_2Group_H2 = function(comp1, comp2) {
+
+  if (any(class(comp1) == "matrix")) {
+    comp1 = comp1
+  } else {
+    comp1 = as.matrix(comp1)
+  }
+
+  if (any(class(comp2) == "matrix")) {
+    comp2 = comp2
+  } else {
+    comp2 = as.matrix(comp2)
+  }
+
   A = comp1
   B = comp2
   n1 = nrow(A)
