@@ -18,7 +18,7 @@ Additional packages that are also useful can be installed using:
 
 * `GMisc::additional_pks()`
 
-It is also recommended to have installed the necessary compiling tools: Xcode for Mac or Rtools for Windows.
+It is also recommended to have installed the necessary compiling tools: [Xcode](https://apps.apple.com/us/app/xcode/id497799835?mt=12) for Mac or [Rtools](https://cran.r-project.org/bin/windows/Rtools/) for Windows.
 
 ## Extras
 
