@@ -2,6 +2,7 @@
 #' @description Given a number of breakpoints, plots a layered model of one variable against distance, plots the confidence intervals for each layer, and gives a summary table.
 #' @param x The resulting object from \code{cp_aic_eta()}
 #' @param breaks An integer giving the number of breakpoints to use (from 'Changepoint')
+#' @param conf.level Confidence level to use for plot and summary statistics (Default is 0.95)
 #' @export
 #' @return A ggplot and plotly objects showing the layered model, another showing the confidence intervals, and a summary table
 #' @import ggplot2
@@ -9,8 +10,9 @@
 #' cp = cp_aic_eta(DPM_data, m = 10, nl = 3)
 #' cp_layers(cp, breaks = 2)
 #'
-cp_layers = function(x, breaks) {
+cp_layers = function(x, breaks, conf.level = 0.95) {
 
+    alfa = 1 - conf.level
     datos = x[['Data']]
     datos = x[['Data']] %>% dplyr::select(c(1:2,(breaks+2)))
     nombres = names(datos)
@@ -33,6 +35,7 @@ cp_layers = function(x, breaks) {
 
   q2 = ggplot(datos, aes_string(nom[3], nom[2])) +
     stat_summary(fun.data = mean_cl_normal,
+                 fun.args = list(conf.int = conf.level),
                  geom = "pointrange",
                  color = "red",
                  size=.5) +
@@ -50,11 +53,11 @@ cp_layers = function(x, breaks) {
                                      SD = ~ signif(stats::sd(.),3),
                                      Min = ~ signif(min(.),3),
                                      Max = ~ signif(max(.),3),
-                                     CI.lwr = ~ signif(DescTools::MeanCI(.)[[2]],3),
-                                     CI.upr = ~ signif(DescTools::MeanCI(.)[[3]],3)
+                                     CI.lwr = ~ signif(DescTools::MeanCI(., conf.level = conf.level)[[2]],3),
+                                     CI.upr = ~ signif(DescTools::MeanCI(., conf.level = conf.level)[[3]],3)
                                    )
                                    ,.names = '{.fn}')) %>%
-    dplyr::mutate(MoE = signif(stats::qt(.975,.data$Obs-1)*.data$SD/sqrt(.data$Obs),3)) %>%
+    dplyr::mutate(MoE = signif(stats::qt(1-alfa/2,.data$Obs-1)*.data$SD/sqrt(.data$Obs),3)) %>%
     as.data.frame()
 
   return(list(LayersGG=q, LayersLY=p, StatsGG=q2, StatsLY=p2, Summary=Summary, ES=ES))

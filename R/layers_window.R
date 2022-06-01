@@ -2,6 +2,7 @@
 #' @description Given a set of breakpoints (depths/distances), plots a layered model of the data against distance, plots the confidence intervals for each layer, and gives a summary table.
 #' @param x A data frame containing the location variable (depth or distance) in the first column, and the value(s) of interest in the rest of the columns
 #' @param breaks A vector containing the breakpoints (from 'RI', 'Cohen d' or 'Mahalanobis D2')
+#' @param conf.level Confidence level to use for plot and summary statistics (Default is 0.95)
 #' @export
 #' @return A ggplot and plotly objects showing the layered model, another showing the confidence intervals, and a summary table
 #' @import ggplot2
@@ -9,8 +10,9 @@
 #' layers_window(DPM_data, breaks = c(3.8,8.9))
 #' layers_window(CPTu_data, breaks = c(1.2,3.8,5.1))
 #'
-layers_window = function(x, breaks) {
+layers_window = function(x, breaks, conf.level = 0.95) {
 
+  alfa = 1 - conf.level
   dat = x
   nom = names(dat)
 
@@ -40,6 +42,7 @@ layers_window = function(x, breaks) {
 
   q2 = ggplot(dat_tidy, aes_string('boundaries', 'Value', col = 'boundaries')) +
     stat_summary(fun.data = mean_cl_normal,
+                 fun.args = list(conf.int = conf.level),
                  geom = "pointrange",
                  # color = "red",
                  size=.5) +
@@ -58,11 +61,11 @@ layers_window = function(x, breaks) {
                                      SD = ~ signif(stats::sd(.),3),
                                      Min = ~ signif(min(.),3),
                                      Max = ~ signif(max(.),3),
-                                     CI.lwr = ~ signif(DescTools::MeanCI(.)[[2]],3),
-                                     CI.upr = ~ signif(DescTools::MeanCI(.)[[3]],3)
+                                     CI.lwr = ~ signif(DescTools::MeanCI(., conf.level = conf.level)[[2]],3),
+                                     CI.upr = ~ signif(DescTools::MeanCI(., conf.level = conf.level)[[3]],3)
                                    )
                                    ,.names = '{.fn}')) %>%
-    dplyr::mutate(MoE = signif(stats::qt(.975,.data$Obs-1)*.data$SD/sqrt(.data$Obs),3)) %>%
+    dplyr::mutate(MoE = signif(stats::qt(1-alfa/2,.data$Obs-1)*.data$SD/sqrt(.data$Obs),3)) %>%
     as.data.frame()
 
   return(list(LayersGG=q, LayersLY=p, StatsGG=q2, StatsLY=p2, Summary=Summary, ES=ES))

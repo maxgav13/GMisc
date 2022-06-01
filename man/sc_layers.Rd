@@ -4,7 +4,7 @@
 \alias{sc_layers}
 \title{Plots a layered model and summarizes the statistics for each layer from a Strucchange result}
 \usage{
-sc_layers(x, h = 0.1, breaks)
+sc_layers(x, h = 0.1, breaks, conf.level = 0.95)
 }
 \arguments{
 \item{x}{A data frame containing the location variable (depth or distance) in the first column, and the value of interest in the second column}
@@ -12,6 +12,8 @@ sc_layers(x, h = 0.1, breaks)
 \item{h}{Percent of data points per layer}
 
 \item{breaks}{An integer giving the number of breakpoints to use (from 'Strucchange')}
+
+\item{conf.level}{Confidence level to use for plot and summary statistics (Default is 0.95)}
 }
 \value{
 A ggplot and plotly objects showing the layered model, another showing the confidence intervals, and a summary table

@@ -4,12 +4,14 @@
 \alias{cp_layers}
 \title{Plots a layered model and summarizes the statistics for each layer from a Changepoint result}
 \usage{
-cp_layers(x, breaks)
+cp_layers(x, breaks, conf.level = 0.95)
 }
 \arguments{
 \item{x}{The resulting object from \code{cp_aic_eta()}}
 
 \item{breaks}{An integer giving the number of breakpoints to use (from 'Changepoint')}
+
+\item{conf.level}{Confidence level to use for plot and summary statistics (Default is 0.95)}
 }
 \value{
 A ggplot and plotly objects showing the layered model, another showing the confidence intervals, and a summary table

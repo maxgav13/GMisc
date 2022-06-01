@@ -3,14 +3,16 @@
 #' @param x A data frame containing the location variable (depth or distance) in the first column, and the value of interest in the second column
 #' @param h Percent of data points per layer
 #' @param breaks An integer giving the number of breakpoints to use (from 'Strucchange')
+#' @param conf.level Confidence level to use for plot and summary statistics (Default is 0.95)
 #' @export
 #' @return A ggplot and plotly objects showing the layered model, another showing the confidence intervals, and a summary table
 #' @import ggplot2
 #' @examples
 #' sc_layers(DPM_data, h = 0.1, breaks = 2)
 #'
-sc_layers = function(x, h = 0.1, breaks) {
+sc_layers = function(x, h = 0.1, breaks, conf.level = 0.95) {
 
+  alfa = 1 - conf.level
   dat = x
   nom = names(dat)
 
@@ -39,6 +41,7 @@ sc_layers = function(x, h = 0.1, breaks) {
 
   q2 = ggplot(dat, aes_string('boundaries', nom[2], col = 'boundaries')) +
     stat_summary(fun.data = mean_cl_normal,
+                 fun.args = list(conf.int = conf.level),
                  geom = "pointrange",
                  color = "red",
                  size=.5) +
@@ -56,11 +59,11 @@ sc_layers = function(x, h = 0.1, breaks) {
                                      SD = ~ signif(stats::sd(.),3),
                                      Min = ~ signif(min(.),3),
                                      Max = ~ signif(max(.),3),
-                                     CI.lwr = ~ signif(DescTools::MeanCI(.)[[2]],3),
-                                     CI.upr = ~ signif(DescTools::MeanCI(.)[[3]],3)
+                                     CI.lwr = ~ signif(DescTools::MeanCI(., conf.level = conf.level)[[2]],3),
+                                     CI.upr = ~ signif(DescTools::MeanCI(., conf.level = conf.level)[[3]],3)
                                    )
                                    ,.names = '{.fn}')) %>%
-    dplyr::mutate(MoE = signif(stats::qt(.975,.data$Obs-1)*.data$SD/sqrt(.data$Obs),3)) %>%
+    dplyr::mutate(MoE = signif(stats::qt(1-alfa/2,.data$Obs-1)*.data$SD/sqrt(.data$Obs),3)) %>%
     as.data.frame()
 
   return(list(LayersGG=q, LayersLY=p, StatsGG=q2, StatsLY=p2, Summary=Summary, ES=ES))

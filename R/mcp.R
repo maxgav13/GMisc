@@ -5,6 +5,7 @@
 #' @param alpha A parameter between 0 (exclusive) and 2 (inclusive). lower values make allow for more variation in the search for changepoints
 #' @param sig.level Significance level to determine significance of the changepoints
 #' @param min.perc Minimum percentage of data points per layer (between changepoints)
+#' @param conf.level Confidence level to use for plot and summary statistics (Default is 0.95)
 #' @export
 #' @return ggplot and plotly objects showing the layer distinction, statistical summary of the layers, and a summary table
 #' @references Nicholas A. James, David S. Matteson (2014). ecp: An R Package for Nonparametric Multiple Change Point Analysis of Multivariate Data, Journal of Statistical Software, 62(7), 1-25.
@@ -14,8 +15,9 @@
 #' mcp(CPTu_data, R = 199, alpha = 2, sig.level = .01, min.perc = 15) # multivariate example
 #' mcp(DPM_data, R = 199, alpha = 2, sig.level = .01, min.perc = 15) # univariate example
 #'
-mcp = function(data, R = 199, alpha = 2, sig.level = .01, min.perc = 15) {
+mcp = function(data, R = 199, alpha = 2, sig.level = .01, min.perc = 15, conf.level = 0.95) {
 
+  alfa = 1 - conf.level
   dat_ecp0 = data
   dat_ecp = as.matrix(dat_ecp0[-1])
   noms.ecp = names(dat_ecp0)
@@ -53,6 +55,7 @@ mcp = function(data, R = 199, alpha = 2, sig.level = .01, min.perc = 15) {
 
   q2 = ggplot(data_ecp0_tidy, aes_string('Layer', 'Value',col='Layer')) +
     stat_summary(fun.data = mean_cl_normal,
+                 fun.args = list(conf.int = conf.level),
                  geom = "pointrange",
                  #color = "red",
                  size=.5) +
@@ -71,11 +74,11 @@ mcp = function(data, R = 199, alpha = 2, sig.level = .01, min.perc = 15) {
                                      SD = ~ signif(stats::sd(.),3),
                                      Min = ~ signif(min(.),3),
                                      Max = ~ signif(max(.),3),
-                                     CI.lwr = ~ signif(DescTools::MeanCI(.)[[2]],3),
-                                     CI.upr = ~ signif(DescTools::MeanCI(.)[[3]],3)
+                                     CI.lwr = ~ signif(DescTools::MeanCI(., conf.level = conf.level)[[2]],3),
+                                     CI.upr = ~ signif(DescTools::MeanCI(., conf.level = conf.level)[[3]],3)
                                    )
                                    ,.names = '{.fn}')) %>%
-    dplyr::mutate(MoE = stats::qt(.975,.data$Obs-1)*.data$SD/sqrt(.data$Obs)
+    dplyr::mutate(MoE = stats::qt(1-alfa/2,.data$Obs-1)*.data$SD/sqrt(.data$Obs)
                   ,Interval = levels(data_ecp0_tidy$Bounds)[levels(data_ecp0_tidy$Layer) == .data$Layer]
                   ) %>%
     dplyr::relocate(.data$Interval, .after = .data$Layer) %>%

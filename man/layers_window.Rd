@@ -4,12 +4,14 @@
 \alias{layers_window}
 \title{Plots a layered model and summarizes the statistics for each layer}
 \usage{
-layers_window(x, breaks)
+layers_window(x, breaks, conf.level = 0.95)
 }
 \arguments{
 \item{x}{A data frame containing the location variable (depth or distance) in the first column, and the value(s) of interest in the rest of the columns}
 
 \item{breaks}{A vector containing the breakpoints (from 'RI', 'Cohen d' or 'Mahalanobis D2')}
+
+\item{conf.level}{Confidence level to use for plot and summary statistics (Default is 0.95)}
 }
 \value{
 A ggplot and plotly objects showing the layered model, another showing the confidence intervals, and a summary table

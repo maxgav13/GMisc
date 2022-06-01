@@ -4,7 +4,14 @@
 \alias{mcp}
 \title{Multiple change-point analysis for layer boundary determination}
 \usage{
-mcp(data, R = 199, alpha = 2, sig.level = 0.01, min.perc = 15)
+mcp(
+  data,
+  R = 199,
+  alpha = 2,
+  sig.level = 0.01,
+  min.perc = 15,
+  conf.level = 0.95
+)
 }
 \arguments{
 \item{data}{A data frame containing the depth/distance in the first column, and the variables of interest in the rest of the columns, for a CPTu test: point resistance (qc), sleeve friction (fs), and pore-water pressure (u)}
@@ -16,6 +23,8 @@ mcp(data, R = 199, alpha = 2, sig.level = 0.01, min.perc = 15)
 \item{sig.level}{Significance level to determine significance of the changepoints}
 
 \item{min.perc}{Minimum percentage of data points per layer (between changepoints)}
+
+\item{conf.level}{Confidence level to use for plot and summary statistics (Default is 0.95)}
 }
 \value{
 ggplot and plotly objects showing the layer distinction, statistical summary of the layers, and a summary table
