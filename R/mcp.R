@@ -53,7 +53,8 @@ mcp = function(data, R = 199, alpha = 2, sig.level = .01, min.perc = 15, conf.le
 
   p = plotly::ggplotly(q, dynamicTicks = TRUE)
 
-  q2 = ggplot(data_ecp0_tidy, aes(Value,forcats::fct_rev(Layer),col=Layer)) +
+  q2 = ggplot(data_ecp0_tidy, aes(.data$Value,forcats::fct_rev(.data$Layer),
+                                  col=.data$Layer)) +
     stat_summary(fun.data = mean_cl_normal,
                  fun.args = list(conf.int = conf.level),
                  geom = "pointrange",

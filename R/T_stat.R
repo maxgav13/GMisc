@@ -72,13 +72,13 @@ T_stat = function(data, k = 6) {
   q = ggplot(Data, aes_string("d", nombres[1])) +
     geom_path(na.rm = T) +
     geom_vline(xintercept = d_crit, col = c("blue", "orange", "red")) +
-    scale_y_reverse(name = "Depth (m)") +
+    scale_y_reverse() +
     scale_x_continuous(name = "Cohen's d") +
     theme_bw()
   p = plotly::ggplotly(ggplot(Data, aes_string("d", nombres[1])) +
                          geom_path(size = 0.25, na.rm = T) +
                          geom_vline(size = 0.25, xintercept = d_crit, col = c("blue", "orange", "red")) +
-                         scale_y_reverse(name = "Depth (m)") +
+                         scale_y_reverse() +
                          scale_x_continuous(name = "Cohen's d") +
                          theme_bw(), dynamicTicks = T)
 

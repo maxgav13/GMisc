@@ -40,8 +40,8 @@ layers_window = function(x, breaks, conf.level = 0.95) {
 
   p = plotly::ggplotly(q, dynamicTicks = T)
 
-  q2 = ggplot(dat_tidy, aes(Value, forcats::fct_rev(boundaries),
-                            col = boundaries)) +
+  q2 = ggplot(dat_tidy, aes(.data$Value, forcats::fct_rev(.data$boundaries),
+                            col = .data$boundaries)) +
     stat_summary(fun.data = mean_cl_normal,
                  fun.args = list(conf.int = conf.level),
                  geom = "pointrange",
