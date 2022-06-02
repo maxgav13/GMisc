@@ -72,7 +72,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">GMisc</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.2</span>
       </span>
     </div>
 
@@ -141,18 +141,22 @@
     <p>Calculates the atypicality index (ranges between 0 and 1, 1 being more atypical/different) for all the observations of a composition or compares one sample to the given composition, using Compositional Data Analysis (CoDA) principles.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>CoDA_Atyp_Idx</span><span class='op'>(</span><span class='va'>comp</span>, sample <span class='op'>=</span> <span class='cn'>NULL</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>CoDA_Atyp_Idx</span><span class='op'>(</span><span class='va'>comp</span>, sample <span class='op'>=</span> <span class='cn'>NULL</span>, thres <span class='op'>=</span> <span class='fl'>0.95</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>comp</th>
-      <td><p>A matrix of observations for a given composition. Entries must be non-zero and positive.</p></td>
+      <td><p>A matrix or data frame of observations for a given composition. Entries must be non-zero and positive.</p></td>
     </tr>
     <tr>
       <th>sample</th>
       <td><p>A one sample vector to compare against the given composition.</p></td>
+    </tr>
+    <tr>
+      <th>thres</th>
+      <td><p>Threshold to classify observation as atypical, from 0 to 1 (Default is 0.95)</p></td>
     </tr>
     </table>
 
@@ -167,34 +171,24 @@
     <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span><span class='op'>(</span><span class='st'>"Hongite"</span>, package <span class='op'>=</span> <span class='st'>'compositions'</span><span class='op'>)</span>
 <span class='va'>samp</span> <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>44</span>, <span class='fl'>20.4</span>, <span class='fl'>13.9</span>, <span class='fl'>9.1</span>, <span class='fl'>12.6</span><span class='op'>)</span>
 <span class='fu'>CoDA_Atyp_Idx</span><span class='op'>(</span><span class='va'>Hongite</span><span class='op'>)</span>
-</div><div class='output co'>#&gt;         [,1]
-#&gt;  [1,] 0.7122
-#&gt;  [2,] 0.0171
-#&gt;  [3,] 0.1990
-#&gt;  [4,] 0.0318
-#&gt;  [5,] 0.7086
-#&gt;  [6,] 0.8284
-#&gt;  [7,] 0.8822
-#&gt;  [8,] 0.9689
-#&gt;  [9,] 0.1000
-#&gt; [10,] 0.9873
-#&gt; [11,] 0.1678
-#&gt; [12,] 0.7012
-#&gt; [13,] 0.8148
-#&gt; [14,] 0.7405
-#&gt; [15,] 0.2679
-#&gt; [16,] 0.7508
-#&gt; [17,] 0.7298
-#&gt; [18,] 0.1454
-#&gt; [19,] 0.5135
-#&gt; [20,] 0.3501
-#&gt; [21,] 0.0990
-#&gt; [22,] 0.0739
-#&gt; [23,] 0.8282
-#&gt; [24,] 0.2800
-#&gt; [25,] 0.2864</div><div class='input'><span class='fu'>CoDA_Atyp_Idx</span><span class='op'>(</span><span class='va'>Hongite</span>, <span class='va'>samp</span><span class='op'>)</span>
-</div><div class='output co'>#&gt;        [,1]
-#&gt; [1,] 0.9979</div><div class='input'>
+</div><div class='output co'>#&gt; <span class='message'>New names:</span></div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 25 × 2</span>
+#&gt;       idx Atypical
+#&gt;     <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>   
+#&gt; <span style='color: #BCBCBC;'> 1</span> 0.712  No      
+#&gt; <span style='color: #BCBCBC;'> 2</span> 0.017<span style='text-decoration: underline;'>1</span> No      
+#&gt; <span style='color: #BCBCBC;'> 3</span> 0.199  No      
+#&gt; <span style='color: #BCBCBC;'> 4</span> 0.031<span style='text-decoration: underline;'>8</span> No      
+#&gt; <span style='color: #BCBCBC;'> 5</span> 0.709  No      
+#&gt; <span style='color: #BCBCBC;'> 6</span> 0.828  No      
+#&gt; <span style='color: #BCBCBC;'> 7</span> 0.882  No      
+#&gt; <span style='color: #BCBCBC;'> 8</span> 0.969  Yes     
+#&gt; <span style='color: #BCBCBC;'> 9</span> 0.1    No      
+#&gt; <span style='color: #BCBCBC;'>10</span> 0.987  Yes     
+#&gt; <span style='color: #949494;'># … with 15 more rows</span></div><div class='input'><span class='fu'>CoDA_Atyp_Idx</span><span class='op'>(</span><span class='va'>Hongite</span>, <span class='va'>samp</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; <span class='message'>New names:</span></div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 1 × 2</span>
+#&gt;     idx Atypical
+#&gt;   <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>   
+#&gt; <span style='color: #BCBCBC;'>1</span> 0.998 Yes     </div><div class='input'>
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

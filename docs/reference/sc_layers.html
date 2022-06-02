@@ -72,7 +72,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">GMisc</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.2</span>
       </span>
     </div>
 
@@ -141,7 +141,7 @@
     <p>Given a number of breakpoints, plots a layered model of one variable against distance, plots the confidence intervals for each layer, and gives a summary table.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>sc_layers</span><span class='op'>(</span><span class='va'>x</span>, h <span class='op'>=</span> <span class='fl'>0.1</span>, <span class='va'>breaks</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>sc_layers</span><span class='op'>(</span><span class='va'>x</span>, h <span class='op'>=</span> <span class='fl'>0.1</span>, <span class='va'>breaks</span>, conf.level <span class='op'>=</span> <span class='fl'>0.95</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -157,6 +157,10 @@
     <tr>
       <th>breaks</th>
       <td><p>An integer giving the number of breakpoints to use (from 'Strucchange')</p></td>
+    </tr>
+    <tr>
+      <th>conf.level</th>
+      <td><p>Confidence level to use for plot and summary statistics (Default is 0.95)</p></td>
     </tr>
     </table>
 

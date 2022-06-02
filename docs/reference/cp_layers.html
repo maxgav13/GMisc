@@ -72,7 +72,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">GMisc</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.2</span>
       </span>
     </div>
 
@@ -141,7 +141,7 @@
     <p>Given a number of breakpoints, plots a layered model of one variable against distance, plots the confidence intervals for each layer, and gives a summary table.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>cp_layers</span><span class='op'>(</span><span class='va'>x</span>, <span class='va'>breaks</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>cp_layers</span><span class='op'>(</span><span class='va'>x</span>, <span class='va'>breaks</span>, conf.level <span class='op'>=</span> <span class='fl'>0.95</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -154,6 +154,10 @@
       <th>breaks</th>
       <td><p>An integer giving the number of breakpoints to use (from 'Changepoint')</p></td>
     </tr>
+    <tr>
+      <th>conf.level</th>
+      <td><p>Confidence level to use for plot and summary statistics (Default is 0.95)</p></td>
+    </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
@@ -162,7 +166,7 @@
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='va'>cp</span> <span class='op'>=</span> <span class='fu'><a href='cp_aic_eta.html'>cp_aic_eta</a></span><span class='op'>(</span><span class='va'>DPM_data</span>, m <span class='op'>=</span> <span class='fl'>10</span>, nl <span class='op'>=</span> <span class='fl'>3</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span class='warning'>Warning: The number of changepoints identified is Q, it is advised to increase Q to make sure changepoints have not been missed.</span></div><div class='output co'>#&gt; <span class='warning'>Warning: The number of changepoints identified is Q, it is advised to increase Q to make sure changepoints have not been missed.</span></div><div class='input'><span class='fu'>cp_layers</span><span class='op'>(</span><span class='va'>cp</span>, breaks <span class='op'>=</span> <span class='fl'>2</span><span class='op'>)</span>
+<span class='fu'>cp_layers</span><span class='op'>(</span><span class='va'>cp</span>, breaks <span class='op'>=</span> <span class='fl'>2</span><span class='op'>)</span>
 </div><div class='output co'>#&gt; $LayersGG</div><div class='img'><img src='cp_layers-1.png' alt='' width='700' height='433' /></div><div class='output co'>#&gt; 
 #&gt; $LayersLY
 #&gt; 

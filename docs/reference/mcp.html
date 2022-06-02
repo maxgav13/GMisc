@@ -72,7 +72,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">GMisc</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.2</span>
       </span>
     </div>
 
@@ -141,7 +141,14 @@
     <p>Performs multiple change-point analysis in univariate or multivariate data, to find layer boundaries in a perforation log.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>mcp</span><span class='op'>(</span><span class='va'>data</span>, R <span class='op'>=</span> <span class='fl'>199</span>, alpha <span class='op'>=</span> <span class='fl'>2</span>, sig.level <span class='op'>=</span> <span class='fl'>0.01</span>, min.perc <span class='op'>=</span> <span class='fl'>15</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>mcp</span><span class='op'>(</span>
+  <span class='va'>data</span>,
+  R <span class='op'>=</span> <span class='fl'>199</span>,
+  alpha <span class='op'>=</span> <span class='fl'>2</span>,
+  sig.level <span class='op'>=</span> <span class='fl'>0.01</span>,
+  min.perc <span class='op'>=</span> <span class='fl'>15</span>,
+  conf.level <span class='op'>=</span> <span class='fl'>0.95</span>
+<span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -166,6 +173,10 @@
       <th>min.perc</th>
       <td><p>Minimum percentage of data points per layer (between changepoints)</p></td>
     </tr>
+    <tr>
+      <th>conf.level</th>
+      <td><p>Confidence level to use for plot and summary statistics (Default is 0.95)</p></td>
+    </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
@@ -180,39 +191,39 @@
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='fu'>mcp</span><span class='op'>(</span><span class='va'>CPTu_data</span>, R <span class='op'>=</span> <span class='fl'>199</span>, alpha <span class='op'>=</span> <span class='fl'>2</span>, sig.level <span class='op'>=</span> <span class='fl'>.01</span>, min.perc <span class='op'>=</span> <span class='fl'>15</span><span class='op'>)</span> <span class='co'># multivariate example</span>
-</div><div class='output co'>#&gt; <span class='warning'>Warning: longer object length is not a multiple of shorter object length</span></div><div class='output co'>#&gt; <span class='warning'>Warning: longer object length is not a multiple of shorter object length</span></div><div class='output co'>#&gt; <span class='warning'>Warning: longer object length is not a multiple of shorter object length</span></div><div class='output co'>#&gt; <span class='warning'>Warning: longer object length is not a multiple of shorter object length</span></div><div class='output co'>#&gt; <span class='warning'>Warning: longer object length is not a multiple of shorter object length</span></div><div class='output co'>#&gt; <span class='warning'>Warning: longer object length is not a multiple of shorter object length</span></div><div class='output co'>#&gt; <span class='warning'>Warning: longer object length is not a multiple of shorter object length</span></div><div class='output co'>#&gt; <span class='warning'>Warning: longer object length is not a multiple of shorter object length</span></div><div class='output co'>#&gt; $LayersGG</div><div class='img'><img src='mcp-1.png' alt='' width='700' height='433' /></div><div class='output co'>#&gt; 
+</div><div class='output co'>#&gt; $LayersGG</div><div class='img'><img src='mcp-1.png' alt='' width='700' height='433' /></div><div class='output co'>#&gt; 
 #&gt; $LayersLY
 #&gt; 
 #&gt; $StatsGG</div><div class='img'><img src='mcp-2.png' alt='' width='700' height='433' /></div><div class='output co'>#&gt; 
 #&gt; $StatsLY
 #&gt; 
 #&gt; $Summary
-#&gt;    Layer Property Obs    Mean      SD    Min     Max  CI.lwr  CI.upr        MoE
-#&gt; 1      1       qc 181    1.96   0.765   0.75    5.01    1.84    2.07  0.1122019
-#&gt; 2      1       fs 181   81.90  36.900   0.53  166.00   76.50   87.40  5.4120895
-#&gt; 3      1        u 181   86.90  94.200 -37.30  358.00   73.00  101.00 13.8162285
-#&gt; 4      2       qc  86    6.41   1.940   2.69   10.60    5.99    6.83  0.4159369
-#&gt; 5      2       fs  86  317.00  86.100 121.00  509.00  299.00  335.00 18.4598781
-#&gt; 6      2        u  86  580.00 460.000  53.90 2040.00  481.00  678.00 98.6242035
-#&gt; 7      3       qc 132    3.65   1.420   2.38   14.20    3.41    3.90  0.2445007
-#&gt; 8      3       fs 132  177.00  49.800  56.00  271.00  168.00  185.00  8.5747415
-#&gt; 9      3        u 132  205.00 164.000 -54.80  690.00  176.00  233.00 28.2381045
-#&gt; 10     4       qc 174    4.90   2.480   2.68   22.60    4.53    5.27  0.3710854
-#&gt; 11     4       fs 174  153.00  89.000 -22.20  467.00  140.00  167.00 13.3171785
-#&gt; 12     4        u 174 1230.00 608.000 -31.80 2530.00 1140.00 1320.00 90.9757811
-#&gt;       Interval
-#&gt; 1  [0.12,3.74]
-#&gt; 2  [0.12,3.74]
-#&gt; 3  [0.12,3.74]
-#&gt; 4  (3.74,5.46]
-#&gt; 5  (3.74,5.46]
-#&gt; 6  (3.74,5.46]
-#&gt; 7   (5.46,8.1]
-#&gt; 8   (5.46,8.1]
-#&gt; 9   (5.46,8.1]
-#&gt; 10  (8.1,11.6]
-#&gt; 11  (8.1,11.6]
-#&gt; 12  (8.1,11.6]
+#&gt;    Layer    Interval Property Obs    Mean      SD    Min     Max  CI.lwr
+#&gt; 1      1 [0.12,3.74]       qc 181    1.96   0.765   0.75    5.01    1.84
+#&gt; 2      1 [0.12,3.74]       fs 181   81.90  36.900   0.53  166.00   76.50
+#&gt; 3      1 [0.12,3.74]        u 181   86.90  94.200 -37.30  358.00   73.00
+#&gt; 4      2 (3.74,5.46]       qc  86    6.41   1.940   2.69   10.60    5.99
+#&gt; 5      2 (3.74,5.46]       fs  86  317.00  86.100 121.00  509.00  299.00
+#&gt; 6      2 (3.74,5.46]        u  86  580.00 460.000  53.90 2040.00  481.00
+#&gt; 7      3  (5.46,8.1]       qc 132    3.65   1.420   2.38   14.20    3.41
+#&gt; 8      3  (5.46,8.1]       fs 132  177.00  49.800  56.00  271.00  168.00
+#&gt; 9      3  (5.46,8.1]        u 132  205.00 164.000 -54.80  690.00  176.00
+#&gt; 10     4  (8.1,11.6]       qc 174    4.90   2.480   2.68   22.60    4.53
+#&gt; 11     4  (8.1,11.6]       fs 174  153.00  89.000 -22.20  467.00  140.00
+#&gt; 12     4  (8.1,11.6]        u 174 1230.00 608.000 -31.80 2530.00 1140.00
+#&gt;     CI.upr    MoE
+#&gt; 1     2.07  0.112
+#&gt; 2    87.40  5.410
+#&gt; 3   101.00 13.800
+#&gt; 4     6.83  0.416
+#&gt; 5   335.00 18.500
+#&gt; 6   678.00 98.600
+#&gt; 7     3.90  0.245
+#&gt; 8   185.00  8.570
+#&gt; 9   233.00 28.200
+#&gt; 10    5.27  0.371
+#&gt; 11  167.00 13.300
+#&gt; 12 1320.00 91.000
 #&gt; 
 #&gt; $ES
 #&gt; [1] 0.405
@@ -224,11 +235,11 @@
 #&gt; $StatsLY
 #&gt; 
 #&gt; $Summary
-#&gt;   Layer Property Obs  Mean    SD Min Max CI.lwr CI.upr       MoE  Interval
-#&gt; 1     1    Blows  28  4.96 2.190   0  10   4.12   5.81 0.8491933   [0,2.8]
-#&gt; 2     2    Blows  30  7.57 0.898   6   9   7.23   7.90 0.3353187 (2.8,5.8]
-#&gt; 3     3    Blows  28  8.61 1.200   7  11   8.14   9.07 0.4653114 (5.8,8.6]
-#&gt; 4     4    Blows  15 10.40 1.120   8  12   9.78  11.00 0.6202353  (8.6,10]
+#&gt;   Layer  Interval Property Obs  Mean    SD Min Max CI.lwr CI.upr   MoE
+#&gt; 1     1   [0,2.8]    Blows  28  4.96 2.190   0  10   4.12   5.81 0.849
+#&gt; 2     2 (2.8,5.8]    Blows  30  7.57 0.898   6   9   7.23   7.90 0.335
+#&gt; 3     3 (5.8,8.6]    Blows  28  8.61 1.200   7  11   8.14   9.07 0.465
+#&gt; 4     4  (8.6,10]    Blows  15 10.40 1.120   8  12   9.78  11.00 0.620
 #&gt; 
 #&gt; $ES
 #&gt; [1] 0.62
