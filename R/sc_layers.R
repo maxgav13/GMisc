@@ -31,7 +31,9 @@ sc_layers = function(x, h = 0.1, breaks, conf.level = 0.95) {
 
   ES = round(DescTools::EtaSq(mod)[[1]],3)
 
-  q = ggplot(dat, aes_string(nom[2], nom[1], col = "boundaries")) +
+  q = dat %>%
+    dplyr::mutate(boundaries = forcats::fct_rev(.data$boundaries)) %>%
+    ggplot(aes_string(nom[2], nom[1], col = "boundaries")) +
     geom_path(size = .5) +
     scale_y_reverse() +
     labs(x = nom[2], y = nom[1], col = 'Layers') +
@@ -39,14 +41,18 @@ sc_layers = function(x, h = 0.1, breaks, conf.level = 0.95) {
 
   p = plotly::ggplotly(q, dynamicTicks = T)
 
-  q2 = ggplot(dat, aes_string('boundaries', nom[2], col = 'boundaries')) +
+  q2 = dat %>%
+    dplyr::mutate(boundaries = forcats::fct_rev(.data$boundaries)) %>%
+    ggplot(aes_string(nom[2], 'boundaries', col = 'boundaries')) +
     stat_summary(fun.data = mean_cl_normal,
                  fun.args = list(conf.int = conf.level),
                  geom = "pointrange",
-                 color = "red",
-                 size=.5) +
-    labs(x = 'Layers', y = nom[2], col = '') +
-    theme_bw() + theme(axis.text.x = element_text(angle = 45, vjust = 1, hjust=1))
+                 # color = "red",
+                 size=.5,
+                 fatten=2) +
+    labs(y = 'Layers', x = nom[2], col = '') +
+    theme_bw()
+    # theme(axis.text.x = element_text(angle = 45, vjust = 1, hjust=1))
 
   p2 = plotly::ggplotly(q2, dynamicTicks = T)
 

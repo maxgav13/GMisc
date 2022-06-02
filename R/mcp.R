@@ -49,18 +49,19 @@ mcp = function(data, R = 199, alpha = 2, sig.level = .01, min.perc = 15, conf.le
     scale_y_reverse() +
     facet_grid(~.data$Property,scales = 'free_x') +
     theme_bw() +
-    labs(x='', y='Depth [m]', col='Layer')
+    labs(x='', y=noms.ecp[1], col='Layer')
 
   p = plotly::ggplotly(q, dynamicTicks = TRUE)
 
-  q2 = ggplot(data_ecp0_tidy, aes_string('Layer', 'Value',col='Layer')) +
+  q2 = ggplot(data_ecp0_tidy, aes(Value,forcats::fct_rev(Layer),col=Layer)) +
     stat_summary(fun.data = mean_cl_normal,
                  fun.args = list(conf.int = conf.level),
                  geom = "pointrange",
                  #color = "red",
-                 size=.5) +
-    facet_wrap(~.data$Property,scales = 'free_y') +
-    labs(x = 'Layer', y = '', col = 'Layer') +
+                 size=.5,
+                 fatten=1) +
+    facet_wrap(~.data$Property,scales = 'free_x') +
+    labs(y = 'Layer', x = '', col = 'Layer') +
     theme_bw()
 
   p2 = plotly::ggplotly(q2)
@@ -78,7 +79,7 @@ mcp = function(data, R = 199, alpha = 2, sig.level = .01, min.perc = 15, conf.le
                                      CI.upr = ~ signif(DescTools::MeanCI(., conf.level = conf.level)[[3]],3)
                                    )
                                    ,.names = '{.fn}')) %>%
-    dplyr::mutate(MoE = stats::qt(1-alfa/2,.data$Obs-1)*.data$SD/sqrt(.data$Obs)
+    dplyr::mutate(MoE = signif(stats::qt(1-alfa/2,.data$Obs-1)*.data$SD/sqrt(.data$Obs),3)
                   ,Interval = levels(data_ecp0_tidy$Bounds)[levels(data_ecp0_tidy$Layer) == .data$Layer]
                   ) %>%
     dplyr::relocate(.data$Interval, .after = .data$Layer) %>%

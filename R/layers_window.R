@@ -40,15 +40,18 @@ layers_window = function(x, breaks, conf.level = 0.95) {
 
   p = plotly::ggplotly(q, dynamicTicks = T)
 
-  q2 = ggplot(dat_tidy, aes_string('boundaries', 'Value', col = 'boundaries')) +
+  q2 = ggplot(dat_tidy, aes(Value, forcats::fct_rev(boundaries),
+                            col = boundaries)) +
     stat_summary(fun.data = mean_cl_normal,
                  fun.args = list(conf.int = conf.level),
                  geom = "pointrange",
                  # color = "red",
-                 size=.5) +
-    facet_wrap(~Property,scales = 'free_y') +
-    labs(x = 'Layers', y = '', col = 'Layers') +
-    theme_bw() + theme(axis.text.x = element_text(angle = 45, vjust = 1, hjust=1))
+                 size=.5,
+                 fatten=1) +
+    facet_wrap(~Property,scales = 'free_x') +
+    labs(y = 'Layers', x = '', col = 'Layers') +
+    theme_bw()
+    # theme(axis.text.x = element_text(angle = 45, vjust = 1, hjust=1))
 
   p2 = plotly::ggplotly(q2)
 
