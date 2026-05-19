@@ -15,6 +15,8 @@ Q_93 = function(Q, De, dot.col = 'blue') {
   img = png::readPNG(system.file("Q_94.png", package = "GMisc"))
   g = grid::rasterGrob(
     img,
+    width = unit(1, "npc"),
+    height = unit(1, "npc"),
     interpolate = FALSE
   )
 
@@ -51,6 +53,7 @@ Q_93 = function(Q, De, dot.col = 'blue') {
       limits = c(1, 190),
       expand = c(0, 0)
     ) +
+    theme_minimal() +
     theme(
       axis.title = element_text(size = 16),
       axis.text = element_text(size = 14)
