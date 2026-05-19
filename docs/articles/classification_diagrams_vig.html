@@ -4,179 +4,184 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <title>Classification Diagrams • GMisc</title>
-<!-- jquery --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script><!-- Bootstrap --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha256-bZLfwXAP04zRMK2BjiO8iu9pf4FbLqX6zitd+tIvLhE=" crossorigin="anonymous">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script><!-- bootstrap-toc --><link rel="stylesheet" href="../bootstrap-toc.css">
-<script src="../bootstrap-toc.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
-<!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- pkgdown --><link href="../pkgdown.css" rel="stylesheet">
-<script src="../pkgdown.js"></script><meta property="og:title" content="Classification Diagrams">
-<meta property="og:description" content="GMisc">
-<!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
-<script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
-<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-<![endif]-->
+<script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link href="../deps/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet">
+<script src="../deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="../deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet">
+<link href="../deps/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet">
+<script src="../deps/headroom-0.11.0/headroom.min.js"></script><script src="../deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="../deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="../deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="../deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="../deps/search-1.0.0/fuse.min.js"></script><script src="../deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="Classification Diagrams">
 </head>
-<body data-spy="scroll" data-target="#toc">
-    <div class="container template-article">
-      <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
-  <div class="container">
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false">
-        <span class="sr-only">Toggle navigation</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-      <span class="navbar-brand">
-        <a class="navbar-link" href="../index.html">GMisc</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.2</span>
-      </span>
-    </div>
+<body>
+    <a href="#main" class="visually-hidden-focusable">Skip to contents</a>
 
-    <div id="navbar" class="navbar-collapse collapse">
-      <ul class="nav navbar-nav">
-<li>
-  <a href="../index.html">
-    <span class="fas fa-home fa-lg"></span>
-     
-  </a>
-</li>
-<li>
-  <a href="../reference/index.html">Reference</a>
-</li>
-<li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-    Articles
-     
-    <span class="caret"></span>
-  </a>
-  <ul class="dropdown-menu" role="menu">
-<li>
-      <a href="../articles/basic_stats_vig.html">Basic statistics</a>
-    </li>
-    <li>
-      <a href="../articles/classification_diagrams_vig.html">Classification Diagrams</a>
-    </li>
-    <li>
-      <a href="../articles/directional_stats_vig.html">Directional statistics</a>
-    </li>
-    <li>
-      <a href="../articles/rock_mechanics_vig.html">Rock Mechanics</a>
-    </li>
-    <li>
-      <a href="../articles/soil_mechanics_vig.html">Soil Mechanics</a>
-    </li>
+
+    <nav class="navbar navbar-expand-lg fixed-top bg-primary" data-bs-theme="dark" aria-label="Site navigation"><div class="container">
+
+    <a class="navbar-brand me-2" href="../index.html">GMisc</a>
+
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.4.0</small>
+
+
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div id="navbar" class="collapse navbar-collapse ms-3">
+      <ul class="navbar-nav me-auto">
+<li class="nav-item"><a class="nav-link" href="../reference/index.html">Reference</a></li>
+<li class="active nav-item dropdown">
+  <button class="nav-link dropdown-toggle" type="button" id="dropdown-articles" data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true">Articles</button>
+  <ul class="dropdown-menu" aria-labelledby="dropdown-articles">
+<li><a class="dropdown-item" href="../articles/basic_stats_vig.html">Basic statistics</a></li>
+    <li><a class="dropdown-item" href="../articles/classification_diagrams_vig.html">Classification Diagrams</a></li>
+    <li><a class="dropdown-item" href="../articles/directional_stats_vig.html">Directional statistics</a></li>
+    <li><a class="dropdown-item" href="../articles/non_linear_self_starters_vig.html">Non-linear and self-starting functions</a></li>
+    <li><a class="dropdown-item" href="../articles/rock_mechanics_vig.html">Rock Mechanics</a></li>
+    <li><a class="dropdown-item" href="../articles/soil_mechanics_vig.html">Soil Mechanics</a></li>
   </ul>
 </li>
+<li class="nav-item"><a class="nav-link" href="../news/index.html">Changelog</a></li>
       </ul>
-<ul class="nav navbar-nav navbar-right">
-<li>
-  <a href="https://github.com/maxgav13/GMisc/">
-    <span class="fab fa-github fa-lg"></span>
-     
-  </a>
-</li>
+<ul class="navbar-nav">
+<li class="nav-item"><form class="form-inline" role="search">
+ <input class="form-control" type="search" name="search-input" id="search-input" autocomplete="off" aria-label="Search site" placeholder="Search for" data-search-index="../search.json">
+</form></li>
+<li class="nav-item"><a class="external-link nav-link" href="https://github.com/maxgav13/GMisc/" aria-label="GitHub"><span class="fa fab fa-github fa-lg"></span></a></li>
       </ul>
 </div>
-<!--/.nav-collapse -->
+
+
   </div>
-<!--/.container -->
-</div>
-<!--/.navbar -->
+</nav><div class="container template-article">
 
-      
 
-      </header><script src="classification_diagrams_vig_files/header-attrs-2.13/header-attrs.js"></script><script src="classification_diagrams_vig_files/htmlwidgets-1.5.4/htmlwidgets.js"></script><script src="classification_diagrams_vig_files/plotly-binding-4.10.0/plotly.js"></script><script src="classification_diagrams_vig_files/typedarray-0.1/typedarray.min.js"></script><script src="classification_diagrams_vig_files/jquery-3.5.1/jquery.min.js"></script><link href="classification_diagrams_vig_files/crosstalk-1.1.1/css/crosstalk.css" rel="stylesheet">
-<script src="classification_diagrams_vig_files/crosstalk-1.1.1/js/crosstalk.min.js"></script><link href="classification_diagrams_vig_files/plotly-htmlwidgets-css-2.5.1/plotly-htmlwidgets.css" rel="stylesheet">
-<script src="classification_diagrams_vig_files/plotly-main-2.5.1/plotly-latest.min.js"></script><script src="classification_diagrams_vig_files/kePrint-0.0.1/kePrint.js"></script><link href="classification_diagrams_vig_files/lightable-0.0.1/lightable.css" rel="stylesheet">
+
+<link href="classification_diagrams_vig_files/htmltools-fill-0.5.9/fill.css" rel="stylesheet">
+<script src="classification_diagrams_vig_files/htmlwidgets-1.6.4/htmlwidgets.js"></script><script src="classification_diagrams_vig_files/plotly-binding-4.12.0/plotly.js"></script><script src="classification_diagrams_vig_files/typedarray-0.1/typedarray.min.js"></script><link href="classification_diagrams_vig_files/crosstalk-1.2.2/css/crosstalk.min.css" rel="stylesheet">
+<script src="classification_diagrams_vig_files/crosstalk-1.2.2/js/crosstalk.min.js"></script><link href="classification_diagrams_vig_files/plotly-htmlwidgets-css-2.25.2/plotly-htmlwidgets.css" rel="stylesheet">
+<script src="classification_diagrams_vig_files/plotly-main-2.25.2/plotly-latest.min.js"></script><script src="classification_diagrams_vig_files/kePrint-0.0.1/kePrint.js"></script><link href="classification_diagrams_vig_files/lightable-0.0.1/lightable.css" rel="stylesheet">
 <div class="row">
-  <div class="col-md-9 contents">
-    <div class="page-header toc-ignore">
-      <h1 data-toc-skip>Classification Diagrams</h1>
-                        <h4 class="author">Maximiliano Garnier-Villarreal</h4>
-            
-            <h4 class="date">2022-06-02</h4>
-      
-      <small class="dont-index">Source: <a href="https://github.com/maxgav13/GMisc/blob/master/vignettes/classification_diagrams_vig.Rmd"><code>vignettes/classification_diagrams_vig.Rmd</code></a></small>
-      <div class="hidden name"><code>classification_diagrams_vig.Rmd</code></div>
+  <main id="main" class="col-md-9"><div class="page-header">
 
+      <h1>Classification Diagrams</h1>
+                        <h4 data-toc-skip class="author">Maximiliano
+Garnier-Villarreal</h4>
+            
+            <h4 data-toc-skip class="date">2026-05-19</h4>
+      
+      <small class="dont-index">Source: <a href="https://github.com/maxgav13/GMisc/blob/HEAD/vignettes/classification_diagrams_vig.Rmd" class="external-link"><code>vignettes/classification_diagrams_vig.Rmd</code></a></small>
+      <div class="d-none name"><code>classification_diagrams_vig.Rmd</code></div>
     </div>
 
     
     
-<div id="diagrams" class="section level1">
-<h1 class="hasAnchor">
-<a href="#diagrams" class="anchor"></a>Diagrams</h1>
-<p>This document shows how to display and use different classification diagrams that are used frequently in geosciences (for more info on each one you can click the function name to go to the help page) these are (diagram - function):</p>
+<div class="section level2">
+<h2 id="introduction">Introduction<a class="anchor" aria-label="anchor" href="#introduction"></a>
+</h2>
+<p>This document shows how to display and use different classification
+diagrams, available in the <code>GMisc</code> package, that are used
+frequently in geosciences (for more info on each one you can click the
+function name to go to the help page) these are (diagram -
+function):</p>
 <ul>
-<li><p>QAP - <code><a href="../reference/ternary_qap.html">ternary_qap()</a></code></p></li>
+<li><p>QAPF - <code><a href="../reference/ternary_qap.html">ternary_qap()</a></code> and
+<code><a href="../reference/ternary_fap.html">ternary_fap()</a></code></p></li>
 <li><p>QAP for gabbros - <code><a href="../reference/ternary_qap_g.html">ternary_qap_g()</a></code></p></li>
-<li><p>QAP for mafic rocks - <code><a href="../reference/ternary_qap_m.html">ternary_qap_m()</a></code></p></li>
-<li><p>QAP for ultramafic rocks - <code><a href="../reference/ternary_qap_um.html">ternary_qap_um()</a></code></p></li>
-<li><p>QtFL for provenance - <code><a href="../reference/ternary_qtfl.html">ternary_qtfl()</a></code></p></li>
-<li><p>QmFLt for provenance - <code><a href="../reference/ternary_qmflt.html">ternary_qmflt()</a></code></p></li>
+<li><p>QAP for mafic rocks - <code><a href="../reference/ternary_qap_m_ol.html">ternary_qap_m_ol()</a></code> and
+<code><a href="../reference/ternary_qap_m_hbl.html">ternary_qap_m_hbl()</a></code></p></li>
+<li><p>QAP for ultramafic rocks - <code><a href="../reference/ternary_qap_um.html">ternary_qap_um()</a></code> and
+<code><a href="../reference/ternary_qap_um_hbl.html">ternary_qap_um_hbl()</a></code></p></li>
+<li><p>Feldspar classification -
+<code>ternary_feldspar()</code></p></li>
+<li><p>For provenance - <code><a href="../reference/ternary_dickinson_qtfl.html">ternary_dickinson_qtfl()</a></code> and
+<code><a href="../reference/ternary_dickinson_qmflt.html">ternary_dickinson_qmflt()</a></code></p></li>
 <li><p>AFM - <code><a href="../reference/ternary_afm.html">ternary_afm()</a></code></p></li>
-<li><p>Pyroclastic rocks - <code><a href="../reference/ternary_pyroclastic.html">ternary_pyroclastic()</a></code></p></li>
-<li><p>Folk for sandstone classification - <code><a href="../reference/ternary_folk.html">ternary_folk()</a></code></p></li>
-<li><p>Shepard for soil classification - <code><a href="../reference/ternary_shepard.html">ternary_shepard()</a></code></p></li>
+<li><p>Pyroclastic rocks by size -
+<code><a href="../reference/ternary_pyroclastic_size.html">ternary_pyroclastic_size()</a></code> and type -
+<code><a href="../reference/ternary_pyroclastic_type.html">ternary_pyroclastic_type()</a></code></p></li>
+<li><p>Folk for sandstone classification -
+<code><a href="../reference/ternary_folk_qfl.html">ternary_folk_qfl()</a></code></p></li>
+<li><p>Folk for sedimentary rock classification -
+<code><a href="../reference/ternary_folk_qfm.html">ternary_folk_qfm()</a></code></p></li>
+<li><p>Folk for clastic rocks - <code><a href="../reference/ternary_folk_gsm.html">ternary_folk_gsm()</a></code> and
+<code><a href="../reference/ternary_folk_smc.html">ternary_folk_smc()</a></code></p></li>
+<li><p>For soil classification - <code><a href="../reference/ternary_shepard.html">ternary_shepard()</a></code> and
+<code><a href="../reference/ternary_usda.html">ternary_usda()</a></code></p></li>
 <li><p>Total Alkali Silica (TAS) - <code><a href="../reference/TAS.html">TAS()</a></code></p></li>
 <li><p>Piper diagram - <code><a href="../reference/piper_diagram.html">piper_diagram()</a></code></p></li>
 </ul>
 </div>
-<div id="basic-use" class="section level1">
-<h1 class="hasAnchor">
-<a href="#basic-use" class="anchor"></a>Basic use</h1>
-<div id="static" class="section level2">
-<h2 class="hasAnchor">
-<a href="#static" class="anchor"></a>Static</h2>
-<p>A simple static diagram without data can be obtained by just calling the respective function. The result is a <strong>ggplot</strong> object. For the ternary diagramas is based on the <strong>ggtern</strong> package.</p>
+<div class="section level2">
+<h2 id="basic-use">Basic use<a class="anchor" aria-label="anchor" href="#basic-use"></a>
+</h2>
+<div class="section level3">
+<h3 id="static">Static<a class="anchor" aria-label="anchor" href="#static"></a>
+</h3>
+<p>A simple static diagram without data can be obtained by just calling
+the respective function. The result is a <strong>ggplot</strong> object.
+For the ternary diagramas is based on the <strong>ggtern</strong>
+package.</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/ternary_folk.html">ternary_folk</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/ternary_folk_qfl.html">ternary_folk_qfl</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <div class="figure" style="text-align: center">
-<img src="classification_diagrams_vig_files/figure-html/unnamed-chunk-1-1.png" alt="Static Folk ternary diagram for sandstones" width="80%"><p class="caption">
+<img src="classification_diagrams_vig_files/figure-html/unnamed-chunk-1-1.png" class="r-plt" alt="Static Folk ternary diagram for sandstones" width="80%"><p class="caption">
 Static Folk ternary diagram for sandstones
 </p>
 </div>
 </div>
-<div id="dynamic" class="section level2">
-<h2 class="hasAnchor">
-<a href="#dynamic" class="anchor"></a>Dynamic</h2>
-<p>To obtain a dynamic diagram the <code>output</code> argument must be set to <code>'plotly'</code>, resulting in a <strong>plotly</strong> object.</p>
+<div class="section level3">
+<h3 id="dynamic">Dynamic<a class="anchor" aria-label="anchor" href="#dynamic"></a>
+</h3>
+<p>To obtain a dynamic diagram the <code>output</code> argument must be
+set to <code>'plotly'</code>, resulting in a <strong>plotly</strong>
+object.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/ternary_qap_m.html">ternary_qap_m</a></span><span class="op">(</span>output <span class="op">=</span> <span class="st">'plotly'</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/ternary_qap_m_ol.html">ternary_qap_m_ol</a></span><span class="op">(</span>output <span class="op">=</span> <span class="st">'plotly'</span><span class="op">)</span></span></code></pre></div>
 <div class="figure" style="text-align: center">
-<div id="htmlwidget-2b0f9af16fc4b275f7bd" style="width:80%;height:432.632880098888px;" class="plotly html-widget"></div>
-<script type="application/json" data-for="htmlwidget-2b0f9af16fc4b275f7bd">{"x":{"visdat":{"930070c0501d":["function () ","plotlyVisDat"],"930061cbd9bf":["function () ","data"]},"cur_data":"930061cbd9bf","attrs":{"930061cbd9bf":{"alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"a":{},"b":{},"c":{},"color":{},"colors":["#FAEBDDFF","#F6B48EFF","#F37651FF","#E13342FF","#AE1759FF","#701F57FF","#36193EFF","#03051AFF"],"opacity":1,"type":"scatterternary","fill":"toself","mode":"lines","line":{"color":"black"},"hoverinfo":"text","hoveron":"fills","inherit":true}},"layout":{"margin":{"b":40,"l":60,"t":25,"r":10},"ternary":{"aaxis":{"title":"P","tickformat":".0%","tickfont":{"size":10}},"baxis":{"title":"Ol","tickformat":".0%","tickfont":{"size":10}},"caxis":{"title":"Px","tickformat":".0%","tickfont":{"size":10}}},"legend":{"title":{"text":"<b> Mafic <\/b>"}},"hovermode":"closest","showlegend":true},"source":"A","config":{"modeBarButtonsToAdd":["hoverclosest","hovercompare"],"showSendToCloud":false,"toImageButtonOptions":{"format":"svg","filename":"Mafic","width":864,"height":576}},"data":[{"fillcolor":"rgba(250,235,221,0.5)","a":[100,90,90],"b":[0,10,0],"c":[0,0,10],"opacity":1,"type":"scatterternary","fill":"toself","mode":"lines","line":{"color":"black"},"hoverinfo":["text","text","text"],"hoveron":"fills","name":"Anorthosite","marker":{"color":"rgba(250,235,221,1)","line":{"color":"rgba(250,235,221,1)"}},"textfont":{"color":"rgba(250,235,221,1)"},"frame":null,"text":""},{"fillcolor":"rgba(246,180,142,0.5)","a":[90,10,5,90],"b":[10,90,90,5],"c":[0,0,5,5],"opacity":1,"type":"scatterternary","fill":"toself","mode":"lines","line":{"color":"black"},"hoverinfo":["text","text","text","text"],"hoveron":"fills","name":"Troctolite","marker":{"color":"rgba(246,180,142,1)","line":{"color":"rgba(246,180,142,1)"}},"textfont":{"color":"rgba(246,180,142,1)"},"frame":null,"text":""},{"fillcolor":"rgba(243,118,81,0.5)","a":[90,5,5],"b":[5,90,5],"c":[5,5,90],"opacity":1,"type":"scatterternary","fill":"toself","mode":"lines","line":{"color":"black"},"hoverinfo":["text","text","text"],"hoveron":"fills","name":"Olivine gabbro /<br />        Olivine norite","marker":{"color":"rgba(243,118,81,1)","line":{"color":"rgba(243,118,81,1)"}},"textfont":{"color":"rgba(243,118,81,1)"},"frame":null,"text":""},{"fillcolor":"rgba(225,51,66,0.5)","a":[90,90,5,10],"b":[0,5,5,0],"c":[10,5,90,90],"opacity":1,"type":"scatterternary","fill":"toself","mode":"lines","line":{"color":"black"},"hoverinfo":["text","text","text","text"],"hoveron":"fills","name":"Gabbro / Norite","marker":{"color":"rgba(225,51,66,1)","line":{"color":"rgba(225,51,66,1)"}},"textfont":{"color":"rgba(225,51,66,1)"},"frame":null,"text":""},{"fillcolor":"rgba(174,23,89,0.5)","a":[10,0,0],"b":[90,100,90],"c":[0,0,10],"opacity":1,"type":"scatterternary","fill":"toself","mode":"lines","line":{"color":"black"},"hoverinfo":["text","text","text"],"hoveron":"fills","name":"Dunite","marker":{"color":"rgba(174,23,89,1)","line":{"color":"rgba(174,23,89,1)"}},"textfont":{"color":"rgba(174,23,89,1)"},"frame":null,"text":""},{"fillcolor":"rgba(112,31,87,0.5)","a":[5,0,0,5],"b":[90,90,42.5,40],"c":[5,10,57.5,55],"opacity":1,"type":"scatterternary","fill":"toself","mode":"lines","line":{"color":"black"},"hoverinfo":["text","text","text","text"],"hoveron":"fills","name":"Wehrlite /<br />        Harzburgite","marker":{"color":"rgba(112,31,87,1)","line":{"color":"rgba(112,31,87,1)"}},"textfont":{"color":"rgba(112,31,87,1)"},"frame":null,"text":""},{"fillcolor":"rgba(54,25,62,0.5)","a":[5,0,0,5],"b":[40,42.5,10,5],"c":[55,57.5,90,90],"opacity":1,"type":"scatterternary","fill":"toself","mode":"lines","line":{"color":"black"},"hoverinfo":["text","text","text","text"],"hoveron":"fills","name":"Olivine clino/orto-pyroxenite","marker":{"color":"rgba(54,25,62,1)","line":{"color":"rgba(54,25,62,1)"}},"textfont":{"color":"rgba(54,25,62,1)"},"frame":null,"text":""},{"fillcolor":"rgba(3,5,26,0.5)","a":[10,0,0],"b":[0,10,0],"c":[90,90,100],"opacity":1,"type":"scatterternary","fill":"toself","mode":"lines","line":{"color":"black"},"hoverinfo":["text","text","text"],"hoveron":"fills","name":"Clinopyroxenite /<br />        Orthopyroxenite","marker":{"color":"rgba(3,5,26,1)","line":{"color":"rgba(3,5,26,1)"}},"textfont":{"color":"rgba(3,5,26,1)"},"frame":null,"text":""}],"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.2,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script><p class="caption">
+<div class="plotly html-widget html-fill-item" id="htmlwidget-ac96cb3ee4656e2e9ec3" style="width:80%;height:432.632880098888px;"></div>
+<script type="application/json" data-for="htmlwidget-ac96cb3ee4656e2e9ec3">{"x":{"visdat":{"511e6f388e31":["function () ","plotlyVisDat"],"511e69ff6c02":["function () ","data"]},"cur_data":"511e69ff6c02","attrs":{"511e69ff6c02":{"alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"a":{},"b":{},"c":{},"color":{},"colors":["#FAEBDDFF","#F6BF9DFF","#F59067FF","#F05B42FF","#D82848FF","#AE1759FF","#7B1F59FF","#4C1D4BFF"],"opacity":1,"type":"scatterternary","fill":"toself","mode":"lines","line":{"color":"black"},"hoverinfo":"text","hoveron":"fills","inherit":true}},"layout":{"margin":{"b":40,"l":60,"t":25,"r":10},"ternary":{"aaxis":{"title":"P","tickformat":".0%","tickfont":{"size":10}},"baxis":{"title":"Ol","tickformat":".0%","tickfont":{"size":10}},"caxis":{"title":"Px","tickformat":".0%","tickfont":{"size":10}}},"legend":{"title":{"text":"<b> Mafic <\/b>"}},"hovermode":"closest","showlegend":true},"source":"A","config":{"modeBarButtonsToAdd":["hoverclosest","hovercompare"],"showSendToCloud":false,"toImageButtonOptions":{"format":"svg","filename":"Mafic","width":864,"height":576}},"data":[{"fillcolor":"rgba(250,235,221,0.5)","a":[100,90,90],"b":[0,10,0],"c":[0,0,10],"opacity":1,"type":"scatterternary","fill":"toself","mode":"lines","line":{"color":"black"},"hoverinfo":["text","text","text"],"hoveron":"fills","name":"Anorthosite","marker":{"color":"rgba(250,235,221,1)","line":{"color":"rgba(250,235,221,1)"}},"textfont":{"color":"rgba(250,235,221,1)"},"frame":null,"text":""},{"fillcolor":"rgba(246,191,157,0.5)","a":[90,10,5,90],"b":[10,90,90,5],"c":[0,0,5,5],"opacity":1,"type":"scatterternary","fill":"toself","mode":"lines","line":{"color":"black"},"hoverinfo":["text","text","text","text"],"hoveron":"fills","name":"Troctolite","marker":{"color":"rgba(246,191,157,1)","line":{"color":"rgba(246,191,157,1)"}},"textfont":{"color":"rgba(246,191,157,1)"},"frame":null,"text":""},{"fillcolor":"rgba(245,144,103,0.5)","a":[90,5,5],"b":[5,90,5],"c":[5,5,90],"opacity":1,"type":"scatterternary","fill":"toself","mode":"lines","line":{"color":"black"},"hoverinfo":["text","text","text"],"hoveron":"fills","name":"Olivine gabbro /<br />        Olivine norite","marker":{"color":"rgba(245,144,103,1)","line":{"color":"rgba(245,144,103,1)"}},"textfont":{"color":"rgba(245,144,103,1)"},"frame":null,"text":""},{"fillcolor":"rgba(240,91,66,0.5)","a":[90,90,5,10],"b":[0,5,5,0],"c":[10,5,90,90],"opacity":1,"type":"scatterternary","fill":"toself","mode":"lines","line":{"color":"black"},"hoverinfo":["text","text","text","text"],"hoveron":"fills","name":"Gabbro / Norite","marker":{"color":"rgba(240,91,66,1)","line":{"color":"rgba(240,91,66,1)"}},"textfont":{"color":"rgba(240,91,66,1)"},"frame":null,"text":""},{"fillcolor":"rgba(216,40,72,0.5)","a":[10,0,0],"b":[90,100,90],"c":[0,0,10],"opacity":1,"type":"scatterternary","fill":"toself","mode":"lines","line":{"color":"black"},"hoverinfo":["text","text","text"],"hoveron":"fills","name":"Dunite","marker":{"color":"rgba(216,40,72,1)","line":{"color":"rgba(216,40,72,1)"}},"textfont":{"color":"rgba(216,40,72,1)"},"frame":null,"text":""},{"fillcolor":"rgba(174,23,89,0.5)","a":[5,0,0,5],"b":[90,90,42.5,40],"c":[5,10,57.5,55],"opacity":1,"type":"scatterternary","fill":"toself","mode":"lines","line":{"color":"black"},"hoverinfo":["text","text","text","text"],"hoveron":"fills","name":"Wehrlite /<br />        Harzburgite","marker":{"color":"rgba(174,23,89,1)","line":{"color":"rgba(174,23,89,1)"}},"textfont":{"color":"rgba(174,23,89,1)"},"frame":null,"text":""},{"fillcolor":"rgba(123,31,89,0.5)","a":[5,0,0,5],"b":[40,42.5,10,5],"c":[55,57.5,90,90],"opacity":1,"type":"scatterternary","fill":"toself","mode":"lines","line":{"color":"black"},"hoverinfo":["text","text","text","text"],"hoveron":"fills","name":"Olivine clino/orto-pyroxenite","marker":{"color":"rgba(123,31,89,1)","line":{"color":"rgba(123,31,89,1)"}},"textfont":{"color":"rgba(123,31,89,1)"},"frame":null,"text":""},{"fillcolor":"rgba(76,29,75,0.5)","a":[10,0,0],"b":[0,10,0],"c":[90,90,100],"opacity":1,"type":"scatterternary","fill":"toself","mode":"lines","line":{"color":"black"},"hoverinfo":["text","text","text"],"hoveron":"fills","name":"Clinopyroxenite /<br />        Orthopyroxenite","marker":{"color":"rgba(76,29,75,1)","line":{"color":"rgba(76,29,75,1)"}},"textfont":{"color":"rgba(76,29,75,1)"},"frame":null,"text":""}],"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.20000000000000001,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script><p class="caption">
 Dynamic QAP ternary diagram for mafic rocks
 </p>
 </div>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/TAS.html">TAS</a></span><span class="op">(</span>output <span class="op">=</span> <span class="st">'plotly'</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/TAS.html">TAS</a></span><span class="op">(</span>output <span class="op">=</span> <span class="st">'plotly'</span><span class="op">)</span></span></code></pre></div>
 <div class="figure" style="text-align: center">
-<div id="htmlwidget-c500aa476084b3cb4de4" style="width:80%;height:432.632880098888px;" class="plotly html-widget"></div>
-<script type="application/json" data-for="htmlwidget-c500aa476084b3cb4de4">{"x":{"visdat":{"930042c46bdf":["function () ","plotlyVisDat"],"93006d861fb7":["function () ","data"],"93008c5f8e":["function () ","data"],"93007fd563e9":["function () ","data"]},"cur_data":"93007fd563e9","attrs":{"93006d861fb7":{"alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"x":{},"y":{},"type":"scatter","fill":"toself","mode":"lines","color":{},"colors":"transparent","line":{"color":"black"},"hoverinfo":"text","showlegend":false,"inherit":true},"93008c5f8e":{"alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"x":{},"y":{},"type":"scatter","mode":"lines","name":"Series","hoverinfo":"none","line":{"color":"darkred"},"showlegend":false,"inherit":true},"93007fd563e9":{"alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"x":{},"y":{},"text":{},"type":"scatter","mode":"text","name":"Type","hoverinfo":"none","textfont":{"family":"Arial","size":7,"color":"Black"},"showlegend":false,"inherit":true}},"layout":{"margin":{"b":40,"l":60,"t":25,"r":10},"xaxis":{"domain":[0,1],"automargin":true,"title":"SiO₂ [wt %]"},"yaxis":{"domain":[0,1],"automargin":true,"title":"Na₂O + K₂O [wt %]","scaleanchor":"x","scaleratio":1.5},"font":{"size":12},"annotations":[{"text":"Alkaline","x":73,"y":13,"showarrow":false,"font":{"size":8,"color":"darkred"}},{"text":"Subalkaline<br />/Tholeiitic","x":76,"y":5,"showarrow":false,"font":{"size":8,"color":"darkred"}}],"hovermode":"closest","showlegend":false},"source":"A","config":{"modeBarButtonsToAdd":["hoverclosest","hovercompare"],"showSendToCloud":false,"toImageButtonOptions":{"format":"svg","filename":"TAS","width":864,"height":576}},"data":[{"fillcolor":"transparent","x":[41,45,45,41],"y":[0,0,3,3],"type":"scatter","fill":"toself","mode":"lines","line":{"color":"black"},"hoverinfo":["text","text","text","text"],"showlegend":false,"name":"Picrobasalt","marker":{"color":"transparent","line":{"color":"transparent"}},"textfont":{"color":"transparent"},"error_y":{"color":"transparent"},"error_x":{"color":"transparent"},"xaxis":"x","yaxis":"y","frame":null},{"fillcolor":"transparent","x":[45,52,52,45],"y":[0,0,5,5],"type":"scatter","fill":"toself","mode":"lines","line":{"color":"black"},"hoverinfo":["text","text","text","text"],"showlegend":false,"name":"Basalt","marker":{"color":"transparent","line":{"color":"transparent"}},"textfont":{"color":"transparent"},"error_y":{"color":"transparent"},"error_x":{"color":"transparent"},"xaxis":"x","yaxis":"y","frame":null},{"fillcolor":"transparent","x":[52,57,57,52],"y":[0,0,5.9,5],"type":"scatter","fill":"toself","mode":"lines","line":{"color":"black"},"hoverinfo":["text","text","text","text"],"showlegend":false,"name":"Basaltic<br />andesite","marker":{"color":"transparent","line":{"color":"transparent"}},"textfont":{"color":"transparent"},"error_y":{"color":"transparent"},"error_x":{"color":"transparent"},"xaxis":"x","yaxis":"y","frame":null},{"fillcolor":"transparent","x":[57,63,63,57],"y":[0,0,7,5.9],"type":"scatter","fill":"toself","mode":"lines","line":{"color":"black"},"hoverinfo":["text","text","text","text"],"showlegend":false,"name":"Andesite","marker":{"color":"transparent","line":{"color":"transparent"}},"textfont":{"color":"transparent"},"error_y":{"color":"transparent"},"error_x":{"color":"transparent"},"xaxis":"x","yaxis":"y","frame":null},{"fillcolor":"transparent","x":[63,77,69,63],"y":[0,0,8,7],"type":"scatter","fill":"toself","mode":"lines","line":{"color":"black"},"hoverinfo":["text","text","text","text"],"showlegend":false,"name":"Dacite","marker":{"color":"transparent","line":{"color":"transparent"}},"textfont":{"color":"transparent"},"error_y":{"color":"transparent"},"error_x":{"color":"transparent"},"xaxis":"x","yaxis":"y","frame":null},{"fillcolor":"transparent","x":[77,80,80,69,69],"y":[0,0,15,15,8],"type":"scatter","fill":"toself","mode":"lines","line":{"color":"black"},"hoverinfo":["text","text","text","text","text"],"showlegend":false,"name":"Rhyolite","marker":{"color":"transparent","line":{"color":"transparent"}},"textfont":{"color":"transparent"},"error_y":{"color":"transparent"},"error_x":{"color":"transparent"},"xaxis":"x","yaxis":"y","frame":null},{"fillcolor":"transparent","x":[45,52,49.4],"y":[5,5,7.3],"type":"scatter","fill":"toself","mode":"lines","line":{"color":"black"},"hoverinfo":["text","text","text"],"showlegend":false,"name":"Trachy-<br />basalt","marker":{"color":"transparent","line":{"color":"transparent"}},"textfont":{"color":"transparent"},"error_y":{"color":"transparent"},"error_x":{"color":"transparent"},"xaxis":"x","yaxis":"y","frame":null},{"fillcolor":"transparent","x":[52,57,53,49.4],"y":[5,5.9,9.3,7.3],"type":"scatter","fill":"toself","mode":"lines","line":{"color":"black"},"hoverinfo":["text","text","text","text"],"showlegend":false,"name":"Basaltic<br />trachy-<br />andesite","marker":{"color":"transparent","line":{"color":"transparent"}},"textfont":{"color":"transparent"},"error_y":{"color":"transparent"},"error_x":{"color":"transparent"},"xaxis":"x","yaxis":"y","frame":null},{"fillcolor":"transparent","x":[57,63,57.6,53],"y":[5.9,7,11.7,9.3],"type":"scatter","fill":"toself","mode":"lines","line":{"color":"black"},"hoverinfo":["text","text","text","text"],"showlegend":false,"name":"Trachy-<br />andesite","marker":{"color":"transparent","line":{"color":"transparent"}},"textfont":{"color":"transparent"},"error_y":{"color":"transparent"},"error_x":{"color":"transparent"},"xaxis":"x","yaxis":"y","frame":null},{"fillcolor":"transparent","x":[63,69,69,63.75,57.6],"y":[7,8,15,15,11.7],"type":"scatter","fill":"toself","mode":"lines","line":{"color":"black"},"hoverinfo":["text","text","text","text","text"],"showlegend":false,"name":"Trachyte<br />Trachydacite","marker":{"color":"transparent","line":{"color":"transparent"}},"textfont":{"color":"transparent"},"error_y":{"color":"transparent"},"error_x":{"color":"transparent"},"xaxis":"x","yaxis":"y","frame":null},{"fillcolor":"transparent","x":[41,45,45,49.4,45,41],"y":[3,3,5,7.3,9.4,7],"type":"scatter","fill":"toself","mode":"lines","line":{"color":"black"},"hoverinfo":["text","text","text","text","text","text"],"showlegend":false,"name":"Tephrite<br />Basanite","marker":{"color":"transparent","line":{"color":"transparent"}},"textfont":{"color":"transparent"},"error_y":{"color":"transparent"},"error_x":{"color":"transparent"},"xaxis":"x","yaxis":"y","frame":null},{"fillcolor":"transparent","x":[49.4,53,48.4,45],"y":[7.3,9.3,11.5,9.4],"type":"scatter","fill":"toself","mode":"lines","line":{"color":"black"},"hoverinfo":["text","text","text","text"],"showlegend":false,"name":"Phono-<br />tephrite","marker":{"color":"transparent","line":{"color":"transparent"}},"textfont":{"color":"transparent"},"error_y":{"color":"transparent"},"error_x":{"color":"transparent"},"xaxis":"x","yaxis":"y","frame":null},{"fillcolor":"transparent","x":[53,57.6,52.5,48.4],"y":[9.3,11.7,14,11.5],"type":"scatter","fill":"toself","mode":"lines","line":{"color":"black"},"hoverinfo":["text","text","text","text"],"showlegend":false,"name":"Tephri-<br />phonolite","marker":{"color":"transparent","line":{"color":"transparent"}},"textfont":{"color":"transparent"},"error_y":{"color":"transparent"},"error_x":{"color":"transparent"},"xaxis":"x","yaxis":"y","frame":null},{"fillcolor":"transparent","x":[57.6,63.75,50.35],"y":[11.7,15,15],"type":"scatter","fill":"toself","mode":"lines","line":{"color":"black"},"hoverinfo":["text","text","text"],"showlegend":false,"name":"Phonolite","marker":{"color":"transparent","line":{"color":"transparent"}},"textfont":{"color":"transparent"},"error_y":{"color":"transparent"},"error_x":{"color":"transparent"},"xaxis":"x","yaxis":"y","frame":null},{"fillcolor":"transparent","x":[37,41,41,45,48.4,52.5,50.35,37],"y":[0,0,7,9.4,11.5,14,15,15],"type":"scatter","fill":"toself","mode":"lines","line":{"color":"black"},"hoverinfo":["text","text","text","text","text","text","text","text"],"showlegend":false,"name":"Foidite","marker":{"color":"transparent","line":{"color":"transparent"}},"textfont":{"color":"transparent"},"error_y":{"color":"transparent"},"error_x":{"color":"transparent"},"xaxis":"x","yaxis":"y","frame":null},{"x":[39.2,40,43.2,45,48,50,53.7,55,60,65,77.4],"y":[0,0.4,2,2.8,4,4.75,6,6.4,8,8.8,10],"type":"scatter","mode":"lines","name":"Series","hoverinfo":["none","none","none","none","none","none","none","none","none","none","none"],"line":{"color":"darkred"},"showlegend":false,"marker":{"color":"rgba(140,86,75,1)","line":{"color":"rgba(140,86,75,1)"}},"error_y":{"color":"rgba(140,86,75,1)"},"error_x":{"color":"rgba(140,86,75,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":[43,48.5,54.8,59.9,67,75,63.5,57.8,52.95,49.2,45,49.2,53,57,43],"y":[1.55,2.8,3,3,3,8.3,11.2,8.5,7,5.65,7,9.3,11.5,14,12],"text":["Picrobasalt","Basalt","Basaltic<br />andesite","Andesite","Dacite","Rhyolite","Trachyte<br />Trachydacite","Trachy-<br />andesite","Basaltic<br />trachy-<br />andesite","Trachy-<br />basalt","Tephrite<br />Basanite","Phono-<br />tephrite","Tephri-<br />phonolite","Phonolite","Foidite"],"type":"scatter","mode":"text","name":"Type","hoverinfo":["none","none","none","none","none","none","none","none","none","none","none","none","none","none","none"],"textfont":{"family":"Arial","size":7,"color":"Black"},"showlegend":false,"marker":{"color":"rgba(227,119,194,1)","line":{"color":"rgba(227,119,194,1)"}},"error_y":{"color":"rgba(227,119,194,1)"},"error_x":{"color":"rgba(227,119,194,1)"},"line":{"color":"rgba(227,119,194,1)"},"xaxis":"x","yaxis":"y","frame":null}],"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.2,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script><p class="caption">
+<div class="plotly html-widget html-fill-item" id="htmlwidget-e5c8c404fe174e4c81bd" style="width:80%;height:432.632880098888px;"></div>
+<script type="application/json" data-for="htmlwidget-e5c8c404fe174e4c81bd">{"x":{"visdat":{"511e3b999103":["function () ","plotlyVisDat"],"511e5eff7a86":["function () ","data"],"511e56c52423":["function () ","data"],"511e28c7a256":["function () ","data"]},"cur_data":"511e28c7a256","attrs":{"511e5eff7a86":{"alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"x":{},"y":{},"type":"scatter","fill":"toself","mode":"lines","color":{},"colors":"transparent","line":{"color":"black"},"hoverinfo":"text","showlegend":false,"inherit":true},"511e56c52423":{"alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"x":{},"y":{},"type":"scatter","mode":"lines","name":"Series","hoverinfo":"none","line":{"color":"darkred"},"showlegend":false,"inherit":true},"511e28c7a256":{"alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"x":{},"y":{},"text":{},"type":"scatter","mode":"text","name":"Type","hoverinfo":"none","textfont":{"family":"Arial","size":7,"color":"Black"},"showlegend":false,"inherit":true}},"layout":{"margin":{"b":40,"l":60,"t":25,"r":10},"xaxis":{"domain":[0,1],"automargin":true,"title":"SiO₂ [wt %]"},"yaxis":{"domain":[0,1],"automargin":true,"title":"Na₂O + K₂O [wt %]","scaleanchor":"x","scaleratio":1.5},"font":{"size":12},"annotations":[{"text":"Alkaline","x":73,"y":13,"showarrow":false,"font":{"size":8,"color":"darkred"}},{"text":"Subalkaline<br />/Tholeiitic","x":76,"y":5,"showarrow":false,"font":{"size":8,"color":"darkred"}}],"hovermode":"closest","showlegend":false},"source":"A","config":{"modeBarButtonsToAdd":["hoverclosest","hovercompare"],"showSendToCloud":false,"toImageButtonOptions":{"format":"svg","filename":"TAS","width":864,"height":576}},"data":[{"fillcolor":"transparent","x":[41,45,45,41],"y":[0,0,3,3],"type":"scatter","fill":"toself","mode":"lines","line":{"color":"black"},"hoverinfo":["text","text","text","text"],"showlegend":false,"name":"Picrobasalt","marker":{"color":"transparent","line":{"color":"transparent"}},"textfont":{"color":"transparent"},"error_y":{"color":"transparent"},"error_x":{"color":"transparent"},"xaxis":"x","yaxis":"y","frame":null},{"fillcolor":"transparent","x":[45,52,52,45],"y":[0,0,5,5],"type":"scatter","fill":"toself","mode":"lines","line":{"color":"black"},"hoverinfo":["text","text","text","text"],"showlegend":false,"name":"Basalt","marker":{"color":"transparent","line":{"color":"transparent"}},"textfont":{"color":"transparent"},"error_y":{"color":"transparent"},"error_x":{"color":"transparent"},"xaxis":"x","yaxis":"y","frame":null},{"fillcolor":"transparent","x":[52,57,57,52],"y":[0,0,5.9000000000000004,5],"type":"scatter","fill":"toself","mode":"lines","line":{"color":"black"},"hoverinfo":["text","text","text","text"],"showlegend":false,"name":"Basaltic<br />andesite","marker":{"color":"transparent","line":{"color":"transparent"}},"textfont":{"color":"transparent"},"error_y":{"color":"transparent"},"error_x":{"color":"transparent"},"xaxis":"x","yaxis":"y","frame":null},{"fillcolor":"transparent","x":[57,63,63,57],"y":[0,0,7,5.9000000000000004],"type":"scatter","fill":"toself","mode":"lines","line":{"color":"black"},"hoverinfo":["text","text","text","text"],"showlegend":false,"name":"Andesite","marker":{"color":"transparent","line":{"color":"transparent"}},"textfont":{"color":"transparent"},"error_y":{"color":"transparent"},"error_x":{"color":"transparent"},"xaxis":"x","yaxis":"y","frame":null},{"fillcolor":"transparent","x":[63,77,69,63],"y":[0,0,8,7],"type":"scatter","fill":"toself","mode":"lines","line":{"color":"black"},"hoverinfo":["text","text","text","text"],"showlegend":false,"name":"Dacite","marker":{"color":"transparent","line":{"color":"transparent"}},"textfont":{"color":"transparent"},"error_y":{"color":"transparent"},"error_x":{"color":"transparent"},"xaxis":"x","yaxis":"y","frame":null},{"fillcolor":"transparent","x":[77,80,80,69,69],"y":[0,0,15,15,8],"type":"scatter","fill":"toself","mode":"lines","line":{"color":"black"},"hoverinfo":["text","text","text","text","text"],"showlegend":false,"name":"Rhyolite","marker":{"color":"transparent","line":{"color":"transparent"}},"textfont":{"color":"transparent"},"error_y":{"color":"transparent"},"error_x":{"color":"transparent"},"xaxis":"x","yaxis":"y","frame":null},{"fillcolor":"transparent","x":[45,52,49.399999999999999],"y":[5,5,7.2999999999999998],"type":"scatter","fill":"toself","mode":"lines","line":{"color":"black"},"hoverinfo":["text","text","text"],"showlegend":false,"name":"Trachy-<br />basalt","marker":{"color":"transparent","line":{"color":"transparent"}},"textfont":{"color":"transparent"},"error_y":{"color":"transparent"},"error_x":{"color":"transparent"},"xaxis":"x","yaxis":"y","frame":null},{"fillcolor":"transparent","x":[52,57,53,49.399999999999999],"y":[5,5.9000000000000004,9.3000000000000007,7.2999999999999998],"type":"scatter","fill":"toself","mode":"lines","line":{"color":"black"},"hoverinfo":["text","text","text","text"],"showlegend":false,"name":"Basaltic<br />trachy-<br />andesite","marker":{"color":"transparent","line":{"color":"transparent"}},"textfont":{"color":"transparent"},"error_y":{"color":"transparent"},"error_x":{"color":"transparent"},"xaxis":"x","yaxis":"y","frame":null},{"fillcolor":"transparent","x":[57,63,57.600000000000001,53],"y":[5.9000000000000004,7,11.699999999999999,9.3000000000000007],"type":"scatter","fill":"toself","mode":"lines","line":{"color":"black"},"hoverinfo":["text","text","text","text"],"showlegend":false,"name":"Trachy-<br />andesite","marker":{"color":"transparent","line":{"color":"transparent"}},"textfont":{"color":"transparent"},"error_y":{"color":"transparent"},"error_x":{"color":"transparent"},"xaxis":"x","yaxis":"y","frame":null},{"fillcolor":"transparent","x":[63,69,69,63.75,57.600000000000001],"y":[7,8,15,15,11.699999999999999],"type":"scatter","fill":"toself","mode":"lines","line":{"color":"black"},"hoverinfo":["text","text","text","text","text"],"showlegend":false,"name":"Trachyte<br />Trachydacite","marker":{"color":"transparent","line":{"color":"transparent"}},"textfont":{"color":"transparent"},"error_y":{"color":"transparent"},"error_x":{"color":"transparent"},"xaxis":"x","yaxis":"y","frame":null},{"fillcolor":"transparent","x":[41,45,45,49.399999999999999,45,41],"y":[3,3,5,7.2999999999999998,9.4000000000000004,7],"type":"scatter","fill":"toself","mode":"lines","line":{"color":"black"},"hoverinfo":["text","text","text","text","text","text"],"showlegend":false,"name":"Tephrite<br />Basanite","marker":{"color":"transparent","line":{"color":"transparent"}},"textfont":{"color":"transparent"},"error_y":{"color":"transparent"},"error_x":{"color":"transparent"},"xaxis":"x","yaxis":"y","frame":null},{"fillcolor":"transparent","x":[49.399999999999999,53,48.399999999999999,45],"y":[7.2999999999999998,9.3000000000000007,11.5,9.4000000000000004],"type":"scatter","fill":"toself","mode":"lines","line":{"color":"black"},"hoverinfo":["text","text","text","text"],"showlegend":false,"name":"Phono-<br />tephrite","marker":{"color":"transparent","line":{"color":"transparent"}},"textfont":{"color":"transparent"},"error_y":{"color":"transparent"},"error_x":{"color":"transparent"},"xaxis":"x","yaxis":"y","frame":null},{"fillcolor":"transparent","x":[53,57.600000000000001,52.5,48.399999999999999],"y":[9.3000000000000007,11.699999999999999,14,11.5],"type":"scatter","fill":"toself","mode":"lines","line":{"color":"black"},"hoverinfo":["text","text","text","text"],"showlegend":false,"name":"Tephri-<br />phonolite","marker":{"color":"transparent","line":{"color":"transparent"}},"textfont":{"color":"transparent"},"error_y":{"color":"transparent"},"error_x":{"color":"transparent"},"xaxis":"x","yaxis":"y","frame":null},{"fillcolor":"transparent","x":[57.600000000000001,63.75,50.350000000000001],"y":[11.699999999999999,15,15],"type":"scatter","fill":"toself","mode":"lines","line":{"color":"black"},"hoverinfo":["text","text","text"],"showlegend":false,"name":"Phonolite","marker":{"color":"transparent","line":{"color":"transparent"}},"textfont":{"color":"transparent"},"error_y":{"color":"transparent"},"error_x":{"color":"transparent"},"xaxis":"x","yaxis":"y","frame":null},{"fillcolor":"transparent","x":[37,41,41,45,48.399999999999999,52.5,50.350000000000001,37],"y":[0,0,7,9.4000000000000004,11.5,14,15,15],"type":"scatter","fill":"toself","mode":"lines","line":{"color":"black"},"hoverinfo":["text","text","text","text","text","text","text","text"],"showlegend":false,"name":"Foidite","marker":{"color":"transparent","line":{"color":"transparent"}},"textfont":{"color":"transparent"},"error_y":{"color":"transparent"},"error_x":{"color":"transparent"},"xaxis":"x","yaxis":"y","frame":null},{"x":[39.200000000000003,40,43.200000000000003,45,48,50,53.700000000000003,55,60,65,77.400000000000006],"y":[0,0.40000000000000002,2,2.7999999999999998,4,4.75,6,6.4000000000000004,8,8.8000000000000007,10],"type":"scatter","mode":"lines","name":"Series","hoverinfo":["none","none","none","none","none","none","none","none","none","none","none"],"line":{"color":"darkred"},"showlegend":false,"marker":{"color":"rgba(140,86,75,1)","line":{"color":"rgba(140,86,75,1)"}},"error_y":{"color":"rgba(140,86,75,1)"},"error_x":{"color":"rgba(140,86,75,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":[43,48.5,54.799999999999997,59.899999999999999,67,75,63.5,57.799999999999997,52.950000000000003,49.200000000000003,45,49.200000000000003,53,57,43],"y":[1.55,2.7999999999999998,3,3,3,8.3000000000000007,11.199999999999999,8.5,7,5.6500000000000004,7,9.3000000000000007,11.5,14,12],"text":["Picrobasalt","Basalt","Basaltic<br />andesite","Andesite","Dacite","Rhyolite","Trachyte<br />Trachydacite","Trachy-<br />andesite","Basaltic<br />trachy-<br />andesite","Trachy-<br />basalt","Tephrite<br />Basanite","Phono-<br />tephrite","Tephri-<br />phonolite","Phonolite","Foidite"],"type":"scatter","mode":"text","name":"Type","hoverinfo":["none","none","none","none","none","none","none","none","none","none","none","none","none","none","none"],"textfont":{"family":"Arial","size":7,"color":"Black"},"showlegend":false,"marker":{"color":"rgba(227,119,194,1)","line":{"color":"rgba(227,119,194,1)"}},"error_y":{"color":"rgba(227,119,194,1)"},"error_x":{"color":"rgba(227,119,194,1)"},"line":{"color":"rgba(227,119,194,1)"},"xaxis":"x","yaxis":"y","frame":null}],"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.20000000000000001,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script><p class="caption">
 Dynamic TAS diagram
 </p>
 </div>
 </div>
-<div id="add-your-data" class="section level2">
-<h2 class="hasAnchor">
-<a href="#add-your-data" class="anchor"></a>Add your data!!</h2>
-<p>To add your own data to the diagram a new table must be created (imported), where the names of the columns should preferably match the names of the axes for the corresponding diagram, or map them accordingly. To do this check the <a href="#tb-names">Names</a> section where the respective names are given for each diagram, and to what axis they have to be mapped to.</p>
-<p><strong>In the case of the ternary diagrams, the sample (row) totals (adding the three components) are not required to add-up to 100%, this is done internally.</strong></p>
-<p>Adding some data is demostrated here by ploting two points on the QtFL and TAS diagrams, first by ploting the data in a static diagram (<strong>ggplot</strong>), and then ploting the same data in the dynamic diagram (<strong>plotly</strong>).</p>
-<p>In the data for the ternary diagram (<code>d</code>) the first sample (point) adds-up to a 100 but the second one does not, showing the point made above.</p>
+<div class="section level3">
+<h3 id="add-your-data">Add your data!!<a class="anchor" aria-label="anchor" href="#add-your-data"></a>
+</h3>
+<p>To add your own data to the diagram a new table must be created
+(imported), where the names of the columns should preferably match the
+names of the axes for the corresponding diagram, or map them
+accordingly. To do this check the <a href="#tb-names">Names</a> section
+where the respective names are given for each diagram, and to what axis
+they have to be mapped to.</p>
+<p><strong>In the case of the ternary diagrams, the sample (row) totals
+(adding the three components) are not required to add-up to 100%, this
+is done internally.</strong></p>
+<p>Adding some data is demostrated here by ploting two points on the
+QtFL and TAS diagrams, first by ploting the data in a static diagram
+(<strong>ggplot</strong>), and then ploting the same data in the dynamic
+diagram (<strong>plotly</strong>).</p>
+<p>In the data for the ternary diagram (<code>d</code>) the first sample
+(point) adds-up to a 100 but the second one does not, showing the point
+made above.</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">d</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span>sample<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">'a'</span>,<span class="st">'b'</span><span class="op">)</span>,
-               qt<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">40</span>,<span class="fl">30</span><span class="op">)</span>,
-               f<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">40</span>,<span class="fl">20</span><span class="op">)</span>,
-               l<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">20</span>,<span class="fl">10</span><span class="op">)</span><span class="op">)</span>
-
-<span class="va">d2</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span>silica<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">58</span>,<span class="fl">70</span><span class="op">)</span>, 
-                alkali<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">8</span>,<span class="fl">4</span><span class="op">)</span><span class="op">)</span></code></pre></div>
-<table class="table  lightable-classic">
+<code class="sourceCode R"><span><span class="va">d</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span></span>
+<span>  sample <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'a'</span>, <span class="st">'b'</span><span class="op">)</span>,</span>
+<span>  qt <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">40</span>, <span class="fl">30</span><span class="op">)</span>,</span>
+<span>  f <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">40</span>, <span class="fl">20</span><span class="op">)</span>,</span>
+<span>  l <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">20</span>, <span class="fl">10</span><span class="op">)</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">d2</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span>silica <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">58</span>, <span class="fl">70</span><span class="op">)</span>, alkali <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">8</span>, <span class="fl">4</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<table class="table  lightable-classic" style='font-family: "Arial Narrow", "Source Sans Pro", sans-serif; margin-left: auto; margin-right: auto;'>
 <caption>
 Samples for QtFL diagram
 </caption>
@@ -225,7 +230,7 @@ b
 </tr>
 </tbody>
 </table>
-<table class="table  lightable-classic">
+<table class="table  lightable-classic" style='font-family: "Arial Narrow", "Source Sans Pro", sans-serif; margin-left: auto; margin-right: auto;'>
 <caption>
 Samples for TAS diagram
 </caption>
@@ -256,96 +261,119 @@ alkali
 </tr>
 </tbody>
 </table>
-<div id="static-1" class="section level3">
-<h3 class="hasAnchor">
-<a href="#static-1" class="anchor"></a>Static</h3>
-<p>For the <strong>ggplot</strong> object, data can be added using the function <code>geom_point</code>, where the only argument that is required is <code>data</code>, the rest can be omitted or modified.</p>
+<div class="section level4">
+<h4 id="static-1">Static<a class="anchor" aria-label="anchor" href="#static-1"></a>
+</h4>
+<p>For the <strong>ggplot</strong> object, data can be added using the
+function <code>geom_point</code>, where the only argument that is
+required is <code>data</code>, the rest can be omitted or modified.</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/ternary_qtfl.html">ternary_qtfl</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span> 
-  <span class="fu"><a href="https://rdrr.io/pkg/ggplot2/man/geom_point.html">geom_point</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">d</span>,
-             color <span class="op">=</span> <span class="st">'coral'</span>,
-             size <span class="op">=</span> <span class="fl">3</span>,
-             shape <span class="op">=</span> <span class="fl">3</span>,
-             alpha <span class="op">=</span> <span class="fl">.7</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/ternary_dickinson_qtfl.html">ternary_dickinson_qtfl</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html" class="external-link">geom_point</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">d</span>, color <span class="op">=</span> <span class="st">'coral'</span>, size <span class="op">=</span> <span class="fl">3</span>, shape <span class="op">=</span> <span class="fl">3</span>, alpha <span class="op">=</span> <span class="fl">.7</span><span class="op">)</span></span></code></pre></div>
 <div class="figure" style="text-align: center">
-<img src="classification_diagrams_vig_files/figure-html/unnamed-chunk-7-1.png" alt="Static QtFL ternary diagram for provenance, with user's data." width="80%"><p class="caption">
+<img src="classification_diagrams_vig_files/figure-html/unnamed-chunk-7-1.png" class="r-plt" alt="Static QtFL ternary diagram for provenance, with user's data." width="80%"><p class="caption">
 Static QtFL ternary diagram for provenance, with user’s data.
 </p>
 </div>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/TAS.html">TAS</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span> 
-  <span class="fu"><a href="https://rdrr.io/pkg/ggplot2/man/geom_point.html">geom_point</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/ggplot2/man/aes.html">aes</a></span><span class="op">(</span>x<span class="op">=</span><span class="va">silica</span>, y<span class="op">=</span><span class="va">alkali</span><span class="op">)</span>,
-             data <span class="op">=</span> <span class="va">d2</span>,
-             color <span class="op">=</span> <span class="st">'coral'</span>,
-             size <span class="op">=</span> <span class="fl">3</span>,
-             shape <span class="op">=</span> <span class="fl">3</span>,
-             alpha <span class="op">=</span> <span class="fl">.7</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/TAS.html">TAS</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html" class="external-link">geom_point</a></span><span class="op">(</span></span>
+<span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">silica</span>, y <span class="op">=</span> <span class="va">alkali</span><span class="op">)</span>,</span>
+<span>    data <span class="op">=</span> <span class="va">d2</span>,</span>
+<span>    color <span class="op">=</span> <span class="st">'coral'</span>,</span>
+<span>    size <span class="op">=</span> <span class="fl">3</span>,</span>
+<span>    shape <span class="op">=</span> <span class="fl">3</span>,</span>
+<span>    alpha <span class="op">=</span> <span class="fl">.7</span></span>
+<span>  <span class="op">)</span></span></code></pre></div>
 <div class="figure" style="text-align: center">
-<img src="classification_diagrams_vig_files/figure-html/unnamed-chunk-8-1.png" alt="Static TAS diagram, with user's data." width="80%"><p class="caption">
+<img src="classification_diagrams_vig_files/figure-html/unnamed-chunk-8-1.png" class="r-plt" alt="Static TAS diagram, with user's data." width="80%"><p class="caption">
 Static TAS diagram, with user’s data.
 </p>
 </div>
 </div>
-<div id="dynamic-1" class="section level3">
-<h3 class="hasAnchor">
-<a href="#dynamic-1" class="anchor"></a>Dynamic</h3>
-<p>For the <strong>plotly</strong> object it is a bit different for the bivariate and ternary diagrams.</p>
-<p>For the ternary diagrams, data can be added using the function <code>add_trace</code>, where the arguments <code>data</code>, <code>a</code>, <code>b</code>, <code>c</code>, <code>type = "scatterternary"</code>, and <code>mode = "markers"</code> are required, the rest can be changed. The vertices <code>a</code>, <code>b</code>, and <code>c</code>, correspond to the top, bottom left, and bottom right of the respective ternary diagram. The <code>name</code> is what gets displayed in the legend, and the <code>marker</code> defines the appearance.</p>
+<div class="section level4">
+<h4 id="dynamic-1">Dynamic<a class="anchor" aria-label="anchor" href="#dynamic-1"></a>
+</h4>
+<p>For the <strong>plotly</strong> object it is a bit different for the
+bivariate and ternary diagrams.</p>
+<p>For the ternary diagrams, data can be added using the function
+<code>add_trace</code>, where the arguments <code>data</code>,
+<code>a</code>, <code>b</code>, <code>c</code>,
+<code>type = "scatterternary"</code>, and <code>mode = "markers"</code>
+are required, the rest can be changed. The vertices <code>a</code>,
+<code>b</code>, and <code>c</code>, correspond to the top, bottom left,
+and bottom right of the respective ternary diagram. The
+<code>name</code> is what gets displayed in the legend, and the
+<code>marker</code> defines the appearance.</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/ternary_qtfl.html">ternary_qtfl</a></span><span class="op">(</span>output <span class="op">=</span> <span class="st">'plotly'</span><span class="op">)</span> <span class="op">%&gt;%</span> 
-  <span class="fu"><a href="https://rdrr.io/pkg/plotly/man/add_trace.html">add_trace</a></span><span class="op">(</span>a <span class="op">=</span> <span class="op">~</span><span class="va">qt</span>, b <span class="op">=</span> <span class="op">~</span><span class="va">f</span>, c <span class="op">=</span> <span class="op">~</span><span class="va">l</span>,
-            data <span class="op">=</span> <span class="va">d</span>,
-            name <span class="op">=</span> <span class="st">'My data'</span>,
-            type <span class="op">=</span> <span class="st">"scatterternary"</span>,
-            mode <span class="op">=</span> <span class="st">"markers"</span>,
-            marker <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>size <span class="op">=</span> <span class="fl">8</span>,
-                          color <span class="op">=</span> <span class="st">'green'</span>,
-                          symbol <span class="op">=</span> <span class="fl">4</span>,
-                          opacity <span class="op">=</span> <span class="fl">.7</span><span class="op">)</span>,
-            hovertemplate <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="st">'Qt: %{a}&lt;br&gt;'</span>,
-                                   <span class="st">'F: %{b}&lt;br&gt;'</span>,
-                                   <span class="st">'L: %{c}'</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/ternary_dickinson_qtfl.html">ternary_dickinson_qtfl</a></span><span class="op">(</span>output <span class="op">=</span> <span class="st">'plotly'</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/pkg/plotly/man/add_trace.html" class="external-link">add_trace</a></span><span class="op">(</span></span>
+<span>    a <span class="op">=</span> <span class="op">~</span><span class="va">qt</span>,</span>
+<span>    b <span class="op">=</span> <span class="op">~</span><span class="va">f</span>,</span>
+<span>    c <span class="op">=</span> <span class="op">~</span><span class="va">l</span>,</span>
+<span>    data <span class="op">=</span> <span class="va">d</span>,</span>
+<span>    name <span class="op">=</span> <span class="st">'My data'</span>,</span>
+<span>    type <span class="op">=</span> <span class="st">"scatterternary"</span>,</span>
+<span>    mode <span class="op">=</span> <span class="st">"markers"</span>,</span>
+<span>    marker <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>size <span class="op">=</span> <span class="fl">8</span>, color <span class="op">=</span> <span class="st">'green'</span>, symbol <span class="op">=</span> <span class="fl">4</span>, opacity <span class="op">=</span> <span class="fl">.7</span><span class="op">)</span>,</span>
+<span>    hovertemplate <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="st">'Qt: %{a}&lt;br&gt;'</span>, <span class="st">'F: %{b}&lt;br&gt;'</span>, <span class="st">'L: %{c}'</span><span class="op">)</span></span>
+<span>  <span class="op">)</span></span></code></pre></div>
 <div class="figure" style="text-align: center">
-<div id="htmlwidget-cc09c1cc2e7306cdce40" style="width:80%;height:432.632880098888px;" class="plotly html-widget"></div>
-<script type="application/json" data-for="htmlwidget-cc09c1cc2e7306cdce40">{"x":{"visdat":{"930029081845":["function () ","plotlyVisDat"],"930052716f0e":["function () ","data"],"930015322a6b":["function () ","data"]},"cur_data":"930015322a6b","attrs":{"930052716f0e":{"alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"a":{},"b":{},"c":{},"color":{},"colors":["#989FA7","#5A9AE1","#2F4996","#6B6943","#BFAED2","#DAB7A3","#B21C3F"],"opacity":1,"type":"scatterternary","fill":"toself","mode":"lines","hoveron":"fills","inherit":true},"930015322a6b":{"alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"a":{},"b":{},"c":{},"name":"My data","type":"scatterternary","mode":"markers","marker":{"size":8,"color":"green","symbol":4,"opacity":0.7},"hovertemplate":"Qt: %{a}<br>F: %{b}<br>L: %{c}","inherit":true}},"layout":{"margin":{"b":40,"l":60,"t":25,"r":10},"annotations":[{"text":"QtFL","x":0.1,"y":1,"ax":0,"ay":0,"xref":"paper","yref":"paper","align":"center","font":{"family":"serif","size":15,"color":"white"},"bgcolor":"#b3b3b3","bordercolor":"black","borderwidth":2},{"text":"QtFL","x":0.1,"y":1,"ax":0,"ay":0,"xref":"paper","yref":"paper","align":"center","font":{"family":"serif","size":15,"color":"white"},"bgcolor":"#b3b3b3","bordercolor":"black","borderwidth":2},{"text":"QtFL","x":0.1,"y":1,"ax":0,"ay":0,"xref":"paper","yref":"paper","align":"center","font":{"family":"serif","size":15,"color":"white"},"bgcolor":"#b3b3b3","bordercolor":"black","borderwidth":2}],"ternary":{"aaxis":{"title":"Qt","tickformat":".0%","tickfont":{"size":10}},"baxis":{"title":"F","tickformat":".0%","tickfont":{"size":10}},"caxis":{"title":"L","tickformat":".0%","tickfont":{"size":10}}},"legend":{"title":{"text":"<b> Provenance <\/b>"}},"hovermode":"closest","showlegend":true},"source":"A","config":{"modeBarButtonsToAdd":["hoverclosest","hovercompare"],"showSendToCloud":false,"toImageButtonOptions":{"format":"svg","filename":"QtFL","width":864,"height":576}},"data":[{"fillcolor":"rgba(152,159,167,0.5)","a":[100,82,80,97],"b":[0,18,15,0],"c":[0,0,5,3],"opacity":1,"type":"scatterternary","fill":"toself","mode":"lines","hoveron":"fills","name":"Craton interior","marker":{"color":"rgba(152,159,167,1)","line":{"color":"rgba(152,159,167,1)"}},"textfont":{"color":"rgba(152,159,167,1)"},"line":{"color":"rgba(152,159,167,1)"},"frame":null,"text":""},{"fillcolor":"rgba(90,154,225,0.5)","a":[82,55,52,80],"b":[18,45,40,15],"c":[0,0,8,5],"opacity":1,"type":"scatterternary","fill":"toself","mode":"lines","hoveron":"fills","name":"Transitional Continental","marker":{"color":"rgba(90,154,225,1)","line":{"color":"rgba(90,154,225,1)"}},"textfont":{"color":"rgba(90,154,225,1)"},"line":{"color":"rgba(90,154,225,1)"},"frame":null,"text":""},{"fillcolor":"rgba(47,73,150,0.5)","a":[55,0,0,20,52],"b":[45,100,85,67.7,40],"c":[0,0,15,12.3,8],"opacity":1,"type":"scatterternary","fill":"toself","mode":"lines","hoveron":"fills","name":"Basement Uplift","marker":{"color":"rgba(47,73,150,1)","line":{"color":"rgba(47,73,150,1)"}},"textfont":{"color":"rgba(47,73,150,1)"},"line":{"color":"rgba(47,73,150,1)"},"frame":null,"text":""},{"fillcolor":"rgba(107,105,67,0.5)","a":[97,80,52,33.781,25],"b":[0,15,40,12.897,0],"c":[3,5,8,53.322,75],"opacity":1,"type":"scatterternary","fill":"toself","mode":"lines","hoveron":"fills","name":"Recycled Orogenic","marker":{"color":"rgba(107,105,67,1)","line":{"color":"rgba(107,105,67,1)"}},"textfont":{"color":"rgba(107,105,67,1)"},"line":{"color":"rgba(107,105,67,1)"},"frame":null,"text":""},{"fillcolor":"rgba(191,174,210,0.5)","a":[52,20,33.781],"b":[40,67.7,12.897],"c":[8,12.3,53.322],"opacity":1,"type":"scatterternary","fill":"toself","mode":"lines","hoveron":"fills","name":"Dissected Arc","marker":{"color":"rgba(191,174,210,1)","line":{"color":"rgba(191,174,210,1)"}},"textfont":{"color":"rgba(191,174,210,1)"},"line":{"color":"rgba(191,174,210,1)"},"frame":null,"text":""},{"fillcolor":"rgba(218,183,163,0.5)","a":[20,0,0,25,25,33.781],"b":[67.7,85,50,0,0,12.897],"c":[12.3,15,50,75,75,53.322],"opacity":1,"type":"scatterternary","fill":"toself","mode":"lines","hoveron":"fills","name":"Transitional Arc","marker":{"color":"rgba(218,183,163,1)","line":{"color":"rgba(218,183,163,1)"}},"textfont":{"color":"rgba(218,183,163,1)"},"line":{"color":"rgba(218,183,163,1)"},"frame":null,"text":""},{"fillcolor":"rgba(178,28,63,0.5)","a":[25,0,0],"b":[0,50,0],"c":[75,50,100],"opacity":1,"type":"scatterternary","fill":"toself","mode":"lines","hoveron":"fills","name":"Undissected Arc","marker":{"color":"rgba(178,28,63,1)","line":{"color":"rgba(178,28,63,1)"}},"textfont":{"color":"rgba(178,28,63,1)"},"line":{"color":"rgba(178,28,63,1)"},"frame":null,"text":""},{"a":[40,30],"b":[40,20],"c":[20,10],"name":"My data","type":"scatterternary","mode":"markers","marker":{"color":"green","size":8,"symbol":4,"opacity":0.7,"line":{"color":"rgba(127,127,127,1)"}},"hovertemplate":["Qt: %{a}<br>F: %{b}<br>L: %{c}","Qt: %{a}<br>F: %{b}<br>L: %{c}"],"line":{"color":"rgba(127,127,127,1)"},"frame":null}],"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.2,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script><p class="caption">
+<div class="plotly html-widget html-fill-item" id="htmlwidget-36aa3d2a04d42bbc2145" style="width:80%;height:432.632880098888px;"></div>
+<script type="application/json" data-for="htmlwidget-36aa3d2a04d42bbc2145">{"x":{"visdat":{"511edb7cc6c":["function () ","plotlyVisDat"],"511e1dcdcd7d":["function () ","data"],"511e326dd8d4":["function () ","data"]},"cur_data":"511e326dd8d4","attrs":{"511e1dcdcd7d":{"alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"a":{},"b":{},"c":{},"color":{},"colors":["#989FA7","#5A9AE1","#2F4996","#6B6943","#BFAED2","#DAB7A3","#B21C3F"],"opacity":1,"type":"scatterternary","fill":"toself","mode":"lines","hoveron":"fills","inherit":true},"511e326dd8d4":{"alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"a":{},"b":{},"c":{},"name":"My data","type":"scatterternary","mode":"markers","marker":{"size":8,"color":"green","symbol":4,"opacity":0.69999999999999996},"hovertemplate":"Qt: %{a}<br>F: %{b}<br>L: %{c}","inherit":true}},"layout":{"margin":{"b":40,"l":60,"t":25,"r":10},"annotations":[{"text":"QtFL","x":0.10000000000000001,"y":1,"ax":0,"ay":0,"xref":"paper","yref":"paper","align":"center","font":{"family":"serif","size":15,"color":"white"},"bgcolor":"#b3b3b3","bordercolor":"black","borderwidth":2},{"text":"QtFL","x":0.10000000000000001,"y":1,"ax":0,"ay":0,"xref":"paper","yref":"paper","align":"center","font":{"family":"serif","size":15,"color":"white"},"bgcolor":"#b3b3b3","bordercolor":"black","borderwidth":2},{"text":"QtFL","x":0.10000000000000001,"y":1,"ax":0,"ay":0,"xref":"paper","yref":"paper","align":"center","font":{"family":"serif","size":15,"color":"white"},"bgcolor":"#b3b3b3","bordercolor":"black","borderwidth":2}],"ternary":{"aaxis":{"title":"Qt","tickformat":".0%","tickfont":{"size":10}},"baxis":{"title":"F","tickformat":".0%","tickfont":{"size":10}},"caxis":{"title":"L","tickformat":".0%","tickfont":{"size":10}}},"legend":{"title":{"text":"<b> Provenance <\/b>"}},"hovermode":"closest","showlegend":true},"source":"A","config":{"modeBarButtonsToAdd":["hoverclosest","hovercompare"],"showSendToCloud":false,"toImageButtonOptions":{"format":"svg","filename":"Dickinson_QtFL","width":864,"height":576}},"data":[{"fillcolor":"rgba(152,159,167,0.5)","a":[100,82,80,97],"b":[0,18,15,0],"c":[0,0,5,3],"opacity":1,"type":"scatterternary","fill":"toself","mode":"lines","hoveron":"fills","name":"Craton interior","marker":{"color":"rgba(152,159,167,1)","line":{"color":"rgba(152,159,167,1)"}},"textfont":{"color":"rgba(152,159,167,1)"},"line":{"color":"rgba(152,159,167,1)"},"frame":null,"text":""},{"fillcolor":"rgba(90,154,225,0.5)","a":[82,55,52,80],"b":[18,45,40,15],"c":[0,0,8,5],"opacity":1,"type":"scatterternary","fill":"toself","mode":"lines","hoveron":"fills","name":"Transitional Continental","marker":{"color":"rgba(90,154,225,1)","line":{"color":"rgba(90,154,225,1)"}},"textfont":{"color":"rgba(90,154,225,1)"},"line":{"color":"rgba(90,154,225,1)"},"frame":null,"text":""},{"fillcolor":"rgba(47,73,150,0.5)","a":[55,0,0,20,52],"b":[45,100,85,67.700000000000003,40],"c":[0,0,15,12.300000000000001,8],"opacity":1,"type":"scatterternary","fill":"toself","mode":"lines","hoveron":"fills","name":"Basement Uplift","marker":{"color":"rgba(47,73,150,1)","line":{"color":"rgba(47,73,150,1)"}},"textfont":{"color":"rgba(47,73,150,1)"},"line":{"color":"rgba(47,73,150,1)"},"frame":null,"text":""},{"fillcolor":"rgba(107,105,67,0.5)","a":[97,80,52,33.780999999999999,25],"b":[0,15,40,12.897,0],"c":[3,5,8,53.322000000000003,75],"opacity":1,"type":"scatterternary","fill":"toself","mode":"lines","hoveron":"fills","name":"Recycled Orogenic","marker":{"color":"rgba(107,105,67,1)","line":{"color":"rgba(107,105,67,1)"}},"textfont":{"color":"rgba(107,105,67,1)"},"line":{"color":"rgba(107,105,67,1)"},"frame":null,"text":""},{"fillcolor":"rgba(191,174,210,0.5)","a":[52,20,33.780999999999999],"b":[40,67.700000000000003,12.897],"c":[8,12.300000000000001,53.322000000000003],"opacity":1,"type":"scatterternary","fill":"toself","mode":"lines","hoveron":"fills","name":"Dissected Arc","marker":{"color":"rgba(191,174,210,1)","line":{"color":"rgba(191,174,210,1)"}},"textfont":{"color":"rgba(191,174,210,1)"},"line":{"color":"rgba(191,174,210,1)"},"frame":null,"text":""},{"fillcolor":"rgba(218,183,163,0.5)","a":[20,0,0,25,25,33.780999999999999],"b":[67.700000000000003,85,50,0,0,12.897],"c":[12.300000000000001,15,50,75,75,53.322000000000003],"opacity":1,"type":"scatterternary","fill":"toself","mode":"lines","hoveron":"fills","name":"Transitional Arc","marker":{"color":"rgba(218,183,163,1)","line":{"color":"rgba(218,183,163,1)"}},"textfont":{"color":"rgba(218,183,163,1)"},"line":{"color":"rgba(218,183,163,1)"},"frame":null,"text":""},{"fillcolor":"rgba(178,28,63,0.5)","a":[25,0,0],"b":[0,50,0],"c":[75,50,100],"opacity":1,"type":"scatterternary","fill":"toself","mode":"lines","hoveron":"fills","name":"Undissected Arc","marker":{"color":"rgba(178,28,63,1)","line":{"color":"rgba(178,28,63,1)"}},"textfont":{"color":"rgba(178,28,63,1)"},"line":{"color":"rgba(178,28,63,1)"},"frame":null,"text":""},{"a":[40,30],"b":[40,20],"c":[20,10],"name":"My data","type":"scatterternary","mode":"markers","marker":{"color":"green","size":8,"symbol":4,"opacity":0.69999999999999996,"line":{"color":"rgba(127,127,127,1)"}},"hovertemplate":["Qt: %{a}<br>F: %{b}<br>L: %{c}","Qt: %{a}<br>F: %{b}<br>L: %{c}"],"line":{"color":"rgba(127,127,127,1)"},"frame":null}],"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.20000000000000001,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script><p class="caption">
 Dynamic QtFL ternary diagram for provenance, with user’s data.
 </p>
 </div>
-<p>For the bivariate diagrams, data can be added using the function <code>add_markers</code>, where the arguments <code>data</code>, <code>x</code>, and <code>y</code> are required, the rest can be changed. The <code>name</code> is what gets displayed in the legend, and the <code>marker</code> defines the appearance. The <code><a href="https://rdrr.io/pkg/plotly/man/layout.html">layout(showlegend = TRUE)</a></code> forces the legend to show up.</p>
+<p>For the bivariate diagrams, data can be added using the function
+<code>add_markers</code>, where the arguments <code>data</code>,
+<code>x</code>, and <code>y</code> are required, the rest can be
+changed. The <code>name</code> is what gets displayed in the legend, and
+the <code>marker</code> defines the appearance. The
+<code>layout(showlegend = TRUE)</code> forces the legend to show up.</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/TAS.html">TAS</a></span><span class="op">(</span><span class="st">'plotly'</span><span class="op">)</span> <span class="op">%&gt;%</span>
-  <span class="fu"><a href="https://rdrr.io/pkg/plotly/man/add_trace.html">add_markers</a></span><span class="op">(</span>x <span class="op">=</span> <span class="op">~</span><span class="va">silica</span>, y <span class="op">=</span> <span class="op">~</span><span class="va">alkali</span>,
-              data <span class="op">=</span> <span class="va">d2</span>,
-              name <span class="op">=</span> <span class="st">"My data"</span>,
-              marker <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>size<span class="op">=</span><span class="fl">8</span>,color<span class="op">=</span><span class="st">'orange'</span>,symbol<span class="op">=</span><span class="fl">3</span>,opacity<span class="op">=</span><span class="fl">.9</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span>
-  <span class="fu"><a href="https://rdrr.io/pkg/plotly/man/layout.html">layout</a></span><span class="op">(</span>showlegend <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/TAS.html">TAS</a></span><span class="op">(</span><span class="st">'plotly'</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/pkg/plotly/man/add_trace.html" class="external-link">add_markers</a></span><span class="op">(</span></span>
+<span>    x <span class="op">=</span> <span class="op">~</span><span class="va">silica</span>,</span>
+<span>    y <span class="op">=</span> <span class="op">~</span><span class="va">alkali</span>,</span>
+<span>    data <span class="op">=</span> <span class="va">d2</span>,</span>
+<span>    name <span class="op">=</span> <span class="st">"My data"</span>,</span>
+<span>    marker <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>size <span class="op">=</span> <span class="fl">8</span>, color <span class="op">=</span> <span class="st">'orange'</span>, symbol <span class="op">=</span> <span class="fl">3</span>, opacity <span class="op">=</span> <span class="fl">.9</span><span class="op">)</span></span>
+<span>  <span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu">layout</span><span class="op">(</span>showlegend <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
 <div class="figure" style="text-align: center">
-<div id="htmlwidget-78dcff4a2bbb20c25588" style="width:80%;height:432.632880098888px;" class="plotly html-widget"></div>
-<script type="application/json" data-for="htmlwidget-78dcff4a2bbb20c25588">{"x":{"visdat":{"93007a11eba9":["function () ","plotlyVisDat"],"93002e86e2db":["function () ","data"],"93001997afba":["function () ","data"],"93003591e976":["function () ","data"],"93007e765d73":["function () ","data"]},"cur_data":"93007e765d73","attrs":{"93002e86e2db":{"alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"x":{},"y":{},"type":"scatter","fill":"toself","mode":"lines","color":{},"colors":"transparent","line":{"color":"black"},"hoverinfo":"text","showlegend":false,"inherit":true},"93001997afba":{"alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"x":{},"y":{},"type":"scatter","mode":"lines","name":"Series","hoverinfo":"none","line":{"color":"darkred"},"showlegend":false,"inherit":true},"93003591e976":{"alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"x":{},"y":{},"text":{},"type":"scatter","mode":"text","name":"Type","hoverinfo":"none","textfont":{"family":"Arial","size":7,"color":"Black"},"showlegend":false,"inherit":true},"93007e765d73":{"alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"x":{},"y":{},"type":"scatter","mode":"markers","name":"My data","marker":{"size":8,"color":"orange","symbol":3,"opacity":0.9},"inherit":true}},"layout":{"margin":{"b":40,"l":60,"t":25,"r":10},"xaxis":{"domain":[0,1],"automargin":true,"title":"SiO₂ [wt %]"},"yaxis":{"domain":[0,1],"automargin":true,"title":"Na₂O + K₂O [wt %]","scaleanchor":"x","scaleratio":1.5},"font":{"size":12},"annotations":[{"text":"Alkaline","x":73,"y":13,"showarrow":false,"font":{"size":8,"color":"darkred"}},{"text":"Subalkaline<br />/Tholeiitic","x":76,"y":5,"showarrow":false,"font":{"size":8,"color":"darkred"}}],"showlegend":true,"hovermode":"closest"},"source":"A","config":{"modeBarButtonsToAdd":["hoverclosest","hovercompare"],"showSendToCloud":false,"toImageButtonOptions":{"format":"svg","filename":"TAS","width":864,"height":576}},"data":[{"fillcolor":"transparent","x":[41,45,45,41],"y":[0,0,3,3],"type":"scatter","fill":"toself","mode":"lines","line":{"color":"black"},"hoverinfo":["text","text","text","text"],"showlegend":false,"name":"Picrobasalt","marker":{"color":"transparent","line":{"color":"transparent"}},"textfont":{"color":"transparent"},"error_y":{"color":"transparent"},"error_x":{"color":"transparent"},"xaxis":"x","yaxis":"y","frame":null},{"fillcolor":"transparent","x":[45,52,52,45],"y":[0,0,5,5],"type":"scatter","fill":"toself","mode":"lines","line":{"color":"black"},"hoverinfo":["text","text","text","text"],"showlegend":false,"name":"Basalt","marker":{"color":"transparent","line":{"color":"transparent"}},"textfont":{"color":"transparent"},"error_y":{"color":"transparent"},"error_x":{"color":"transparent"},"xaxis":"x","yaxis":"y","frame":null},{"fillcolor":"transparent","x":[52,57,57,52],"y":[0,0,5.9,5],"type":"scatter","fill":"toself","mode":"lines","line":{"color":"black"},"hoverinfo":["text","text","text","text"],"showlegend":false,"name":"Basaltic<br />andesite","marker":{"color":"transparent","line":{"color":"transparent"}},"textfont":{"color":"transparent"},"error_y":{"color":"transparent"},"error_x":{"color":"transparent"},"xaxis":"x","yaxis":"y","frame":null},{"fillcolor":"transparent","x":[57,63,63,57],"y":[0,0,7,5.9],"type":"scatter","fill":"toself","mode":"lines","line":{"color":"black"},"hoverinfo":["text","text","text","text"],"showlegend":false,"name":"Andesite","marker":{"color":"transparent","line":{"color":"transparent"}},"textfont":{"color":"transparent"},"error_y":{"color":"transparent"},"error_x":{"color":"transparent"},"xaxis":"x","yaxis":"y","frame":null},{"fillcolor":"transparent","x":[63,77,69,63],"y":[0,0,8,7],"type":"scatter","fill":"toself","mode":"lines","line":{"color":"black"},"hoverinfo":["text","text","text","text"],"showlegend":false,"name":"Dacite","marker":{"color":"transparent","line":{"color":"transparent"}},"textfont":{"color":"transparent"},"error_y":{"color":"transparent"},"error_x":{"color":"transparent"},"xaxis":"x","yaxis":"y","frame":null},{"fillcolor":"transparent","x":[77,80,80,69,69],"y":[0,0,15,15,8],"type":"scatter","fill":"toself","mode":"lines","line":{"color":"black"},"hoverinfo":["text","text","text","text","text"],"showlegend":false,"name":"Rhyolite","marker":{"color":"transparent","line":{"color":"transparent"}},"textfont":{"color":"transparent"},"error_y":{"color":"transparent"},"error_x":{"color":"transparent"},"xaxis":"x","yaxis":"y","frame":null},{"fillcolor":"transparent","x":[45,52,49.4],"y":[5,5,7.3],"type":"scatter","fill":"toself","mode":"lines","line":{"color":"black"},"hoverinfo":["text","text","text"],"showlegend":false,"name":"Trachy-<br />basalt","marker":{"color":"transparent","line":{"color":"transparent"}},"textfont":{"color":"transparent"},"error_y":{"color":"transparent"},"error_x":{"color":"transparent"},"xaxis":"x","yaxis":"y","frame":null},{"fillcolor":"transparent","x":[52,57,53,49.4],"y":[5,5.9,9.3,7.3],"type":"scatter","fill":"toself","mode":"lines","line":{"color":"black"},"hoverinfo":["text","text","text","text"],"showlegend":false,"name":"Basaltic<br />trachy-<br />andesite","marker":{"color":"transparent","line":{"color":"transparent"}},"textfont":{"color":"transparent"},"error_y":{"color":"transparent"},"error_x":{"color":"transparent"},"xaxis":"x","yaxis":"y","frame":null},{"fillcolor":"transparent","x":[57,63,57.6,53],"y":[5.9,7,11.7,9.3],"type":"scatter","fill":"toself","mode":"lines","line":{"color":"black"},"hoverinfo":["text","text","text","text"],"showlegend":false,"name":"Trachy-<br />andesite","marker":{"color":"transparent","line":{"color":"transparent"}},"textfont":{"color":"transparent"},"error_y":{"color":"transparent"},"error_x":{"color":"transparent"},"xaxis":"x","yaxis":"y","frame":null},{"fillcolor":"transparent","x":[63,69,69,63.75,57.6],"y":[7,8,15,15,11.7],"type":"scatter","fill":"toself","mode":"lines","line":{"color":"black"},"hoverinfo":["text","text","text","text","text"],"showlegend":false,"name":"Trachyte<br />Trachydacite","marker":{"color":"transparent","line":{"color":"transparent"}},"textfont":{"color":"transparent"},"error_y":{"color":"transparent"},"error_x":{"color":"transparent"},"xaxis":"x","yaxis":"y","frame":null},{"fillcolor":"transparent","x":[41,45,45,49.4,45,41],"y":[3,3,5,7.3,9.4,7],"type":"scatter","fill":"toself","mode":"lines","line":{"color":"black"},"hoverinfo":["text","text","text","text","text","text"],"showlegend":false,"name":"Tephrite<br />Basanite","marker":{"color":"transparent","line":{"color":"transparent"}},"textfont":{"color":"transparent"},"error_y":{"color":"transparent"},"error_x":{"color":"transparent"},"xaxis":"x","yaxis":"y","frame":null},{"fillcolor":"transparent","x":[49.4,53,48.4,45],"y":[7.3,9.3,11.5,9.4],"type":"scatter","fill":"toself","mode":"lines","line":{"color":"black"},"hoverinfo":["text","text","text","text"],"showlegend":false,"name":"Phono-<br />tephrite","marker":{"color":"transparent","line":{"color":"transparent"}},"textfont":{"color":"transparent"},"error_y":{"color":"transparent"},"error_x":{"color":"transparent"},"xaxis":"x","yaxis":"y","frame":null},{"fillcolor":"transparent","x":[53,57.6,52.5,48.4],"y":[9.3,11.7,14,11.5],"type":"scatter","fill":"toself","mode":"lines","line":{"color":"black"},"hoverinfo":["text","text","text","text"],"showlegend":false,"name":"Tephri-<br />phonolite","marker":{"color":"transparent","line":{"color":"transparent"}},"textfont":{"color":"transparent"},"error_y":{"color":"transparent"},"error_x":{"color":"transparent"},"xaxis":"x","yaxis":"y","frame":null},{"fillcolor":"transparent","x":[57.6,63.75,50.35],"y":[11.7,15,15],"type":"scatter","fill":"toself","mode":"lines","line":{"color":"black"},"hoverinfo":["text","text","text"],"showlegend":false,"name":"Phonolite","marker":{"color":"transparent","line":{"color":"transparent"}},"textfont":{"color":"transparent"},"error_y":{"color":"transparent"},"error_x":{"color":"transparent"},"xaxis":"x","yaxis":"y","frame":null},{"fillcolor":"transparent","x":[37,41,41,45,48.4,52.5,50.35,37],"y":[0,0,7,9.4,11.5,14,15,15],"type":"scatter","fill":"toself","mode":"lines","line":{"color":"black"},"hoverinfo":["text","text","text","text","text","text","text","text"],"showlegend":false,"name":"Foidite","marker":{"color":"transparent","line":{"color":"transparent"}},"textfont":{"color":"transparent"},"error_y":{"color":"transparent"},"error_x":{"color":"transparent"},"xaxis":"x","yaxis":"y","frame":null},{"x":[39.2,40,43.2,45,48,50,53.7,55,60,65,77.4],"y":[0,0.4,2,2.8,4,4.75,6,6.4,8,8.8,10],"type":"scatter","mode":"lines","name":"Series","hoverinfo":["none","none","none","none","none","none","none","none","none","none","none"],"line":{"color":"darkred"},"showlegend":false,"marker":{"color":"rgba(140,86,75,1)","line":{"color":"rgba(140,86,75,1)"}},"error_y":{"color":"rgba(140,86,75,1)"},"error_x":{"color":"rgba(140,86,75,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":[43,48.5,54.8,59.9,67,75,63.5,57.8,52.95,49.2,45,49.2,53,57,43],"y":[1.55,2.8,3,3,3,8.3,11.2,8.5,7,5.65,7,9.3,11.5,14,12],"text":["Picrobasalt","Basalt","Basaltic<br />andesite","Andesite","Dacite","Rhyolite","Trachyte<br />Trachydacite","Trachy-<br />andesite","Basaltic<br />trachy-<br />andesite","Trachy-<br />basalt","Tephrite<br />Basanite","Phono-<br />tephrite","Tephri-<br />phonolite","Phonolite","Foidite"],"type":"scatter","mode":"text","name":"Type","hoverinfo":["none","none","none","none","none","none","none","none","none","none","none","none","none","none","none"],"textfont":{"family":"Arial","size":7,"color":"Black"},"showlegend":false,"marker":{"color":"rgba(227,119,194,1)","line":{"color":"rgba(227,119,194,1)"}},"error_y":{"color":"rgba(227,119,194,1)"},"error_x":{"color":"rgba(227,119,194,1)"},"line":{"color":"rgba(227,119,194,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":[58,70],"y":[8,4],"type":"scatter","mode":"markers","name":"My data","marker":{"color":"orange","size":8,"symbol":3,"opacity":0.9,"line":{"color":"rgba(127,127,127,1)"}},"error_y":{"color":"rgba(127,127,127,1)"},"error_x":{"color":"rgba(127,127,127,1)"},"line":{"color":"rgba(127,127,127,1)"},"xaxis":"x","yaxis":"y","frame":null}],"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.2,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script><p class="caption">
+<div class="plotly html-widget html-fill-item" id="htmlwidget-febe03efa1a2d8d52a86" style="width:80%;height:432.632880098888px;"></div>
+<script type="application/json" data-for="htmlwidget-febe03efa1a2d8d52a86">{"x":{"visdat":{"511e3271fb78":["function () ","plotlyVisDat"],"511e59349d27":["function () ","data"],"511ed399932":["function () ","data"],"511e4078a866":["function () ","data"],"511e3177e19b":["function () ","data"]},"cur_data":"511e3177e19b","attrs":{"511e59349d27":{"alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"x":{},"y":{},"type":"scatter","fill":"toself","mode":"lines","color":{},"colors":"transparent","line":{"color":"black"},"hoverinfo":"text","showlegend":false,"inherit":true},"511ed399932":{"alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"x":{},"y":{},"type":"scatter","mode":"lines","name":"Series","hoverinfo":"none","line":{"color":"darkred"},"showlegend":false,"inherit":true},"511e4078a866":{"alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"x":{},"y":{},"text":{},"type":"scatter","mode":"text","name":"Type","hoverinfo":"none","textfont":{"family":"Arial","size":7,"color":"Black"},"showlegend":false,"inherit":true},"511e3177e19b":{"alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"x":{},"y":{},"type":"scatter","mode":"markers","name":"My data","marker":{"size":8,"color":"orange","symbol":3,"opacity":0.90000000000000002},"inherit":true}},"layout":{"margin":{"b":40,"l":60,"t":25,"r":10},"xaxis":{"domain":[0,1],"automargin":true,"title":"SiO₂ [wt %]"},"yaxis":{"domain":[0,1],"automargin":true,"title":"Na₂O + K₂O [wt %]","scaleanchor":"x","scaleratio":1.5},"font":{"size":12},"annotations":[{"text":"Alkaline","x":73,"y":13,"showarrow":false,"font":{"size":8,"color":"darkred"}},{"text":"Subalkaline<br />/Tholeiitic","x":76,"y":5,"showarrow":false,"font":{"size":8,"color":"darkred"}}],"showlegend":true,"hovermode":"closest"},"source":"A","config":{"modeBarButtonsToAdd":["hoverclosest","hovercompare"],"showSendToCloud":false,"toImageButtonOptions":{"format":"svg","filename":"TAS","width":864,"height":576}},"data":[{"fillcolor":"transparent","x":[41,45,45,41],"y":[0,0,3,3],"type":"scatter","fill":"toself","mode":"lines","line":{"color":"black"},"hoverinfo":["text","text","text","text"],"showlegend":false,"name":"Picrobasalt","marker":{"color":"transparent","line":{"color":"transparent"}},"textfont":{"color":"transparent"},"error_y":{"color":"transparent"},"error_x":{"color":"transparent"},"xaxis":"x","yaxis":"y","frame":null},{"fillcolor":"transparent","x":[45,52,52,45],"y":[0,0,5,5],"type":"scatter","fill":"toself","mode":"lines","line":{"color":"black"},"hoverinfo":["text","text","text","text"],"showlegend":false,"name":"Basalt","marker":{"color":"transparent","line":{"color":"transparent"}},"textfont":{"color":"transparent"},"error_y":{"color":"transparent"},"error_x":{"color":"transparent"},"xaxis":"x","yaxis":"y","frame":null},{"fillcolor":"transparent","x":[52,57,57,52],"y":[0,0,5.9000000000000004,5],"type":"scatter","fill":"toself","mode":"lines","line":{"color":"black"},"hoverinfo":["text","text","text","text"],"showlegend":false,"name":"Basaltic<br />andesite","marker":{"color":"transparent","line":{"color":"transparent"}},"textfont":{"color":"transparent"},"error_y":{"color":"transparent"},"error_x":{"color":"transparent"},"xaxis":"x","yaxis":"y","frame":null},{"fillcolor":"transparent","x":[57,63,63,57],"y":[0,0,7,5.9000000000000004],"type":"scatter","fill":"toself","mode":"lines","line":{"color":"black"},"hoverinfo":["text","text","text","text"],"showlegend":false,"name":"Andesite","marker":{"color":"transparent","line":{"color":"transparent"}},"textfont":{"color":"transparent"},"error_y":{"color":"transparent"},"error_x":{"color":"transparent"},"xaxis":"x","yaxis":"y","frame":null},{"fillcolor":"transparent","x":[63,77,69,63],"y":[0,0,8,7],"type":"scatter","fill":"toself","mode":"lines","line":{"color":"black"},"hoverinfo":["text","text","text","text"],"showlegend":false,"name":"Dacite","marker":{"color":"transparent","line":{"color":"transparent"}},"textfont":{"color":"transparent"},"error_y":{"color":"transparent"},"error_x":{"color":"transparent"},"xaxis":"x","yaxis":"y","frame":null},{"fillcolor":"transparent","x":[77,80,80,69,69],"y":[0,0,15,15,8],"type":"scatter","fill":"toself","mode":"lines","line":{"color":"black"},"hoverinfo":["text","text","text","text","text"],"showlegend":false,"name":"Rhyolite","marker":{"color":"transparent","line":{"color":"transparent"}},"textfont":{"color":"transparent"},"error_y":{"color":"transparent"},"error_x":{"color":"transparent"},"xaxis":"x","yaxis":"y","frame":null},{"fillcolor":"transparent","x":[45,52,49.399999999999999],"y":[5,5,7.2999999999999998],"type":"scatter","fill":"toself","mode":"lines","line":{"color":"black"},"hoverinfo":["text","text","text"],"showlegend":false,"name":"Trachy-<br />basalt","marker":{"color":"transparent","line":{"color":"transparent"}},"textfont":{"color":"transparent"},"error_y":{"color":"transparent"},"error_x":{"color":"transparent"},"xaxis":"x","yaxis":"y","frame":null},{"fillcolor":"transparent","x":[52,57,53,49.399999999999999],"y":[5,5.9000000000000004,9.3000000000000007,7.2999999999999998],"type":"scatter","fill":"toself","mode":"lines","line":{"color":"black"},"hoverinfo":["text","text","text","text"],"showlegend":false,"name":"Basaltic<br />trachy-<br />andesite","marker":{"color":"transparent","line":{"color":"transparent"}},"textfont":{"color":"transparent"},"error_y":{"color":"transparent"},"error_x":{"color":"transparent"},"xaxis":"x","yaxis":"y","frame":null},{"fillcolor":"transparent","x":[57,63,57.600000000000001,53],"y":[5.9000000000000004,7,11.699999999999999,9.3000000000000007],"type":"scatter","fill":"toself","mode":"lines","line":{"color":"black"},"hoverinfo":["text","text","text","text"],"showlegend":false,"name":"Trachy-<br />andesite","marker":{"color":"transparent","line":{"color":"transparent"}},"textfont":{"color":"transparent"},"error_y":{"color":"transparent"},"error_x":{"color":"transparent"},"xaxis":"x","yaxis":"y","frame":null},{"fillcolor":"transparent","x":[63,69,69,63.75,57.600000000000001],"y":[7,8,15,15,11.699999999999999],"type":"scatter","fill":"toself","mode":"lines","line":{"color":"black"},"hoverinfo":["text","text","text","text","text"],"showlegend":false,"name":"Trachyte<br />Trachydacite","marker":{"color":"transparent","line":{"color":"transparent"}},"textfont":{"color":"transparent"},"error_y":{"color":"transparent"},"error_x":{"color":"transparent"},"xaxis":"x","yaxis":"y","frame":null},{"fillcolor":"transparent","x":[41,45,45,49.399999999999999,45,41],"y":[3,3,5,7.2999999999999998,9.4000000000000004,7],"type":"scatter","fill":"toself","mode":"lines","line":{"color":"black"},"hoverinfo":["text","text","text","text","text","text"],"showlegend":false,"name":"Tephrite<br />Basanite","marker":{"color":"transparent","line":{"color":"transparent"}},"textfont":{"color":"transparent"},"error_y":{"color":"transparent"},"error_x":{"color":"transparent"},"xaxis":"x","yaxis":"y","frame":null},{"fillcolor":"transparent","x":[49.399999999999999,53,48.399999999999999,45],"y":[7.2999999999999998,9.3000000000000007,11.5,9.4000000000000004],"type":"scatter","fill":"toself","mode":"lines","line":{"color":"black"},"hoverinfo":["text","text","text","text"],"showlegend":false,"name":"Phono-<br />tephrite","marker":{"color":"transparent","line":{"color":"transparent"}},"textfont":{"color":"transparent"},"error_y":{"color":"transparent"},"error_x":{"color":"transparent"},"xaxis":"x","yaxis":"y","frame":null},{"fillcolor":"transparent","x":[53,57.600000000000001,52.5,48.399999999999999],"y":[9.3000000000000007,11.699999999999999,14,11.5],"type":"scatter","fill":"toself","mode":"lines","line":{"color":"black"},"hoverinfo":["text","text","text","text"],"showlegend":false,"name":"Tephri-<br />phonolite","marker":{"color":"transparent","line":{"color":"transparent"}},"textfont":{"color":"transparent"},"error_y":{"color":"transparent"},"error_x":{"color":"transparent"},"xaxis":"x","yaxis":"y","frame":null},{"fillcolor":"transparent","x":[57.600000000000001,63.75,50.350000000000001],"y":[11.699999999999999,15,15],"type":"scatter","fill":"toself","mode":"lines","line":{"color":"black"},"hoverinfo":["text","text","text"],"showlegend":false,"name":"Phonolite","marker":{"color":"transparent","line":{"color":"transparent"}},"textfont":{"color":"transparent"},"error_y":{"color":"transparent"},"error_x":{"color":"transparent"},"xaxis":"x","yaxis":"y","frame":null},{"fillcolor":"transparent","x":[37,41,41,45,48.399999999999999,52.5,50.350000000000001,37],"y":[0,0,7,9.4000000000000004,11.5,14,15,15],"type":"scatter","fill":"toself","mode":"lines","line":{"color":"black"},"hoverinfo":["text","text","text","text","text","text","text","text"],"showlegend":false,"name":"Foidite","marker":{"color":"transparent","line":{"color":"transparent"}},"textfont":{"color":"transparent"},"error_y":{"color":"transparent"},"error_x":{"color":"transparent"},"xaxis":"x","yaxis":"y","frame":null},{"x":[39.200000000000003,40,43.200000000000003,45,48,50,53.700000000000003,55,60,65,77.400000000000006],"y":[0,0.40000000000000002,2,2.7999999999999998,4,4.75,6,6.4000000000000004,8,8.8000000000000007,10],"type":"scatter","mode":"lines","name":"Series","hoverinfo":["none","none","none","none","none","none","none","none","none","none","none"],"line":{"color":"darkred"},"showlegend":false,"marker":{"color":"rgba(140,86,75,1)","line":{"color":"rgba(140,86,75,1)"}},"error_y":{"color":"rgba(140,86,75,1)"},"error_x":{"color":"rgba(140,86,75,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":[43,48.5,54.799999999999997,59.899999999999999,67,75,63.5,57.799999999999997,52.950000000000003,49.200000000000003,45,49.200000000000003,53,57,43],"y":[1.55,2.7999999999999998,3,3,3,8.3000000000000007,11.199999999999999,8.5,7,5.6500000000000004,7,9.3000000000000007,11.5,14,12],"text":["Picrobasalt","Basalt","Basaltic<br />andesite","Andesite","Dacite","Rhyolite","Trachyte<br />Trachydacite","Trachy-<br />andesite","Basaltic<br />trachy-<br />andesite","Trachy-<br />basalt","Tephrite<br />Basanite","Phono-<br />tephrite","Tephri-<br />phonolite","Phonolite","Foidite"],"type":"scatter","mode":"text","name":"Type","hoverinfo":["none","none","none","none","none","none","none","none","none","none","none","none","none","none","none"],"textfont":{"family":"Arial","size":7,"color":"Black"},"showlegend":false,"marker":{"color":"rgba(227,119,194,1)","line":{"color":"rgba(227,119,194,1)"}},"error_y":{"color":"rgba(227,119,194,1)"},"error_x":{"color":"rgba(227,119,194,1)"},"line":{"color":"rgba(227,119,194,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":[58,70],"y":[8,4],"type":"scatter","mode":"markers","name":"My data","marker":{"color":"orange","size":8,"symbol":3,"opacity":0.90000000000000002,"line":{"color":"rgba(127,127,127,1)"}},"error_y":{"color":"rgba(127,127,127,1)"},"error_x":{"color":"rgba(127,127,127,1)"},"line":{"color":"rgba(127,127,127,1)"},"xaxis":"x","yaxis":"y","frame":null}],"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.20000000000000001,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script><p class="caption">
 Dynamic TAS diagram, with user’s data.
 </p>
 </div>
 </div>
-<div id="piper-diagram" class="section level3">
-<h3 class="hasAnchor">
-<a href="#piper-diagram" class="anchor"></a>Piper diagram</h3>
-<p>The Piper diagram is a special case since the data needs pre-processing in order to be plotted on the <code><a href="../reference/piper_diagram.html">piper_diagram()</a></code> function. The following example shows how to do this by using the <code><a href="../reference/piper_data_prep.html">piper_data_prep()</a></code> function. This diagram is only available as static (<strong>ggplot</strong>) object.</p>
+<div class="section level4">
+<h4 id="piper-diagram">Piper diagram<a class="anchor" aria-label="anchor" href="#piper-diagram"></a>
+</h4>
+<p>The Piper diagram is a special case since the data needs
+pre-processing in order to be plotted on the
+<code><a href="../reference/piper_diagram.html">piper_diagram()</a></code> function. The following example shows how
+to do this by using the <code><a href="../reference/piper_data_prep.html">piper_data_prep()</a></code> function. This
+diagram is only available as static (<strong>ggplot</strong>)
+object.</p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">d3</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span>Group <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">'A'</span>,<span class="st">'A'</span>,<span class="st">'B'</span>,<span class="st">'B'</span><span class="op">)</span>,
-                Ca <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">120</span>,<span class="fl">150</span>,<span class="fl">110</span>,<span class="fl">52.6</span><span class="op">)</span>,
-                Mg <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">78</span>,<span class="fl">160</span>,<span class="fl">110</span>,<span class="fl">28</span><span class="op">)</span>,
-                Na <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">210</span>,<span class="fl">590</span>,<span class="fl">340</span>,<span class="fl">51.6</span><span class="op">)</span>,
-                K <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">4.2</span>,<span class="fl">2</span>,<span class="fl">3.6</span>,<span class="fl">2.3</span><span class="op">)</span>,
-                HCO3 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">181</span>,<span class="fl">181</span>,<span class="fl">189</span>,<span class="fl">151</span><span class="op">)</span>,
-                CO3 <span class="op">=</span> <span class="fl">0</span>,
-                Cl <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">220</span>,<span class="fl">744</span>,<span class="fl">476</span>,<span class="fl">72.2</span><span class="op">)</span>,
-                SO4 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">560</span>,<span class="fl">1020</span>,<span class="fl">584</span>,<span class="fl">126</span><span class="op">)</span><span class="op">)</span>
-
-<span class="va">piper_data</span> <span class="op">=</span> <span class="fu"><a href="../reference/piper_data_prep.html">piper_data_prep</a></span><span class="op">(</span><span class="va">d3</span><span class="op">)</span>
-<span class="va">piper_data</span> <span class="op">%&gt;%</span> 
-  <span class="fu">kable</span><span class="op">(</span>caption <span class="op">=</span> <span class="st">'Processed sample data for Piper diagram'</span><span class="op">)</span> <span class="op">%&gt;%</span> 
-  <span class="fu">kable_classic</span><span class="op">(</span><span class="op">)</span></code></pre></div>
-<table class="table  lightable-classic">
+<code class="sourceCode R"><span><span class="va">d3</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span></span>
+<span>  Group <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'A'</span>, <span class="st">'A'</span>, <span class="st">'B'</span>, <span class="st">'B'</span><span class="op">)</span>,</span>
+<span>  Ca <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">120</span>, <span class="fl">150</span>, <span class="fl">110</span>, <span class="fl">52.6</span><span class="op">)</span>,</span>
+<span>  Mg <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">78</span>, <span class="fl">160</span>, <span class="fl">110</span>, <span class="fl">28</span><span class="op">)</span>,</span>
+<span>  Na <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">210</span>, <span class="fl">590</span>, <span class="fl">340</span>, <span class="fl">51.6</span><span class="op">)</span>,</span>
+<span>  K <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">4.2</span>, <span class="fl">2</span>, <span class="fl">3.6</span>, <span class="fl">2.3</span><span class="op">)</span>,</span>
+<span>  HCO3 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">181</span>, <span class="fl">181</span>, <span class="fl">189</span>, <span class="fl">151</span><span class="op">)</span>,</span>
+<span>  CO3 <span class="op">=</span> <span class="fl">0</span>,</span>
+<span>  Cl <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">220</span>, <span class="fl">744</span>, <span class="fl">476</span>, <span class="fl">72.2</span><span class="op">)</span>,</span>
+<span>  SO4 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">560</span>, <span class="fl">1020</span>, <span class="fl">584</span>, <span class="fl">126</span><span class="op">)</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">piper_data</span> <span class="op">=</span> <span class="fu"><a href="../reference/piper_data_prep.html">piper_data_prep</a></span><span class="op">(</span><span class="va">d3</span><span class="op">)</span></span>
+<span><span class="va">piper_data</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu">kable</span><span class="op">(</span>caption <span class="op">=</span> <span class="st">'Processed sample data for Piper diagram'</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu">kable_classic</span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<table class="table  lightable-classic" style='font-family: "Arial Narrow", "Source Sans Pro", sans-serif; margin-left: auto; margin-right: auto;'>
 <caption>
 Processed sample data for Piper diagram
 </caption>
@@ -846,28 +874,38 @@ B
 </tr>
 </tbody>
 </table>
-<p>Once the data is transformed it can be plotted using the <code>x</code> and <code>y</code> values as the coordinates. As with the other diagrams, further customization of the resulting object is posible.</p>
+<p>Once the data is transformed it can be plotted using the
+<code>x</code> and <code>y</code> values as the coordinates. As with the
+other diagrams, further customization of the resulting object is
+posible.</p>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/piper_diagram.html">piper_diagram</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span>
-   <span class="fu"><a href="https://rdrr.io/pkg/ggplot2/man/geom_point.html">geom_point</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/ggplot2/man/aes.html">aes</a></span><span class="op">(</span><span class="va">x</span>,<span class="va">y</span>,col<span class="op">=</span><span class="va">Group</span>,shape<span class="op">=</span><span class="va">Group</span><span class="op">)</span>,
-              size<span class="op">=</span><span class="fl">3</span>,
-              data <span class="op">=</span> <span class="va">piper_data</span><span class="op">)</span> <span class="op">+</span>
-   <span class="fu"><a href="https://rdrr.io/pkg/ggplot2/man/scale_brewer.html">scale_color_brewer</a></span><span class="op">(</span><span class="st">'Group'</span>,palette <span class="op">=</span> <span class="st">'Dark2'</span><span class="op">)</span> <span class="op">+</span>
-   <span class="fu"><a href="https://rdrr.io/pkg/ggplot2/man/scale_manual.html">scale_shape_manual</a></span><span class="op">(</span><span class="st">'Group'</span>,values <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">3</span>,<span class="fl">21</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/piper_diagram.html">piper_diagram</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html" class="external-link">geom_point</a></span><span class="op">(</span></span>
+<span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span>, col <span class="op">=</span> <span class="va">Group</span>, shape <span class="op">=</span> <span class="va">Group</span><span class="op">)</span>,</span>
+<span>    size <span class="op">=</span> <span class="fl">3</span>,</span>
+<span>    data <span class="op">=</span> <span class="va">piper_data</span></span>
+<span>  <span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_brewer.html" class="external-link">scale_color_brewer</a></span><span class="op">(</span><span class="st">'Group'</span>, palette <span class="op">=</span> <span class="st">'Dark2'</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_manual.html" class="external-link">scale_shape_manual</a></span><span class="op">(</span><span class="st">'Group'</span>, values <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">3</span>, <span class="fl">21</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <div class="figure" style="text-align: center">
-<img src="classification_diagrams_vig_files/figure-html/unnamed-chunk-12-1.png" alt="Piper diagram, with user's data." width="80%"><p class="caption">
+<img src="classification_diagrams_vig_files/figure-html/unnamed-chunk-12-1.png" class="r-plt" alt="Piper diagram, with user's data." width="80%"><p class="caption">
 Piper diagram, with user’s data.
 </p>
 </div>
 </div>
 </div>
-<div id="tb-names" class="section level2">
-<h2 class="hasAnchor">
-<a href="#tb-names" class="anchor"></a>Names</h2>
-<p>These are the suggested names that your data should have for you to be able to plot your data in the corresponding diagram, focusing on the ternary diagrams. For the TAS diagram the names of the axes are <code>x</code> and <code>y</code>. Other names can be used but they must be mapped to the corresponding axis.</p>
-<table class="table  lightable-classic">
+<div class="section level3">
+<h3 id="tb-names">Names<a class="anchor" aria-label="anchor" href="#tb-names"></a>
+</h3>
+<p>These are the suggested names that your data should have for you to
+be able to plot your data in the corresponding diagram, focusing on the
+ternary diagrams. For the TAS diagram the names of the axes are
+<code>x</code> and <code>y</code>. Other names can be used but they must
+be mapped to the corresponding axis.</p>
+<table class="table  lightable-classic" style='font-family: "Arial Narrow", "Source Sans Pro", sans-serif; margin-left: auto; margin-right: auto;'>
 <caption>
-Mapping of the data to the respective axis for both outputs, for the ternary diagrams.
+Mapping of the data to the respective axis for both outputs, for the
+ternary diagrams.
 </caption>
 <thead>
 <tr>
@@ -934,7 +972,30 @@ m
 </tr>
 <tr>
 <td style="text-align:left;">
-folk
+feldspars
+</td>
+<td style="text-align:left;">
+Na
+</td>
+<td style="text-align:left;">
+K
+</td>
+<td style="text-align:left;">
+Ca
+</td>
+<td style="text-align:left;">
+~K
+</td>
+<td style="text-align:left;">
+~Na
+</td>
+<td style="text-align:left;">
+~Ca
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+folk_qfl
 </td>
 <td style="text-align:left;">
 f
@@ -957,7 +1018,76 @@ r
 </tr>
 <tr>
 <td style="text-align:left;">
-pyroclastic
+folk_qfm
+</td>
+<td style="text-align:left;">
+f
+</td>
+<td style="text-align:left;">
+q
+</td>
+<td style="text-align:left;">
+m
+</td>
+<td style="text-align:left;">
+~q
+</td>
+<td style="text-align:left;">
+~f
+</td>
+<td style="text-align:left;">
+~m
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+folk_gsm
+</td>
+<td style="text-align:left;">
+g
+</td>
+<td style="text-align:left;">
+s
+</td>
+<td style="text-align:left;">
+s
+</td>
+<td style="text-align:left;">
+~g
+</td>
+<td style="text-align:left;">
+~s
+</td>
+<td style="text-align:left;">
+~m
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+folk_smc
+</td>
+<td style="text-align:left;">
+m
+</td>
+<td style="text-align:left;">
+s
+</td>
+<td style="text-align:left;">
+c
+</td>
+<td style="text-align:left;">
+~s
+</td>
+<td style="text-align:left;">
+~m
+</td>
+<td style="text-align:left;">
+~c
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+pyroclastic_size
 </td>
 <td style="text-align:left;">
 lapilli
@@ -976,6 +1106,29 @@ ash
 </td>
 <td style="text-align:left;">
 ~ash
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+pyroclastic_type
+</td>
+<td style="text-align:left;">
+l
+</td>
+<td style="text-align:left;">
+g
+</td>
+<td style="text-align:left;">
+c
+</td>
+<td style="text-align:left;">
+~l
+</td>
+<td style="text-align:left;">
+~g
+</td>
+<td style="text-align:left;">
+~c
 </td>
 </tr>
 <tr>
@@ -1003,7 +1156,7 @@ opx
 </tr>
 <tr>
 <td style="text-align:left;">
-qap_m
+qap_m_ol
 </td>
 <td style="text-align:left;">
 ol
@@ -1022,6 +1175,29 @@ px
 </td>
 <td style="text-align:left;">
 px
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+qap_m_hbl
+</td>
+<td style="text-align:left;">
+px
+</td>
+<td style="text-align:left;">
+p
+</td>
+<td style="text-align:left;">
+hbl
+</td>
+<td style="text-align:left;">
+~p
+</td>
+<td style="text-align:left;">
+~px
+</td>
+<td style="text-align:left;">
+~hbl
 </td>
 </tr>
 <tr>
@@ -1049,6 +1225,29 @@ cpx
 </tr>
 <tr>
 <td style="text-align:left;">
+qap_um_hbl
+</td>
+<td style="text-align:left;">
+px
+</td>
+<td style="text-align:left;">
+ol
+</td>
+<td style="text-align:left;">
+hbl
+</td>
+<td style="text-align:left;">
+~ol
+</td>
+<td style="text-align:left;">
+~px
+</td>
+<td style="text-align:left;">
+~hbl
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
 qap
 </td>
 <td style="text-align:left;">
@@ -1072,7 +1271,30 @@ p
 </tr>
 <tr>
 <td style="text-align:left;">
-qmflt
+fap
+</td>
+<td style="text-align:left;">
+p
+</td>
+<td style="text-align:left;">
+f
+</td>
+<td style="text-align:left;">
+a
+</td>
+<td style="text-align:left;">
+~f
+</td>
+<td style="text-align:left;">
+~p
+</td>
+<td style="text-align:left;">
+~a
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+dickinson_qmflt
 </td>
 <td style="text-align:left;">
 f
@@ -1095,7 +1317,7 @@ lt
 </tr>
 <tr>
 <td style="text-align:left;">
-qtfl
+dickinson_qtfl
 </td>
 <td style="text-align:left;">
 f
@@ -1139,58 +1361,86 @@ silt
 ~silt
 </td>
 </tr>
+<tr>
+<td style="text-align:left;">
+usda
+</td>
+<td style="text-align:left;">
+sand
+</td>
+<td style="text-align:left;">
+clay
+</td>
+<td style="text-align:left;">
+silt
+</td>
+<td style="text-align:left;">
+~clay
+</td>
+<td style="text-align:left;">
+~sand
+</td>
+<td style="text-align:left;">
+~silt
+</td>
+</tr>
 </tbody>
 </table>
 </div>
-<div id="español-spanish" class="section level2">
-<h2 class="hasAnchor">
-<a href="#espa%C3%B1ol-spanish" class="anchor"></a>Español (Spanish)</h2>
-<p>Todos los diagramas se pueden generar en español, para ello es necesario usar el argumento <code>language</code> y ponerlo igual a <code>'es'</code>, por defecto se despliegan en inglés (<code>'en'</code>). [A spanish version is available for all the diagrams, to display this version the <code>language</code> argument must be set to <code>'es'</code>, by default is set to english (<code>'en'</code>).]</p>
+<div class="section level3">
+<h3 id="español-spanish">Español (Spanish)<a class="anchor" aria-label="anchor" href="#espa%C3%B1ol-spanish"></a>
+</h3>
+<p>Todos los diagramas se pueden generar en español, para ello es
+necesario usar el argumento <code>language</code> y ponerlo igual a
+<code>'es'</code>, por defecto se despliegan en inglés
+(<code>'en'</code>). [A spanish version is available for all the
+diagrams, to display this version the <code>language</code> argument
+must be set to <code>'es'</code>, by default is set to english
+(<code>'en'</code>).]</p>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/ternary_shepard.html">ternary_shepard</a></span><span class="op">(</span>language <span class="op">=</span> <span class="st">'es'</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/ternary_shepard.html">ternary_shepard</a></span><span class="op">(</span>language <span class="op">=</span> <span class="st">'es'</span><span class="op">)</span></span></code></pre></div>
 <div class="figure" style="text-align: center">
-<img src="classification_diagrams_vig_files/figure-html/unnamed-chunk-14-1.png" alt="Diagrama ternario de Shepard para la clasificación de suelos, en español" width="80%"><p class="caption">
+<img src="classification_diagrams_vig_files/figure-html/unnamed-chunk-14-1.png" class="r-plt" alt="Diagrama ternario de Shepard para la clasificación de suelos, en español" width="80%"><p class="caption">
 Diagrama ternario de Shepard para la clasificación de suelos, en español
 </p>
 </div>
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/TAS.html">TAS</a></span><span class="op">(</span>language <span class="op">=</span> <span class="st">'es'</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/TAS.html">TAS</a></span><span class="op">(</span>language <span class="op">=</span> <span class="st">'es'</span><span class="op">)</span></span></code></pre></div>
 <div class="figure" style="text-align: center">
-<img src="classification_diagrams_vig_files/figure-html/unnamed-chunk-15-1.png" alt="Diagrama TAS, en español" width="80%"><p class="caption">
+<img src="classification_diagrams_vig_files/figure-html/unnamed-chunk-15-1.png" class="r-plt" alt="Diagrama TAS, en español" width="80%"><p class="caption">
 Diagrama TAS, en español
 </p>
 </div>
 </div>
 </div>
-<div id="conclusion" class="section level1">
-<h1 class="hasAnchor">
-<a href="#conclusion" class="anchor"></a>Conclusion</h1>
-<p>This is very basic and quick introduction on how to use the functions to plot diagrams used in geosciences. Further customization of the diagramas can be achived by manipulating the <strong>ggplot</strong> or <strong>plotly</strong> objects, specially when adding your own data.</p>
+<div class="section level2">
+<h2 id="conclusion">Conclusion<a class="anchor" aria-label="anchor" href="#conclusion"></a>
+</h2>
+<p>This is very basic and quick introduction on how to use the functions
+to plot diagrams used in geosciences. Further customization of the
+diagramas can be achived by manipulating the <strong>ggplot</strong> or
+<strong>plotly</strong> objects, specially when adding your own
+data.</p>
 </div>
-  </div>
-
-  <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
-
-        <nav id="toc" data-toggle="toc"><h2 data-toc-skip>Contents</h2>
-    </nav>
-</div>
-
+  </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
+    </nav></aside>
 </div>
 
 
 
-      <footer><div class="copyright">
+    <footer><div class="pkgdown-footer-left">
   <p>Developed by Maximiliano Garnier-Villarreal.</p>
 </div>
 
-<div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
+<div class="pkgdown-footer-right">
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.0.</p>
 </div>
 
-      </footer>
+    </footer>
 </div>
 
-  
+
+
 
 
   </body>

@@ -2,11 +2,8 @@ destination: docs
 template:
   bootstrap: 5
   bootswatch: sandstone
-template:
-  light-switch: true
-  theme: gruvbox-light
-  theme-dark: gruvbox-dark
-url: https://maxgav13.github.io/GMisc/
-template:
+  theme: pygments
+  opengraph:
     twitter:
       creator: "@maxgarnier13"
+url: https://maxgav13.github.io/GMisc/

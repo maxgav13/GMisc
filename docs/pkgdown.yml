@@ -1,11 +1,14 @@
-pandoc: 2.14.0.3
-pkgdown: 1.6.1
+pandoc: 3.8.3
+pkgdown: 2.2.0
 pkgdown_sha: ~
 articles:
   basic_stats_vig: basic_stats_vig.html
   classification_diagrams_vig: classification_diagrams_vig.html
   directional_stats_vig: directional_stats_vig.html
+  non_linear_self_starters_vig: non_linear_self_starters_vig.html
   rock_mechanics_vig: rock_mechanics_vig.html
   soil_mechanics_vig: soil_mechanics_vig.html
-last_built: 2022-06-02T16:28Z
-
+last_built: 2026-05-19T21:24Z
+urls:
+  reference: https://maxgav13.github.io/GMisc/reference
+  article: https://maxgav13.github.io/GMisc/articles

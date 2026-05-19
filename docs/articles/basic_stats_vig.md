@@ -1,0 +1,172 @@
+# Basic statistics
+
+This document highlights some functions of the `GMisc` package related
+to classical statistics, focusing on summarized data rather than
+vectors.
+
+## Confidence intervals
+
+There are a few functions that can compute confidence intervals based on
+vectors or tables (a full sample), but sometimes all you get are the
+point estimates and corresponding sample information. Even though the
+formulas are straight forward to implement, these have been programmed
+here for easiness.
+
+The cases shown here are:
+
+- For the mean:
+  - One-sample Z-test
+  - Two-sample Z-test
+  - One-sample t-test
+  - Two-sample t-test
+- For the variance (standard deviation):
+  - One-sample ($`\chi^2`$-test)
+  - Two-sample (F-test, ratio of variances)
+
+For the variance cases the functions also report the confidence interval
+for the standard deviation.
+
+### One-sample Z-test
+
+This has the form:
+
+``` math
+\bar{x} \pm z_{\alpha/2} \frac{\sigma}{\sqrt{n}}
+```
+
+The function for computing it is `ci_z`, with arguments `x` for the
+sample mean, `sig` for the population standard deviation, `n` for the
+sample size, and `conf.level` for the desired confidence level:
+
+``` r
+
+ci_z(x = 80, sig = 15, n = 20, conf.level = 0.95)
+```
+
+    ## # A tibble: 1 × 3
+    ##    mean lower upper
+    ##   <dbl> <dbl> <dbl>
+    ## 1    80  73.4  86.6
+
+### Two-sample Z-test
+
+This has the form:
+
+``` math
+\left(\bar{x}_1-\bar{x}_2\right) \pm z_{\alpha/2} {\sqrt{\frac{\sigma^2_1}{n_1} + \frac{\sigma^2_2}{n_2}}}
+```
+
+The function for computing it is `ci_z2`, with arguments `x1` for the
+mean of sample 1, `sig1` for the population 1 standard deviation, `n1`
+for the sample size of 1, `x2` for the mean of sample 2, `sig2` for the
+population 2 standard deviation, `n2` for the sample size of 2, and
+`conf.level` for the desired confidence level:
+
+``` r
+
+ci_z2(x1 = 42, sig1 = 8, n1 = 75, x2 = 36, sig2 = 6, n2 = 50, conf.level = 0.95)
+```
+
+    ## # A tibble: 1 × 3
+    ##   mean_diff lower upper
+    ##       <dbl> <dbl> <dbl>
+    ## 1         6  3.54  8.46
+
+### One-sample t-test
+
+This has the form:
+
+``` math
+\bar{x} \pm t_{\alpha/2,v} \frac{s}{\sqrt{n}}
+```
+
+The function for computing it is `ci_t`, with arguments `x` for the
+sample mean, `s` for the sample standard deviation, `n` for the sample
+size, and `conf.level` for the desired confidence level:
+
+``` r
+
+ci_t(x = 80, s = 15, n = 20, conf.level = 0.95)
+```
+
+    ## # A tibble: 1 × 4
+    ##    mean    df lower upper
+    ##   <dbl> <dbl> <dbl> <dbl>
+    ## 1    80    19  73.0  87.0
+
+### Two-sample t-test
+
+This has the general form:
+
+``` math
+\left(\bar{x}_1-\bar{x}_2\right) \pm t_{\alpha/2,v} {\sqrt{\frac{s^2_1}{n_1} + \frac{s^2_2}{n_2}}}
+```
+
+The function for computing it is `ci_t2`, with arguments `x1` for the
+mean of sample 1, `s1` for the sample 1 standard deviation, `n1` for the
+sample size of 1, `x2` for the mean of sample 2, `s2` for the sample 2
+standard deviation, `n2` for the sample size of 2, and `conf.level` for
+the desired confidence level:
+
+``` r
+
+ci_t2(x1 = 42, s1 = 8, n1 = 75, x2 = 36, s2 = 6, n2 = 50, conf.level = 0.95)
+```
+
+    ## # A tibble: 1 × 4
+    ##   mean_diff    df lower upper
+    ##       <dbl> <dbl> <dbl> <dbl>
+    ## 1         6  121.  3.52  8.48
+
+### One-sample $`\chi^2`$-test
+
+This has the form:
+
+``` math
+\frac{(n-1)s^2}{\chi^2_{\alpha/2,v}} < \sigma^2 < \frac{(n-1)s^2}{\chi^2_{1-\alpha/2,v}}
+```
+
+The function for computing it is `ci_chisq`, with arguments `s` for the
+sample standard deviation, `n` for the sample size, and `conf.level` for
+the desired confidence level:
+
+``` r
+
+ci_chisq(s = 0.535, n = 10, conf.level = 0.95)
+```
+
+    ## # A tibble: 2 × 5
+    ##   stat  value    df lower upper
+    ##   <chr> <dbl> <dbl> <dbl> <dbl>
+    ## 1 sd     0.54     9  0.37  0.98
+    ## 2 var    0.29     9  0.14  0.95
+
+### Two-sample F-test (Ratio of variances)
+
+This has the form:
+
+``` math
+\frac{s^2_1}{s^2_2} \frac{1}{F_{\alpha/2(v_1,v_2)}} < \frac{\sigma^2_1}{\sigma^2_2} < \frac{s^2_1}{s^2_2} F_{\alpha/2(v_2,v_1)}
+```
+
+The function for computing it is `ci_F`, with arguments `s1` for the
+sample 1 standard deviation, `n1` for the sample size of 1, `s2` for the
+sample 2 standard deviation, `n2` for the sample size of 2, and
+`conf.level` for the desired confidence level:
+
+``` r
+
+ci_F(s1 = 3.1, n1 = 15, s2 = 0.8, n2 = 12, conf.level = 0.95)
+```
+
+    ## # A tibble: 2 × 6
+    ##   stat  ratio   df1   df2 lower upper
+    ##   <chr> <dbl> <dbl> <dbl> <dbl> <dbl>
+    ## 1 sd     3.88    14    11  2.11  6.82
+    ## 2 var   15.0     14    11  4.47 46.5
+
+## P-values
+
+There are homologous functions for calculating p-values, with the same
+arguments but adding either the population mean or population standard
+deviation for the respective cases.
