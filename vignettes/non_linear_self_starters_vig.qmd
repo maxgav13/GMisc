@@ -1,0 +1,234 @@
+---
+title: "Non-linear and self-starting functions"
+author: "Maximiliano Garnier-Villarreal"
+date: "`r Sys.Date()`"
+format: 
+  html:
+    toc: true
+    syntax-highlighting: pygments
+    # number-sections: true
+    # theme: cosmo
+vignette: >
+  %\VignetteIndexEntry{Non-linear and self-starting functions}
+  %\VignetteEngine{quarto::html}
+  %\VignetteEncoding{UTF-8}
+knitr:
+  opts_chunk:
+    collapse: true
+    comment: '#>'
+---
+
+```{r}
+#| label: setup
+library(GMisc)
+library(drc)
+library(ggplot2)
+```
+
+## Introduction
+
+The `GMisc` package provides a collection of non-linear model functions together
+with self-starting routines for both `nls()` (base R) and `drc::drm()`. Self-
+starters automatically derive sensible initial parameter values from the data,
+removing the need to supply starting values manually and reducing the risk of
+convergence failures.
+
+Each model is available in three forms:
+
+- **`*.fun()`** — the bare mathematical function.
+- **`SS*()`** — a `selfStart` object for use with `nls()`.
+- **`DRC*()`** — a `drcMean` object for use with `drc::drm()`.
+
+---
+
+## Available models
+
+| Model | Equation | Parameters | `nls` self-starter | `drc` self-starter |
+|---|---|---|---|---|
+| Chapman-Richards | $y = a(1 - e^{-bx})^c$ | $a$, $b$, $c$ | `SSchaprich()` | `DRCchaprich()` |
+| Exp. with inverse predictor (Type 3) | $y = a e^{b/x}$ | $a$, $b$ | `SSexp3()` | `DRCexp3()` |
+| Negative exponential | $y = a + b e^{cx}$ | $a$, $b$, $c$ | `SSexpneg()` | `DRCexpneg()` |
+| Two-asymptote exponential | $y = a e^{cx} + b(1 - e^{cx})$ | $a$, $b$, $c$ | `SSexpneg2()` | `DRCexpneg2()` |
+| Exponential variogram | $y = \text{nug} + \text{psill}(1 - e^{-x/\text{range}})$ | nug, psill, range | `SSvarexp()` | `DRCvarexp()` |
+| Gaussian variogram | $y = \text{nug} + \text{psill}(1 - e^{-(x/\text{range})^2})$ | nug, psill, range | `SSvargauss()` | `DRCvargauss()` |
+| Spherical variogram | $y = \text{nug} + \text{psill}\left(\frac{3}{2}\frac{x}{r} - \frac{1}{2}\left(\frac{x}{r}\right)^3\right),\; x \le r$ | nug, psill, range | `SSvarsph()` | `DRCvarsph()` |
+| Inverse polynomial (1st order) | $y = \dfrac{x}{a + bx}$ | $a$, $b$ | `SSinvpoly1()` | `DRCinvpoly1()` |
+| Inverse polynomial (2nd order) | $y = \dfrac{x}{a + bx + cx^2}$ | $a$, $b$, $c$ | `SSinvpoly2()` | `DRCinvpoly2()` |
+| Inverse polynomial (3rd order) | $y = \dfrac{x}{a + bx + cx^2 + dx^3}$ | $a$, $b$, $c$, $d$ | `SSinvpoly3()` | `DRCinvpoly3()` |
+| Modified Kostiakov | $y = \alpha x^{\beta} + f_c$ | $\alpha$, $\beta$, $f_c$ | `SSkostmod()` | `DRCkostmod()` |
+
+---
+
+## Examples
+
+### 1. Chapman-Richards growth model
+
+The Chapman-Richards model describes sigmoidal growth towards an upper
+asymptote $a$:
+
+$$y = a \left(1 - e^{-bx}\right)^c$$
+
+```{r}
+#| label: chaprich-data
+set.seed(42)
+x <- seq(0, 10, length.out = 60)
+y <- chaprich.fun(x, a = 10, b = 0.5, c = 2) + rnorm(60, sd = 0.25)
+df <- data.frame(x = x, y = y)
+```
+
+**Fit with `nls()`**
+
+```{r}
+#| label: chaprich-nls
+mod_nls <- nls(y ~ SSchaprich(x, a, b, c), data = df)
+summary(mod_nls)
+```
+
+**Fit with `drc::drm()`**
+
+```{r}
+#| label: chaprich-drc
+mod_drc <- drm(y ~ x, data = df, fct = DRCchaprich())
+summary(mod_drc)
+```
+
+**Plot**
+
+```{r}
+#| label: chaprich-plot
+df$fit_nls <- predict(mod_nls)
+df$fit_drc <- predict(mod_drc)
+
+ggplot(df, aes(x, y)) +
+  geom_point(alpha = 0.6) +
+  geom_line(aes(y = fit_nls, colour = "nls"), linewidth = 1) +
+  geom_line(
+    aes(y = fit_drc, colour = "drc"),
+    linewidth = 1,
+    linetype = "dashed"
+  ) +
+  scale_colour_manual(values = c(nls = "steelblue", drc = "tomato")) +
+  labs(
+    title = "Chapman-Richards growth model",
+    x = "x",
+    y = "y",
+    colour = "Fit"
+  ) +
+  theme_minimal()
+```
+
+---
+
+### 2. Exponential variogram model
+
+The exponential variogram is widely used in geostatistics to model spatial
+autocorrelation. It approaches the sill asymptotically:
+
+$$\gamma(x) = \text{nug} + \text{psill}\left(1 - e^{-x / \text{range}}\right)$$
+
+```{r}
+#| label: varexp-data
+set.seed(7)
+x <- seq(0, 100, length.out = 60)
+y <- varexp.fun(x, nug = 0.1, psill = 0.9, range = 20) + rnorm(60, sd = 0.03)
+df2 <- data.frame(x = x, y = y)
+```
+
+**Fit with `nls()`**
+
+```{r}
+#| label: varexp-nls
+mod_nls2 <- nls(y ~ SSvarexp(x, nug, psill, range), data = df2)
+summary(mod_nls2)
+```
+
+**Fit with `drc::drm()`**
+
+```{r}
+#| label: varexp-drc
+mod_drc2 <- drm(y ~ x, data = df2, fct = DRCvarexp())
+summary(mod_drc2)
+```
+
+**Plot**
+
+```{r}
+#| label: varexp-plot
+df2$fit_nls <- predict(mod_nls2)
+df2$fit_drc <- predict(mod_drc2)
+
+ggplot(df2, aes(x, y)) +
+  geom_point(alpha = 0.6) +
+  geom_line(aes(y = fit_nls, colour = "nls"), linewidth = 1) +
+  geom_line(
+    aes(y = fit_drc, colour = "drc"),
+    linewidth = 1,
+    linetype = "dashed"
+  ) +
+  scale_colour_manual(values = c(nls = "steelblue", drc = "tomato")) +
+  labs(
+    title = "Exponential variogram model",
+    x = "Lag distance",
+    y = "Semivariance",
+    colour = "Fit"
+  ) +
+  theme_minimal()
+```
+
+---
+
+### 3. Modified Kostiakov infiltration model
+
+The Modified Kostiakov model describes infiltration rate as a power-law decay
+with an additive constant representing the steady-state rate $f_c$:
+
+$$y = \alpha\, x^{\beta} + f_c$$
+
+```{r}
+#| label: kostmod-data
+set.seed(99)
+x <- seq(0.5, 40, length.out = 60)
+y <- kostmod.fun(x, alfa = 0.5, beta = -0.6, fc = 0.05) + rnorm(60, sd = 0.02)
+df3 <- data.frame(x = x, y = y)
+```
+
+**Fit with `nls()`**
+
+```{r}
+#| label: kostmod-nls
+mod_nls3 <- nls(y ~ SSkostmod(x, alfa, beta, fc), data = df3)
+summary(mod_nls3)
+```
+
+**Fit with `drc::drm()`**
+
+```{r}
+#| label: kostmod-drc
+mod_drc3 <- drm(y ~ x, data = df3, fct = DRCkostmod())
+summary(mod_drc3)
+```
+
+**Plot**
+
+```{r}
+#| label: kostmod-plot
+df3$fit_nls <- predict(mod_nls3)
+df3$fit_drc <- predict(mod_drc3)
+
+ggplot(df3, aes(x, y)) +
+  geom_point(alpha = 0.6) +
+  geom_line(aes(y = fit_nls, colour = "nls"), linewidth = 1) +
+  geom_line(
+    aes(y = fit_drc, colour = "drc"),
+    linewidth = 1,
+    linetype = "dashed"
+  ) +
+  scale_colour_manual(values = c(nls = "steelblue", drc = "tomato")) +
+  labs(
+    title = "Modified Kostiakov infiltration model",
+    x = "Time",
+    y = "Infiltration rate",
+    colour = "Fit"
+  ) +
+  theme_minimal()
+```

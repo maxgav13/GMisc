@@ -28,29 +28,33 @@ knitr::opts_chunk$set(
 )
 ```
 
-# Diagrams
+# Introduction
 
-This document shows how to display and use different classification diagrams that are used frequently in geosciences (for more info on each one you can click the function name to go to the help page) these are (diagram - function):
+This document shows how to display and use different classification diagrams, available in the `GMisc` package, that are used frequently in geosciences (for more info on each one you can click the function name to go to the help page) these are (diagram - function):
 
--   QAP - `ternary_qap()`
+-   QAPF - `ternary_qap()` and `ternary_fap()`
 
 -   QAP for gabbros - `ternary_qap_g()`
 
--   QAP for mafic rocks - `ternary_qap_m()`
+-   QAP for mafic rocks - `ternary_qap_m_ol()` and `ternary_qap_m_hbl()`
 
--   QAP for ultramafic rocks - `ternary_qap_um()`
+-   QAP for ultramafic rocks - `ternary_qap_um()` and `ternary_qap_um_hbl()`
 
--   QtFL for provenance - `ternary_qtfl()`
+-   Feldspar classification - `ternary_feldspar()`
 
--   QmFLt for provenance - `ternary_qmflt()`
+-   For provenance - `ternary_dickinson_qtfl()` and `ternary_dickinson_qmflt()`
 
 -   AFM - `ternary_afm()`
 
--   Pyroclastic rocks - `ternary_pyroclastic()`
+-   Pyroclastic rocks by size - `ternary_pyroclastic_size()` and type - `ternary_pyroclastic_type()`
 
--   Folk for sandstone classification - `ternary_folk()`
+-   Folk for sandstone classification - `ternary_folk_qfl()`
 
--   Shepard for soil classification - `ternary_shepard()`
+-   Folk for sedimentary rock classification - `ternary_folk_qfm()`
+
+-   Folk for clastic rocks - `ternary_folk_gsm()` and `ternary_folk_smc()`
+
+-   For soil classification - `ternary_shepard()` and `ternary_usda()`
 
 -   Total Alkali Silica (TAS) - `TAS()`
 
@@ -64,8 +68,7 @@ A simple static diagram without data can be obtained by just calling the respect
 
 ```{r}
 #| fig.cap: Static Folk ternary diagram for sandstones
-
-ternary_folk()
+ternary_folk_qfl()
 ```
 
 ## Dynamic
@@ -74,13 +77,11 @@ To obtain a dynamic diagram the `output` argument must be set to `'plotly'`, res
 
 ```{r}
 #| fig.cap: Dynamic QAP ternary diagram for mafic rocks
-
-ternary_qap_m(output = 'plotly')
+ternary_qap_m_ol(output = 'plotly')
 ```
 
 ```{r}
 #| fig.cap: Dynamic TAS diagram
-
 TAS(output = 'plotly')
 ```
 
@@ -95,26 +96,27 @@ Adding some data is demostrated here by ploting two points on the QtFL and TAS d
 In the data for the ternary diagram (`d`) the first sample (point) adds-up to a 100 but the second one does not, showing the point made above.
 
 ```{r}
-d = data.frame(sample=c('a','b'),
-               qt=c(40,30),
-               f=c(40,20),
-               l=c(20,10))
+d = data.frame(
+  sample = c('a', 'b'),
+  qt = c(40, 30),
+  f = c(40, 20),
+  l = c(20, 10)
+)
 
-d2 = data.frame(silica=c(58,70), 
-                alkali=c(8,4))
+d2 = data.frame(silica = c(58, 70), alkali = c(8, 4))
 ```
 
 ```{r}
 #| echo: false
-d %>% 
-  kable(caption = 'Samples for QtFL diagram') %>% 
+d %>%
+  kable(caption = 'Samples for QtFL diagram') %>%
   kable_classic()
 ```
 
 ```{r}
 #| echo: false
-d2 %>% 
-  kable(caption = 'Samples for TAS diagram') %>% 
+d2 %>%
+  kable(caption = 'Samples for TAS diagram') %>%
   kable_classic()
 ```
 
@@ -124,25 +126,21 @@ For the **ggplot** object, data can be added using the function `geom_point`, wh
 
 ```{r}
 #| fig.cap: Static QtFL ternary diagram for provenance, with user's data.
-
-ternary_qtfl() + 
-  geom_point(data = d,
-             color = 'coral',
-             size = 3,
-             shape = 3,
-             alpha = .7)
+ternary_dickinson_qtfl() +
+  geom_point(data = d, color = 'coral', size = 3, shape = 3, alpha = .7)
 ```
 
 ```{r}
 #| fig.cap: Static TAS diagram, with user's data.
-
-TAS() + 
-  geom_point(aes(x=silica, y=alkali),
-             data = d2,
-             color = 'coral',
-             size = 3,
-             shape = 3,
-             alpha = .7)
+TAS() +
+  geom_point(
+    aes(x = silica, y = alkali),
+    data = d2,
+    color = 'coral',
+    size = 3,
+    shape = 3,
+    alpha = .7
+  )
 ```
 
 ### Dynamic
@@ -153,32 +151,32 @@ For the ternary diagrams, data can be added using the function `add_trace`, wher
 
 ```{r}
 #| fig.cap: Dynamic QtFL ternary diagram for provenance, with user's data.
-
-ternary_qtfl(output = 'plotly') %>% 
-  add_trace(a = ~qt, b = ~f, c = ~l,
-            data = d,
-            name = 'My data',
-            type = "scatterternary",
-            mode = "markers",
-            marker = list(size = 8,
-                          color = 'green',
-                          symbol = 4,
-                          opacity = .7),
-            hovertemplate = paste0('Qt: %{a}<br>',
-                                   'F: %{b}<br>',
-                                   'L: %{c}'))
+ternary_dickinson_qtfl(output = 'plotly') %>%
+  add_trace(
+    a = ~qt,
+    b = ~f,
+    c = ~l,
+    data = d,
+    name = 'My data',
+    type = "scatterternary",
+    mode = "markers",
+    marker = list(size = 8, color = 'green', symbol = 4, opacity = .7),
+    hovertemplate = paste0('Qt: %{a}<br>', 'F: %{b}<br>', 'L: %{c}')
+  )
 ```
 
 For the bivariate diagrams, data can be added using the function `add_markers`, where the arguments `data`, `x`, and `y` are required, the rest can be changed. The `name` is what gets displayed in the legend, and the `marker` defines the appearance. The `layout(showlegend = TRUE)` forces the legend to show up.
 
 ```{r}
 #| fig.cap: Dynamic TAS diagram, with user's data.
-
 TAS('plotly') %>%
-  add_markers(x = ~silica, y = ~alkali,
-              data = d2,
-              name = "My data",
-              marker = list(size=8,color='orange',symbol=3,opacity=.9)) %>%
+  add_markers(
+    x = ~silica,
+    y = ~alkali,
+    data = d2,
+    name = "My data",
+    marker = list(size = 8, color = 'orange', symbol = 3, opacity = .9)
+  ) %>%
   layout(showlegend = TRUE)
 ```
 
@@ -187,19 +185,21 @@ TAS('plotly') %>%
 The Piper diagram is a special case since the data needs pre-processing in order to be plotted on the `piper_diagram()` function. The following example shows how to do this by using the `piper_data_prep()` function. This diagram is only available as static (**ggplot**) object.
 
 ```{r}
-d3 = data.frame(Group = c('A','A','B','B'),
-                Ca = c(120,150,110,52.6),
-                Mg = c(78,160,110,28),
-                Na = c(210,590,340,51.6),
-                K = c(4.2,2,3.6,2.3),
-                HCO3 = c(181,181,189,151),
-                CO3 = 0,
-                Cl = c(220,744,476,72.2),
-                SO4 = c(560,1020,584,126))
+d3 = data.frame(
+  Group = c('A', 'A', 'B', 'B'),
+  Ca = c(120, 150, 110, 52.6),
+  Mg = c(78, 160, 110, 28),
+  Na = c(210, 590, 340, 51.6),
+  K = c(4.2, 2, 3.6, 2.3),
+  HCO3 = c(181, 181, 189, 151),
+  CO3 = 0,
+  Cl = c(220, 744, 476, 72.2),
+  SO4 = c(560, 1020, 584, 126)
+)
 
 piper_data = piper_data_prep(d3)
-piper_data %>% 
-  kable(caption = 'Processed sample data for Piper diagram') %>% 
+piper_data %>%
+  kable(caption = 'Processed sample data for Piper diagram') %>%
   kable_classic()
 ```
 
@@ -207,13 +207,14 @@ Once the data is transformed it can be plotted using the `x` and `y` values as t
 
 ```{r}
 #| fig.cap: Piper diagram, with user's data.
-
 piper_diagram() +
-   geom_point(aes(x,y,col=Group,shape=Group),
-              size=3,
-              data = piper_data) +
-   scale_color_brewer('Group',palette = 'Dark2') +
-   scale_shape_manual('Group',values = c(3,21))
+  geom_point(
+    aes(x, y, col = Group, shape = Group),
+    size = 3,
+    data = piper_data
+  ) +
+  scale_color_brewer('Group', palette = 'Dark2') +
+  scale_shape_manual('Group', values = c(3, 21))
 ```
 
 ## Names {#tb-names}
@@ -222,20 +223,161 @@ These are the suggested names that your data should have for you to be able to p
 
 ```{r}
 #| echo: false
-
 diagrams.tern = data.frame(
-    diagram = c('afm','folk','pyroclastic','qap_g','qap_m','qap_um','qap','qmflt','qtfl','shepard'),
-    x = c('a','f','lapilli','cpx','ol','opx','a','f','f','sand'),
-    y = c('f','q','bb','p','p','ol','q','qm','qt','clay'),
-    z = c('m','r','ash','opx','px','cpx','p','lt','l','silt'),
-    a = c('~f','~q','~bb','~p','~p','~ol','~q','~qm','~qt','~clay'),
-    b = c('~a','~f','~lapilli','~cpx','~ol','~opx','~a','~f','~f','~sand'),
-    c = c('~m','~r','~ash','~opx','px','~cpx','~p','~lt','~l','~silt')
+  diagram = c(
+    'afm',
+    'feldspars',
+    'folk_qfl',
+    'folk_qfm',
+    'folk_gsm',
+    'folk_smc',
+    'pyroclastic_size',
+    'pyroclastic_type',
+    'qap_g',
+    'qap_m_ol',
+    'qap_m_hbl',
+    'qap_um',
+    'qap_um_hbl',
+    'qap',
+    'fap',
+    'dickinson_qmflt',
+    'dickinson_qtfl',
+    'shepard',
+    'usda'
+  ),
+  x = c(
+    'a',
+    'Na',
+    'f',
+    'f',
+    'g',
+    'm',
+    'lapilli',
+    'l',
+    'cpx',
+    'ol',
+    'px',
+    'opx',
+    'px',
+    'a',
+    'p',
+    'f',
+    'f',
+    'sand',
+    'sand'
+  ),
+  y = c(
+    'f',
+    'K',
+    'q',
+    'q',
+    's',
+    's',
+    'bb',
+    'g',
+    'p',
+    'p',
+    'p',
+    'ol',
+    'ol',
+    'q',
+    'f',
+    'qm',
+    'qt',
+    'clay',
+    'clay'
+  ),
+  z = c(
+    'm',
+    'Ca',
+    'r',
+    'm',
+    's',
+    'c',
+    'ash',
+    'c',
+    'opx',
+    'px',
+    'hbl',
+    'cpx',
+    'hbl',
+    'p',
+    'a',
+    'lt',
+    'l',
+    'silt',
+    'silt'
+  ),
+  a = c(
+    '~f',
+    '~K',
+    '~q',
+    '~q',
+    '~g',
+    '~s',
+    '~bb',
+    '~l',
+    '~p',
+    '~p',
+    '~p',
+    '~ol',
+    '~ol',
+    '~q',
+    '~f',
+    '~qm',
+    '~qt',
+    '~clay',
+    '~clay'
+  ),
+  b = c(
+    '~a',
+    '~Na',
+    '~f',
+    '~f',
+    '~s',
+    '~m',
+    '~lapilli',
+    '~g',
+    '~cpx',
+    '~ol',
+    '~px',
+    '~opx',
+    '~px',
+    '~a',
+    '~p',
+    '~f',
+    '~f',
+    '~sand',
+    '~sand'
+  ),
+  c = c(
+    '~m',
+    '~Ca',
+    '~r',
+    '~m',
+    '~m',
+    '~c',
+    '~ash',
+    '~c',
+    '~opx',
+    'px',
+    '~hbl',
+    '~cpx',
+    '~hbl',
+    '~p',
+    '~a',
+    '~lt',
+    '~l',
+    '~silt',
+    '~silt'
+  )
 )
 
-diagrams.tern %>% 
-  kable(caption = 'Mapping of the data to the respective axis for both outputs, for the ternary diagrams.') %>% 
-  add_header_above(c('','ggplot'=3,'plotly'=3)) %>% 
+diagrams.tern %>%
+  kable(
+    caption = 'Mapping of the data to the respective axis for both outputs, for the ternary diagrams.'
+  ) %>%
+  add_header_above(c('', 'ggplot' = 3, 'plotly' = 3)) %>%
   kable_classic()
 ```
 
@@ -245,13 +387,11 @@ Todos los diagramas se pueden generar en español, para ello es necesario usar e
 
 ```{r}
 #| fig.cap: Diagrama ternario de Shepard para la clasificación de suelos, en español
-
 ternary_shepard(language = 'es')
 ```
 
 ```{r}
 #| fig.cap: Diagrama TAS, en español
-
 TAS(language = 'es')
 ```
 

@@ -30,7 +30,7 @@ knitr::opts_chunk$set(
 )
 ```
 
-This document highlights some functions of the GMisc package related to rock mechanics problems.
+This document highlights some functions of the `GMisc` package related to rock mechanics problems.
 
 # Uniaxial Compressive Strength (UCS)
 
@@ -41,9 +41,9 @@ The function `UCS` of the package performs the conventional analysis through a c
 The arguments for `UCS` are `W` for the widths in millimeters, `D` for the diameter in millimeters, and `P` for the failure load. Also a vertical dashed line is shown at the 50 mm diameter, as this is the reference diameter.
 
 ```{r warning=FALSE, message=FALSE}
-W = c(70.0,95.0,80.0,90.0,98.0,110.0,100.0,100.0,110.0)
-D = c(40,55,60,50,25,60,40,70,50)
-P = c(4.3,3.4,4.5,3.1,5.0,6.4,2.6,11,4.1)
+W = c(70.0, 95.0, 80.0, 90.0, 98.0, 110.0, 100.0, 100.0, 110.0)
+D = c(40, 55, 60, 50, 25, 60, 40, 70, 50)
+P = c(4.3, 3.4, 4.5, 3.1, 5.0, 6.4, 2.6, 11, 4.1)
 UCS(W = W, D = D, P = P)
 ```
 
@@ -80,22 +80,28 @@ To use this criterion there are two functions `Hoek_Brown` and `Hoek_Brown_plot`
 Some of these inputs can be obtained from the following tables, where in most cases are rock type dependent.
 
 ```{r echo=FALSE}
-DT::datatable(HB_sig_ci,
-              rownames=FALSE, options = list(dom='t'),
-              caption="Table 1: Intact Uniaxial Compressive Strength"
-              )
+DT::datatable(
+  HB_sig_ci,
+  rownames = FALSE,
+  options = list(dom = 't'),
+  caption = "Table 1: Intact Uniaxial Compressive Strength"
+)
 
-DT::datatable(HB_mi_MR,
-              rownames=FALSE, filter="top",
-              caption="Table 2: mi & MR values for different rocks",
-              colnames = c('Modulus Ratio (MR)' = 'MR')
-      )
+DT::datatable(
+  HB_mi_MR,
+  rownames = FALSE,
+  filter = "top",
+  caption = "Table 2: mi & MR values for different rocks",
+  colnames = c('Modulus Ratio (MR)' = 'MR')
+)
 
-DT::datatable(HB_D,
-              rownames=FALSE, options = list(dom='t'),
-              caption="Table 3: Disturbance Factor",
-              colnames = c('Use' = 'Application')
-      )
+DT::datatable(
+  HB_D,
+  rownames = FALSE,
+  options = list(dom = 't'),
+  caption = "Table 3: Disturbance Factor",
+  colnames = c('Use' = 'Application')
+)
 ```
 
 
@@ -108,8 +114,8 @@ D = 0
 height = 40
 unit.weight = 18.6
 HB = Hoek_Brown(sig.ci, GSI, mi, MR, D, height, unit.weight)
-HB %>% 
-  purrr::pluck('Results') %>% 
+HB %>%
+  purrr::pluck('Results') %>%
   as.data.frame()
 ```
 
