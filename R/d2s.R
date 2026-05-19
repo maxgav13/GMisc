@@ -3,6 +3,7 @@
 #' @param x A vector of directions in degrees
 #' @export
 #' @return A vector or directions
+#' @family directional analysis
 #' @examples
 #' x <- runif(min = 30, max = 80, n = 20)
 #' strike <- d2s(x)

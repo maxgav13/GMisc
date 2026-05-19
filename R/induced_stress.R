@@ -5,11 +5,15 @@
 #' @param L The footing's length for a rectangular footing (in meters)
 #' @param z.end The depth to which calculate the stresses (in meters)
 #' @param footing Type of footing for which to calculate the stresses (Default is "strip")
+#' @param rect.pos For rectangular or square footings, whether the stress is calculated at the center of the footing (Default is "center") or at the corner of the footing (i.e., at the edge of the footing) (rect.pos = "corner")
 #' @export
-#' @return A stress distribution plot for the desired footing
+#' @return A list with three elements: \code{Profile} is a tibble with the stress distribution, \code{Plot} is a ggplot object with the stress distribution, and \code{Plotly} is an interactive plotly object with the stress distribution.
 #' @import ggplot2
 #' @references Holtz, R. D., Kovacs, W. D. & Sheahan, T. C. (2011). An Introduction to Geotechnical Engineering. Prentice Hall.
+#' @references Budhu, M. (2011). Soil mechanics and foundations (3rd ed). Wiley.
+#' @references Das, B. M., & Sobhan, K. (2018). Principles of geotechnical engineering (Ninth edition). Cengage Learning.
 #' @details The stresses are calculated using the solutions from Boussinesq. The parameter \code{L} only applies for rectangular footings, otherwise is not considered, thus the default value of \code{NULL}. For rectangular footings the length (\code{L}) can be varied, while for the other footing shapes the width \code{B} can be varied. For circular footings the width is equal to the radius (\code{B=R})
+#' @family soil mechanics
 #' @examples
 #' # Singular value of B for a strip footing
 #' qs = 1
@@ -26,86 +30,283 @@
 #' # Different values of L for a rectangular footing
 #' qs = 1
 #' B = 1
-#' L = c(1, 2, 4)
+#' L = c(2, 3, 4)
 #' z.end = 8
-#' induced_stress(qs, B, L, z.end, footing = "rectangular")
+#' res = induced_stress(qs, B, L, z.end, footing = "rectangular")
+#' res$Profile |> dplyr::filter(z==4)
+#' res$Plot
 #'
-induced_stress = function(qs, B, L = NULL, z.end, footing = c("strip", "square", "rectangular", "circular")) {
-  z = seq(0.01, z.end, .01)
+induced_stress = function(
+  qs,
+  B,
+  L = NULL,
+  z.end,
+  footing = c("strip", "square", "rectangular", "circular"),
+  rect.pos = c("center", "corner")
+) {
+  footing = match.arg(footing)
+  rect.pos = match.arg(rect.pos)
+
+  if (footing == "rectangular" && is.null(L)) {
+    stop("For rectangular footings, the length (L) must be provided.")
+  }
+
+  z = seq(0.1, z.end, .1)
+  rect.fct = ifelse(rect.pos == "center", 4, 1)
 
   # square footing
-  a.z = c(0,.2,.4,.6,.8,1,1.2,1.4,1.6,1.8,2,2.4,2.8,3.2,3.6,4,5,6,8,10,12,16,20,Inf)
-  I.az = c(0,.0188,.0716,.1494,.2410,.336,.4276,.5108,.5844,.6476,.7008,.7832,.8408,.8812,.9096,.93,.9604,.9756,.9892,.9944,.9968,.9984,.9992,1)
+  a.z = c(
+    0,
+    .2,
+    .4,
+    .6,
+    .8,
+    1,
+    1.2,
+    1.4,
+    1.6,
+    1.8,
+    2,
+    2.4,
+    2.8,
+    3.2,
+    3.6,
+    4,
+    5,
+    6,
+    8,
+    10,
+    12,
+    16,
+    20,
+    Inf
+  )
+  I.az = c(
+    0,
+    .0188,
+    .0716,
+    .1494,
+    .2410,
+    .336,
+    .4276,
+    .5108,
+    .5844,
+    .6476,
+    .7008,
+    .7832,
+    .8408,
+    .8812,
+    .9096,
+    .93,
+    .9604,
+    .9756,
+    .9892,
+    .9944,
+    .9968,
+    .9984,
+    .9992,
+    1
+  )
 
   # strip footing
-  b.z = c(0,.1,.2,.5,.8,1,1.2,1.5,2,2.5,3,3.5,4,4.5,5,5.5,6,6.5,7,8,9,10,100,Inf)
-  I.bz = c(0,.064,.127,.306,.462,.55,.624,.716,.817,.889,.92,.943,.96,.97,.977,.983,.986,.989,.991,.994,.996,.997,1,1)
+  b.z = c(
+    0,
+    .1,
+    .2,
+    .5,
+    .8,
+    1,
+    1.2,
+    1.5,
+    2,
+    2.5,
+    3,
+    3.5,
+    4,
+    4.5,
+    5,
+    5.5,
+    6,
+    6.5,
+    7,
+    8,
+    9,
+    10,
+    100,
+    Inf
+  )
+  I.bz = c(
+    0,
+    .064,
+    .127,
+    .306,
+    .462,
+    .55,
+    .624,
+    .716,
+    .817,
+    .889,
+    .92,
+    .943,
+    .96,
+    .97,
+    .977,
+    .983,
+    .986,
+    .989,
+    .991,
+    .994,
+    .996,
+    .997,
+    1,
+    1
+  )
 
-  if (any(footing == "rectangular") & is.null(L) == F) {
-    B = B / 2
-    L = L / 2
+  if (footing == "rectangular" || footing == "square") {
+    if (footing == "square") {
+      L = B
+    }
+    if (rect.pos == "center") {
+      B = B / 2
+      L = L / 2
+    } else if (rect.pos == "corner") {
+      B = B
+      L = L
+    }
 
-    M = B / z
+    if (footing == "rectangular") {
+      M = B / z
+    } else if (footing == "square") {
+      M = list()
+    }
+
     N = list()
     if (length(L) == 1) {
+      M = B / z
       N = L / z
     } else {
       for (i in 1:length(L)) {
+        if (footing == "rectangular") {
+          M = B / z
+        } else if (footing == "square") {
+          M[[i]] = L[i] / z
+        }
         N[[i]] = L[i] / z
       }
     }
 
     I.z = list()
+
     if (length(L) == 1) {
-      I.z = 1/(2*pi) * ((M*N)/sqrt(M^2 + N^2 + 1) * (1/(M^2+1)+(1/(N^2+1))) + atan((M*N)/sqrt(M^2 + N^2 + 1)))
+      I.z = 1 /
+        (2 * pi) *
+        ((M * N) /
+          sqrt(M^2 + N^2 + 1) *
+          (1 / (M^2 + 1) + (1 / (N^2 + 1))) +
+          atan((M * N) / sqrt(M^2 + N^2 + 1)))
     } else {
-      for (i in 1:length(L)) {
-        I.z[[i]] = 1/(2*pi) * ((M*N[[i]])/sqrt(M^2 + N[[i]]^2 + 1) * (1/(M^2+1)+(1/(N[[i]]^2+1))) + atan((M*N[[i]])/sqrt(M^2 + N[[i]]^2 + 1)))
+      if (footing == "rectangular") {
+        for (i in 1:length(L)) {
+          I.z[[i]] = 1 /
+            (2 * pi) *
+            ((M * N[[i]]) /
+              sqrt(M^2 + N[[i]]^2 + 1) *
+              (1 / (M^2 + 1) + (1 / (N[[i]]^2 + 1))) +
+              atan((M * N[[i]]) / sqrt(M^2 + N[[i]]^2 + 1)))
+        }
+      } else if (footing == "square") {
+        for (i in 1:length(L)) {
+          I.z[[i]] = 1 /
+            (2 * pi) *
+            ((M[[i]] * N[[i]]) /
+              sqrt(M[[i]]^2 + N[[i]]^2 + 1) *
+              (1 / (M[[i]]^2 + 1) + (1 / (N[[i]]^2 + 1))) +
+              atan((M[[i]] * N[[i]]) / sqrt(M[[i]]^2 + N[[i]]^2 + 1)))
+        }
       }
     }
 
     sig.z = list()
     if (length(L) == 1) {
-      sig.z = qs * I.z * 4
+      sig.z = qs * I.z * rect.fct
     } else {
       for (i in 1:length(L)) {
-        sig.z[[i]] = qs * I.z[[i]] * 4
+        sig.z[[i]] = qs * I.z[[i]] * rect.fct
       }
     }
+
+    if (footing == "rectangular") {
+      col.title = "Length (m)"
+      name.txt = "L="
+      rect.title = ifelse(
+        rect.pos == "center",
+        paste("Induced stress under the center of a rectangular footing"),
+        paste("Induced stress under the corner of a rectangular footing")
+      )
+    } else if (footing == "square") {
+      col.title = "Width (m)"
+      name.txt = "B="
+      rect.title = ifelse(
+        rect.pos == "center",
+        paste("Induced stress under the center of a square footing"),
+        paste("Induced stress under the corner of a square footing")
+      )
+    }
+
     if (length(L) > 1) {
-      names(sig.z) = paste("L=",L*2, sep = "")
+      if (rect.pos == "center") {
+        names(sig.z) = paste(name.txt, L * 2, sep = "")
+      } else if (rect.pos == "corner") {
+        names(sig.z) = paste(name.txt, L, sep = "")
+      }
     }
 
     if (length(L) == 1) {
-      sz = data.frame(sig.z = sig.z, d = z, L = L)
+      if (rect.pos == "center") {
+        sz = data.frame(sig.z = sig.z, z = z, L = L * 2)
+      } else if (rect.pos == "corner") {
+        sz = data.frame(sig.z = sig.z, z = z, L = L)
+      }
     } else {
       sz = dplyr::bind_rows(sig.z)
-      sz = data.frame(sz, d = z)
-      names(sz)[1:length(L)] = paste("L=",L*2, sep = "")
-      sz = tidyr::pivot_longer(sz,cols = -.data$d,
-                               names_to = 'L', values_to = 'sig.z')
+      sz = data.frame(sz, z = z)
+      if (rect.pos == "center") {
+        names(sz)[1:length(L)] = paste(name.txt, L * 2, sep = "")
+      } else if (rect.pos == "corner") {
+        names(sz)[1:length(L)] = paste(name.txt, L, sep = "")
+      }
+      sz = tidyr::pivot_longer(
+        sz,
+        cols = -.data$z,
+        names_to = "L",
+        values_to = 'sig.z'
+      )
     }
 
     if (length(L) > 1) {
-      q = ggplot(sz, aes(.data$sig.z, .data$d, col = .data$L)) +
+      q = ggplot(sz, aes(.data$sig.z, .data$z, col = .data$L)) +
         geom_line() +
-        scale_y_reverse() +
+        scale_y_reverse(limits = c(0, z.end)) +
         theme_bw() +
-        labs(x = "Stress (kPa)", y = "Depth (m)", col = "Length (m)") +
-        ggtitle(paste("Induced stress under a", footing[1], "footing ")) +
-        theme(axis.title = element_text(size = 16),
-              axis.text = element_text(size = 14),
-              legend.text = element_text(size = 12))
+        labs(x = "Stress (kPa)", y = "Depth (m)", col = col.title) +
+        ggtitle(rect.title) +
+        theme(
+          axis.title = element_text(size = 16),
+          axis.text = element_text(size = 14),
+          legend.text = element_text(size = 12)
+        )
     } else {
-      q = ggplot(sz, aes(.data$sig.z, .data$d, col = as.factor(.data$L))) +
+      q = ggplot(sz, aes(.data$sig.z, .data$z, col = as.factor(.data$L))) +
         geom_line() +
-        scale_y_reverse() +
+        scale_y_reverse(limits = c(0, z.end)) +
         theme_bw() +
-        labs(x = "Stress (kPa)", y = "Depth (m)", col = "Length (m)") +
-        ggtitle(paste("Induced stress under a", footing[1], "footing ")) +
-        theme(axis.title = element_text(size = 16),
-              axis.text = element_text(size = 14),
-              legend.text = element_text(size = 12))
+        labs(x = "Stress (kPa)", y = "Depth (m)", col = col.title) +
+        ggtitle(rect.title) +
+        theme(
+          axis.title = element_text(size = 16),
+          axis.text = element_text(size = 14),
+          legend.text = element_text(size = 12)
+        )
     }
   } else {
     M = list()
@@ -120,21 +321,37 @@ induced_stress = function(qs, B, L = NULL, z.end, footing = c("strip", "square",
     method = "linear"
     I.z = list()
     if (length(B) == 1) {
-      if (any(footing == "strip")) {
-        I.z = pracma::interp1(b.z, I.bz, M, method = method)
-      } else if (footing == "square") {
-        I.z = pracma::interp1(a.z, I.az, M, method = method)
+      if (footing == "strip") {
+        # I.z = pracma::interp1(b.z, I.bz, M, method = method)
+        x = 0
+        I.z = 1 /
+          pi *
+          (atan(z / (x - B / 2)) +
+            pi -
+            atan(z / (x + B / 2)) -
+            (B * z * (x^2 - z^2 - (B^2 / 4))) /
+              ((x^2 + z^2 - (B^2 / 4))^2 + B^2 * z^2))
+        # } else if (footing == "square") {
+        #   I.z = pracma::interp1(a.z, I.az, M, method = method)
       } else if (footing == "circular") {
-        I.z = 1 - (1 / (1 + (M)^2))^(3/2)
+        I.z = 1 - (1 / (1 + (M)^2))^(3 / 2)
       }
     } else {
       for (i in 1:length(B)) {
-        if (any(footing == "strip")) {
-          I.z[[i]] = pracma::interp1(b.z, I.bz, M[[i]], method = method)
-        } else if (footing == "square") {
-          I.z[[i]] = pracma::interp1(a.z, I.az, M[[i]], method = method)
+        if (footing == "strip") {
+          # I.z[[i]] = pracma::interp1(b.z, I.bz, M[[i]], method = method)
+          x = 0
+          I.z[[i]] = 1 /
+            pi *
+            (atan(z / (x - B[[i]] / 2)) +
+              pi -
+              atan(z / (x + B[[i]] / 2)) -
+              (B[[i]] * z * (x^2 - z^2 - (B[[i]]^2 / 4))) /
+                ((x^2 + z^2 - (B[[i]]^2 / 4))^2 + B[[i]]^2 * z^2))
+          # } else if (footing == "square") {
+          #   I.z[[i]] = pracma::interp1(a.z, I.az, M[[i]], method = method)
         } else if (footing == "circular") {
-          I.z[[i]] = 1 - (1 / (1 + (M[[i]])^2))^(3/2)
+          I.z[[i]] = 1 - (1 / (1 + (M[[i]])^2))^(3 / 2)
         }
       }
     }
@@ -148,49 +365,61 @@ induced_stress = function(qs, B, L = NULL, z.end, footing = c("strip", "square",
       }
     }
     if (length(B) > 1) {
-      names(sig.z) = paste("B=",B, sep = "")
+      names(sig.z) = paste("B=", B, sep = "")
     }
 
     if (length(B) == 1) {
-      sz = data.frame(sig.z = sig.z, d = z, B = B)
+      sz = data.frame(sig.z = sig.z, z = z, B = B)
     } else {
       sz = dplyr::bind_rows(sig.z)
-      sz = data.frame(sz, d = z)
-      names(sz)[1:length(B)] = paste("B=",B, sep = "")
-      sz = tidyr::pivot_longer(sz, cols = -.data$d,
-                               names_to = "B", values_to = 'sig.z')
+      sz = data.frame(sz, z = z)
+      names(sz)[1:length(B)] = paste("B=", B, sep = "")
+      sz = tidyr::pivot_longer(
+        sz,
+        cols = -.data$z,
+        names_to = "B",
+        values_to = 'sig.z'
+      )
     }
 
-    if (any(footing == "strip")) {
+    if (footing == "strip") {
       texto = "Width (m)"
-    } else if (footing == "square") {
-      texto = "Width (m)"
+      # } else if (footing == "square") {
+      #   texto = "Width (m)"
     } else if (footing == "circular") {
       texto = "Radius (m)"
     }
     if (length(B) > 1) {
-      q = ggplot(sz, aes(.data$sig.z, .data$d, col = .data$B)) +
+      q = ggplot(sz, aes(.data$sig.z, .data$z, col = .data$B)) +
         geom_line() +
-        scale_y_reverse() +
-        theme_bw() +
-        labs(x = "Stress (kPa)", y = "Depth (m)", col = texto)  +
-        ggtitle(paste("Induced stress under a", footing[1], "footing ")) +
-        theme(axis.title = element_text(size = 16),
-              axis.text = element_text(size = 14),
-              legend.text = element_text(size = 12),
-              legend.title = element_text(size = 12))
-    } else {
-      q = ggplot(sz, aes(.data$sig.z, .data$d, col = as.factor(.data$B))) +
-        geom_line() +
-        scale_y_reverse() +
+        scale_y_reverse(limits = c(0, z.end)) +
         theme_bw() +
         labs(x = "Stress (kPa)", y = "Depth (m)", col = texto) +
         ggtitle(paste("Induced stress under a", footing[1], "footing ")) +
-        theme(axis.title = element_text(size = 16),
-              axis.text = element_text(size = 14),
-              legend.text = element_text(size = 12),
-              legend.title = element_text(size = 12))
+        theme(
+          axis.title = element_text(size = 16),
+          axis.text = element_text(size = 14),
+          legend.text = element_text(size = 12),
+          legend.title = element_text(size = 12)
+        )
+    } else {
+      q = ggplot(sz, aes(.data$sig.z, .data$z, col = as.factor(.data$B))) +
+        geom_line() +
+        scale_y_reverse(limits = c(0, z.end)) +
+        theme_bw() +
+        labs(x = "Stress (kPa)", y = "Depth (m)", col = texto) +
+        ggtitle(paste("Induced stress under a", footing[1], "footing ")) +
+        theme(
+          axis.title = element_text(size = 16),
+          axis.text = element_text(size = 14),
+          legend.text = element_text(size = 12),
+          legend.title = element_text(size = 12)
+        )
     }
   }
-  return(list(Plot = q, Plotly = plotly::ggplotly(q, dynamicTicks = T)))
+  return(list(
+    Profile = tibble::tibble(sz),
+    Plot = q,
+    Plotly = plotly::ggplotly(q, dynamicTicks = T)
+  ))
 }

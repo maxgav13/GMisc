@@ -16,25 +16,37 @@
 #' moving_filter_plot_f(filt, plotk = c("y", "k_9")) # plots data and filter of window 9
 #' moving_filter_plot_f(filt, plotk = c("k_3", "k_9")) # plots filters of window 3 and 9
 #'
-moving_filter_plot_f = function(x, xlab = "X", ylab = "Data", filterlab = "Filter & data", plotk = "all") {
-
+moving_filter_plot_f = function(
+  x,
+  xlab = "X",
+  ylab = "Data",
+  filterlab = "Filter & data",
+  plotk = "all"
+) {
   if (any(plotk == "all")) {
     df = x$Filtered
   } else {
     zz = plotk
-    df = x$Filtered %>% dplyr::select(c("x",zz))
+    df = x$Filtered %>% dplyr::select(c("x", zz))
   }
 
-  df = tidyr::pivot_longer(df, cols = -x, names_to = 'filtro', values_to = 'y_val')
+  df = tidyr::pivot_longer(
+    df,
+    cols = -x,
+    names_to = 'filtro',
+    values_to = 'y_val'
+  )
   df$filtro = factor(df$filtro, levels = unique(df$filtro))
 
-  f = ggplot(df, aes(x = x, y = .data$y_val,
-                     group = .data$filtro, col = .data$filtro)) +
+  f = ggplot(
+    df,
+    aes(x = x, y = .data$y_val, group = .data$filtro, col = .data$filtro)
+  ) +
     geom_line(size = 0.5) +
     labs(x = xlab, y = ylab, col = filterlab) +
-    theme_bw()
+    theme_bw(base_size = 14)
 
   p = plotly::ggplotly(f, dynamicTicks = T)
 
-  return(list(GGPLOT=f, PLOTLY=p))
+  return(list(GGPLOT = f, PLOTLY = p))
 }

@@ -7,6 +7,7 @@
 #' @references Davis, J. C. (2002). Statistical and Data Analysis in Geology. 3rd ed. John Wiley & Sons.
 #' @import ggplot2
 #' @details The example data given is intended to show the structure needed for input data. The user should follow this structure, which in general corresponds with a data frame with a sequence in the first column and the observed/measured values in the second, third, and fourth columns
+#' @family layer detection
 #' @examples
 #' T2_stat(CPTu_data, k = 50)
 #'
@@ -14,9 +15,9 @@ T2_stat = function(data, k = 50) {
   Data = data
   v = ncol(Data)
   nombres = names(Data)
-  w = Data[,-1]
-  n = floor(k/2)
-  n.2 = floor(k/4)
+  w = Data[, -1]
+  n = floor(k / 2)
+  n.2 = floor(k / 4)
   m = v - 1
   NADF = as.data.frame(matrix(NA, ncol = m, nrow = n.2))
   names(NADF) = names(w)
@@ -26,26 +27,42 @@ T2_stat = function(data, k = 50) {
   f = NULL
   D2 = NULL
 
-  for (i in floor(n+n.2/2):(nrow(wadj)-floor(n+n.2/2))) {
-    s1 = wadj[(i-(n-1)):(i),]
-    s2 = wadj[(i+1):(i+n),]
+  for (i in floor(n + n.2 / 2):(nrow(wadj) - floor(n + n.2 / 2))) {
+    s1 = wadj[(i - (n - 1)):(i), ]
+    s2 = wadj[(i + 1):(i + n), ]
     S1 = stats::cov(s1, use = "na.or.complete")
     S2 = stats::cov(s2, use = "na.or.complete")
     Sp = ((n - 1) * S1 + (n - 1) * S2) / (n + n - 2)
     D = colMeans(s1, na.rm = T) - colMeans(s2, na.rm = T)
-    D2[i] = round(as.numeric(D %*% solve(Sp) %*% D),3)
+    D2[i] = round(as.numeric(D %*% solve(Sp) %*% D), 3)
     T2stat[i] = (n * n) / (n + n) * D2[i]
     f[i] = (n + n - m - 1) / ((n + n - 2) * m) * T2stat[i]
   }
 
   DF1 = stats::na.omit(data.frame(k, T2stat, D2, f))
   if (n.2 %% 2 == 0) {
-    NADF2.a = data.frame(rep(NA,floor(n-n.2/2-1)),rep(NA,floor(n-n.2/2-1)),rep(NA,floor(n-n.2/2-1)),rep(NA,floor(n-n.2/2-1)))
+    NADF2.a = data.frame(
+      rep(NA, floor(n - n.2 / 2 - 1)),
+      rep(NA, floor(n - n.2 / 2 - 1)),
+      rep(NA, floor(n - n.2 / 2 - 1)),
+      rep(NA, floor(n - n.2 / 2 - 1))
+    )
   } else {
-    NADF2.a = data.frame(rep(NA,floor(n-n.2/2-1)),rep(NA,floor(n-n.2/2-1)),rep(NA,floor(n-n.2/2-1)),rep(NA,floor(n-n.2/2-1)))
+    NADF2.a = data.frame(
+      rep(NA, floor(n - n.2 / 2 - 1)),
+      rep(NA, floor(n - n.2 / 2 - 1)),
+      rep(NA, floor(n - n.2 / 2 - 1)),
+      rep(NA, floor(n - n.2 / 2 - 1))
+    )
   }
-    NADF2.b = data.frame(rep(NA,floor(n-n.2/2)),rep(NA,floor(n-n.2/2)),rep(NA,floor(n-n.2/2)),rep(NA,floor(n-n.2/2)))
-  names(NADF2.a) = names(DF1); names(NADF2.b) = names(DF1)
+  NADF2.b = data.frame(
+    rep(NA, floor(n - n.2 / 2)),
+    rep(NA, floor(n - n.2 / 2)),
+    rep(NA, floor(n - n.2 / 2)),
+    rep(NA, floor(n - n.2 / 2))
+  )
+  names(NADF2.a) = names(DF1)
+  names(NADF2.b) = names(DF1)
   DF = rbind.data.frame(NADF2.a, DF1, NADF2.b)
   row.names(DF) = 1:nrow(DF)
   Data$T2stat = DF$T2stat
@@ -64,18 +81,17 @@ T2_stat = function(data, k = 50) {
   #   as.vector()
 
   bounds.95 = Data %>%
-    dplyr::mutate(dif = c(0, diff(sign(diff(.data$D2))),0)) %>%
+    dplyr::mutate(dif = c(0, diff(sign(diff(.data$D2))), 0)) %>%
     dplyr::filter(.data$dif < 0 & .data$D2 > chi[1]) %>%
     dplyr::pull(1)
 
-
   bounds.99 = Data %>%
-    dplyr::mutate(dif = c(0, diff(sign(diff(.data$D2))),0)) %>%
+    dplyr::mutate(dif = c(0, diff(sign(diff(.data$D2))), 0)) %>%
     dplyr::filter(.data$dif < 0 & .data$D2 > chi[2]) %>%
     dplyr::pull(1)
 
   bounds.999 = Data %>%
-    dplyr::mutate(dif = c(0, diff(sign(diff(.data$D2))),0)) %>%
+    dplyr::mutate(dif = c(0, diff(sign(diff(.data$D2))), 0)) %>%
     dplyr::filter(.data$dif < 0 & .data$D2 > chi[3]) %>%
     dplyr::pull(1)
 
@@ -85,12 +101,25 @@ T2_stat = function(data, k = 50) {
     scale_y_reverse() +
     scale_x_continuous(name = "Mahalanobis D2") +
     theme_bw()
-  p = plotly::ggplotly(ggplot(Data, aes_string("D2", nombres[1])) +
-                         geom_path(size = 0.25, na.rm = T) +
-                         geom_vline(size = 0.25, xintercept = chi, col = c("blue", "orange", "red")) +
-                         scale_y_reverse() +
-                         scale_x_continuous(name = "Mahalanobis D2") +
-                         theme_bw(), dynamicTicks = T)
+  p = plotly::ggplotly(
+    ggplot(Data, aes_string("D2", nombres[1])) +
+      geom_path(size = 0.25, na.rm = T) +
+      geom_vline(
+        size = 0.25,
+        xintercept = chi,
+        col = c("blue", "orange", "red")
+      ) +
+      scale_y_reverse() +
+      scale_x_continuous(name = "Mahalanobis D2") +
+      theme_bw(),
+    dynamicTicks = T
+  )
 
-  return(list(GGPLOT=q, PLOTLY=p, Bounds.95=bounds.95, Bounds.99=bounds.99, Bounds.999=bounds.999))
+  return(list(
+    GGPLOT = q,
+    PLOTLY = p,
+    Bounds.95 = bounds.95,
+    Bounds.99 = bounds.99,
+    Bounds.999 = bounds.999
+  ))
 }

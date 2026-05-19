@@ -15,25 +15,37 @@
 #' moving_filter_plot_r(filt)
 #' moving_filter_plot_r(filt, plotk = c("k_3", "k_9")) # plots residuals for filters of window 3 and 9
 #'
-moving_filter_plot_r = function(x, xlab = "X", ylab = "Residual data",filterlab = "Filter", plotk = "all") {
-
+moving_filter_plot_r = function(
+  x,
+  xlab = "X",
+  ylab = "Residual data",
+  filterlab = "Filter",
+  plotk = "all"
+) {
   if (any(plotk == "all")) {
     df = x$Residual
   } else {
     zz = plotk
-    df = x$Residual %>% dplyr::select(c("x",zz))
+    df = x$Residual %>% dplyr::select(c("x", zz))
   }
 
-  df = tidyr::pivot_longer(df, cols = -x, names_to = 'filtro', values_to = 'y_val')
+  df = tidyr::pivot_longer(
+    df,
+    cols = -x,
+    names_to = 'filtro',
+    values_to = 'y_val'
+  )
   df$filtro = factor(df$filtro, levels = unique(df$filtro))
 
-  r = ggplot(df, aes(x = x, y = .data$y_val,
-                     group = .data$filtro, col = .data$filtro)) +
+  r = ggplot(
+    df,
+    aes(x = x, y = .data$y_val, group = .data$filtro, col = .data$filtro)
+  ) +
     geom_line(size = 0.5) +
     labs(x = xlab, y = ylab, col = filterlab) +
-    theme_bw()
+    theme_bw(base_size = 14)
 
   p = plotly::ggplotly(r, dynamicTicks = T)
 
-  return(list(GGPLOT=r, PLOTLY=p))
+  return(list(GGPLOT = r, PLOTLY = p))
 }

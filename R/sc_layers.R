@@ -7,29 +7,34 @@
 #' @export
 #' @return A ggplot and plotly objects showing the layered model, another showing the confidence intervals, and a summary table
 #' @import ggplot2
+#' @family layer detection
 #' @examples
 #' sc_layers(DPM_data, h = 0.1, breaks = 2)
 #'
 sc_layers = function(x, h = 0.1, breaks, conf.level = 0.95) {
-
   alfa = 1 - conf.level
   dat = x
   nom = names(dat)
 
-  dat.ts = zoo::zoo(dat[[2]],dat[[1]])
+  dat.ts = zoo::zoo(dat[[2]], dat[[1]])
   bp = strucchange::breakpoints(dat.ts ~ 1, h = h)
-  breaks = dat[round(strucchange::breakdates(bp, breaks = breaks)*nrow(dat)),1]
+  breaks = dat[
+    round(strucchange::breakdates(bp, breaks = breaks) * nrow(dat)),
+    1
+  ]
 
-  grouping = cut(dat[[nom[1]]],
-                 breaks = c(min(dat[1]), breaks, max(dat[1])),
-                 include.lowest = T)
+  grouping = cut(
+    dat[[nom[1]]],
+    breaks = c(min(dat[1]), breaks, max(dat[1])),
+    include.lowest = T
+  )
   dat$boundaries = grouping
 
-  ydata = dat %>% dplyr::select(-1,-.data$boundaries) %>% as.matrix()
+  ydata = dat %>% dplyr::select(-1, -.data$boundaries) %>% as.matrix()
   xdata = dat %>% dplyr::select(.data$boundaries) %>% as.matrix()
   mod = stats::lm(ydata ~ xdata)
 
-  ES = round(DescTools::EtaSq(mod)[[1]],3)
+  ES = round(DescTools::EtaSq(mod)[[1]], 3)
 
   q = dat %>%
     dplyr::mutate(boundaries = forcats::fct_rev(.data$boundaries)) %>%
@@ -44,33 +49,52 @@ sc_layers = function(x, h = 0.1, breaks, conf.level = 0.95) {
   q2 = dat %>%
     dplyr::mutate(boundaries = forcats::fct_rev(.data$boundaries)) %>%
     ggplot(aes_string(nom[2], 'boundaries', col = 'boundaries')) +
-    stat_summary(fun.data = mean_cl_normal,
-                 fun.args = list(conf.int = conf.level),
-                 geom = "pointrange",
-                 # color = "red",
-                 size=.5,
-                 fatten=2) +
+    stat_summary(
+      fun.data = mean_cl_normal,
+      fun.args = list(conf.int = conf.level),
+      geom = "pointrange",
+      # color = "red",
+      size = .5,
+      fatten = 2
+    ) +
     labs(y = 'Layers', x = nom[2], col = '') +
     theme_bw()
-    # theme(axis.text.x = element_text(angle = 45, vjust = 1, hjust=1))
+  # theme(axis.text.x = element_text(angle = 45, vjust = 1, hjust=1))
 
   p2 = plotly::ggplotly(q2, dynamicTicks = T)
 
   Summary = dat %>%
     dplyr::group_by(.data$boundaries) %>%
-    dplyr::summarise(dplyr::across(nom[2],
-                                   .fns = list(
-                                     Obs = ~ dplyr::n(),
-                                     Mean = ~ signif(mean(.),3),
-                                     SD = ~ signif(stats::sd(.),3),
-                                     Min = ~ signif(min(.),3),
-                                     Max = ~ signif(max(.),3),
-                                     CI.lwr = ~ signif(DescTools::MeanCI(., conf.level = conf.level)[[2]],3),
-                                     CI.upr = ~ signif(DescTools::MeanCI(., conf.level = conf.level)[[3]],3)
-                                   )
-                                   ,.names = '{.fn}')) %>%
-    dplyr::mutate(MoE = signif(stats::qt(1-alfa/2,.data$Obs-1)*.data$SD/sqrt(.data$Obs),3)) %>%
+    dplyr::summarise(dplyr::across(
+      nom[2],
+      .fns = list(
+        Obs = ~ dplyr::n(),
+        Mean = ~ signif(mean(.), 3),
+        SD = ~ signif(stats::sd(.), 3),
+        Min = ~ signif(min(.), 3),
+        Max = ~ signif(max(.), 3),
+        CI.lwr = ~ signif(
+          DescTools::MeanCI(., conf.level = conf.level)[[2]],
+          3
+        ),
+        CI.upr = ~ signif(DescTools::MeanCI(., conf.level = conf.level)[[3]], 3)
+      ),
+      .names = '{.fn}'
+    )) %>%
+    dplyr::mutate(
+      MoE = signif(
+        stats::qt(1 - alfa / 2, .data$Obs - 1) * .data$SD / sqrt(.data$Obs),
+        3
+      )
+    ) %>%
     as.data.frame()
 
-  return(list(LayersGG=q, LayersLY=p, StatsGG=q2, StatsLY=p2, Summary=Summary, ES=ES))
+  return(list(
+    LayersGG = q,
+    LayersLY = p,
+    StatsGG = q2,
+    StatsLY = p2,
+    Summary = Summary,
+    ES = ES
+  ))
 }

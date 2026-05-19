@@ -9,6 +9,7 @@
 #' @references ASTM (1995). Standard Test Method for Determination of the Point Load Strength Index of Rock.
 #' @import ggplot2
 #' @name UCS
+#' @family rock mechanics
 #' @examples
 #' W = c(70.0,95.0,80.0,90.0,98.0,110.0,100.0,100.0,110.0)
 #' D = c(40,55,60,50,25,60,40,70,50)
@@ -16,7 +17,6 @@
 #' UCS(W = W, D = D, P = P)
 #'
 UCS = function(W, D, P, digits = 2) {
-
   A = W * D
   De2 = 4 * A / pi
   De = sqrt(De2)
@@ -50,25 +50,36 @@ UCS = function(W, D, P, digits = 2) {
   UCS.g = I50.g * 23
 
   gg = ggplot(dat.UCS, aes(De, P)) +
-    geom_point(size=2) +
-    geom_smooth(method = 'lm', se = F, aes(col='Gaussian'), size=.8) +
+    geom_point(size = 2) +
+    geom_smooth(method = 'lm', se = F, aes(col = 'Gaussian'), size = .8) +
     # geom_line(aes(De, fit.t$fitted.values, col='t-distributed'), size=.8) +
-    geom_smooth(method = MASS::rlm, se = F, aes(col='Robust'), size=.8) +
-    geom_vline(xintercept = 50, size=1, linetype=8) +
+    geom_smooth(method = MASS::rlm, se = F, aes(col = 'Robust'), size = .8) +
+    geom_vline(xintercept = 50, size = 1, linetype = 8) +
     theme_bw(base_size = 12) +
-    labs(x='Equivalent diameter, De [mm]',y='Load, P [kN]',col='Method') +
+    labs(
+      x = 'Equivalent diameter, De [mm]',
+      y = 'Load, P [kN]',
+      col = 'Method'
+    ) +
     scale_color_brewer(type = 'qual', palette = 6) +
-    theme(legend.position = 'top',
-          legend.title = element_text(size = 14),
-          legend.text = element_text(size = 12),
-          axis.title = element_text(size = 14),
-          axis.text = element_text(size = 12))
+    theme(
+      legend.position = 'top',
+      legend.title = element_text(size = 14),
+      legend.text = element_text(size = 12),
+      axis.title = element_text(size = 14),
+      axis.text = element_text(size = 12)
+    )
 
   UCS = c(mean(I50), stats::median(I50)) * 23
 
-  UCS.res = data.frame(Method = c('Gaussian','Robust','Corrected (mean)','Corrected (median)'),
-                       I50 = round(c(I50.g,I50.r,mean(I50),stats::median(I50)),digits = digits),
-                       UCS = round(c(UCS.g,UCS.r,UCS[1],UCS[2]),digits = digits))
+  UCS.res = data.frame(
+    Method = c('Gaussian', 'Robust', 'Corrected (mean)', 'Corrected (median)'),
+    I50 = round(
+      c(I50.g, I50.r, mean(I50), stats::median(I50)),
+      digits = digits
+    ),
+    UCS = round(c(UCS.g, UCS.r, UCS[1], UCS[2]), digits = digits)
+  )
 
   names(UCS.res) = c('Method', 'I50 [MPa]', 'UCS [MPa]')
 

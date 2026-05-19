@@ -7,6 +7,7 @@
 #' @return A matrix with the atypicality index or indices.
 #' @references Aitchison, J. (1986). The statistical analysis of compositional data. Chapman and Hall.
 #' @name CoDA_Atyp_Idx
+#' @family compositional data analysis
 #' @examples
 #' data("Hongite", package = 'compositions')
 #' samp = c(44, 20.4, 13.9, 9.1, 12.6)
@@ -14,7 +15,6 @@
 #' CoDA_Atyp_Idx(Hongite, samp)
 #'
 CoDA_Atyp_Idx = function(comp, sample = NULL, thres = .95) {
-
   if (any(class(comp) == "matrix")) {
     comp = comp
   } else {
@@ -24,26 +24,26 @@ CoDA_Atyp_Idx = function(comp, sample = NULL, thres = .95) {
   n1 = nrow(comp)
   A = compositions::alr(compositions::acomp(comp)) %>% unclass()
   Amu = colMeans(A)
-  Acov = stats::var(A)*((n1-1)/n1)
+  Acov = stats::var(A) * ((n1 - 1) / n1)
   N = nrow(comp)
   D = ncol(A)
-  k = (N*(N-D))/((N^2-1)*D)
+  k = (N * (N - D)) / ((N^2 - 1) * D)
 
   if (is.null(sample)) {
-    ai = matrix(0,nrow = N,ncol = 1)
+    ai = matrix(0, nrow = N, ncol = 1)
     for (i in seq_len(N)) {
-      xalr = compositions::alr(compositions::acomp(comp[i,])) %>% unclass()
-      Amu = colMeans(compositions::alr(compositions::acomp(comp[-i,])))
-      Acov = stats::var(compositions::alr(compositions::acomp(comp[-i,])))
-      k = ((N-1)*(N-1-D))/(((N-1)^2-1)*D)
-      ai0 = (t(xalr-Amu) %*% solve(Acov) %*% (xalr-Amu)) * k
-      ai[i,] = stats::pf(ai0,D,N-D-1) %>% round(4)
+      xalr = compositions::alr(compositions::acomp(comp[i, ])) %>% unclass()
+      Amu = colMeans(compositions::alr(compositions::acomp(comp[-i, ])))
+      Acov = stats::var(compositions::alr(compositions::acomp(comp[-i, ])))
+      k = ((N - 1) * (N - 1 - D)) / (((N - 1)^2 - 1) * D)
+      ai0 = (t(xalr - Amu) %*% solve(Acov) %*% (xalr - Amu)) * k
+      ai[i, ] = stats::pf(ai0, D, N - D - 1) %>% round(4)
     }
   } else {
     x = sample
     xalr = compositions::alr(compositions::acomp(x)) %>% unclass()
-    ai0 = (t(xalr-Amu) %*% solve(Acov) %*% (xalr-Amu)) * k
-    ai = stats::pf(ai0,D,N-D) %>% round(4)
+    ai0 = (t(xalr - Amu) %*% solve(Acov) %*% (xalr - Amu)) * k
+    ai = stats::pf(ai0, D, N - D) %>% round(4)
   }
 
   ai = tibble::as_tibble(ai, .name_repair = 'unique') %>%

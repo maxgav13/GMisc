@@ -7,6 +7,7 @@
 #' @references Mora, R. (2013). Uso de metodos estadisticos para la determinacion de capas homogeneas de suelos volcanicos en un sitio de las laderas del Volcan Irazu, Cartago, Costa Rica. - Rev. Geol. Amer. Central, 49: 101-108.
 #' @import ggplot2
 #' @details The example data given is intended to show the structure needed for input data. The user should follow this structure, which in general corresponds with a data frame with a sequence in the first column and the observed/measured values in the second column
+#' @family layer detection
 #' @examples
 #' RI(DPM_data, k = 6)
 #'
@@ -14,51 +15,54 @@ RI = function(data, k = 6) {
   Data = data
   nombres = names(Data)
   w = Data[[2]]
-  n = floor(k/2)
-  wadj = c(rep(NA,n), w, rep(NA,n))
+  n = floor(k / 2)
+  wadj = c(rep(NA, n), w, rep(NA, n))
 
   RI = NULL
 
-  for (i in (n+1):(length(wadj)-n)) {
-    S1 = stats::var(wadj[(i-(n-1)):(i)], na.rm = TRUE)
-    S2 = stats::var(wadj[(i+1):(i+n)], na.rm = TRUE)
+  for (i in (n + 1):(length(wadj) - n)) {
+    S1 = stats::var(wadj[(i - (n - 1)):(i)], na.rm = TRUE)
+    S2 = stats::var(wadj[(i + 1):(i + n)], na.rm = TRUE)
     SC = (n * (S1 + S2)) / (2 * n - 1)
-    SB = stats::var(wadj[(i-(n-1)):(i+n)], na.rm = TRUE)
-    RI[i] = round(SB / (SB + SC),3)
+    SB = stats::var(wadj[(i - (n - 1)):(i + n)], na.rm = TRUE)
+    RI[i] = round(SB / (SB + SC), 3)
   }
   DF = data.frame(k, RI)
-  DF = DF[c((n+1):nrow(DF)),]
+  DF = DF[c((n + 1):nrow(DF)), ]
   row.names(DF) = 1:nrow(DF)
   Data$RI = DF$RI
 
   bounds.7 = Data %>%
-    dplyr::mutate(dif = c(0, diff(sign(diff(.data$RI))),0)) %>%
+    dplyr::mutate(dif = c(0, diff(sign(diff(.data$RI))), 0)) %>%
     dplyr::filter(.data$dif < 0 & .data$RI > .7) %>%
     dplyr::pull(1)
 
-    # Data[Data$RI>=.7,nombres[1]] %>% na.omit() %>% as.vector()
-    # as.data.frame() %>%
-    # tidyr::drop_na() %>%
-    # unlist() %>%
-    # as.vector()
+  # Data[Data$RI>=.7,nombres[1]] %>% na.omit() %>% as.vector()
+  # as.data.frame() %>%
+  # tidyr::drop_na() %>%
+  # unlist() %>%
+  # as.vector()
 
   bounds.8 = Data %>%
-    dplyr::mutate(dif = c(0, diff(sign(diff(.data$RI))),0)) %>%
+    dplyr::mutate(dif = c(0, diff(sign(diff(.data$RI))), 0)) %>%
     dplyr::filter(.data$dif < 0 & .data$RI > .8) %>%
     dplyr::pull(1)
 
   q = ggplot(Data, aes_string("RI", nombres[1])) +
     geom_path(na.rm = T) +
-    geom_vline(xintercept = c(.7,.8), col = c("blue", "red")) +
+    geom_vline(xintercept = c(.7, .8), col = c("blue", "red")) +
     scale_y_reverse() +
     scale_x_continuous(name = "RI") +
     theme_bw()
-  p = plotly::ggplotly(ggplot(Data, aes_string("RI", nombres[1])) +
-                         geom_path(size = 0.25,na.rm = T) +
-                         geom_vline(size = 0.25, xintercept = c(.7,.8), col = c("blue", "red")) +
-                         scale_y_reverse() +
-                         scale_x_continuous(name = "RI") +
-                         theme_bw(), dynamicTicks = T)
+  p = plotly::ggplotly(
+    ggplot(Data, aes_string("RI", nombres[1])) +
+      geom_path(size = 0.25, na.rm = T) +
+      geom_vline(size = 0.25, xintercept = c(.7, .8), col = c("blue", "red")) +
+      scale_y_reverse() +
+      scale_x_continuous(name = "RI") +
+      theme_bw(),
+    dynamicTicks = T
+  )
 
-  return(list(GGPLOT=q, PLOTLY=p, Bounds.7=bounds.7, Bounds.8=bounds.8))
+  return(list(GGPLOT = q, PLOTLY = p, Bounds.7 = bounds.7, Bounds.8 = bounds.8))
 }

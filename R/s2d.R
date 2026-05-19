@@ -3,6 +3,7 @@
 #' @param x A vector of directions in degrees
 #' @export
 #' @return A vector or directions
+#' @family directional analysis
 #' @examples
 #' x <- runif(min = 120, max = 170, n = 20)
 #' dip.dir <- s2d(x)
@@ -13,4 +14,3 @@ s2d = function(x) {
 
   return(dip.dir = dip.dir)
 }
-
