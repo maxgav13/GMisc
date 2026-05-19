@@ -6,3 +6,6 @@
 ^\.github$
 ^doc$
 ^Meta$
+^LICENSE\.md$
+^vignettes/\.quarto$
+^vignettes/*_files$

@@ -4,4 +4,9 @@
 .Ruserdata
 GMisc.Rproj
 doc
+legacy
 Meta
+*.code-workspace
+.DS_Store
+inst/doc
+**/.quarto/

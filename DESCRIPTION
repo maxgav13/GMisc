@@ -1,7 +1,7 @@
 Package: GMisc
 Title: Miscellaneous Functions for Geology (and its areas)
-Version: 0.3.2
-Date: 2022-06-02
+Version: 0.4.0
+Date: 2026-04-24
 Author: Maximiliano Garnier-Villarreal <max.garnier.villa@gmail.com>
 Maintainer: Maximiliano Garnier-Villarreal <max.garnier.villa@gmail.com>
 Description: Functions for general statistical purpose use, and geological use. 
@@ -11,9 +11,8 @@ BugReports: https://github.com/maxgav13/GMisc/issues
 License: GPL (>= 3)
 Encoding: UTF-8
 LazyData: TRUE
-RoxygenNote: 7.1.1
+RoxygenNote: 7.3.3
 Imports: 
-    remotes,
     ggplot2,
     forcats,
     dplyr,
@@ -21,10 +20,8 @@ Imports:
     zoo,
     png,
     grid,
-    cowplot,
     plotly,
     tibble,
-    RFOC,
     pracma,
     changepoint,
     strucchange,
@@ -37,13 +34,18 @@ Imports:
     heplots,
     purrr,
     ggtern,
-    viridisLite,
-    utils,
-    grDevices,
+    rlang,
+    tidyselect,
+    pak,
+    broom
 Suggests: 
+    DT,
     knitr,
     rmarkdown,
     Hmisc,
     kableExtra,
-    DT
-VignetteBuilder: knitr, rmarkdown
+    rio,
+    drc,
+    quarto
+VignetteBuilder: knitr, rmarkdown, quarto
+Roxygen: list(markdown = TRUE)
