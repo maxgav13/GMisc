@@ -21,3 +21,8 @@ strike <- d2s(x)
 dip.dir <- s2d(strike)
 
 }
+\seealso{
+Other directional analysis: 
+\code{\link{s2d}()}
+}
+\concept{directional analysis}

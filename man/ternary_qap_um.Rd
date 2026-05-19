@@ -32,9 +32,9 @@ The examples show basic usage and how to add data, which can be more customizabl
 library(ggplot2)
 library(plotly)
 
-d = data.frame(ol=c(23,26.9,25.3),
-               opx=c(27,23.7,5.1),
-               cpx=c(50,49.4,59.6))
+d = data.frame(ol=c(23,40,60),
+               opx=c(27,50,30),
+               cpx=c(50,10,10))
 
 # adding data to ggplot object
 ternary_qap_um() + geom_point(data = d)
@@ -53,3 +53,24 @@ ternary_qap_um('plotly') \%>\%
                                    'Cpx: \%{c}'))
 
 }
+\seealso{
+Other classification plots, petrology: 
+\code{\link{TAS}()},
+\code{\link{ternary_afm}()},
+\code{\link{ternary_dickinson_qmflt}()},
+\code{\link{ternary_dickinson_qtfl}()},
+\code{\link{ternary_fap}()},
+\code{\link{ternary_feldspars}()},
+\code{\link{ternary_folk_gsm}()},
+\code{\link{ternary_folk_qfl}()},
+\code{\link{ternary_folk_qfm}()},
+\code{\link{ternary_folk_smc}()},
+\code{\link{ternary_pyroclastic_size}()},
+\code{\link{ternary_pyroclastic_type}()},
+\code{\link{ternary_qap}()},
+\code{\link{ternary_qap_g}()},
+\code{\link{ternary_qap_m_hbl}()},
+\code{\link{ternary_qap_m_ol}()},
+\code{\link{ternary_qap_um_hbl}()}
+}
+\concept{classification plots, petrology}

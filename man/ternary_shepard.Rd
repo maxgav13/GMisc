@@ -32,9 +32,9 @@ The examples show basic usage and how to add data, which can be more customizabl
 library(ggplot2)
 library(plotly)
 
-d = data.frame(sand=c(23,26.9,25.3),
-               clay=c(27,23.7,5.1),
-               silt=c(50,49.4,59.6))
+d = data.frame(sand=c(23,40,60),
+               clay=c(27,50,30),
+               silt=c(50,10,10))
 
 # adding data to ggplot object
 ternary_shepard() + geom_point(data = d)
@@ -53,3 +53,13 @@ ternary_shepard('plotly') \%>\%
                                    'Silt: \%{c}'))
 
 }
+\seealso{
+Other classification plots, soil mechanics: 
+\code{\link{Casagrande_chart}()},
+\code{\link{clay_activity}()},
+\code{\link{soil_collapse}()},
+\code{\link{soil_expansion}()},
+\code{\link{soil_swelling}()},
+\code{\link{ternary_usda}()}
+}
+\concept{classification plots, soil mechanics}

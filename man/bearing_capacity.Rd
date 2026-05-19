@@ -7,64 +7,112 @@
 bearing_capacity(
   B,
   D,
-  L = NULL,
+  Lf = 1,
   gamma.h,
   gamma.s,
   tau0,
   phi,
   wl,
   FS,
-  footing = c("strip", "square", "rectangular", "circular")
+  footing = c("square", "strip", "rectangular", "circular"),
+  method = c("Vesic", "Terzaghi", "Meyerhof", "Hansen", "Michalowski", "Davis & Booker"),
+  case = c("general", "local"),
+  metric = TRUE
 )
 }
 \arguments{
-\item{B}{The footing's width (in meters)}
+\item{B}{The footing's width or diameter}
 
-\item{D}{The footing's embedment depth (in meters)}
+\item{D}{The footing's embedment depth}
 
-\item{L}{The footing's length for a rectangular footing (in meters)}
+\item{Lf}{Length factor for the footing}
 
-\item{gamma.h}{The wet unit weight of the soil (in kN/m3)}
+\item{gamma.h}{The wet/moist unit weight of the soil}
 
-\item{gamma.s}{The saturated unit weight of the soil (in kN/m3)}
+\item{gamma.s}{The saturated unit weight of the soil}
 
-\item{tau0}{The soil's cohesion (in kPa)}
+\item{tau0}{The soil's cohesion (\eqn{c, \tau_0}) or undrained shear strength (\eqn{s_u})}
 
-\item{phi}{The soil's friction angle}
+\item{phi}{The soil's friction angle (\eqn{\phi}) (in degrees)}
 
-\item{wl}{The depth to the water level (in meters)}
+\item{wl}{The depth to the water level from the ground surface}
 
-\item{FS}{The Factor of Safety to use for the calculation of qa}
+\item{FS}{The Factor of Safety to use for the calculation of \eqn{q_a}}
 
-\item{footing}{Type of footing for which to calculate the bearing capacity (Default is "strip")}
+\item{footing}{Type of footing for which to calculate the bearing capacity: "square" (default), "strip", "rectangular", "circular"}
+
+\item{method}{The method to use to calculate the bearing capacity factor \eqn{N_\gamma}: "Vesic" (default), "Terzaghi", "Meyerhof", "Hansen", "Michalowski" or "Davis & Booker"}
+
+\item{case}{The case to calculate the bearing capacity: "general" (default) or "local"}
+
+\item{metric}{Logical. If \code{TRUE} (default) the function will assume SI units (kN/m3 for unit weight, kPa for strength parameters, and meters for dimensions). If \code{FALSE}, the function will assume imperial units (pcf for unit weight, psf for strength parameters, and feet for dimensions).}
 }
 \value{
-A data frame with the solution (Depth in rows, Width in columns) and the respective plot
+A list with three elements: "qu" is a data frame with the calculated ultimate bearing capacity for each combination of \code{B} and \code{D}, "qa" is a data frame with the calculated allowable bearing capacity for each combination of \code{B} and \code{D}, and "Plot" is a ggplot object showing the relationship between \code{D} and \code{qa} for different values of \code{B}.
 }
 \description{
-Calculates and plots the allowable bearing capacity for different footings.
+Calculates the ultimate and allowable bearing capacity of a shallow foundation using the general bearing capacity equation, and plots the relationship between depth and allowable bearing capacity for different footing widths and embedment depths.
 }
 \details{
-The \code{B} and \code{D} parameters can be vectors for multiple cases comparisons or single values for a single case estimates. If  \code{FS = 1} then \code{qa = qu}.
-For a total stress analysis (TSA) in a cohesive soil (plastic silts and clays) set the friction angle equal to zero (\code{phi = 0}) and the cohesion equal to the undrained shear strength (\code{tau0 = Su}).
+The \code{B} and \code{D} parameters can be vectors for multiple cases comparisons or single values for a single case estimates. If \code{FS = 1} then \eqn{q_a = q_u}.
+For a total stress analysis (TSA) in a cohesive soil (plastic silts and clays) set the friction angle equal to zero (\eqn{\phi = 0}) and the cohesion equal to the undrained shear strength (\eqn{\tau_0 = s_u}).
 For an effective stress analysis (ESA) in a cohesive soil use the effective friction angle and effective cohesion.
-For a coarse-grained soil (gravels, sands, and non-plastic silts) usually TSA = ESA, and the friction angle and cohesion should be used, and if the material has no-cohesion then set cohesion equal to zero (tau0 = 0)
+For a coarse-grained soil (gravels, sands, and non-plastic silts) usually TSA = ESA, and the friction angle and cohesion should be used, and if the material has no-cohesion then set cohesion equal to zero (\eqn{\tau_0 = 0})
+
+The general bearing capacity is calculated using the following equation:
+
+\deqn{q_u = \tau_0 N_c s_c d_c + \gamma D \left(N_q - 1\right) s_q d_q + 0.5 B * N_\gamma \gamma s_\gamma d_\gamma}
+Where:
+\eqn{N_c}, \eqn{N_q}, and \eqn{N_\gamma} are the bearing capacity factors, which are functions of the soil's friction angle (\eqn{\phi}) and the method used to calculate them,
+\eqn{s_c}, \eqn{s_q}, and \eqn{s_\gamma} are the shape factors, which depend on the footing type and dimensions,
+\eqn{d_c}, \eqn{d_q}, and \eqn{d_\gamma} are the depth factors, which depend on the footing's embedment depth and the water level, and
+\eqn{\gamma} is the unit weight of the soil, which can be either the wet/moist unit weight (\eqn{\gamma_h}) or the bouyant unit weight (\eqn{\gamma_b = \gamma_s - 9.807}), depending on the depth of the water level relative to the footing.
+
+For a TSA, the equation simplifies to:
+
+\deqn{q_u = s_u N_c s_c d_c}
+Where:
+\eqn{\tau_0 = s_u} is the undrained shear strength of the soil, and
+\eqn{N_c} is 5.7 for "Terzaghi" and 5.14 for all the others.
+
+For an ESA, the equation simplifies to:
+
+\deqn{q_u = \gamma D \left(N_q - 1\right) s_q d_q + 0.5 B * N_\gamma \gamma s_\gamma d_\gamma}
+
+The allowable bearing capacity (\eqn{q_a}) is then calculated by dividing the ultimate bearing capacity (\eqn{q_u}) by the Factor of Safety (\eqn{FS}):
+
+\deqn{q_a = \frac{q_u}{FS} + \gamma D}
 }
 \examples{
 B = seq(0.5, 2, 0.25)
 D = seq(0, 2, 0.25)
-L = NULL
+Lf = 1
 gamma.h = 15.5
 gamma.s = 18.5
 tau0 = 10
 phi = 30
 FS = 3
 wl = 1
-bearing_capacity(B, D, L, gamma.h, gamma.s, tau0, phi, wl, FS)
-bearing_capacity(B, D, L, gamma.h, gamma.s, tau0, phi, wl, FS, footing = "square")
-bearing_capacity(B, D, L = 3, gamma.h, gamma.s, tau0, phi, wl, FS, footing = "rectangular")
+bearing_capacity(B, D, Lf, gamma.h, gamma.s, tau0, phi, wl, FS)
+bearing_capacity(B, D, Lf, gamma.h, gamma.s, tau0, phi, wl, FS, footing = "strip")
+bearing_capacity(B, D, Lf = 3, gamma.h, gamma.s, tau0, phi, wl, FS,
+                 footing = "rectangular", method = "Meyerhof")
 
 }
 \references{
+Budhu, M. (2011). Soil mechanics and foundations (3rd ed). Wiley.
+
 Day, R. W. (2010). Foundation Engineering Handbook. McGraw Hill.
 }
+\seealso{
+Other soil mechanics: 
+\code{\link{Casagrande_LL}()},
+\code{\link{DS_plot}()},
+\code{\link{Mohr_Circle}()},
+\code{\link{compaction_test}()},
+\code{\link{fallcone_limits}()},
+\code{\link{induced_stress}()},
+\code{\link{insitu_stress}()},
+\code{\link{particle_size_graph}()}
+}
+\concept{soil mechanics}

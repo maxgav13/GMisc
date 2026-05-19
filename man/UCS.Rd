@@ -31,3 +31,9 @@ UCS(W = W, D = D, P = P)
 \references{
 ASTM (1995). Standard Test Method for Determination of the Point Load Strength Index of Rock.
 }
+\seealso{
+Other rock mechanics: 
+\code{\link{Barton_Choubey}()},
+\code{\link{Hoek_Brown}()}
+}
+\concept{rock mechanics}

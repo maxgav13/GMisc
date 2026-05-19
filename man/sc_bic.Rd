@@ -24,3 +24,14 @@ The example data given is intended to show the structure needed for input data. 
 sc_bic(DPM_data, h = 0.1)
 
 }
+\seealso{
+Other layer detection: 
+\code{\link{RI}()},
+\code{\link{T2_stat}()},
+\code{\link{T_stat}()},
+\code{\link{cp_aic_eta}()},
+\code{\link{cp_layers}()},
+\code{\link{layers_window}()},
+\code{\link{sc_layers}()}
+}
+\concept{layer detection}

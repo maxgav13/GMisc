@@ -53,3 +53,12 @@ NewStats_2samples(x, y1, dep = TRUE)
 \references{
 Cumming, G. (2014). The New Statistics: Why and How - Psychological Science, 25(1): 7-29.
 }
+\seealso{
+Other statistics: 
+\code{\link{NewStats_contrasts}()},
+\code{\link{R_crit}()},
+\code{\link{Spearman_crit}()},
+\code{\link{ci_chisq}()},
+\code{\link{pval_chisq}()}
+}
+\concept{statistics}

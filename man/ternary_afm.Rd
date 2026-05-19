@@ -21,14 +21,16 @@ AFM ternary diagram in the desired format (object)
 For plotting data on the ggplot object it would be easier if the names of the dataframe are "a", "f", and "m", that way it gets mapped automatically, if not make sure to use "aes(x=a,y=f,z=m)".
 For plotting on the plotly object the mapping of the new data should be as shown in the example: \code{a = ~f, b = ~a, c = ~m}, where \code{a} refers to the top ("f"), \code{b} refers to the bottom left ("a"), and \code{c} refers to the bottom right ("m").
 The examples show basic usage and how to add data, which can be more customizable.
+
+The AFM diagram is used in igneous petrology to classify volcanic rocks based on their chemical composition, specifically the relative proportions of three major oxides: FeO (F), MgO (M), and Al2O3 (A). The diagram helps to distinguish between tholeiitic and calc-alkaline rock series, which have different magmatic histories and tectonic settings.
 }
 \examples{
 library(ggplot2)
 library(plotly)
 
-d = data.frame(f=c(23,26.9,8.5),
-               a=c(27,23.7,5.1),
-               m=c(36,39.8,59.6))
+d = data.frame(f=c(23,40,60),
+               a=c(27,50,30),
+               m=c(50,10,10))
 
 # adding data to ggplot object
 ternary_afm() + geom_point(data = d)
@@ -48,3 +50,24 @@ ternary_afm('plotly') \%>\%
   layout(showlegend = TRUE)
 
 }
+\seealso{
+Other classification plots, petrology: 
+\code{\link{TAS}()},
+\code{\link{ternary_dickinson_qmflt}()},
+\code{\link{ternary_dickinson_qtfl}()},
+\code{\link{ternary_fap}()},
+\code{\link{ternary_feldspars}()},
+\code{\link{ternary_folk_gsm}()},
+\code{\link{ternary_folk_qfl}()},
+\code{\link{ternary_folk_qfm}()},
+\code{\link{ternary_folk_smc}()},
+\code{\link{ternary_pyroclastic_size}()},
+\code{\link{ternary_pyroclastic_type}()},
+\code{\link{ternary_qap}()},
+\code{\link{ternary_qap_g}()},
+\code{\link{ternary_qap_m_hbl}()},
+\code{\link{ternary_qap_m_ol}()},
+\code{\link{ternary_qap_um}()},
+\code{\link{ternary_qap_um_hbl}()}
+}
+\concept{classification plots, petrology}

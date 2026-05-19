@@ -40,3 +40,15 @@ Holtz, R. D., Kovacs, W. D. & Sheahan, T. C. (2011). An Introduction to Geotechn
 
 Gonzalez de Vallejo, L. I. (2004). Ingenieria Geologica. Prentice Hall.
 }
+\seealso{
+Other soil mechanics: 
+\code{\link{Casagrande_LL}()},
+\code{\link{DS_plot}()},
+\code{\link{bearing_capacity}()},
+\code{\link{compaction_test}()},
+\code{\link{fallcone_limits}()},
+\code{\link{induced_stress}()},
+\code{\link{insitu_stress}()},
+\code{\link{particle_size_graph}()}
+}
+\concept{soil mechanics}

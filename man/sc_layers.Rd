@@ -25,3 +25,14 @@ Given a number of breakpoints, plots a layered model of one variable against dis
 sc_layers(DPM_data, h = 0.1, breaks = 2)
 
 }
+\seealso{
+Other layer detection: 
+\code{\link{RI}()},
+\code{\link{T2_stat}()},
+\code{\link{T_stat}()},
+\code{\link{cp_aic_eta}()},
+\code{\link{cp_layers}()},
+\code{\link{layers_window}()},
+\code{\link{sc_bic}()}
+}
+\concept{layer detection}

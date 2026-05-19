@@ -29,3 +29,9 @@ CoDA_Univariate(d2, ppm_vars = c('Ba','Pb')) # with Ba and Pb variables in ppm
 \references{
 Filzmoser, P., Hron, K. & Reimann, C. (2009). Univariate statistical analysis of environmental (compositional) data: Problems and possibilities. Science of The Total Environment, 407(23), 6100-6108. 10.1016/j.scitotenv.2009.08.008.
 }
+\seealso{
+Other compositional data analysis: 
+\code{\link{CoDA_2Group_H1}()},
+\code{\link{CoDA_Atyp_Idx}()}
+}
+\concept{compositional data analysis}

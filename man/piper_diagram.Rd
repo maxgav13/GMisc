@@ -19,6 +19,8 @@ Piper diagram for hydrochemical data
 }
 \details{
 For ploting data the \code{piper_data_prep()} function should be used to transform the data in the proper format. After that the data has \code{x} and \code{y} coordinates, and these are the ones to use when plotting the data on \code{piper_diagram()}.
+
+The Piper diagram is a graphical representation used in hydrogeology and geochemistry to classify water types based on their chemical composition. It consists of two ternary diagrams (one for cations and one for anions) and a central diamond-shaped plot that combines the information from the two ternary diagrams. The diagram helps to infer the geochemical processes affecting the water, such as mixing, ion exchange, or mineral dissolution, and to identify the dominant ions in the water sample.
 }
 \examples{
 library(ggplot2)
@@ -44,3 +46,4 @@ piper_diagram() +
   scale_shape_manual('Group',values = c(3,21))
 
 }
+\concept{classification plots}

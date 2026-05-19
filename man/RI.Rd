@@ -27,3 +27,14 @@ RI(DPM_data, k = 6)
 \references{
 Mora, R. (2013). Uso de metodos estadisticos para la determinacion de capas homogeneas de suelos volcanicos en un sitio de las laderas del Volcan Irazu, Cartago, Costa Rica. - Rev. Geol. Amer. Central, 49: 101-108.
 }
+\seealso{
+Other layer detection: 
+\code{\link{T2_stat}()},
+\code{\link{T_stat}()},
+\code{\link{cp_aic_eta}()},
+\code{\link{cp_layers}()},
+\code{\link{layers_window}()},
+\code{\link{sc_bic}()},
+\code{\link{sc_layers}()}
+}
+\concept{layer detection}

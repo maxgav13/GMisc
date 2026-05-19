@@ -24,3 +24,14 @@ layers_window(DPM_data, breaks = c(3.8,8.9))
 layers_window(CPTu_data, breaks = c(1.2,3.8,5.1))
 
 }
+\seealso{
+Other layer detection: 
+\code{\link{RI}()},
+\code{\link{T2_stat}()},
+\code{\link{T_stat}()},
+\code{\link{cp_aic_eta}()},
+\code{\link{cp_layers}()},
+\code{\link{sc_bic}()},
+\code{\link{sc_layers}()}
+}
+\concept{layer detection}

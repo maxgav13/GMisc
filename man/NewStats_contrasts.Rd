@@ -39,7 +39,7 @@ NewStats_contrasts(
 \item{B.labels}{Labels to use for plot B of the difference between groups}
 }
 \value{
-A ggplot object
+A ggplot objects list with the plot of the samples and the plot of the difference between groups
 }
 \description{
 It plots all the samples with their confidence intervals (CI), and in addition it plots the contrasts between the selected samples.
@@ -55,3 +55,12 @@ NewStats_contrasts(dat, g1 = c('AD10', 'AD17'), g2 = c('AF10', 'AF17'))
 \references{
 Cumming, G. & Calin-Jageman, R.J. (2017). Introduction to the New Statistics: Estimation, Open Science, and Beyond. New York: Routledge.
 }
+\seealso{
+Other statistics: 
+\code{\link{NewStats_2samples}()},
+\code{\link{R_crit}()},
+\code{\link{Spearman_crit}()},
+\code{\link{ci_chisq}()},
+\code{\link{pval_chisq}()}
+}
+\concept{statistics}

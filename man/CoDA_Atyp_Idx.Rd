@@ -29,3 +29,9 @@ CoDA_Atyp_Idx(Hongite, samp)
 \references{
 Aitchison, J. (1986). The statistical analysis of compositional data. Chapman and Hall.
 }
+\seealso{
+Other compositional data analysis: 
+\code{\link{CoDA_2Group_H1}()},
+\code{\link{CoDA_Univariate}()}
+}
+\concept{compositional data analysis}

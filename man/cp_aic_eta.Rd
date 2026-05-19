@@ -26,3 +26,14 @@ The example data given is intended to show the structure needed for input data. 
 cp_aic_eta(DPM_data, m = 10, nl = 3)
 
 }
+\seealso{
+Other layer detection: 
+\code{\link{RI}()},
+\code{\link{T2_stat}()},
+\code{\link{T_stat}()},
+\code{\link{cp_layers}()},
+\code{\link{layers_window}()},
+\code{\link{sc_bic}()},
+\code{\link{sc_layers}()}
+}
+\concept{layer detection}

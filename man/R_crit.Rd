@@ -31,3 +31,12 @@ R_crit(10, case = "3D", conf.level = 0.9)
 \references{
 Davis, J. C. (2002). Statistical and Data Analysis in Geology. 3rd ed. John Wiley & Sons.
 }
+\seealso{
+Other statistics: 
+\code{\link{NewStats_2samples}()},
+\code{\link{NewStats_contrasts}()},
+\code{\link{Spearman_crit}()},
+\code{\link{ci_chisq}()},
+\code{\link{pval_chisq}()}
+}
+\concept{statistics}

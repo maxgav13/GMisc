@@ -2,9 +2,12 @@
 % Please edit documentation in R/Barton_Choubey.R
 \name{Barton_Choubey}
 \alias{Barton_Choubey}
+\alias{Barton_Choubey_plot}
 \title{Barton-Choubey criterion}
 \usage{
 Barton_Choubey(JRC, JCS, phi.r, unit.weight, depth)
+
+Barton_Choubey_plot(BC, units = "kPa")
 }
 \arguments{
 \item{JRC}{The Joint Roughness Coefficient (1-20)}
@@ -16,12 +19,18 @@ Barton_Choubey(JRC, JCS, phi.r, unit.weight, depth)
 \item{unit.weight}{The unit weight of the rock in kN/m3}
 
 \item{depth}{The depth, in meters, to which calculate the parameters}
+
+\item{BC}{The result from running \code{Barton_Choubey()}}
+
+\item{units}{The units to use in the plot, either "kPa" or "MPa". Default is "kPa". If "MPa" is desired you can use units = "" or units = "MPa"}
 }
 \value{
-A list with 3 tibbles: data (normal stress and shear stress), stress level point, and parameters (c and phi). All stress values are in MPa
+For \code{Barton_Choubey()}: a list with 3 tibbles: data (normal stress and shear stress), stress level point, and parameters (c and phi). All stress values are in MPa
+
+For \code{Barton_Choubey_plot()}: a ggplot object for the Barton-Choubey criterion
 }
 \description{
-Calculates the Barton-Choubey criterion for the given data and for the given level of stress (unit weight and depth).
+Calculates the Barton-Choubey criterion for the given data and for the given level of stress (unit weight and depth), and an option for plotting it.
 }
 \examples{
 JRC = 10
@@ -29,9 +38,17 @@ JCS = 30
 phi.r = 26
 unit.weight = 18.6
 depth = 40
-Barton_Choubey(JRC, JCS, phi.r, unit.weight, depth)
+BC = Barton_Choubey(JRC, JCS, phi.r, unit.weight, depth)
+BC
+Barton_Choubey_plot(BC)
 
 }
 \references{
 Barton, N. & Choubey, V. (1977). The shear strength of rock joints in theory and practice. Rock Mechanichs, 10: 1-54.
 }
+\seealso{
+Other rock mechanics: 
+\code{\link{Hoek_Brown}()},
+\code{\link{UCS}()}
+}
+\concept{rock mechanics}

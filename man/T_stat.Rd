@@ -27,3 +27,14 @@ T_stat(DPM_data, k = 6)
 \references{
 Mora, R. (2013). Uso de metodos estadisticos para la identifacion de capas de suelos volcanicos con el ensayo del cono de pentracion en los terrenos de la Universidad de Costa Rica, Montes de Oca, San Jose, Costa Rica. - Rev. Geol. Amer. Central, 49: 109-120.
 }
+\seealso{
+Other layer detection: 
+\code{\link{RI}()},
+\code{\link{T2_stat}()},
+\code{\link{cp_aic_eta}()},
+\code{\link{cp_layers}()},
+\code{\link{layers_window}()},
+\code{\link{sc_bic}()},
+\code{\link{sc_layers}()}
+}
+\concept{layer detection}

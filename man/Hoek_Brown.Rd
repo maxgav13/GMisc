@@ -2,6 +2,7 @@
 % Please edit documentation in R/Hoek_Brown.R
 \name{Hoek_Brown}
 \alias{Hoek_Brown}
+\alias{Hoek_Brown_plot}
 \title{Hoek-Brown criterion}
 \usage{
 Hoek_Brown(
@@ -14,6 +15,8 @@ Hoek_Brown(
   unit.weight,
   use = c("general", "tunnels", "slopes")
 )
+
+Hoek_Brown_plot(HB)
 }
 \arguments{
 \item{sig.ci}{The unconfined compressive strength of the intact rock, in MPa}
@@ -31,12 +34,16 @@ Hoek_Brown(
 \item{unit.weight}{The unit weight of the rock, in kN/m3}
 
 \item{use}{The use expected for the rock mass (general, tunnels, or slopes)}
+
+\item{HB}{The result from running \code{Hoek_Brown()}}
 }
 \value{
-A list with a list of the resulting parameters of the rock mass and 3 data frames: Shear envelopes for Mohr-Coulomb and Hoek-Brown criteria, Principal stresses envelopes for Mohr-Coulomb and Hoek-Brown criteria, and stress level for the given height and unit weight
+For \code{Hoek_Brown()}: a list with a list of the resulting parameters of the rock mass and 3 data frames: Shear envelopes for Mohr-Coulomb and Hoek-Brown criteria, Principal stresses envelopes for Mohr-Coulomb and Hoek-Brown criteria, and stress level for the given height and unit weight
+
+For \code{Hoek_Brown_plot()}: a list with two ggplot objects for the Hoek-Brown criterion (principal stresses and normal-shear stresses)
 }
 \description{
-Calculates the Hoek-Brown criterion for the given data and for the given level of stress (unit weight and depth).
+Calculates the Hoek-Brown criterion for the given data and for the given level of stress (unit weight and depth), and an option for plotting it.
 }
 \details{
 Tables for some of the input parameters can be found in the directory where the package is installed, just run the following command to find this path: \code{system.file(package = "GMisc")}
@@ -49,7 +56,9 @@ MR = 300
 D = 0
 height = 40
 unit.weight = 18.6
-Hoek_Brown(sig.ci, GSI, mi, MR, D, height, unit.weight)
+HB = Hoek_Brown(sig.ci, GSI, mi, MR, D, height, unit.weight)
+HB
+Hoek_Brown_plot(HB)
 
 }
 \references{
@@ -59,3 +68,9 @@ Hoek, E., Carranza-Torres, C. & Corkum, B. (2002). Hoek-Brown Failure Criterion 
 
 Hoek, E. & Marinos, P. (2007). A brief history of the development of the Hoek-Brown criterion. Soils and Rocks, No. 2.
 }
+\seealso{
+Other rock mechanics: 
+\code{\link{Barton_Choubey}()},
+\code{\link{UCS}()}
+}
+\concept{rock mechanics}

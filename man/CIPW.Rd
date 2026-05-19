@@ -26,3 +26,4 @@ d = data.frame(O = c('SiO2', 'TiO2', 'Al2O3', 'Fe2O3', 'FeO',
 CIPW(d)
 
 }
+\concept{petrology}

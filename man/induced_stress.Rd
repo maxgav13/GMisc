@@ -9,7 +9,8 @@ induced_stress(
   B,
   L = NULL,
   z.end,
-  footing = c("strip", "square", "rectangular", "circular")
+  footing = c("strip", "square", "rectangular", "circular"),
+  rect.pos = c("center", "corner")
 )
 }
 \arguments{
@@ -22,9 +23,11 @@ induced_stress(
 \item{z.end}{The depth to which calculate the stresses (in meters)}
 
 \item{footing}{Type of footing for which to calculate the stresses (Default is "strip")}
+
+\item{rect.pos}{For rectangular or square footings, whether the stress is calculated at the center of the footing (Default is "center") or at the corner of the footing (i.e., at the edge of the footing) (rect.pos = "corner")}
 }
 \value{
-A stress distribution plot for the desired footing
+A list with three elements: \code{Profile} is a tibble with the stress distribution, \code{Plot} is a ggplot object with the stress distribution, and \code{Plotly} is an interactive plotly object with the stress distribution.
 }
 \description{
 Plots the stress distribution under the center of a footing of different shapes.
@@ -48,11 +51,29 @@ induced_stress(qs, B, L, z.end, footing = "square")
 # Different values of L for a rectangular footing
 qs = 1
 B = 1
-L = c(1, 2, 4)
+L = c(2, 3, 4)
 z.end = 8
-induced_stress(qs, B, L, z.end, footing = "rectangular")
+res = induced_stress(qs, B, L, z.end, footing = "rectangular")
+res$Profile |> dplyr::filter(z==4)
+res$Plot
 
 }
 \references{
 Holtz, R. D., Kovacs, W. D. & Sheahan, T. C. (2011). An Introduction to Geotechnical Engineering. Prentice Hall.
+
+Budhu, M. (2011). Soil mechanics and foundations (3rd ed). Wiley.
+
+Das, B. M., & Sobhan, K. (2018). Principles of geotechnical engineering (Ninth edition). Cengage Learning.
 }
+\seealso{
+Other soil mechanics: 
+\code{\link{Casagrande_LL}()},
+\code{\link{DS_plot}()},
+\code{\link{Mohr_Circle}()},
+\code{\link{bearing_capacity}()},
+\code{\link{compaction_test}()},
+\code{\link{fallcone_limits}()},
+\code{\link{insitu_stress}()},
+\code{\link{particle_size_graph}()}
+}
+\concept{soil mechanics}

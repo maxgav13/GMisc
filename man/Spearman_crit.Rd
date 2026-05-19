@@ -28,3 +28,12 @@ Spearman_crit(10, conf.level = 0.9)
 \references{
 Swan, A. R. H. & Sandilands, M. (1995). Introduction to Geological Data Analysis. Blackwell Science.
 }
+\seealso{
+Other statistics: 
+\code{\link{NewStats_2samples}()},
+\code{\link{NewStats_contrasts}()},
+\code{\link{R_crit}()},
+\code{\link{ci_chisq}()},
+\code{\link{pval_chisq}()}
+}
+\concept{statistics}

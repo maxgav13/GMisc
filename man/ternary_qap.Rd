@@ -27,14 +27,16 @@ QAP ternary diagram for plutonic and volcanic rocks in the desired format (objec
 For plotting data on the ggplot object it would be easier if the names of the dataframe are "a", "q", and "p", that way it gets mapped automatically, if not make sure to use "aes(x=a,y=q,z=p)".
 For plotting on the plotly object the mapping of the new data should be as shown in the example: \code{a = ~q, b = ~a, c = ~p}, where \code{a} refers to the top ("q"), \code{b} refers to the bottom left ("a"), and \code{c} refers to the bottom right ("p").
 The examples show basic usage and how to add data, which can be more customizable.
+
+The QAP ternary diagram is used in igneous petrology to classify plutonic and volcanic rocks based on their mineralogical composition, specifically the relative proportions of quartz (Q), alkali feldspar (A), and plagioclase feldspar (P). The diagram helps to infer the petrogenesis and tectonic setting of igneous rocks, as different types of magmatic processes produce characteristic mineral assemblages in the resulting plutonic and volcanic rocks.
 }
 \examples{
 library(ggplot2)
 library(plotly)
 
-d = data.frame(q=c(23,26.9,25.3),
-               a=c(27,23.7,5.1),
-               p=c(50,49.4,59.6))
+d = data.frame(q=c(23,40,60),
+               a=c(27,50,30),
+               p=c(50,10,10))
 
 # adding data to ggplot object
 ternary_qap() + geom_point(data = d)
@@ -53,3 +55,24 @@ ternary_qap('plotly') \%>\%
                                    'P: \%{c}'))
 
 }
+\seealso{
+Other classification plots, petrology: 
+\code{\link{TAS}()},
+\code{\link{ternary_afm}()},
+\code{\link{ternary_dickinson_qmflt}()},
+\code{\link{ternary_dickinson_qtfl}()},
+\code{\link{ternary_fap}()},
+\code{\link{ternary_feldspars}()},
+\code{\link{ternary_folk_gsm}()},
+\code{\link{ternary_folk_qfl}()},
+\code{\link{ternary_folk_qfm}()},
+\code{\link{ternary_folk_smc}()},
+\code{\link{ternary_pyroclastic_size}()},
+\code{\link{ternary_pyroclastic_type}()},
+\code{\link{ternary_qap_g}()},
+\code{\link{ternary_qap_m_hbl}()},
+\code{\link{ternary_qap_m_ol}()},
+\code{\link{ternary_qap_um}()},
+\code{\link{ternary_qap_um_hbl}()}
+}
+\concept{classification plots, petrology}

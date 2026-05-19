@@ -27,3 +27,14 @@ T2_stat(CPTu_data, k = 50)
 \references{
 Davis, J. C. (2002). Statistical and Data Analysis in Geology. 3rd ed. John Wiley & Sons.
 }
+\seealso{
+Other layer detection: 
+\code{\link{RI}()},
+\code{\link{T_stat}()},
+\code{\link{cp_aic_eta}()},
+\code{\link{cp_layers}()},
+\code{\link{layers_window}()},
+\code{\link{sc_bic}()},
+\code{\link{sc_layers}()}
+}
+\concept{layer detection}

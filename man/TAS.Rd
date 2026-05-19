@@ -43,3 +43,24 @@ TAS('plotly') \%>\%
   layout(showlegend = TRUE)
 
 }
+\seealso{
+Other classification plots, petrology: 
+\code{\link{ternary_afm}()},
+\code{\link{ternary_dickinson_qmflt}()},
+\code{\link{ternary_dickinson_qtfl}()},
+\code{\link{ternary_fap}()},
+\code{\link{ternary_feldspars}()},
+\code{\link{ternary_folk_gsm}()},
+\code{\link{ternary_folk_qfl}()},
+\code{\link{ternary_folk_qfm}()},
+\code{\link{ternary_folk_smc}()},
+\code{\link{ternary_pyroclastic_size}()},
+\code{\link{ternary_pyroclastic_type}()},
+\code{\link{ternary_qap}()},
+\code{\link{ternary_qap_g}()},
+\code{\link{ternary_qap_m_hbl}()},
+\code{\link{ternary_qap_m_ol}()},
+\code{\link{ternary_qap_um}()},
+\code{\link{ternary_qap_um_hbl}()}
+}
+\concept{classification plots, petrology}
