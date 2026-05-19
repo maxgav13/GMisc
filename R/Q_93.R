@@ -15,17 +15,16 @@ Q_93 = function(Q, De, dot.col = 'blue') {
   img = png::readPNG(system.file("Q_94.png", package = "GMisc"))
   g = grid::rasterGrob(
     img,
-    width = unit(1, "npc"),
-    height = unit(1, "npc"),
     interpolate = FALSE
   )
 
   df = data.frame(x = Q, y = De)
   p = ggplot(df) +
-    annotation_custom(g, -3, 3, -.001, 2.29) +
+    annotation_custom(g, xmin = .001, xmax = 1000, ymin = 1, ymax = 190) +
     geom_point(aes(.data$x, .data$y), color = dot.col, size = 3) +
-    scale_x_log10(
+    scale_x_continuous(
       "Rock Mass Quality, Q",
+      trans = "log10",
       breaks = c(.001, .004, .01, .04, .1, .4, 1, 4, 10, 40, 100, 400),
       labels = c(
         ".001",
@@ -44,8 +43,9 @@ Q_93 = function(Q, De, dot.col = 'blue') {
       limits = c(.001, 1000),
       expand = c(0, 0)
     ) +
-    scale_y_log10(
+    scale_y_continuous(
       "Equivalent dimension, De",
+      trans = "log10",
       breaks = c(1, 2, 3, 5, 10, 20, 50, 100),
       labels = c("1", "2", "3", "5", "10", "20", "50", "100"),
       limits = c(1, 190),
