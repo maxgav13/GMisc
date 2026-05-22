@@ -19,12 +19,18 @@ TAS diagram in the desired format (object)
 }
 \details{
 The examples show basic usage and how to add data, which can be more customizable. In general, just map the silica content to the x-axis and alkali content to the y-axis.
+For a more complete description on how to use this function and similar ones, see
+\code{vignette("classification_diagrams_vig")}
 }
 \examples{
 library(ggplot2)
 library(plotly)
 
-d = data.frame(silica=c(58,50,70), alkali=c(8,4,5))
+d = data.frame(
+  silica=c(58,50,70),
+  alkali=c(8,4,5),
+  loc=c("A", "B", "C")
+  )
 
 TAS()
 TAS('plotly')
@@ -32,6 +38,9 @@ TAS('plotly')
 # adding data to ggplot object
 TAS(language = 'es') +
   geom_point(aes(x=silica, y=alkali), data=d)
+
+TAS(language = 'es') +
+  geom_point(aes(x=silica, y=alkali, color=loc), data=d)
 
 # adding data to plotly object
 TAS('plotly') \%>\%
@@ -41,6 +50,19 @@ TAS('plotly') \%>\%
               marker = list(size=8,color='orange',
                             symbol=3,opacity=.9)) \%>\%
   layout(showlegend = TRUE)
+
+# adding data to plotly object with custom colors
+my_pal    <- c("A" = "red",      "B" = "blue",   "C" = "green")
+my_shapes <- c("A" = "circle",   "B" = "square",  "C" = "diamond")
+
+TAS('plotly') \%>\%
+  add_markers(x=~silica, y=~alkali,
+              data = d,
+              split = ~loc,
+              marker = list(size=8,
+                            color  = ~my_pal[loc],
+                            symbol = ~my_shapes[loc],
+                            opacity=.9))
 
 }
 \seealso{

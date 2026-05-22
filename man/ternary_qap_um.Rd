@@ -27,6 +27,8 @@ QAP ternary diagram for ultramafic rocks in the desired format (object)
 For plotting data on the ggplot object it would be easier if the names of the dataframe are "opx", "ol", and "cpx", that way it gets mapped automatically, if not make sure to use "aes(x=opx,y=ol,z=cpx)".
 For plotting on the plotly object the mapping of the new data should be as shown in the example: \code{a = ~ol, b = ~opx, c = ~cpx}, where \code{a} refers to the top ("ol"), \code{b} refers to the bottom left ("opx"), and \code{c} refers to the bottom right ("cpx").
 The examples show basic usage and how to add data, which can be more customizable.
+For a more complete description on how to use this function and similar ones, see
+\code{vignette("classification_diagrams_vig")}
 }
 \examples{
 library(ggplot2)
@@ -34,10 +36,11 @@ library(plotly)
 
 d = data.frame(ol=c(23,40,60),
                opx=c(27,50,30),
-               cpx=c(50,10,10))
+               cpx=c(50,10,10),
+               loc=c("A", "B", "C"))
 
 # adding data to ggplot object
-ternary_qap_um() + geom_point(data = d)
+ternary_qap_um() + geom_point(aes(col = loc), data = d)
 
 # adding data to plotly object
 ternary_qap_um('plotly') \%>\%
@@ -48,6 +51,24 @@ ternary_qap_um('plotly') \%>\%
             mode = "markers",
             marker = list(size=8,color='coral',
                           symbol=3,opacity=.9),
+            hovertemplate = paste0('Ol: \%{a}<br>',
+                                   'Opx: \%{b}<br>',
+                                   'Cpx: \%{c}'))
+
+# customizing colors and symbols by location
+my_pal    <- c("A" = "red",      "B" = "blue",   "C" = "green")
+my_shapes <- c("A" = "circle",   "B" = "square",  "C" = "diamond")
+
+ternary_qap_um('plotly') \%>\%
+  add_trace(a = ~ol, b = ~opx, c = ~cpx,
+            data = d,
+            type = "scatterternary",
+            mode = "markers",
+            split = ~loc,
+            marker = list(size=8,
+                          color  = ~my_pal[loc],
+                          symbol = ~my_shapes[loc],
+                          opacity=.9),
             hovertemplate = paste0('Ol: \%{a}<br>',
                                    'Opx: \%{b}<br>',
                                    'Cpx: \%{c}'))

@@ -4,16 +4,6 @@
 
 library(GMisc)
 library(drc)
-#> Loading required package: MASS
-#> 
-#> 'drc' has been loaded.
-#> Please cite R and 'drc' if used for a publication,
-#> for references type 'citation()' and 'citation('drc')'.
-#> 
-#> Attaching package: 'drc'
-#> The following objects are masked from 'package:stats':
-#> 
-#>     gaussian, getInitial
 library(ggplot2)
 ```
 
@@ -41,17 +31,17 @@ Each model is available in three forms:
 
 | Model | Equation | Parameters | `nls` self-starter | `drc` self-starter |
 |----|----|----|----|----|
-| Chapman-Richards | $`y = a(1 - e^{-bx})^c`$ | $`a`$, $`b`$, $`c`$ | [`SSchaprich()`](https://maxgav13.github.io/GMisc/reference/chaprich.md) | [`DRCchaprich()`](https://maxgav13.github.io/GMisc/reference/chaprich.md) |
-| Exp. with inverse predictor (Type 3) | $`y = a e^{b/x}`$ | $`a`$, $`b`$ | [`SSexp3()`](https://maxgav13.github.io/GMisc/reference/exp3.md) | [`DRCexp3()`](https://maxgav13.github.io/GMisc/reference/exp3.md) |
-| Negative exponential | $`y = a + b e^{cx}`$ | $`a`$, $`b`$, $`c`$ | [`SSexpneg()`](https://maxgav13.github.io/GMisc/reference/expneg.md) | [`DRCexpneg()`](https://maxgav13.github.io/GMisc/reference/expneg.md) |
-| Two-asymptote exponential | $`y = a e^{cx} + b(1 - e^{cx})`$ | $`a`$, $`b`$, $`c`$ | [`SSexpneg2()`](https://maxgav13.github.io/GMisc/reference/expneg2.md) | [`DRCexpneg2()`](https://maxgav13.github.io/GMisc/reference/expneg2.md) |
-| Exponential variogram | $`y = \text{nug} + \text{psill}(1 - e^{-x/\text{range}})`$ | nug, psill, range | [`SSvarexp()`](https://maxgav13.github.io/GMisc/reference/varexp.md) | [`DRCvarexp()`](https://maxgav13.github.io/GMisc/reference/varexp.md) |
-| Gaussian variogram | $`y = \text{nug} + \text{psill}(1 - e^{-(x/\text{range})^2})`$ | nug, psill, range | [`SSvargauss()`](https://maxgav13.github.io/GMisc/reference/vargauss.md) | [`DRCvargauss()`](https://maxgav13.github.io/GMisc/reference/vargauss.md) |
-| Spherical variogram | $`y = \text{nug} + \text{psill}\left(\frac{3}{2}\frac{x}{r} - \frac{1}{2}\left(\frac{x}{r}\right)^3\right),\; x \le r`$ | nug, psill, range | [`SSvarsph()`](https://maxgav13.github.io/GMisc/reference/varsph.md) | [`DRCvarsph()`](https://maxgav13.github.io/GMisc/reference/varsph.md) |
-| Inverse polynomial (1st order) | $`y = \dfrac{x}{a + bx}`$ | $`a`$, $`b`$ | [`SSinvpoly1()`](https://maxgav13.github.io/GMisc/reference/invpoly1.md) | [`DRCinvpoly1()`](https://maxgav13.github.io/GMisc/reference/invpoly1.md) |
-| Inverse polynomial (2nd order) | $`y = \dfrac{x}{a + bx + cx^2}`$ | $`a`$, $`b`$, $`c`$ | [`SSinvpoly2()`](https://maxgav13.github.io/GMisc/reference/invpoly2.md) | [`DRCinvpoly2()`](https://maxgav13.github.io/GMisc/reference/invpoly2.md) |
-| Inverse polynomial (3rd order) | $`y = \dfrac{x}{a + bx + cx^2 + dx^3}`$ | $`a`$, $`b`$, $`c`$, $`d`$ | [`SSinvpoly3()`](https://maxgav13.github.io/GMisc/reference/invpoly3.md) | [`DRCinvpoly3()`](https://maxgav13.github.io/GMisc/reference/invpoly3.md) |
-| Modified Kostiakov | $`y = \alpha x^{\beta} + f_c`$ | $`\alpha`$, $`\beta`$, $`f_c`$ | [`SSkostmod()`](https://maxgav13.github.io/GMisc/reference/kostmod.md) | [`DRCkostmod()`](https://maxgav13.github.io/GMisc/reference/kostmod.md) |
+| Chapman-Richards | y = a(1 - e^{-bx})^c | a, b, c | [`SSchaprich()`](https://maxgav13.github.io/GMisc/reference/chaprich.md) | [`DRCchaprich()`](https://maxgav13.github.io/GMisc/reference/chaprich.md) |
+| Exp. with inverse predictor (Type 3) | y = a e^{b/x} | a, b | [`SSexp3()`](https://maxgav13.github.io/GMisc/reference/exp3.md) | [`DRCexp3()`](https://maxgav13.github.io/GMisc/reference/exp3.md) |
+| Negative exponential | y = a + b e^{cx} | a, b, c | [`SSexpneg()`](https://maxgav13.github.io/GMisc/reference/expneg.md) | [`DRCexpneg()`](https://maxgav13.github.io/GMisc/reference/expneg.md) |
+| Two-asymptote exponential | y = a e^{cx} + b(1 - e^{cx}) | a, b, c | [`SSexpneg2()`](https://maxgav13.github.io/GMisc/reference/expneg2.md) | [`DRCexpneg2()`](https://maxgav13.github.io/GMisc/reference/expneg2.md) |
+| Exponential variogram | y = \text{nug} + \text{psill}(1 - e^{-x/\text{range}}) | nug, psill, range | [`SSvarexp()`](https://maxgav13.github.io/GMisc/reference/varexp.md) | [`DRCvarexp()`](https://maxgav13.github.io/GMisc/reference/varexp.md) |
+| Gaussian variogram | y = \text{nug} + \text{psill}(1 - e^{-(x/\text{range})^2}) | nug, psill, range | [`SSvargauss()`](https://maxgav13.github.io/GMisc/reference/vargauss.md) | [`DRCvargauss()`](https://maxgav13.github.io/GMisc/reference/vargauss.md) |
+| Spherical variogram | y = \text{nug} + \text{psill}\left(\frac{3}{2}\frac{x}{r} - \frac{1}{2}\left(\frac{x}{r}\right)^3\right),\\ x \le r | nug, psill, range | [`SSvarsph()`](https://maxgav13.github.io/GMisc/reference/varsph.md) | [`DRCvarsph()`](https://maxgav13.github.io/GMisc/reference/varsph.md) |
+| Inverse polynomial (1st order) | y = \dfrac{x}{a + bx} | a, b | [`SSinvpoly1()`](https://maxgav13.github.io/GMisc/reference/invpoly1.md) | [`DRCinvpoly1()`](https://maxgav13.github.io/GMisc/reference/invpoly1.md) |
+| Inverse polynomial (2nd order) | y = \dfrac{x}{a + bx + cx^2} | a, b, c | [`SSinvpoly2()`](https://maxgav13.github.io/GMisc/reference/invpoly2.md) | [`DRCinvpoly2()`](https://maxgav13.github.io/GMisc/reference/invpoly2.md) |
+| Inverse polynomial (3rd order) | y = \dfrac{x}{a + bx + cx^2 + dx^3} | a, b, c, d | [`SSinvpoly3()`](https://maxgav13.github.io/GMisc/reference/invpoly3.md) | [`DRCinvpoly3()`](https://maxgav13.github.io/GMisc/reference/invpoly3.md) |
+| Modified Kostiakov | y = \alpha x^{\beta} + f_c | \alpha, \beta, f_c | [`SSkostmod()`](https://maxgav13.github.io/GMisc/reference/kostmod.md) | [`DRCkostmod()`](https://maxgav13.github.io/GMisc/reference/kostmod.md) |
 
 ------------------------------------------------------------------------
 
@@ -60,11 +50,9 @@ Each model is available in three forms:
 ### 1. Chapman-Richards growth model
 
 The Chapman-Richards model describes sigmoidal growth towards an upper
-asymptote $`a`$:
+asymptote a:
 
-``` math
 y = a \left(1 - e^{-bx}\right)^c
-```
 
 ``` r
 
@@ -154,9 +142,8 @@ ggplot(df, aes(x, y)) +
 The exponential variogram is widely used in geostatistics to model
 spatial autocorrelation. It approaches the sill asymptotically:
 
-``` math
-\gamma(x) = \text{nug} + \text{psill}\left(1 - e^{-x / \text{range}}\right)
-```
+\gamma(x) = \text{nug} + \text{psill}\left(1 - e^{-x /
+\text{range}}\right)
 
 ``` r
 
@@ -244,12 +231,9 @@ ggplot(df2, aes(x, y)) +
 ### 3. Modified Kostiakov infiltration model
 
 The Modified Kostiakov model describes infiltration rate as a power-law
-decay with an additive constant representing the steady-state rate
-$`f_c`$:
+decay with an additive constant representing the steady-state rate f_c:
 
-``` math
-y = \alpha\, x^{\beta} + f_c
-```
+y = \alpha\\ x^{\beta} + f_c
 
 ``` r
 

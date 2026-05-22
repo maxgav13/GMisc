@@ -6,8 +6,7 @@ format:
   html:
     toc: true
     syntax-highlighting: pygments
-    # number-sections: true
-    # theme: cosmo
+    fig-align: center
 vignette: >
   %\VignetteIndexEntry{Non-linear and self-starting functions}
   %\VignetteEngine{quarto::html}
@@ -20,6 +19,8 @@ knitr:
 
 ```{r}
 #| label: setup
+#| warning: false
+#| message: false
 library(GMisc)
 library(drc)
 library(ggplot2)

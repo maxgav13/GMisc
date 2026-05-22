@@ -27,6 +27,8 @@ Feldspar ternary diagram in the desired format (object)
 For plotting data on the ggplot object it would be easier if the names of the dataframe are "p", "f", and "a", that way it gets mapped automatically, if not make sure to use "aes(x=Na,y=K,z=Ca)".
 For plotting on the plotly object the mapping of the new data should be as shown in the example: \code{a = ~K, b = ~Na, c = ~Ca}, where \code{a} refers to the top ("K"), \code{b} refers to the bottom left ("Na"), and \code{c} refers to the bottom right ("Ca").
 The examples show basic usage and how to add data, which can be more customizable.
+For a more complete description on how to use this function and similar ones, see
+\code{vignette("classification_diagrams_vig")}
 }
 \examples{
 library(ggplot2)
@@ -34,10 +36,11 @@ library(plotly)
 
 d = data.frame(K=c(80,5,30),
                Na=c(15,60,65),
-               Ca=c(5,35,5))
+               Ca=c(5,35,5),
+               loc=c("A", "B", "C"))
 
 # adding data to ggplot object
-ternary_feldspars() + geom_point(data = d)
+ternary_feldspars() + geom_point(aes(col = loc), data = d)
 
 # adding data to plotly object
 ternary_feldspars('plotly') \%>\%
@@ -48,6 +51,24 @@ ternary_feldspars('plotly') \%>\%
             mode = "markers",
             marker = list(size=8,color='coral',
                           symbol=3,opacity=.9),
+            hovertemplate = paste0('K: \%{a}<br>',
+                                   'Na: \%{b}<br>',
+                                   'Ca: \%{c}'))
+
+# adding data to plotly object with custom colors
+my_pal    <- c("A" = "red",      "B" = "blue",   "C" = "green")
+my_shapes <- c("A" = "circle",   "B" = "square",  "C" = "diamond")
+
+ternary_feldspars('plotly') \%>\%
+  add_trace(a = ~K, b = ~Na, c = ~Ca,
+            data = d,
+            type = "scatterternary",
+            mode = "markers",
+            split = ~loc,
+            marker = list(size=8,
+                          color  = ~my_pal[loc],
+                          symbol = ~my_shapes[loc],
+                          opacity=.9),
             hovertemplate = paste0('K: \%{a}<br>',
                                    'Na: \%{b}<br>',
                                    'Ca: \%{c}'))

@@ -6,9 +6,10 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <title>Directional statistics • GMisc</title>
-<script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<link href="../deps/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet">
-<script src="../deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="../deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet">
+<!-- katex math --><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" integrity="sha384-nB0miv6/jRmo5UMMR1wu3Gz6NLsoTkbqJghGIsx//Rlm+ZU03BU6SQNC66uf4l5+" crossorigin="anonymous">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" integrity="sha384-7zkQWkzuo3B5mTepMUcHkMB5jZaolc2xDwL6VFqjFALcbeS9Ggm/Yr2r3Dy4lfFg" crossorigin="anonymous"></script><script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js" integrity="sha384-43gviWU0YVjaDtb/GhzOouOXtZMP/7XUzwPTstBeZFe/+rCMvRwr4yROQP43s0Xk" crossorigin="anonymous" onload="renderMathInElement(document.body);"></script><script src="../katex-auto.js"></script><script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link href="../deps/bootstrap-5.3.8/bootstrap.min.css" rel="stylesheet">
+<script src="../deps/bootstrap-5.3.8/bootstrap.bundle.min.js"></script><link href="../deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet">
 <link href="../deps/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet">
 <script src="../deps/headroom-0.11.0/headroom.min.js"></script><script src="../deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="../deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="../deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="../deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="../deps/search-1.0.0/fuse.min.js"></script><script src="../deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="Directional statistics">
 </head>
@@ -20,7 +21,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">GMisc</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.4.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.4.1</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -65,7 +66,7 @@
                         <h4 data-toc-skip class="author">Maximiliano
 Garnier-Villarreal</h4>
             
-            <h4 data-toc-skip class="date">2026-05-19</h4>
+            <h4 data-toc-skip class="date">2026-05-22</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/maxgav13/GMisc/blob/HEAD/vignettes/directional_stats_vig.Rmd" class="external-link"><code>vignettes/directional_stats_vig.Rmd</code></a></small>
       <div class="d-none name"><code>directional_stats_vig.Rmd</code></div>
@@ -73,6 +74,10 @@ Garnier-Villarreal</h4>
 
     
     
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://maxgav13.github.io/GMisc/">GMisc</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org" class="external-link">ggplot2</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://purrr.tidyverse.org/" class="external-link">purrr</a></span><span class="op">)</span></span></code></pre></div>
 <p>This document highlights some functions of the <code>GMisc</code>
 package related to directional statistics and stereonets.</p>
 <p>Directional data refers to anything that can be expressed in
@@ -104,39 +109,29 @@ applied.</p>
 <h3 id="basic-stats">Basic stats<a class="anchor" aria-label="anchor" href="#basic-stats"></a>
 </h3>
 <p>The main statistics that describe circular data are the mean
-direction
-(<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mover><mi>θ</mi><mo accent="true">‾</mo></mover><annotation encoding="application/x-tex">\bar{\theta}</annotation></semantics></math>),
-mean resultant length
-(<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mover><mi>R</mi><mo accent="true">‾</mo></mover><annotation encoding="application/x-tex">\bar{R}</annotation></semantics></math>),
-and circular variance
-(<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msubsup><mi>s</mi><mn>0</mn><mn>2</mn></msubsup><annotation encoding="application/x-tex">s_0^2</annotation></semantics></math>).
-The mean resultant length
-(<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mover><mi>R</mi><mo accent="true">‾</mo></mover><annotation encoding="application/x-tex">\bar{R}</annotation></semantics></math>)
-ranges between 0 and 1, and the closer to 1 the more concentrated are
-the data and the closer to 0 the more dispersed is the data. The
-circular variance
-(<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msubsup><mi>s</mi><mn>0</mn><mn>2</mn></msubsup><annotation encoding="application/x-tex">s_0^2</annotation></semantics></math>)
-is the complement of the mean resultant length
-(<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mover><mi>R</mi><mo accent="true">‾</mo></mover><annotation encoding="application/x-tex">\bar{R}</annotation></semantics></math>)
-and its interpretation is the opposite, the closer to 1 the more
-variation there is in the data.</p>
+direction (<span class="math inline">\bar{\theta}</span>), mean
+resultant length (<span class="math inline">\bar{R}</span>), and
+circular variance (<span class="math inline">s_0^2</span>). The mean
+resultant length (<span class="math inline">\bar{R}</span>) ranges
+between 0 and 1, and the closer to 1 the more concentrated are the data
+and the closer to 0 the more dispersed is the data. The circular
+variance (<span class="math inline">s_0^2</span>) is the complement of
+the mean resultant length (<span class="math inline">\bar{R}</span>) and
+its interpretation is the opposite, the closer to 1 the more variation
+there is in the data.</p>
 <p>The function <code>dir_stats_circ</code> is used to obtain the basic
 statistics for circular data. Its arguments are <code>x</code> a vector
 of angular measurements in degrees, <code>dir</code> a switch to
 indicate if the data is directional (1) or non-directional (0), and
 <code>conf.level</code> to determine the desired confidence level. The
 result shows the statistics mentioned above, plus the concentration
-parameter kappa
-(<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>k</mi><annotation encoding="application/x-tex">k</annotation></semantics></math>),
-and the general width for the cone of confidence. The concentration
-parameter
-(<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>k</mi><annotation encoding="application/x-tex">k</annotation></semantics></math>)
-is another measure of the dispersion, the higher it is the more
-concentrated (less dispersed) is the data, and more likely to have a
-preferred mean direction.</p>
+parameter kappa (<span class="math inline">k</span>), and the general
+width for the cone of confidence. The concentration parameter (<span class="math inline">k</span>) is another measure of the dispersion, the
+higher it is the more concentrated (less dispersed) is the data, and
+more likely to have a preferred mean direction.</p>
 <p>The first example shows a set of directional data, while the second
 example shows a set of non-directional data.</p>
-<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span></span>
 <span>  <span class="fl">255</span>,</span>
 <span>  <span class="fl">239</span>,</span>
@@ -156,13 +151,13 @@ example shows a set of non-directional data.</p>
 <span>  <span class="fl">209</span>,</span>
 <span>  <span class="fl">216</span></span>
 <span><span class="op">)</span></span>
-<span><span class="fu"><a href="../reference/dir_stats_circ.html">dir_stats_circ</a></span><span class="op">(</span><span class="va">x</span>, dir <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">##   theta.hat  N     R   Rbar circ.var circ.sd circ.disp kappa  cone</span></span>
-<span><span class="co">## 1     228.4 17 15.29 0.8996   0.1004    0.46    0.2205 5.271 12.61</span></span></code></pre>
+<span><span class="fu"><a href="../reference/dir_stats_circ.html">dir_stats_circ</a></span><span class="op">(</span><span class="va">x</span>, dir <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span>
+<span><span class="co">#&gt;   theta.hat  N     R   Rbar circ.var circ.sd circ.disp kappa  cone</span></span>
+<span><span class="co">#&gt; 1     228.4 17 15.29 0.8996   0.1004    0.46    0.2205 5.271 12.61</span></span></code></pre></div>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="../reference/dir_stats_circ.html">dir_stats_circ</a></span><span class="op">(</span><span class="va">carolina</span>, dir <span class="op">=</span> <span class="fl">0</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">##   theta.hat  N     R   Rbar circ.var circ.sd circ.disp kappa cone</span></span>
-<span><span class="co">## 1      48.7 99 97.25 0.9823   0.0177   0.189   0.03541  28.5 1.07</span></span></code></pre>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/dir_stats_circ.html">dir_stats_circ</a></span><span class="op">(</span><span class="va">carolina</span>, dir <span class="op">=</span> <span class="fl">0</span><span class="op">)</span></span>
+<span><span class="co">#&gt;   theta.hat  N     R   Rbar circ.var circ.sd circ.disp kappa cone</span></span>
+<span><span class="co">#&gt; 1      48.7 99 97.25 0.9823   0.0177   0.189   0.03541  28.5 1.07</span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="rose-diagram">Rose diagram<a class="anchor" aria-label="anchor" href="#rose-diagram"></a>
@@ -175,12 +170,12 @@ non-directional data it results in a symmetric rose diagram.</p>
 extra argument of <code>width</code> for the width in degrees of the
 petals (bins). The plot shows the data, and by thedault the mean
 direction in red.</p>
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/rose_diag_circ.html">rose_diag_circ</a></span><span class="op">(</span><span class="va">x</span>, width <span class="op">=</span> <span class="fl">30</span>, dir <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span></code></pre></div>
-<p><img src="directional_stats_vig_files/figure-html/unnamed-chunk-3-1.png" class="r-plt" alt="" width="80%" style="display: block; margin: auto;"></p>
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<p><img src="directional_stats_vig_files/figure-html/unnamed-chunk-4-1.png" class="r-plt" alt="" width="700" style="display: block; margin: auto;"></p>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/rose_diag_circ.html">rose_diag_circ</a></span><span class="op">(</span><span class="va">carolina</span>, width <span class="op">=</span> <span class="fl">10</span>, dir <span class="op">=</span> <span class="fl">0</span><span class="op">)</span></span></code></pre></div>
-<p><img src="directional_stats_vig_files/figure-html/unnamed-chunk-4-1.png" class="r-plt" alt="" width="80%" style="display: block; margin: auto;"></p>
+<p><img src="directional_stats_vig_files/figure-html/unnamed-chunk-5-1.png" class="r-plt" alt="" width="700" style="display: block; margin: auto;"></p>
 </div>
 <div class="section level3">
 <h3 id="two-sample-test">Two-sample test<a class="anchor" aria-label="anchor" href="#two-sample-test"></a>
@@ -193,7 +188,7 @@ addition of a second vector of measurements. The test is an
 <em>F-test</em>, comparing the critical value with the estimated value.
 The result gives the <em>F-statistics</em>, the p-value and an
 interpretation.</p>
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">y</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span></span>
 <span>  <span class="fl">225</span>,</span>
 <span>  <span class="fl">208</span>,</span>
@@ -236,24 +231,24 @@ interpretation.</p>
 <span>  <span class="fl">146</span>,</span>
 <span>  <span class="fl">231</span></span>
 <span><span class="op">)</span></span>
-<span><span class="fu"><a href="../reference/dir_2sample_test_circ.html">dir_2sample_test_circ</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span>, dir <span class="op">=</span> <span class="fl">1</span>, conf.level <span class="op">=</span> <span class="fl">0.95</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## $f</span></span>
-<span><span class="co">## [1] 11.45</span></span>
-<span><span class="co">## </span></span>
-<span><span class="co">## $fcrit</span></span>
-<span><span class="co">## [1] 4.02</span></span>
-<span><span class="co">## </span></span>
-<span><span class="co">## $df1</span></span>
-<span><span class="co">## [1] 1</span></span>
-<span><span class="co">## </span></span>
-<span><span class="co">## $df2</span></span>
-<span><span class="co">## [1] 55</span></span>
-<span><span class="co">## </span></span>
-<span><span class="co">## $p_value</span></span>
-<span><span class="co">## [1] 0.00133</span></span>
-<span><span class="co">## </span></span>
-<span><span class="co">## $interpretation</span></span>
-<span><span class="co">## [1] "Reject H0 and conclude that the two samples could not come from the same population with the same mean direction"</span></span></code></pre>
+<span><span class="fu"><a href="../reference/dir_2sample_test_circ.html">dir_2sample_test_circ</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span>, dir <span class="op">=</span> <span class="fl">1</span>, conf.level <span class="op">=</span> <span class="fl">0.95</span><span class="op">)</span></span>
+<span><span class="co">#&gt; $f</span></span>
+<span><span class="co">#&gt; [1] 11.45</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; $fcrit</span></span>
+<span><span class="co">#&gt; [1] 4.02</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; $df1</span></span>
+<span><span class="co">#&gt; [1] 1</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; $df2</span></span>
+<span><span class="co">#&gt; [1] 55</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; $p_value</span></span>
+<span><span class="co">#&gt; [1] 0.00133</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; $interpretation</span></span>
+<span><span class="co">#&gt; [1] "Reject H0 and conclude that the two samples could not come from the same population with the same mean direction"</span></span></code></pre></div>
 <p>Other functions are available from other packages like
 <code>Directional</code>, <code>circular</code> and
 <code>CircStats</code>, including tests for randomness, uniformity, and
@@ -286,86 +281,86 @@ directed (vector) and undirected (axial) data, depending on the case,
 and the summary for Point-Girdle-Randon characterization. Additionally,
 the plots for eigenvalues, pgr characterization, and the data plotted in
 a stereonet with the chosen summary stats.</p>
-<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">trds</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">12</span>, <span class="fl">18</span>, <span class="fl">22</span>, <span class="fl">15</span>, <span class="fl">10</span>, <span class="fl">20</span><span class="op">)</span></span>
 <span><span class="va">plgs</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">42</span>, <span class="fl">40</span>, <span class="fl">48</span>, <span class="fl">30</span>, <span class="fl">42</span>, <span class="fl">30</span><span class="op">)</span></span>
-<span><span class="fu"><a href="../reference/dir_stats_spher.html">dir_stats_spher</a></span><span class="op">(</span><span class="va">trds</span>, <span class="va">plgs</span>, conf.level <span class="op">=</span> <span class="fl">0.95</span>, type <span class="op">=</span> <span class="st">'line'</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## $eigen_values</span></span>
-<span><span class="co">##            V1     V2     V3</span></span>
-<span><span class="co">## lambda 5.9020 0.0799 0.0181</span></span>
-<span><span class="co">## S      0.9837 0.0133 0.0030</span></span>
-<span><span class="co">## </span></span>
-<span><span class="co">## $eigen_vectors</span></span>
-<span><span class="co">##          V1         V2          V3</span></span>
-<span><span class="co">## x 0.7491359 -0.5903778 -0.30041565</span></span>
-<span><span class="co">## y 0.2167973 -0.2100226  0.95335692</span></span>
-<span><span class="co">## z 0.6259348  0.7793232  0.02934318</span></span>
-<span><span class="co">## </span></span>
-<span><span class="co">## $orientation_matrix</span></span>
-<span><span class="co">##           [,1]      [,2]      [,3]</span></span>
-<span><span class="co">## [1,] 3.3417213 0.9632761 2.7306143</span></span>
-<span><span class="co">## [2,] 0.9632761 0.2973670 0.7883442</span></span>
-<span><span class="co">## [3,] 2.7306143 0.7883442 2.3609117</span></span>
-<span><span class="co">## </span></span>
-<span><span class="co">## $trend_plunge</span></span>
-<span><span class="co">##        V1     V2     V3</span></span>
-<span><span class="co">## trd 16.14 199.58 107.49</span></span>
-<span><span class="co">## plg 38.75  51.20   1.68</span></span>
-<span><span class="co">## </span></span>
-<span><span class="co">## $dir_dip</span></span>
-<span><span class="co">##         V1    V2     V3</span></span>
-<span><span class="co">## dir 196.14 19.58 287.49</span></span>
-<span><span class="co">## dip  51.25 38.80  88.32</span></span>
-<span><span class="co">## </span></span>
-<span><span class="co">## $vector_stats</span></span>
-<span><span class="co">## <span style="color: #949494;"># A tibble: 1 × 13</span></span></span>
-<span><span class="co">##     trd   plg strike   dir   dip     R  Rbar kappa  cone     N     x     y     z</span></span>
-<span><span class="co">##   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span></span>
-<span><span class="co">## <span style="color: #BCBCBC;">1</span>  16.2  38.7   106.  196.  51.3  5.95 0.992  84.6  6.68     6 0.749 0.217 0.626</span></span>
-<span><span class="co">## </span></span>
-<span><span class="co">## $axis_stats_watson</span></span>
-<span><span class="co">## <span style="color: #949494;"># A tibble: 1 × 5</span></span></span>
-<span><span class="co">##   V1_cone V2_cone V3_cone kappa_bipolar kappa_girdle</span></span>
-<span><span class="co">##     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>         <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span></span>
-<span><span class="co">## <span style="color: #BCBCBC;">1</span>    5.27    4.77       0          61.6        -<span style="color: #BB0000;">166.</span></span></span>
-<span><span class="co">## </span></span>
-<span><span class="co">## $axis_stats_aniso</span></span>
-<span><span class="co">##                       V1      V2       V3</span></span>
-<span><span class="co">## bingham kappa      0.000 -37.558 -165.838</span></span>
-<span><span class="co">## watson max ellipse 6.737  39.133   38.980</span></span>
-<span><span class="co">## watson min ellipse 3.178   5.900    2.860</span></span>
-<span><span class="co">## </span></span>
-<span><span class="co">## $PointGirdleRandom</span></span>
-<span><span class="co">## <span style="color: #949494;"># A tibble: 1 × 13</span></span></span>
-<span><span class="co">##       P      G       R     B     I     D     K     C s1.s2 s1.s3 s2.s3    r1</span></span>
-<span><span class="co">##   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span></span>
-<span><span class="co">## <span style="color: #BCBCBC;">1</span> 0.970 0.020<span style="text-decoration: underline;">6</span> 0.009<span style="text-decoration: underline;">04</span> 0.991  4.76 0.976  2.90  5.79  73.9  326.  4.42  1.49</span></span>
-<span><span class="co">## <span style="color: #949494;"># ℹ 1 more variable: r2 &lt;dbl&gt;</span></span></span>
-<span><span class="co">## </span></span>
-<span><span class="co">## $eigenplot</span></span></code></pre>
-<p><img src="directional_stats_vig_files/figure-html/unnamed-chunk-6-1.png" class="r-plt" alt="" width="80%" style="display: block; margin: auto;"></p>
-<pre><code><span><span class="co">## </span></span>
-<span><span class="co">## $pgrplot</span></span></code></pre>
-<p><img src="directional_stats_vig_files/figure-html/unnamed-chunk-6-2.png" class="r-plt" alt="" width="80%" style="display: block; margin: auto;"></p>
-<pre><code><span><span class="co">## </span></span>
-<span><span class="co">## $stereoplot</span></span></code></pre>
-<p><img src="directional_stats_vig_files/figure-html/unnamed-chunk-6-3.png" class="r-plt" alt="" width="80%" style="display: block; margin: auto;"></p>
+<span><span class="fu"><a href="../reference/dir_stats_spher.html">dir_stats_spher</a></span><span class="op">(</span><span class="va">trds</span>, <span class="va">plgs</span>, conf.level <span class="op">=</span> <span class="fl">0.95</span>, type <span class="op">=</span> <span class="st">'line'</span><span class="op">)</span></span>
+<span><span class="co">#&gt; $eigen_values</span></span>
+<span><span class="co">#&gt;            V1     V2     V3</span></span>
+<span><span class="co">#&gt; lambda 5.9020 0.0799 0.0181</span></span>
+<span><span class="co">#&gt; S      0.9837 0.0133 0.0030</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; $eigen_vectors</span></span>
+<span><span class="co">#&gt;          V1         V2          V3</span></span>
+<span><span class="co">#&gt; x 0.7491359 -0.5903778 -0.30041565</span></span>
+<span><span class="co">#&gt; y 0.2167973 -0.2100226  0.95335692</span></span>
+<span><span class="co">#&gt; z 0.6259348  0.7793232  0.02934318</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; $orientation_matrix</span></span>
+<span><span class="co">#&gt;           [,1]      [,2]      [,3]</span></span>
+<span><span class="co">#&gt; [1,] 3.3417213 0.9632761 2.7306143</span></span>
+<span><span class="co">#&gt; [2,] 0.9632761 0.2973670 0.7883442</span></span>
+<span><span class="co">#&gt; [3,] 2.7306143 0.7883442 2.3609117</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; $trend_plunge</span></span>
+<span><span class="co">#&gt;        V1     V2     V3</span></span>
+<span><span class="co">#&gt; trd 16.14 199.58 107.49</span></span>
+<span><span class="co">#&gt; plg 38.75  51.20   1.68</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; $dir_dip</span></span>
+<span><span class="co">#&gt;         V1    V2     V3</span></span>
+<span><span class="co">#&gt; dir 196.14 19.58 287.49</span></span>
+<span><span class="co">#&gt; dip  51.25 38.80  88.32</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; $vector_stats</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 1 × 13</span></span></span>
+<span><span class="co">#&gt;     trd   plg strike   dir   dip     R  Rbar kappa  cone     N     x     y     z</span></span>
+<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span>  16.2  38.7   106.  196.  51.3  5.95 0.992  84.6  6.68     6 0.749 0.217 0.626</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; $axis_stats_watson</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 1 × 5</span></span></span>
+<span><span class="co">#&gt;   V1_cone V2_cone V3_cone kappa_bipolar kappa_girdle</span></span>
+<span><span class="co">#&gt;     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>         <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span>    5.27    4.77       0          61.6        -<span style="color: #BB0000;">166.</span></span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; $axis_stats_aniso</span></span>
+<span><span class="co">#&gt;                       V1      V2       V3</span></span>
+<span><span class="co">#&gt; bingham kappa      0.000 -37.558 -165.838</span></span>
+<span><span class="co">#&gt; watson max ellipse 6.737  39.133   38.980</span></span>
+<span><span class="co">#&gt; watson min ellipse 3.178   5.900    2.860</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; $PointGirdleRandom</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 1 × 13</span></span></span>
+<span><span class="co">#&gt;       P      G       R     B     I     D     K     C s1.s2 s1.s3 s2.s3    r1</span></span>
+<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> 0.970 0.020<span style="text-decoration: underline;">6</span> 0.009<span style="text-decoration: underline;">04</span> 0.991  4.76 0.976  2.90  5.79  73.9  326.  4.42  1.49</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 1 more variable: r2 &lt;dbl&gt;</span></span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; $eigenplot</span></span></code></pre></div>
+<p><img src="directional_stats_vig_files/figure-html/unnamed-chunk-7-1.png" class="r-plt" alt="" width="700" style="display: block; margin: auto;"></p>
+<pre><code><span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; $pgrplot</span></span></code></pre>
+<p><img src="directional_stats_vig_files/figure-html/unnamed-chunk-7-2.png" class="r-plt" alt="" width="700" style="display: block; margin: auto;"></p>
+<pre><code><span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; $stereoplot</span></span></code></pre>
+<p><img src="directional_stats_vig_files/figure-html/unnamed-chunk-7-3.png" class="r-plt" alt="" width="700" style="display: block; margin: auto;"></p>
 <p>Data can be provided in a data frame, like in the following example,
 where the data is from a set of measurements of axial data (undirected,
 bi-polar) from a geological formation. The data is available in the
 package as a csv file:</p>
-<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">csv_path</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"spherical_data_ax_bp.csv"</span>, package <span class="op">=</span> <span class="st">"GMisc"</span><span class="op">)</span></span>
 <span><span class="va">df</span> <span class="op">&lt;-</span> <span class="fu">utils</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/r/utils/read.table.html" class="external-link">read.csv</a></span><span class="op">(</span><span class="va">csv_path</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">df</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">##   dip_direction dip</span></span>
-<span><span class="co">## 1            65  50</span></span>
-<span><span class="co">## 2            75  53</span></span>
-<span><span class="co">## 3           233  85</span></span>
-<span><span class="co">## 4            39  82</span></span>
-<span><span class="co">## 5            53  82</span></span>
-<span><span class="co">## 6            58  66</span></span></code></pre>
-<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
+<span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">df</span><span class="op">)</span></span>
+<span><span class="co">#&gt;   dip_direction dip</span></span>
+<span><span class="co">#&gt; 1            65  50</span></span>
+<span><span class="co">#&gt; 2            75  53</span></span>
+<span><span class="co">#&gt; 3           233  85</span></span>
+<span><span class="co">#&gt; 4            39  82</span></span>
+<span><span class="co">#&gt; 5            53  82</span></span>
+<span><span class="co">#&gt; 6            58  66</span></span></code></pre></div>
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">res2</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/dir_stats_spher.html">dir_stats_spher</a></span><span class="op">(</span></span>
 <span>  <span class="va">dip_direction</span>,</span>
 <span>  <span class="va">dip</span>,</span>
@@ -373,14 +368,13 @@ package as a csv file:</p>
 <span>  conf.level <span class="op">=</span> <span class="fl">0.90</span>,</span>
 <span>  type <span class="op">=</span> <span class="st">"dir"</span></span>
 <span><span class="op">)</span></span>
-<span><span class="va">res2</span><span class="op">$</span><span class="va">axis_stats_watson</span></span></code></pre></div>
-<pre><code><span><span class="co">## <span style="color: #949494;"># A tibble: 1 × 5</span></span></span>
-<span><span class="co">##   V1_cone V2_cone V3_cone kappa_bipolar kappa_girdle</span></span>
-<span><span class="co">##     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>         <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span></span>
-<span><span class="co">## <span style="color: #BCBCBC;">1</span>    2.93    2.30       0          12.6        -<span style="color: #BB0000;">14.1</span></span></span></code></pre>
-<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">res2</span><span class="op">$</span><span class="va">stereoplot</span></span></code></pre></div>
-<p><img src="directional_stats_vig_files/figure-html/unnamed-chunk-8-1.png" class="r-plt" alt="" width="80%" style="display: block; margin: auto;"></p>
+<span><span class="va">res2</span><span class="op">$</span><span class="va">axis_stats_watson</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 1 × 5</span></span></span>
+<span><span class="co">#&gt;   V1_cone V2_cone V3_cone kappa_bipolar kappa_girdle</span></span>
+<span><span class="co">#&gt;     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>         <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span>    2.93    2.30       0          12.6        -<span style="color: #BB0000;">14.1</span></span></span>
+<span><span class="va">res2</span><span class="op">$</span><span class="va">stereoplot</span></span></code></pre></div>
+<p><img src="directional_stats_vig_files/figure-html/unnamed-chunk-9-1.png" class="r-plt" alt="" width="700" style="display: block; margin: auto;"></p>
 </div>
 <div class="section level3">
 <h3 id="rose-diagram-1">Rose diagram<a class="anchor" aria-label="anchor" href="#rose-diagram-1"></a>
@@ -392,7 +386,7 @@ strike, dip direction, dip angle, trend, and plunge. By default shows
 all of them but the desired output can be selected with the
 <code>show</code> argument, selecting one or more of: “strike”, “dir”,
 “dip”, “trend”, “plunge”.</p>
-<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">dip.dir</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">12</span>, <span class="fl">18</span>, <span class="fl">22</span>, <span class="fl">15</span>, <span class="fl">10</span>, <span class="fl">20</span><span class="op">)</span></span>
 <span><span class="va">strike</span> <span class="op">=</span> <span class="fu"><a href="../reference/d2s.html">d2s</a></span><span class="op">(</span><span class="va">dip.dir</span><span class="op">)</span></span>
 <span><span class="va">dip</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">42</span>, <span class="fl">40</span>, <span class="fl">48</span>, <span class="fl">30</span>, <span class="fl">42</span>, <span class="fl">30</span><span class="op">)</span></span>
@@ -402,12 +396,12 @@ all of them but the desired output can be selected with the
 <span>  width1 <span class="op">=</span> <span class="fl">30</span>,</span>
 <span>  type <span class="op">=</span> <span class="st">'dir'</span>,</span>
 <span>  show <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"strike"</span>, <span class="st">"dip"</span><span class="op">)</span></span>
-<span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## $strike</span></span></code></pre>
-<p><img src="directional_stats_vig_files/figure-html/unnamed-chunk-9-1.png" class="r-plt" alt="" width="80%" style="display: block; margin: auto;"></p>
-<pre><code><span><span class="co">## </span></span>
-<span><span class="co">## $dip</span></span></code></pre>
-<p><img src="directional_stats_vig_files/figure-html/unnamed-chunk-9-2.png" class="r-plt" alt="" width="80%" style="display: block; margin: auto;"></p>
+<span><span class="op">)</span></span>
+<span><span class="co">#&gt; $strike</span></span></code></pre></div>
+<p><img src="directional_stats_vig_files/figure-html/unnamed-chunk-10-1.png" class="r-plt" alt="" width="700" style="display: block; margin: auto;"></p>
+<pre><code><span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; $dip</span></span></code></pre>
+<p><img src="directional_stats_vig_files/figure-html/unnamed-chunk-10-2.png" class="r-plt" alt="" width="700" style="display: block; margin: auto;"></p>
 </div>
 <div class="section level3">
 <h3 id="multiple-sample-test">Multiple-sample test<a class="anchor" aria-label="anchor" href="#multiple-sample-test"></a>
@@ -421,31 +415,31 @@ the statistical test with its interpretation for the specific case,
 group statistics, and a plot of the data in a stereonet with the mean
 directions for each group, and ,if the null hypothesis is not rejected,
 the common mean is also displayed.</p>
-<div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed</a></span><span class="op">(</span><span class="fl">123</span><span class="op">)</span></span>
 <span><span class="va">trds</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Uniform.html" class="external-link">runif</a></span><span class="op">(</span><span class="fl">10</span>, <span class="fl">50</span>, <span class="fl">70</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/stats/Uniform.html" class="external-link">runif</a></span><span class="op">(</span><span class="fl">10</span>, <span class="fl">70</span>, <span class="fl">90</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="va">plgs</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Uniform.html" class="external-link">runif</a></span><span class="op">(</span><span class="fl">10</span>, <span class="fl">20</span>, <span class="fl">40</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/stats/Uniform.html" class="external-link">runif</a></span><span class="op">(</span><span class="fl">10</span>, <span class="fl">30</span>, <span class="fl">50</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="va">grps</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"A"</span>, <span class="st">"B"</span><span class="op">)</span>, each <span class="op">=</span> <span class="fl">10</span><span class="op">)</span></span>
 <span><span class="va">res</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/dir_aov_spher_vec.html">dir_aov_spher_vec</a></span><span class="op">(</span><span class="va">trds</span>, <span class="va">plgs</span>, <span class="va">grps</span><span class="op">)</span></span>
-<span><span class="va">res</span></span></code></pre></div>
-<pre><code><span><span class="co">## $statement</span></span>
-<span><span class="co">## [1] "Mean direction differs between samples"</span></span>
-<span><span class="co">## </span></span>
-<span><span class="co">## $vector_g</span></span>
-<span><span class="co">## <span style="color: #949494;"># A tibble: 2 × 9</span></span></span>
-<span><span class="co">##   grp       N     R  Rbar kappa   sigc   trd   plg  cone</span></span>
-<span><span class="co">##   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span></span>
-<span><span class="co">## <span style="color: #BCBCBC;">1</span> A        10  9.93 0.993 120.  0.036<span style="text-decoration: underline;">9</span>  61.5  32.4  3.66</span></span>
-<span><span class="co">## <span style="color: #BCBCBC;">2</span> B        10  9.90 0.990  83.5 0.044<span style="text-decoration: underline;">3</span>  80.2  41.0  4.40</span></span>
-<span><span class="co">## </span></span>
-<span><span class="co">## $vector_res</span></span>
-<span><span class="co">## <span style="color: #949494;"># A tibble: 1 × 3</span></span></span>
-<span><span class="co">##      Nr    df  p.value</span></span>
-<span><span class="co">##   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span></span>
-<span><span class="co">## <span style="color: #BCBCBC;">1</span>  54.0     2 1.87<span style="color: #949494;">e</span><span style="color: #BB0000;">-12</span></span></span>
-<span><span class="co">## </span></span>
-<span><span class="co">## $stereoplot</span></span></code></pre>
-<p><img src="directional_stats_vig_files/figure-html/unnamed-chunk-10-1.png" class="r-plt" alt="" width="80%" style="display: block; margin: auto;"></p>
+<span><span class="va">res</span></span>
+<span><span class="co">#&gt; $statement</span></span>
+<span><span class="co">#&gt; [1] "Mean direction differs between samples"</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; $vector_g</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 2 × 9</span></span></span>
+<span><span class="co">#&gt;   grp       N     R  Rbar kappa   sigc   trd   plg  cone</span></span>
+<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> A        10  9.93 0.993 120.  0.036<span style="text-decoration: underline;">9</span>  61.5  32.4  3.66</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> B        10  9.90 0.990  83.5 0.044<span style="text-decoration: underline;">3</span>  80.2  41.0  4.40</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; $vector_res</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 1 × 3</span></span></span>
+<span><span class="co">#&gt;      Nr    df  p.value</span></span>
+<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span>  54.0     2 1.87<span style="color: #949494;">e</span><span style="color: #BB0000;">-12</span></span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; $stereoplot</span></span></code></pre></div>
+<p><img src="directional_stats_vig_files/figure-html/unnamed-chunk-11-1.png" class="r-plt" alt="" width="700" style="display: block; margin: auto;"></p>
 <p>More functions are available from the <code>Directional</code>
 package, including tests for randomness, uniformity, and multiple
 samples, but they are not included in this vignette. For the spherical
@@ -472,7 +466,7 @@ the points in the stereonet, which can be obtained with the
 <code>StCoordLineD</code> function. It tkes the trends and plunges and
 outputs a data frame with the coordinates for plotting. The points can
 be added to the stereonet with <code>geom_point</code>.</p>
-<div class="sourceCode" id="cb23"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed</a></span><span class="op">(</span><span class="fl">4101</span><span class="op">)</span></span>
 <span><span class="va">trds</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/Uniform.html" class="external-link">runif</a></span><span class="op">(</span>min <span class="op">=</span> <span class="fl">30</span>, max <span class="op">=</span> <span class="fl">80</span>, n <span class="op">=</span> <span class="fl">20</span><span class="op">)</span></span>
 <span><span class="va">plgs</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/Uniform.html" class="external-link">runif</a></span><span class="op">(</span>min <span class="op">=</span> <span class="fl">10</span>, max <span class="op">=</span> <span class="fl">60</span>, n <span class="op">=</span> <span class="fl">20</span><span class="op">)</span></span>
@@ -480,7 +474,7 @@ be added to the stereonet with <code>geom_point</code>.</p>
 <span></span>
 <span><span class="fu"><a href="../reference/ggstereo.html">ggstereo</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html" class="external-link">geom_point</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span><span class="va">xp</span>, <span class="va">yp</span><span class="op">)</span>, <span class="va">pts</span>, col <span class="op">=</span> <span class="st">'red'</span><span class="op">)</span></span></code></pre></div>
-<p><img src="directional_stats_vig_files/figure-html/unnamed-chunk-11-1.png" class="r-plt" alt="" width="80%" style="display: block; margin: auto;"></p>
+<p><img src="directional_stats_vig_files/figure-html/unnamed-chunk-12-1.png" class="r-plt" alt="" width="700" style="display: block; margin: auto;"></p>
 </div>
 <div class="section level4">
 <h4 id="planes-great-circles">Planes (Great circles)<a class="anchor" aria-label="anchor" href="#planes-great-circles"></a>
@@ -494,24 +488,24 @@ plotting. The planes can be added to the stereonet with
 more than one plane is needed it can be used with <code>map2</code> and
 <code>list_rbind</code> to get the coordinates for all the planes in a
 single data frame.</p>
-<div class="sourceCode" id="cb24"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">strike</span> <span class="op">=</span> <span class="fl">240</span></span>
 <span><span class="va">dip</span> <span class="op">=</span> <span class="fl">30</span></span>
 <span><span class="va">plane</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/GreatCircleD.html">GreatCircleD</a></span><span class="op">(</span><span class="va">strike</span>, <span class="va">dip</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu"><a href="../reference/ggstereo.html">ggstereo</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html" class="external-link">geom_path</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span><span class="va">xp</span>, <span class="va">yp</span><span class="op">)</span>, <span class="va">plane</span>, col <span class="op">=</span> <span class="st">'steelblue'</span><span class="op">)</span></span></code></pre></div>
-<p><img src="directional_stats_vig_files/figure-html/unnamed-chunk-12-1.png" class="r-plt" alt="" width="80%" style="display: block; margin: auto;"></p>
-<div class="sourceCode" id="cb25"><pre class="downlit sourceCode r">
+<p><img src="directional_stats_vig_files/figure-html/unnamed-chunk-13-1.png" class="r-plt" alt="" width="700" style="display: block; margin: auto;"></p>
+<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed</a></span><span class="op">(</span><span class="fl">4101</span><span class="op">)</span></span>
 <span><span class="va">strike</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/Uniform.html" class="external-link">runif</a></span><span class="op">(</span>min <span class="op">=</span> <span class="fl">30</span>, max <span class="op">=</span> <span class="fl">80</span>, n <span class="op">=</span> <span class="fl">10</span><span class="op">)</span></span>
 <span><span class="va">dip</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/Uniform.html" class="external-link">runif</a></span><span class="op">(</span>min <span class="op">=</span> <span class="fl">40</span>, max <span class="op">=</span> <span class="fl">60</span>, n <span class="op">=</span> <span class="fl">10</span><span class="op">)</span></span>
-<span><span class="va">planes</span> <span class="op">&lt;-</span> <span class="fu">map2</span><span class="op">(</span><span class="va">strike</span>, <span class="va">dip</span>, <span class="op">~</span> <span class="fu"><a href="../reference/GreatCircleD.html">GreatCircleD</a></span><span class="op">(</span><span class="va">.x</span>, <span class="va">.y</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu">list_rbind</span><span class="op">(</span>names_to <span class="op">=</span> <span class="st">"plane_id"</span><span class="op">)</span></span>
+<span><span class="va">planes</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://purrr.tidyverse.org/reference/map2.html" class="external-link">map2</a></span><span class="op">(</span><span class="va">strike</span>, <span class="va">dip</span>, <span class="op">~</span> <span class="fu"><a href="../reference/GreatCircleD.html">GreatCircleD</a></span><span class="op">(</span><span class="va">.x</span>, <span class="va">.y</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="https://purrr.tidyverse.org/reference/list_c.html" class="external-link">list_rbind</a></span><span class="op">(</span>names_to <span class="op">=</span> <span class="st">"plane_id"</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu"><a href="../reference/ggstereo.html">ggstereo</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html" class="external-link">geom_path</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span><span class="va">xp</span>, <span class="va">yp</span>, group <span class="op">=</span> <span class="va">plane_id</span><span class="op">)</span>, <span class="va">planes</span>, col <span class="op">=</span> <span class="st">'steelblue'</span><span class="op">)</span></span></code></pre></div>
-<p><img src="directional_stats_vig_files/figure-html/unnamed-chunk-13-1.png" class="r-plt" alt="" width="80%" style="display: block; margin: auto;"></p>
+<p><img src="directional_stats_vig_files/figure-html/unnamed-chunk-14-1.png" class="r-plt" alt="" width="700" style="display: block; margin: auto;"></p>
 <div class="section level5">
 <h5 id="cone-angle-small-circles">Cone angle (Small circles)<a class="anchor" aria-label="anchor" href="#cone-angle-small-circles"></a>
 </h5>
@@ -522,15 +516,15 @@ circle, and the cone angle. Since the small circle can wrap around the
 edge of the stereonet two paths are generated and they need to be
 combined. The planes can be added to the stereonet with
 <code>geom_path</code>.</p>
-<div class="sourceCode" id="cb26"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">pt</span> <span class="op">=</span> <span class="fu"><a href="../reference/StCoordLineD.html">StCoordLineD</a></span><span class="op">(</span>trd <span class="op">=</span> <span class="fl">230</span>, plg <span class="op">=</span> <span class="fl">40</span><span class="op">)</span></span>
 <span><span class="va">sc</span> <span class="op">=</span> <span class="fu"><a href="../reference/SmallCircleD.html">SmallCircleD</a></span><span class="op">(</span>trda <span class="op">=</span> <span class="fl">230</span>, plga <span class="op">=</span> <span class="fl">40</span>, coneAngle <span class="op">=</span> <span class="fl">20</span>, closed <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu">list_rbind</span><span class="op">(</span>names_to <span class="op">=</span> <span class="st">"sc_id"</span><span class="op">)</span></span>
+<span>  <span class="fu"><a href="https://purrr.tidyverse.org/reference/list_c.html" class="external-link">list_rbind</a></span><span class="op">(</span>names_to <span class="op">=</span> <span class="st">"sc_id"</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu"><a href="../reference/ggstereo.html">ggstereo</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html" class="external-link">geom_point</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span><span class="va">xp</span>, <span class="va">yp</span><span class="op">)</span>, <span class="va">pt</span>, col <span class="op">=</span> <span class="st">'red'</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html" class="external-link">geom_path</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span><span class="va">xp</span>, <span class="va">yp</span>, group <span class="op">=</span> <span class="va">sc_id</span><span class="op">)</span>, <span class="va">sc</span>, col <span class="op">=</span> <span class="st">'steelblue'</span><span class="op">)</span></span></code></pre></div>
-<p><img src="directional_stats_vig_files/figure-html/unnamed-chunk-14-1.png" class="r-plt" alt="" width="80%" style="display: block; margin: auto;"></p>
+<p><img src="directional_stats_vig_files/figure-html/unnamed-chunk-15-1.png" class="r-plt" alt="" width="700" style="display: block; margin: auto;"></p>
 </div>
 <div class="section level5">
 <h5 id="mean-planetrend-and-principal-stresses">Mean plane/trend and principal stresses<a class="anchor" aria-label="anchor" href="#mean-planetrend-and-principal-stresses"></a>
@@ -538,12 +532,12 @@ combined. The planes can be added to the stereonet with
 <p>The mean plane/trend and principal stresses can be obtained and
 plotted directly with <code>dir_stats_spher</code>. From these results
 the desired information can be obtained and plotted as shown before.</p>
-<div class="sourceCode" id="cb27"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">dirs</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">12</span>, <span class="fl">18</span>, <span class="fl">22</span>, <span class="fl">15</span>, <span class="fl">10</span>, <span class="fl">20</span><span class="op">)</span></span>
 <span><span class="va">dips</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">42</span>, <span class="fl">40</span>, <span class="fl">48</span>, <span class="fl">30</span>, <span class="fl">42</span>, <span class="fl">30</span><span class="op">)</span></span>
 <span><span class="va">res</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/dir_stats_spher.html">dir_stats_spher</a></span><span class="op">(</span><span class="va">trds</span>, <span class="va">plgs</span>, conf.level <span class="op">=</span> <span class="fl">0.95</span>, type <span class="op">=</span> <span class="st">'dir'</span><span class="op">)</span></span>
 <span><span class="va">res</span><span class="op">$</span><span class="va">stereoplot</span></span></code></pre></div>
-<p><img src="directional_stats_vig_files/figure-html/unnamed-chunk-15-1.png" class="r-plt" alt="" width="80%" style="display: block; margin: auto;"></p>
+<p><img src="directional_stats_vig_files/figure-html/unnamed-chunk-16-1.png" class="r-plt" alt="" width="700" style="display: block; margin: auto;"></p>
 </div>
 </div>
 </div>

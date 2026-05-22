@@ -24,13 +24,16 @@
 #'
 #' dat = data.frame(
 #'   clay = c(20, 40, 60),
-#'   activity = c(.5, 1, 2)
+#'   activity = c(.5, 1, 2),
+#'   loc = c("A", "B", "C")
 #' )
 #' # Spanish labels
 #' soil_swelling(lang = "es") +
 #' ggplot2::geom_point(data = dat,
-#'                     ggplot2::aes(x = clay, y = activity),
-#'                     size = 3, inherit.aes = FALSE)
+#'                     ggplot2::aes(x = clay, y = activity, color = loc),
+#'                     size = 3,
+#'                     inherit.aes = FALSE # needed
+#'                    )
 soil_swelling = function(lang = "en", clay.max = 70) {
   dat = tibble::tribble(
     ~clay  , ~activity , ~expansion ,
@@ -315,7 +318,7 @@ soil_swelling = function(lang = "en", clay.max = 70) {
     ggplot2::aes(
       .data$clay,
       .data$activity,
-      col = .data$expansion,
+      linetype = .data$expansion,
       group = .data$expansion
     )
   ) +
@@ -338,8 +341,8 @@ soil_swelling = function(lang = "en", clay.max = 70) {
       arrow = ggplot2::arrow(length = ggplot2::unit(0.01, "npc")),
       col = 'black'
     ) +
-    ggplot2::scale_color_manual(values = c('#BB2751', '#2F6D68', '#2F6498')) +
-    ggplot2::labs(x = xlab, y = ylab, col = col.lab) +
+    # ggplot2::scale_color_manual(values = c('#BB2751', '#2F6D68', '#2F6498')) +
+    ggplot2::labs(x = xlab, y = ylab, linetype = col.lab) +
     ggplot2::scale_x_continuous(
       limits = c(0, clay.max),
       breaks = seq(0, clay.max, 10)

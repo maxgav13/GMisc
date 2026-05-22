@@ -1,9 +1,12 @@
 destination: docs
 template:
   bootstrap: 5
-  bootswatch: sandstone
+  bslib:
+    bootswatch: sandstone
+    pkgdown-nav-height: 80px
   theme: pygments
   opengraph:
     twitter:
       creator: "@maxgarnier13"
+  math-rendering: katex
 url: https://maxgav13.github.io/GMisc/

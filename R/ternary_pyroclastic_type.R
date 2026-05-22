@@ -13,6 +13,8 @@
 #' The examples show basic usage and how to add data, which can be more customizable.
 #'
 #' The ternary diagram for pyroclastic rocks based on type is used in volcanology and sedimentary petrology to classify pyroclastic deposits based on the relative proportions of different components, specifically lithic fragments, glass, and crystals. The diagram helps to infer the eruptive style and depositional processes of volcanic eruptions, as different types of eruptions produce characteristic component distributions in the resulting pyroclastic deposits.
+#' For a more complete description on how to use this function and similar ones, see
+#' \code{vignette("classification_diagrams_vig")}
 #'
 #' @family classification plots, petrology
 #'
@@ -22,10 +24,11 @@
 #'
 #' d = data.frame(l=c(23,40,60),
 #'                g=c(27,50,30),
-#'                c=c(50,10,10))
+#'                c=c(50,10,10),
+#'                loc=c("A", "B", "C"))
 #'
 #' # adding data to ggplot object
-#' ternary_pyroclastic_type() + geom_point(data = d)
+#' ternary_pyroclastic_type() + geom_point(aes(col = loc), data = d)
 #'
 #' # adding data to plotly object
 #' ternary_pyroclastic_type('plotly') %>%
@@ -36,6 +39,24 @@
 #'             mode = "markers",
 #'             marker = list(size=8,color='cyan',
 #'                           symbol=3,opacity=.9),
+#'             hovertemplate = paste0('Rock fragments: %{a}<br>',
+#'                                    'Glass: %{b}<br>',
+#'                                    'Crystals: %{c}'))
+#'
+#' # adding data to plotly object with custom colors
+#' my_pal    <- c("A" = "red",      "B" = "blue",   "C" = "green")
+#' my_shapes <- c("A" = "circle",   "B" = "square",  "C" = "diamond")
+#'
+#' ternary_pyroclastic_type('plotly') %>%
+#'   add_trace(a = ~l, b = ~g, c = ~c,
+#'             data = d,
+#'             type = "scatterternary",
+#'             mode = "markers",
+#'             split = ~loc,
+#'             marker = list(size=8,
+#'                           color  = ~my_pal[loc],
+#'                           symbol = ~my_shapes[loc],
+#'                           opacity=.9),
 #'             hovertemplate = paste0('Rock fragments: %{a}<br>',
 #'                                    'Glass: %{b}<br>',
 #'                                    'Crystals: %{c}'))
@@ -112,7 +133,7 @@ ternary_pyroclastic_type = function(
       ggplot2::geom_polygon(
         ggplot2::aes(
           fill = .data$Label,
-          color = .data$Label,
+          # color = .data$Label,
           group = .data$Label
         ),
         alpha = opacity
@@ -121,10 +142,10 @@ ternary_pyroclastic_type = function(
       ggtern::theme_arrowdefault() +
       ggtern::theme_clockwise() +
       ggplot2::scale_fill_brewer(palette = 'Set1') +
-      ggplot2::scale_color_brewer(palette = 'Set1') +
+      # ggplot2::scale_color_brewer(palette = 'Set1') +
       ggplot2::labs(
         fill = "Pyroclastic rock",
-        color = "Pyroclastic rock",
+        # color = "Pyroclastic rock",
         T = "Rock fragments",
         L = "Glass",
         R = "Crystals"
@@ -137,7 +158,7 @@ ternary_pyroclastic_type = function(
       ggplot2::geom_polygon(
         ggplot2::aes(
           fill = .data$Label.es,
-          color = .data$Label.es,
+          # color = .data$Label.es,
           group = .data$Label.es
         ),
         alpha = opacity
@@ -146,10 +167,10 @@ ternary_pyroclastic_type = function(
       ggtern::theme_arrowdefault() +
       ggtern::theme_clockwise() +
       ggplot2::scale_fill_brewer(palette = 'Set1') +
-      ggplot2::scale_color_brewer(palette = 'Set1') +
+      # ggplot2::scale_color_brewer(palette = 'Set1') +
       ggplot2::labs(
         fill = "Roca pirocl\u00e1stica",
-        color = "Roca pirocl\u00e1stica",
+        # color = "Roca pirocl\u00e1stica",
         T = "Litoclastos",
         L = "Vitroclastos",
         R = "Cristaloclastos"

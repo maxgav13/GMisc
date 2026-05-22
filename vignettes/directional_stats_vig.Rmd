@@ -12,19 +12,22 @@ vignette: >
   %\VignetteEncoding{UTF-8}
 ---
 
-```{r setup, include=FALSE}
-library(GMisc)
-library(ggplot2)
-library(purrr)
-
+```{r, include=FALSE}
 knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
   echo = TRUE,
   message = FALSE,
   warning = FALSE,
   error = FALSE,
-  fig.align = "center",
-  out.width = "80%"
+  fig.align = "center"
 )
+```
+
+```{r setup}
+library(GMisc)
+library(ggplot2)
+library(purrr)
 ```
 
 This document highlights some functions of the `GMisc` package related to directional statistics and stereonets.

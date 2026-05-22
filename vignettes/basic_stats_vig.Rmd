@@ -12,17 +12,20 @@ vignette: >
   %\VignetteEncoding{UTF-8}
 ---
 
-```{r setup, include=FALSE}
-library(GMisc)
-
+```{r, include=FALSE}
 knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
   echo = TRUE,
   message = FALSE,
   warning = FALSE,
   error = FALSE,
-  fig.align = "center",
-  out.width = "80%"
+  fig.align = "center"
 )
+```
+
+```{r setup}
+library(GMisc)
 ```
 
 

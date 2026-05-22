@@ -1,5 +1,12 @@
 # Changelog
 
+## GMisc 0.4.1
+
+- Fixed problem not allowing to map color for user data in ternary plots
+  for `ggplot2` output, as well as for `TAS` and `soil_swelling`
+  functions, and added respective examples.
+- Updated vignette `classification_diagramas_vig`.
+
 ## GMisc 0.4.0
 
 - Change package installation to `pak`.

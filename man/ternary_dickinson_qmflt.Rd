@@ -27,6 +27,8 @@ QmFLt ternary diagram for provenance analysis in the desired format (object)
 For plotting data on the ggplot object it would be easier if the names of the dataframe are "f", "qm", and "lt", that way it gets mapped automatically, if not make sure to use "aes(x=f,y=qm,z=lt)".
 For plotting on the plotly object the mapping of the new data should be as shown in the example: \code{a = ~qm, b = ~f, c = ~lt}, where \code{a} refers to the top ("qm"), \code{b} refers to the bottom left ("f"), and \code{c} refers to the bottom right ("lt").
 The examples show basic usage and how to add data, which can be more customizable.
+For a more complete description on how to use this function and similar ones, see
+\code{vignette("classification_diagrams_vig")}
 
 The QmFLt diagram is used in sedimentary petrology to classify sandstones based on their detrital composition, specifically the relative proportions of monocrystalline quartz (Qm), feldspar (F), and lithic fragments (Lt). The diagram helps to infer the tectonic setting and provenance of the sedimentary rocks, as different source areas and geological processes produce characteristic detrital assemblages.
 }
@@ -36,10 +38,11 @@ library(plotly)
 
 d = data.frame(qm=c(23,26.9,25.3),
                f=c(27,23.7,5.1),
-               lt=c(50,49.4,59.6))
+               lt=c(50,49.4,59.6),
+               loc=c("A", "B", "C"))
 
 # adding data to ggplot object
-ternary_dickinson_qmflt() + geom_point(data = d)
+ternary_dickinson_qmflt() + geom_point(aes(col = loc), data = d)
 
 # adding data to plotly object
 ternary_dickinson_qmflt('plotly') \%>\%
@@ -50,6 +53,24 @@ ternary_dickinson_qmflt('plotly') \%>\%
             mode = "markers",
             marker = list(size=8,color='coral',
                           symbol=3,opacity=.9),
+            hovertemplate = paste0('Qm: \%{a}<br>',
+                                   'F: \%{b}<br>',
+                                   'Lt: \%{c}'))
+
+# adding data to plotly object with custom colors
+my_pal    <- c("A" = "red",      "B" = "blue",   "C" = "green")
+my_shapes <- c("A" = "circle",   "B" = "square",  "C" = "diamond")
+
+ternary_dickinson_qmflt('plotly') \%>\%
+  add_trace(a = ~qm, b = ~f, c = ~lt,
+            data = d,
+            type = "scatterternary",
+            mode = "markers",
+            split = ~loc,
+            marker = list(size=8,
+                          color  = ~my_pal[loc],
+                          symbol = ~my_shapes[loc],
+                          opacity=.9),
             hovertemplate = paste0('Qm: \%{a}<br>',
                                    'F: \%{b}<br>',
                                    'Lt: \%{c}'))

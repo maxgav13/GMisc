@@ -11,6 +11,8 @@
 #' @details For plotting data on the ggplot object it would be easier if the names of the dataframe are "g", "s", and "m", that way it gets mapped automatically, if not make sure to use "aes(x=g,y=s,z=m)".
 #' For plotting on the plotly object the mapping of the new data should be as shown in the example: \code{a = ~g, b = ~s, c = ~m}, where \code{a} refers to the top ("g"), \code{b} refers to the bottom left ("s"), and \code{c} refers to the bottom right ("m").
 #' The examples show basic usage and how to add data, which can be more customizable.
+#' For a more complete description on how to use this function and similar ones, see
+#' \code{vignette("classification_diagrams_vig")}
 #'
 #' @family classification plots, petrology
 #'
@@ -20,10 +22,11 @@
 #'
 #' d = data.frame(g=c(23,40,60),
 #'                s=c(27,50,30),
-#'                m=c(50,10,10))
+#'                m=c(50,10,10),
+#'                loc=c("A", "B", "C"))
 #'
 #' # adding data to ggplot object
-#' ternary_folk_gsm() + geom_point(data = d)
+#' ternary_folk_gsm() + geom_point(aes(col = loc), data = d)
 #'
 #' # adding data to plotly object
 #' ternary_folk_gsm('plotly') %>%
@@ -34,6 +37,24 @@
 #'             mode = "markers",
 #'             marker = list(size=8,color='coral',
 #'                           symbol=3,opacity=.9),
+#'             hovertemplate = paste0('Gravel: %{a}<br>',
+#'                                    'Sand: %{b}<br>',
+#'                                    'Mud: %{c}'))
+#'
+#' # adding data to plotly object with custom colors
+#' my_pal    <- c("A" = "red",      "B" = "blue",   "C" = "green")
+#' my_shapes <- c("A" = "circle",   "B" = "square",  "C" = "diamond")
+#'
+#' ternary_folk_gsm('plotly') %>%
+#'   add_trace(a = ~g, b = ~s, c = ~m,
+#'             data = d,
+#'             type = "scatterternary",
+#'             mode = "markers",
+#'             split = ~loc,
+#'             marker = list(size=8,
+#'                           color  = ~my_pal[loc],
+#'                           symbol = ~my_shapes[loc],
+#'                           opacity=.9),
 #'             hovertemplate = paste0('Gravel: %{a}<br>',
 #'                                    'Sand: %{b}<br>',
 #'                                    'Mud: %{c}'))
@@ -163,7 +184,7 @@ ternary_folk_gsm = function(
       ggplot2::geom_polygon(
         ggplot2::aes(
           fill = .data$Label,
-          color = .data$Label,
+          # color = .data$Label,
           group = .data$Label
         ),
         alpha = opacity
@@ -172,10 +193,10 @@ ternary_folk_gsm = function(
       ggtern::theme_arrowdefault() +
       ggtern::theme_clockwise() +
       ggplot2::scale_fill_manual(values = Folk.pal) +
-      ggplot2::scale_color_manual(values = Folk.pal) +
+      # ggplot2::scale_color_manual(values = Folk.pal) +
       ggplot2::labs(
         fill = "Rock (sediment)",
-        color = "Rock (sediment)",
+        # color = "Rock (sediment)",
         T = "Gravel",
         L = "Sand",
         R = "Mud"
@@ -188,7 +209,7 @@ ternary_folk_gsm = function(
       ggplot2::geom_polygon(
         ggplot2::aes(
           fill = .data$Label.es,
-          color = .data$Label.es,
+          # color = .data$Label.es,
           group = .data$Label.es
         ),
         alpha = opacity
@@ -197,10 +218,10 @@ ternary_folk_gsm = function(
       ggtern::theme_arrowdefault() +
       ggtern::theme_clockwise() +
       ggplot2::scale_fill_manual(values = Folk.pal) +
-      ggplot2::scale_color_manual(values = Folk.pal) +
+      # ggplot2::scale_color_manual(values = Folk.pal) +
       ggplot2::labs(
         fill = "Roca (sedimento)",
-        color = "Roca (sedimento)",
+        # color = "Roca (sedimento)",
         T = "Grava",
         L = "Arena",
         R = "Lodo"

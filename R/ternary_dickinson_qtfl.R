@@ -11,6 +11,8 @@
 #' @details For plotting data on the ggplot object it would be easier if the names of the dataframe are "f", "qt", and "l", that way it gets mapped automatically, if not make sure to use "aes(x=f,y=qt,z=l)".
 #' For plotting on the plotly object the mapping of the new data should be as shown in the example: \code{a = ~qt, b = ~f, c = ~l}, where \code{a} refers to the top ("qt"), \code{b} refers to the bottom left ("f"), and \code{c} refers to the bottom right ("l").
 #' The examples show basic usage and how to add data, which can be more customizable.
+#' For a more complete description on how to use this function and similar ones, see
+#' \code{vignette("classification_diagrams_vig")}
 #'
 #' The QtFL diagram is used in sedimentary petrology to classify sandstones based on their detrital composition, specifically the relative proportions of quartz (Qt), feldspar (F), and lithic fragments (L). The diagram helps to infer the tectonic setting and provenance of the sedimentary rocks, as different source areas and geological processes produce characteristic detrital assemblages.
 #'
@@ -24,10 +26,11 @@
 #'
 #' d = data.frame(qt=c(23,40,60),
 #'                f=c(27,50,30),
-#'                l=c(50,10,10))
+#'                l=c(50,10,10),
+#'                loc=c("A", "B", "C"))
 #'
 #' # adding data to ggplot object
-#' ternary_dickinson_qtfl() + geom_point(data = d)
+#' ternary_dickinson_qtfl() + geom_point(aes(col = loc), data = d)
 #'
 #' # adding data to plotly object
 #' ternary_dickinson_qtfl('plotly') %>%
@@ -37,6 +40,24 @@
 #'             type = "scatterternary",
 #'             mode = "markers",
 #'             marker = list(size=8,color='coral',symbol=3,opacity=.9),
+#'             hovertemplate = paste0('Qt: %{a}<br>',
+#'                                    'F: %{b}<br>',
+#'                                    'L: %{c}'))
+#'
+#' # adding data to plotly object with custom colors
+#' my_pal    <- c("A" = "red",      "B" = "blue",   "C" = "green")
+#' my_shapes <- c("A" = "circle",   "B" = "square",  "C" = "diamond")
+#'
+#' ternary_dickinson_qtfl('plotly') %>%
+#'   add_trace(a = ~qt, b = ~f, c = ~l,
+#'             data = d,
+#'             type = "scatterternary",
+#'             mode = "markers",
+#'             split = ~loc,
+#'             marker = list(size=8,
+#'                           color  = ~my_pal[loc],
+#'                           symbol = ~my_shapes[loc],
+#'                           opacity=.9),
 #'             hovertemplate = paste0('Qt: %{a}<br>',
 #'                                    'F: %{b}<br>',
 #'                                    'L: %{c}'))
@@ -132,7 +153,7 @@ ternary_dickinson_qtfl = function(
       ggplot2::geom_polygon(
         ggplot2::aes(
           fill = .data$Label,
-          color = .data$Label,
+          # color = .data$Label,
           group = .data$Label
         ),
         alpha = opacity
@@ -140,11 +161,11 @@ ternary_dickinson_qtfl = function(
       ggtern::theme_arrowdefault() +
       ggtern::theme_clockwise() +
       ggplot2::scale_fill_manual(values = QFL.pal) +
-      ggplot2::scale_color_manual(values = QFL.pal) +
+      # ggplot2::scale_color_manual(values = QFL.pal) +
       ggplot2::labs(
         title = "QtFL",
         fill = "Provenance",
-        color = "Provenance",
+        # color = "Provenance",
         T = "Qt",
         L = "F",
         R = "L"
@@ -157,7 +178,7 @@ ternary_dickinson_qtfl = function(
       ggplot2::geom_polygon(
         ggplot2::aes(
           fill = .data$Label.es,
-          color = .data$Label.es,
+          # color = .data$Label.es,
           group = .data$Label.es
         ),
         alpha = opacity
@@ -165,11 +186,11 @@ ternary_dickinson_qtfl = function(
       ggtern::theme_arrowdefault() +
       ggtern::theme_clockwise() +
       ggplot2::scale_fill_manual(values = QFL.pal) +
-      ggplot2::scale_color_manual(values = QFL.pal) +
+      # ggplot2::scale_color_manual(values = QFL.pal) +
       ggplot2::labs(
         title = "QtFL",
         fill = "Proveniencia",
-        color = "Proveniencia",
+        # color = "Proveniencia",
         T = "Qt",
         L = "F",
         R = "L"

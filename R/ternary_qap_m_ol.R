@@ -11,6 +11,8 @@
 #' @details For plotting data on the ggplot object it would be easier if the names of the dataframe are "ol", "p", and "px", that way it gets mapped automatically, if not make sure to use "aes(x=ol,y=p,z=px)".
 #' For plotting on the plotly object the mapping of the new data should be as shown in the example: \code{a = ~p, b = ~ol, c = ~px}, where \code{a} refers to the top ("p"), \code{b} refers to the bottom left ("ol"), and \code{c} refers to the bottom right ("px").
 #' The examples show basic usage and how to add data, which can be more customizable.
+#' For a more complete description on how to use this function and similar ones, see
+#' \code{vignette("classification_diagrams_vig")}
 #'
 #' @family classification plots, petrology
 #'
@@ -20,10 +22,11 @@
 #'
 #' d = data.frame(p=c(23,40,60),
 #'                ol=c(27,50,30),
-#'                px=c(50,10,10))
+#'                px=c(50,10,10),
+#'                loc=c("A", "B", "C"))
 #'
 #' # adding data to ggplot object
-#' ternary_qap_m_ol() + geom_point(data = d)
+#' ternary_qap_m_ol() + geom_point(aes(col = loc), data = d)
 #'
 #' # adding data to plotly object
 #' ternary_qap_m_ol('plotly') %>%
@@ -34,6 +37,24 @@
 #'             mode = "markers",
 #'             marker = list(size=8,color='cyan',
 #'                           symbol=3,opacity=.9),
+#'             hovertemplate = paste0('P: %{a}<br>',
+#'                                    'Ol: %{b}<br>',
+#'                                    'Cpx: %{c}'))
+#'
+#' # customizing colors and symbols by location
+#' my_pal    <- c("A" = "red",      "B" = "blue",   "C" = "green")
+#' my_shapes <- c("A" = "circle",   "B" = "square",  "C" = "diamond")
+#'
+#' ternary_qap_m_ol('plotly') %>%
+#'   add_trace(a = ~p, b = ~ol, c = ~px,
+#'             data = d,
+#'             type = "scatterternary",
+#'             mode = "markers",
+#'             split = ~loc,
+#'             marker = list(size=8,
+#'                           color  = ~my_pal[loc],
+#'                           symbol = ~my_shapes[loc],
+#'                           opacity=.9),
 #'             hovertemplate = paste0('P: %{a}<br>',
 #'                                    'Ol: %{b}<br>',
 #'                                    'Cpx: %{c}'))
@@ -150,7 +171,7 @@ ternary_qap_m_ol = function(
       ggplot2::geom_polygon(
         aes(
           fill = .data$Label.en,
-          color = .data$Label.en,
+          # color = .data$Label.en,
           group = .data$Label.en
         ),
         alpha = opacity
@@ -159,7 +180,7 @@ ternary_qap_m_ol = function(
       ggtern::theme_clockwise() +
       # custom_percent("Percent") +
       ggplot2::scale_fill_manual('Mafic', values = QAP_M.pal) +
-      ggplot2::scale_color_manual('Mafic', values = QAP_M.pal) +
+      # ggplot2::scale_color_manual('Mafic', values = QAP_M.pal) +
       ggplot2::labs(T = "P", L = "Ol", R = "Px")
   } else if (any(output == 'ggplot' & language == 'es')) {
     QAP_M <- ggtern::ggtern(
@@ -169,7 +190,7 @@ ternary_qap_m_ol = function(
       ggplot2::geom_polygon(
         aes(
           fill = .data$Label.es,
-          color = .data$Label.es,
+          # color = .data$Label.es,
           group = .data$Label.es
         ),
         alpha = opacity
@@ -178,7 +199,7 @@ ternary_qap_m_ol = function(
       ggtern::theme_clockwise() +
       # custom_percent("Percent") +
       ggplot2::scale_fill_manual('M\u00e1ficas', values = QAP_M.pal) +
-      ggplot2::scale_color_manual('M\u00e1ficas', values = QAP_M.pal) +
+      # ggplot2::scale_color_manual('M\u00e1ficas', values = QAP_M.pal) +
       ggplot2::labs(T = "P", L = "Ol", R = "Px")
   } else if (any(output == 'plotly' & language == 'en')) {
     QAP_M = plotly::plot_ly() %>%

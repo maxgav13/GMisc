@@ -1,7 +1,7 @@
 Package: GMisc
 Title: Miscellaneous Functions for Geology (and its areas)
-Version: 0.4.0
-Date: 2026-04-24
+Version: 0.4.1
+Date: 2026-05-22
 Author: Maximiliano Garnier-Villarreal <max.garnier.villa@gmail.com>
 Maintainer: Maximiliano Garnier-Villarreal <max.garnier.villa@gmail.com>
 Description: Functions for general statistical purpose use, and geological use. 
@@ -46,6 +46,7 @@ Suggests:
     kableExtra,
     rio,
     drc,
-    quarto
+    quarto,
+    RColorBrewer
 VignetteBuilder: knitr, rmarkdown, quarto
 Roxygen: list(markdown = TRUE)

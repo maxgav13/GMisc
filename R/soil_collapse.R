@@ -25,14 +25,17 @@
 #'
 #' dat = data.frame(
 #'   ll = c(20, 40, 60, 80),
-#'   dry = c(1.5, 1.15, 1.2, 1.0)
+#'   dry = c(1.5, 1.15, 1.2, 1.0),
+#'   loc = c("A", "B", "C", "D")
 #' )
 #'
 #' # Spanish labels
 #' soil_collapse(lang = "es") +
 #'  ggplot2::geom_point(data = dat,
-#'                      ggplot2::aes(x = ll, y = dry),
-#'                      size = 3, inherit.aes = FALSE)
+#'                      ggplot2::aes(x = ll, y = dry, color = loc),
+#'                      size = 3,
+#'                      inherit.aes = FALSE # needed
+#'                     )
 soil_collapse = function(lang = "en", ll.max = 100) {
   dat = tibble::tribble(
     ~ll    , ~dry  , ~gs ,

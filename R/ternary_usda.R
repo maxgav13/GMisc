@@ -11,6 +11,8 @@
 #' @details For plotting data on the ggplot object it would be easier if the names of the dataframe are "sand", "clay", and "silt", that way it gets mapped automatically, if not make sure to use "aes(x=sand,y=clay,z=silt)".
 #' For plotting on the plotly object the mapping of the new data should be as shown in the example: \code{a = ~clay, b = ~sand, c = ~silt}, where \code{a} refers to the top ("clay"), \code{b} refers to the bottom left ("sand"), and \code{c} refers to the bottom right ("silt").
 #' The examples show basic usage and how to add data, which can be more customizable.
+#' For a more complete description on how to use this function and similar ones, see
+#' \code{vignette("classification_diagrams_vig")}
 #'
 #' @family classification plots, soil mechanics
 #'
@@ -20,10 +22,11 @@
 #'
 #' d = data.frame(sand=c(23,40,60),
 #'                clay=c(27,50,30),
-#'                silt=c(50,10,10))
+#'                silt=c(50,10,10),
+#'                loc=c("A", "B", "C"))
 #'
 #' # adding data to ggplot object
-#' ternary_usda() + geom_point(data = d)
+#' ternary_usda() + geom_point(aes(col = loc), data = d)
 #'
 #' # adding data to plotly object
 #' ternary_usda('plotly') %>%
@@ -34,6 +37,24 @@
 #'             mode = "markers",
 #'             marker = list(size=8,color='blue',
 #'                           symbol=3,opacity=.9),
+#'             hovertemplate = paste0('Clay: %{a}<br>',
+#'                                    'Sand: %{b}<br>',
+#'                                    'Silt: %{c}'))
+#'
+#' # customizing colors and symbols by location
+#' my_pal    <- c("A" = "red",      "B" = "blue",   "C" = "green")
+#' my_shapes <- c("A" = "circle",   "B" = "square",  "C" = "diamond")
+#'
+#' ternary_usda('plotly') %>%
+#'   add_trace(a = ~clay, b = ~sand, c = ~silt,
+#'             data = d,
+#'             type = "scatterternary",
+#'             mode = "markers",
+#'             split = ~loc,
+#'             marker = list(size=8,
+#'                           color  = ~my_pal[loc],
+#'                           symbol = ~my_shapes[loc],
+#'                           opacity=.9),
 #'             hovertemplate = paste0('Clay: %{a}<br>',
 #'                                    'Sand: %{b}<br>',
 #'                                    'Silt: %{c}'))
@@ -176,19 +197,19 @@ ternary_usda = function(
       ggplot2::geom_polygon(
         ggplot2::aes(
           fill = .data$Label,
-          color = .data$Label,
+          # color = .data$Label,
           group = .data$Label
         ),
         alpha = opacity
       ) +
-      ggtern::theme_bw() +
+      # ggtern::theme_bw() +
       ggtern::theme_arrowdefault() +
       ggtern::theme_clockwise() +
       ggplot2::scale_fill_brewer(palette = 'Set3') +
-      ggplot2::scale_color_brewer(palette = 'Set3') +
+      # ggplot2::scale_color_brewer(palette = 'Set3') +
       ggplot2::labs(
         fill = "Soil",
-        color = "Soil",
+        # color = "Soil",
         T = "Clay",
         L = "Sand",
         R = "Silt"
@@ -201,19 +222,19 @@ ternary_usda = function(
       ggplot2::geom_polygon(
         ggplot2::aes(
           fill = .data$Label.es,
-          color = .data$Label.es,
+          # color = .data$Label.es,
           group = .data$Label.es
         ),
         alpha = opacity
       ) +
-      ggtern::theme_bw() +
+      # ggtern::theme_bw() +
       ggtern::theme_arrowdefault() +
       ggtern::theme_clockwise() +
       ggplot2::scale_fill_brewer(palette = 'Set3') +
-      ggplot2::scale_color_brewer(palette = 'Set3') +
+      # ggplot2::scale_color_brewer(palette = 'Set3') +
       ggplot2::labs(
         fill = "Suelo",
-        color = "Suelo",
+        # color = "Suelo",
         T = "Arcilla",
         L = "Arena",
         R = "Limo"

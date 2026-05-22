@@ -1,5 +1,13 @@
 # Classification Diagrams
 
+``` r
+
+library(kableExtra)
+library(GMisc)
+library(plotly)
+library(ggplot2)
+```
+
 ## Introduction
 
 This document shows how to display and use different classification
@@ -76,7 +84,7 @@ ternary_folk_qfl()
 ```
 
 ![Static Folk ternary diagram for
-sandstones](classification_diagrams_vig_files/figure-html/unnamed-chunk-1-1.png)
+sandstones](classification_diagrams_vig_files/figure-html/unnamed-chunk-2-1.png)
 
 Static Folk ternary diagram for sandstones
 
@@ -130,7 +138,11 @@ d = data.frame(
   l = c(20, 10)
 )
 
-d2 = data.frame(silica = c(58, 70), alkali = c(8, 4))
+d2 = data.frame(
+  silica = c(58, 70),
+  alkali = c(8, 4),
+  sample = c('a', 'b')
+)
 ```
 
 | sample |  qt |   f |   l |
@@ -141,10 +153,10 @@ d2 = data.frame(silica = c(58, 70), alkali = c(8, 4))
 Samples for QtFL diagram {.table .lightable-classic
 style="font-family: \"Arial Narrow\", \"Source Sans Pro\", sans-serif; margin-left: auto; margin-right: auto;"}
 
-| silica | alkali |
-|-------:|-------:|
-|     58 |      8 |
-|     70 |      4 |
+| silica | alkali | sample |
+|-------:|-------:|:-------|
+|     58 |      8 | a      |
+|     70 |      4 | b      |
 
 Samples for TAS diagram {.table .lightable-classic
 style="font-family: \"Arial Narrow\", \"Source Sans Pro\", sans-serif; margin-left: auto; margin-right: auto;"}
@@ -158,13 +170,38 @@ rest can be omitted or modified.
 ``` r
 
 ternary_dickinson_qtfl() +
-  geom_point(data = d, color = 'coral', size = 3, shape = 3, alpha = .7)
+  geom_point(
+    data = d,
+    color = 'coral',
+    size = 3,
+    shape = 3,
+    alpha = .7
+  )
 ```
 
 ![Static QtFL ternary diagram for provenance, with user's
-data.](classification_diagrams_vig_files/figure-html/unnamed-chunk-7-1.png)
+data.](classification_diagrams_vig_files/figure-html/unnamed-chunk-8-1.png)
 
 Static QtFL ternary diagram for provenance, with user’s data.
+
+``` r
+
+ternary_dickinson_qtfl() +
+  geom_point(
+    aes(col = sample),
+    data = d,
+    size = 3,
+    shape = 3,
+    alpha = .7
+  )
+```
+
+![Static QtFL ternary diagram for provenance, with user's data, colored
+by
+sample.](classification_diagrams_vig_files/figure-html/unnamed-chunk-9-1.png)
+
+Static QtFL ternary diagram for provenance, with user’s data, colored by
+sample.
 
 ``` r
 
@@ -180,9 +217,76 @@ TAS() +
 ```
 
 ![Static TAS diagram, with user's
-data.](classification_diagrams_vig_files/figure-html/unnamed-chunk-8-1.png)
+data.](classification_diagrams_vig_files/figure-html/unnamed-chunk-10-1.png)
 
 Static TAS diagram, with user’s data.
+
+``` r
+
+TAS() +
+  geom_point(
+    aes(x = silica, y = alkali, col = sample),
+    data = d2,
+    size = 3,
+    shape = 3,
+    alpha = .7
+  )
+```
+
+![Static TAS diagram, with user's data, colored by
+sample.](classification_diagrams_vig_files/figure-html/unnamed-chunk-11-1.png)
+
+Static TAS diagram, with user’s data, colored by sample.
+
+For the static diagrams, the fill color of the polygons can be
+customized by suplying a `scale_fill_manual` layer, where the `values`
+argument is a vector with the colors to be used, and, optionally, the
+names of the vector are the names of the groups (polygons) to be
+colored, if not they will be colored in order. Another option is to use
+a `scale_fill_brewer` layer, where the `palette` argument is the name of
+the palette to be used, and the colors will be assigned in order, but
+the user needs to check the number of colors in the palette and make
+sure it is enough for the number of groups (polygons) to be colored. Any
+other `scale_fill_*` layer can be used, as long as it is compatible with
+the **ggplot** object.
+
+``` r
+
+ternary_pyroclastic_size() +
+  scale_fill_brewer(palette = 'Accent')
+```
+
+![Static pyroclastic size diagram, with different colors for the
+polygons, using Brewer
+palette.](classification_diagrams_vig_files/figure-html/unnamed-chunk-12-1.png)
+
+Static pyroclastic size diagram, with different colors for the polygons,
+using Brewer palette.
+
+``` r
+
+my_pal_usda = colorRampPalette(RColorBrewer::brewer.pal(11, 'BrBG'))(12)
+
+ternary_usda() +
+  scale_fill_manual(values = my_pal_usda)
+```
+
+![Static USDA diagram, with custom colors for the
+polygons.](classification_diagrams_vig_files/figure-html/unnamed-chunk-13-1.png)
+
+Static USDA diagram, with custom colors for the polygons.
+
+``` r
+
+ternary_usda() +
+  scale_fill_viridis_d(option = 'H')
+```
+
+![Static USDA diagram, with different colors for the polygons, using
+viridis.](classification_diagrams_vig_files/figure-html/unnamed-chunk-14-1.png)
+
+Static USDA diagram, with different colors for the polygons, using
+viridis.
 
 #### Dynamic
 
@@ -215,6 +319,42 @@ ternary_dickinson_qtfl(output = 'plotly') %>%
 
 Dynamic QtFL ternary diagram for provenance, with user’s data.
 
+To color the points by sample, the `split` argument can be used, where
+the name of the column with the sample names is given. The `marker`
+argument can be modified to change the appearance of the points, in this
+case the color and symbol are mapped to the sample names. Here, the
+`my_pal` and `my_shapes` objects are created to assign a color and
+symbol to each sample, this is done by using the sample names as names
+of the vector, so that when mapping the color and symbol to the sample
+names it gets the corresponding value from the vector.
+
+``` r
+
+my_pal <- c("a" = "red", "b" = "blue")
+my_shapes <- c("a" = "circle", "b" = "square")
+
+ternary_dickinson_qtfl(output = 'plotly') %>%
+  add_trace(
+    a = ~qt,
+    b = ~f,
+    c = ~l,
+    data = d,
+    split = ~sample,
+    type = "scatterternary",
+    mode = "markers",
+    marker = list(
+      size = 8,
+      color = ~ my_pal[sample],
+      symbol = ~ my_shapes[sample],
+      opacity = .7
+    ),
+    hovertemplate = paste0('Qt: %{a}<br>', 'F: %{b}<br>', 'L: %{c}')
+  )
+```
+
+Dynamic QtFL ternary diagram for provenance, with user’s data, colored
+by sample.
+
 For the bivariate diagrams, data can be added using the function
 `add_markers`, where the arguments `data`, `x`, and `y` are required,
 the rest can be changed. The `name` is what gets displayed in the
@@ -235,6 +375,22 @@ TAS('plotly') %>%
 ```
 
 Dynamic TAS diagram, with user’s data.
+
+``` r
+
+my_pal <- c("a" = "cyan", "b" = "magenta")
+
+TAS('plotly') %>%
+  add_markers(
+    x = ~silica,
+    y = ~alkali,
+    data = d2,
+    split = ~sample,
+    marker = list(size = 8, color = ~ my_pal[sample], symbol = 3, opacity = .9)
+  )
+```
+
+Dynamic TAS diagram, with user’s data, colored by sample.
 
 #### Piper diagram
 
@@ -300,7 +456,7 @@ piper_diagram() +
 ```
 
 ![Piper diagram, with user's
-data.](classification_diagrams_vig_files/figure-html/unnamed-chunk-12-1.png)
+data.](classification_diagrams_vig_files/figure-html/unnamed-chunk-20-1.png)
 
 Piper diagram, with user’s data.
 
@@ -332,7 +488,7 @@ ternary_shepard(language = 'es')
 ```
 
 ![Diagrama ternario de Shepard para la clasificación de suelos, en
-español](classification_diagrams_vig_files/figure-html/unnamed-chunk-14-1.png)
+español](classification_diagrams_vig_files/figure-html/unnamed-chunk-22-1.png)
 
 Diagrama ternario de Shepard para la clasificación de suelos, en español
 
@@ -342,7 +498,7 @@ TAS(language = 'es')
 ```
 
 ![Diagrama TAS, en
-español](classification_diagrams_vig_files/figure-html/unnamed-chunk-15-1.png)
+español](classification_diagrams_vig_files/figure-html/unnamed-chunk-23-1.png)
 
 Diagrama TAS, en español
 

@@ -11,6 +11,8 @@
 #' @details For plotting data on the ggplot object it would be easier if the names of the dataframe are "opx", "ol", and "cpx", that way it gets mapped automatically, if not make sure to use "aes(x=opx,y=ol,z=cpx)".
 #' For plotting on the plotly object the mapping of the new data should be as shown in the example: \code{a = ~ol, b = ~opx, c = ~cpx}, where \code{a} refers to the top ("ol"), \code{b} refers to the bottom left ("opx"), and \code{c} refers to the bottom right ("cpx").
 #' The examples show basic usage and how to add data, which can be more customizable.
+#' For a more complete description on how to use this function and similar ones, see
+#' \code{vignette("classification_diagrams_vig")}
 #'
 #' @family classification plots, petrology
 #'
@@ -20,10 +22,11 @@
 #'
 #' d = data.frame(ol=c(23,40,60),
 #'                opx=c(27,50,30),
-#'                cpx=c(50,10,10))
+#'                cpx=c(50,10,10),
+#'                loc=c("A", "B", "C"))
 #'
 #' # adding data to ggplot object
-#' ternary_qap_um() + geom_point(data = d)
+#' ternary_qap_um() + geom_point(aes(col = loc), data = d)
 #'
 #' # adding data to plotly object
 #' ternary_qap_um('plotly') %>%
@@ -34,6 +37,24 @@
 #'             mode = "markers",
 #'             marker = list(size=8,color='coral',
 #'                           symbol=3,opacity=.9),
+#'             hovertemplate = paste0('Ol: %{a}<br>',
+#'                                    'Opx: %{b}<br>',
+#'                                    'Cpx: %{c}'))
+#'
+#' # customizing colors and symbols by location
+#' my_pal    <- c("A" = "red",      "B" = "blue",   "C" = "green")
+#' my_shapes <- c("A" = "circle",   "B" = "square",  "C" = "diamond")
+#'
+#' ternary_qap_um('plotly') %>%
+#'   add_trace(a = ~ol, b = ~opx, c = ~cpx,
+#'             data = d,
+#'             type = "scatterternary",
+#'             mode = "markers",
+#'             split = ~loc,
+#'             marker = list(size=8,
+#'                           color  = ~my_pal[loc],
+#'                           symbol = ~my_shapes[loc],
+#'                           opacity=.9),
 #'             hovertemplate = paste0('Ol: %{a}<br>',
 #'                                    'Opx: %{b}<br>',
 #'                                    'Cpx: %{c}'))
@@ -141,7 +162,7 @@ ternary_qap_um = function(
       ggplot2::geom_polygon(
         aes(
           fill = .data$Label.en,
-          color = .data$Label.en,
+          # color = .data$Label.en,
           group = .data$Label.en
         ),
         alpha = opacity
@@ -149,7 +170,7 @@ ternary_qap_um = function(
       ggtern::theme_arrowdefault() +
       ggtern::theme_clockwise() +
       ggplot2::scale_fill_manual('Ultramafic', values = QAP_UM.pal) +
-      ggplot2::scale_color_manual('Ultramafic', values = QAP_UM.pal) +
+      # ggplot2::scale_color_manual('Ultramafic', values = QAP_UM.pal) +
       ggplot2::labs(T = "Ol", L = "Opx", R = "Cpx")
   } else if (any(output == 'ggplot' & language == 'es')) {
     QAP_UM <- ggtern::ggtern(
@@ -159,7 +180,7 @@ ternary_qap_um = function(
       ggplot2::geom_polygon(
         aes(
           fill = .data$Label.es,
-          color = .data$Label.es,
+          # color = .data$Label.es,
           group = .data$Label.es
         ),
         alpha = opacity
@@ -167,7 +188,7 @@ ternary_qap_um = function(
       ggtern::theme_arrowdefault() +
       ggtern::theme_clockwise() +
       ggplot2::scale_fill_manual("Ultram\u00e1ficas", values = QAP_UM.pal) +
-      ggplot2::scale_color_manual("Ultram\u00e1ficas", values = QAP_UM.pal) +
+      # ggplot2::scale_color_manual("Ultram\u00e1ficas", values = QAP_UM.pal) +
       ggplot2::labs(T = "Ol", L = "Opx", R = "Cpx")
   } else if (any(output == 'plotly' & language == 'en')) {
     QAP_UM = plotly::plot_ly() %>%

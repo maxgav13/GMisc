@@ -26,13 +26,16 @@ soil_expansion()
 
 dat = data.frame(
   clay = c(20, 40, 60),
-  pi = c(10, 23, 40)
+  pi = c(10, 23, 40),
+  loc = c("A", "B", "C")
 )
 # Spanish labels
 soil_expansion(lang = "es") +
 ggplot2::geom_point(data = dat,
-                     ggplot2::aes(x = clay, y = pi),
-                     size = 3, inherit.aes = FALSE)
+                     ggplot2::aes(x = clay, y = pi, color = loc),
+                     size = 3,
+                     inherit.aes = FALSE # needed
+                    )
 }
 \references{
 Holtz, R. D., Kovacs, W. D., & Sheahan, T. C. (2023). An Introduction to Geotechnical Engineering (3rd ed.). Pearson Education.

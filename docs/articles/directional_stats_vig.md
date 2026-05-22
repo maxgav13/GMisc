@@ -1,5 +1,12 @@
 # Directional statistics
 
+``` r
+
+library(GMisc)
+library(ggplot2)
+library(purrr)
+```
+
 This document highlights some functions of the `GMisc` package related
 to directional statistics and stereonets.
 
@@ -33,22 +40,22 @@ applied.
 ### Basic stats
 
 The main statistics that describe circular data are the mean direction
-($`\bar{\theta}`$), mean resultant length ($`\bar{R}`$), and circular
-variance ($`s_0^2`$). The mean resultant length ($`\bar{R}`$) ranges
-between 0 and 1, and the closer to 1 the more concentrated are the data
-and the closer to 0 the more dispersed is the data. The circular
-variance ($`s_0^2`$) is the complement of the mean resultant length
-($`\bar{R}`$) and its interpretation is the opposite, the closer to 1
-the more variation there is in the data.
+(\bar{\theta}), mean resultant length (\bar{R}), and circular variance
+(s_0^2). The mean resultant length (\bar{R}) ranges between 0 and 1, and
+the closer to 1 the more concentrated are the data and the closer to 0
+the more dispersed is the data. The circular variance (s_0^2) is the
+complement of the mean resultant length (\bar{R}) and its interpretation
+is the opposite, the closer to 1 the more variation there is in the
+data.
 
 The function `dir_stats_circ` is used to obtain the basic statistics for
 circular data. Its arguments are `x` a vector of angular measurements in
 degrees, `dir` a switch to indicate if the data is directional (1) or
 non-directional (0), and `conf.level` to determine the desired
 confidence level. The result shows the statistics mentioned above, plus
-the concentration parameter kappa ($`k`$), and the general width for the
-cone of confidence. The concentration parameter ($`k`$) is another
-measure of the dispersion, the higher it is the more concentrated (less
+the concentration parameter kappa (k), and the general width for the
+cone of confidence. The concentration parameter (k) is another measure
+of the dispersion, the higher it is the more concentrated (less
 dispersed) is the data, and more likely to have a preferred mean
 direction.
 
@@ -77,18 +84,16 @@ x <- c(
   216
 )
 dir_stats_circ(x, dir = 1)
+#>   theta.hat  N     R   Rbar circ.var circ.sd circ.disp kappa  cone
+#> 1     228.4 17 15.29 0.8996   0.1004    0.46    0.2205 5.271 12.61
 ```
-
-    ##   theta.hat  N     R   Rbar circ.var circ.sd circ.disp kappa  cone
-    ## 1     228.4 17 15.29 0.8996   0.1004    0.46    0.2205 5.271 12.61
 
 ``` r
 
 dir_stats_circ(carolina, dir = 0)
+#>   theta.hat  N     R   Rbar circ.var circ.sd circ.disp kappa cone
+#> 1      48.7 99 97.25 0.9823   0.0177   0.189   0.03541  28.5 1.07
 ```
-
-    ##   theta.hat  N     R   Rbar circ.var circ.sd circ.disp kappa cone
-    ## 1      48.7 99 97.25 0.9823   0.0177   0.189   0.03541  28.5 1.07
 
 ### Rose diagram
 
@@ -106,14 +111,14 @@ the data, and by thedault the mean direction in red.
 rose_diag_circ(x, width = 30, dir = 1)
 ```
 
-![](directional_stats_vig_files/figure-html/unnamed-chunk-3-1.png)
+![](directional_stats_vig_files/figure-html/unnamed-chunk-4-1.png)
 
 ``` r
 
 rose_diag_circ(carolina, width = 10, dir = 0)
 ```
 
-![](directional_stats_vig_files/figure-html/unnamed-chunk-4-1.png)
+![](directional_stats_vig_files/figure-html/unnamed-chunk-5-1.png)
 
 ### Two-sample test
 
@@ -170,25 +175,24 @@ y = c(
   231
 )
 dir_2sample_test_circ(x, y, dir = 1, conf.level = 0.95)
+#> $f
+#> [1] 11.45
+#> 
+#> $fcrit
+#> [1] 4.02
+#> 
+#> $df1
+#> [1] 1
+#> 
+#> $df2
+#> [1] 55
+#> 
+#> $p_value
+#> [1] 0.00133
+#> 
+#> $interpretation
+#> [1] "Reject H0 and conclude that the two samples could not come from the same population with the same mean direction"
 ```
-
-    ## $f
-    ## [1] 11.45
-    ## 
-    ## $fcrit
-    ## [1] 4.02
-    ## 
-    ## $df1
-    ## [1] 1
-    ## 
-    ## $df2
-    ## [1] 55
-    ## 
-    ## $p_value
-    ## [1] 0.00133
-    ## 
-    ## $interpretation
-    ## [1] "Reject H0 and conclude that the two samples could not come from the same population with the same mean direction"
 
 Other functions are available from other packages like `Directional`,
 `circular` and `CircStats`, including tests for randomness, uniformity,
@@ -224,73 +228,72 @@ data plotted in a stereonet with the chosen summary stats.
 trds = c(12, 18, 22, 15, 10, 20)
 plgs = c(42, 40, 48, 30, 42, 30)
 dir_stats_spher(trds, plgs, conf.level = 0.95, type = 'line')
+#> $eigen_values
+#>            V1     V2     V3
+#> lambda 5.9020 0.0799 0.0181
+#> S      0.9837 0.0133 0.0030
+#> 
+#> $eigen_vectors
+#>          V1         V2          V3
+#> x 0.7491359 -0.5903778 -0.30041565
+#> y 0.2167973 -0.2100226  0.95335692
+#> z 0.6259348  0.7793232  0.02934318
+#> 
+#> $orientation_matrix
+#>           [,1]      [,2]      [,3]
+#> [1,] 3.3417213 0.9632761 2.7306143
+#> [2,] 0.9632761 0.2973670 0.7883442
+#> [3,] 2.7306143 0.7883442 2.3609117
+#> 
+#> $trend_plunge
+#>        V1     V2     V3
+#> trd 16.14 199.58 107.49
+#> plg 38.75  51.20   1.68
+#> 
+#> $dir_dip
+#>         V1    V2     V3
+#> dir 196.14 19.58 287.49
+#> dip  51.25 38.80  88.32
+#> 
+#> $vector_stats
+#> # A tibble: 1 × 13
+#>     trd   plg strike   dir   dip     R  Rbar kappa  cone     N     x     y     z
+#>   <dbl> <dbl>  <dbl> <dbl> <dbl> <dbl> <dbl> <dbl> <dbl> <int> <dbl> <dbl> <dbl>
+#> 1  16.2  38.7   106.  196.  51.3  5.95 0.992  84.6  6.68     6 0.749 0.217 0.626
+#> 
+#> $axis_stats_watson
+#> # A tibble: 1 × 5
+#>   V1_cone V2_cone V3_cone kappa_bipolar kappa_girdle
+#>     <dbl>   <dbl>   <dbl>         <dbl>        <dbl>
+#> 1    5.27    4.77       0          61.6        -166.
+#> 
+#> $axis_stats_aniso
+#>                       V1      V2       V3
+#> bingham kappa      0.000 -37.558 -165.838
+#> watson max ellipse 6.737  39.133   38.980
+#> watson min ellipse 3.178   5.900    2.860
+#> 
+#> $PointGirdleRandom
+#> # A tibble: 1 × 13
+#>       P      G       R     B     I     D     K     C s1.s2 s1.s3 s2.s3    r1
+#>   <dbl>  <dbl>   <dbl> <dbl> <dbl> <dbl> <dbl> <dbl> <dbl> <dbl> <dbl> <dbl>
+#> 1 0.970 0.0206 0.00904 0.991  4.76 0.976  2.90  5.79  73.9  326.  4.42  1.49
+#> # ℹ 1 more variable: r2 <dbl>
+#> 
+#> $eigenplot
 ```
 
-    ## $eigen_values
-    ##            V1     V2     V3
-    ## lambda 5.9020 0.0799 0.0181
-    ## S      0.9837 0.0133 0.0030
-    ## 
-    ## $eigen_vectors
-    ##          V1         V2          V3
-    ## x 0.7491359 -0.5903778 -0.30041565
-    ## y 0.2167973 -0.2100226  0.95335692
-    ## z 0.6259348  0.7793232  0.02934318
-    ## 
-    ## $orientation_matrix
-    ##           [,1]      [,2]      [,3]
-    ## [1,] 3.3417213 0.9632761 2.7306143
-    ## [2,] 0.9632761 0.2973670 0.7883442
-    ## [3,] 2.7306143 0.7883442 2.3609117
-    ## 
-    ## $trend_plunge
-    ##        V1     V2     V3
-    ## trd 16.14 199.58 107.49
-    ## plg 38.75  51.20   1.68
-    ## 
-    ## $dir_dip
-    ##         V1    V2     V3
-    ## dir 196.14 19.58 287.49
-    ## dip  51.25 38.80  88.32
-    ## 
-    ## $vector_stats
-    ## # A tibble: 1 × 13
-    ##     trd   plg strike   dir   dip     R  Rbar kappa  cone     N     x     y     z
-    ##   <dbl> <dbl>  <dbl> <dbl> <dbl> <dbl> <dbl> <dbl> <dbl> <int> <dbl> <dbl> <dbl>
-    ## 1  16.2  38.7   106.  196.  51.3  5.95 0.992  84.6  6.68     6 0.749 0.217 0.626
-    ## 
-    ## $axis_stats_watson
-    ## # A tibble: 1 × 5
-    ##   V1_cone V2_cone V3_cone kappa_bipolar kappa_girdle
-    ##     <dbl>   <dbl>   <dbl>         <dbl>        <dbl>
-    ## 1    5.27    4.77       0          61.6        -166.
-    ## 
-    ## $axis_stats_aniso
-    ##                       V1      V2       V3
-    ## bingham kappa      0.000 -37.558 -165.838
-    ## watson max ellipse 6.737  39.133   38.980
-    ## watson min ellipse 3.178   5.900    2.860
-    ## 
-    ## $PointGirdleRandom
-    ## # A tibble: 1 × 13
-    ##       P      G       R     B     I     D     K     C s1.s2 s1.s3 s2.s3    r1
-    ##   <dbl>  <dbl>   <dbl> <dbl> <dbl> <dbl> <dbl> <dbl> <dbl> <dbl> <dbl> <dbl>
-    ## 1 0.970 0.0206 0.00904 0.991  4.76 0.976  2.90  5.79  73.9  326.  4.42  1.49
-    ## # ℹ 1 more variable: r2 <dbl>
-    ## 
-    ## $eigenplot
+![](directional_stats_vig_files/figure-html/unnamed-chunk-7-1.png)
 
-![](directional_stats_vig_files/figure-html/unnamed-chunk-6-1.png)
+    #> 
+    #> $pgrplot
 
-    ## 
-    ## $pgrplot
+![](directional_stats_vig_files/figure-html/unnamed-chunk-7-2.png)
 
-![](directional_stats_vig_files/figure-html/unnamed-chunk-6-2.png)
+    #> 
+    #> $stereoplot
 
-    ## 
-    ## $stereoplot
-
-![](directional_stats_vig_files/figure-html/unnamed-chunk-6-3.png)
+![](directional_stats_vig_files/figure-html/unnamed-chunk-7-3.png)
 
 Data can be provided in a data frame, like in the following example,
 where the data is from a set of measurements of axial data (undirected,
@@ -302,15 +305,14 @@ package as a csv file:
 csv_path <- system.file("spherical_data_ax_bp.csv", package = "GMisc")
 df <- utils::read.csv(csv_path)
 head(df)
+#>   dip_direction dip
+#> 1            65  50
+#> 2            75  53
+#> 3           233  85
+#> 4            39  82
+#> 5            53  82
+#> 6            58  66
 ```
-
-    ##   dip_direction dip
-    ## 1            65  50
-    ## 2            75  53
-    ## 3           233  85
-    ## 4            39  82
-    ## 5            53  82
-    ## 6            58  66
 
 ``` r
 
@@ -322,19 +324,14 @@ res2 <- dir_stats_spher(
   type = "dir"
 )
 res2$axis_stats_watson
-```
-
-    ## # A tibble: 1 × 5
-    ##   V1_cone V2_cone V3_cone kappa_bipolar kappa_girdle
-    ##     <dbl>   <dbl>   <dbl>         <dbl>        <dbl>
-    ## 1    2.93    2.30       0          12.6        -14.1
-
-``` r
-
+#> # A tibble: 1 × 5
+#>   V1_cone V2_cone V3_cone kappa_bipolar kappa_girdle
+#>     <dbl>   <dbl>   <dbl>         <dbl>        <dbl>
+#> 1    2.93    2.30       0          12.6        -14.1
 res2$stereoplot
 ```
 
-![](directional_stats_vig_files/figure-html/unnamed-chunk-8-1.png)
+![](directional_stats_vig_files/figure-html/unnamed-chunk-9-1.png)
 
 ### Rose diagram
 
@@ -357,16 +354,15 @@ rose_diag_spher(
   type = 'dir',
   show = c("strike", "dip")
 )
+#> $strike
 ```
 
-    ## $strike
+![](directional_stats_vig_files/figure-html/unnamed-chunk-10-1.png)
 
-![](directional_stats_vig_files/figure-html/unnamed-chunk-9-1.png)
+    #> 
+    #> $dip
 
-    ## 
-    ## $dip
-
-![](directional_stats_vig_files/figure-html/unnamed-chunk-9-2.png)
+![](directional_stats_vig_files/figure-html/unnamed-chunk-10-2.png)
 
 ### Multiple-sample test
 
@@ -388,27 +384,26 @@ plgs <- c(runif(10, 20, 40), runif(10, 30, 50))
 grps <- rep(c("A", "B"), each = 10)
 res <- dir_aov_spher_vec(trds, plgs, grps)
 res
+#> $statement
+#> [1] "Mean direction differs between samples"
+#> 
+#> $vector_g
+#> # A tibble: 2 × 9
+#>   grp       N     R  Rbar kappa   sigc   trd   plg  cone
+#>   <chr> <int> <dbl> <dbl> <dbl>  <dbl> <dbl> <dbl> <dbl>
+#> 1 A        10  9.93 0.993 120.  0.0369  61.5  32.4  3.66
+#> 2 B        10  9.90 0.990  83.5 0.0443  80.2  41.0  4.40
+#> 
+#> $vector_res
+#> # A tibble: 1 × 3
+#>      Nr    df  p.value
+#>   <dbl> <dbl>    <dbl>
+#> 1  54.0     2 1.87e-12
+#> 
+#> $stereoplot
 ```
 
-    ## $statement
-    ## [1] "Mean direction differs between samples"
-    ## 
-    ## $vector_g
-    ## # A tibble: 2 × 9
-    ##   grp       N     R  Rbar kappa   sigc   trd   plg  cone
-    ##   <chr> <int> <dbl> <dbl> <dbl>  <dbl> <dbl> <dbl> <dbl>
-    ## 1 A        10  9.93 0.993 120.  0.0369  61.5  32.4  3.66
-    ## 2 B        10  9.90 0.990  83.5 0.0443  80.2  41.0  4.40
-    ## 
-    ## $vector_res
-    ## # A tibble: 1 × 3
-    ##      Nr    df  p.value
-    ##   <dbl> <dbl>    <dbl>
-    ## 1  54.0     2 1.87e-12
-    ## 
-    ## $stereoplot
-
-![](directional_stats_vig_files/figure-html/unnamed-chunk-10-1.png)
+![](directional_stats_vig_files/figure-html/unnamed-chunk-11-1.png)
 
 More functions are available from the `Directional` package, including
 tests for randomness, uniformity, and multiple samples, but they are not
@@ -446,7 +441,7 @@ ggstereo() +
   geom_point(aes(xp, yp), pts, col = 'red')
 ```
 
-![](directional_stats_vig_files/figure-html/unnamed-chunk-11-1.png)
+![](directional_stats_vig_files/figure-html/unnamed-chunk-12-1.png)
 
 #### Planes (Great circles)
 
@@ -469,7 +464,7 @@ ggstereo() +
   geom_path(aes(xp, yp), plane, col = 'steelblue')
 ```
 
-![](directional_stats_vig_files/figure-html/unnamed-chunk-12-1.png)
+![](directional_stats_vig_files/figure-html/unnamed-chunk-13-1.png)
 
 ``` r
 
@@ -483,7 +478,7 @@ ggstereo() +
   geom_path(aes(xp, yp, group = plane_id), planes, col = 'steelblue')
 ```
 
-![](directional_stats_vig_files/figure-html/unnamed-chunk-13-1.png)
+![](directional_stats_vig_files/figure-html/unnamed-chunk-14-1.png)
 
 ##### Cone angle (Small circles)
 
@@ -505,7 +500,7 @@ ggstereo() +
   geom_path(aes(xp, yp, group = sc_id), sc, col = 'steelblue')
 ```
 
-![](directional_stats_vig_files/figure-html/unnamed-chunk-14-1.png)
+![](directional_stats_vig_files/figure-html/unnamed-chunk-15-1.png)
 
 ##### Mean plane/trend and principal stresses
 
@@ -521,7 +516,7 @@ res <- dir_stats_spher(trds, plgs, conf.level = 0.95, type = 'dir')
 res$stereoplot
 ```
 
-![](directional_stats_vig_files/figure-html/unnamed-chunk-15-1.png)
+![](directional_stats_vig_files/figure-html/unnamed-chunk-16-1.png)
 
 ## Extras
 

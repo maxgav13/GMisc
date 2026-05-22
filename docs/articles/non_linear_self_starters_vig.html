@@ -6,9 +6,10 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <title>Non-linear and self-starting functions • GMisc</title>
-<script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<link href="../deps/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet">
-<script src="../deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="../deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet">
+<!-- katex math --><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" integrity="sha384-nB0miv6/jRmo5UMMR1wu3Gz6NLsoTkbqJghGIsx//Rlm+ZU03BU6SQNC66uf4l5+" crossorigin="anonymous">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" integrity="sha384-7zkQWkzuo3B5mTepMUcHkMB5jZaolc2xDwL6VFqjFALcbeS9Ggm/Yr2r3Dy4lfFg" crossorigin="anonymous"></script><script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js" integrity="sha384-43gviWU0YVjaDtb/GhzOouOXtZMP/7XUzwPTstBeZFe/+rCMvRwr4yROQP43s0Xk" crossorigin="anonymous" onload="renderMathInElement(document.body);"></script><script src="../katex-auto.js"></script><script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link href="../deps/bootstrap-5.3.8/bootstrap.min.css" rel="stylesheet">
+<script src="../deps/bootstrap-5.3.8/bootstrap.bundle.min.js"></script><link href="../deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet">
 <link href="../deps/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet">
 <script src="../deps/headroom-0.11.0/headroom.min.js"></script><script src="../deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="../deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="../deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="../deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="../deps/search-1.0.0/fuse.min.js"></script><script src="../deps/search-1.0.0/mark.min.js"></script><script src="non_linear_self_starters_vig_files/libs/quarto-html/popper.min.js"></script><script src="non_linear_self_starters_vig_files/libs/quarto-html/tippy.umd.min.js"></script><link href="non_linear_self_starters_vig_files/libs/quarto-html/tippy.css" rel="stylesheet">
 <link href="non_linear_self_starters_vig_files/libs/quarto-html/light-border.css" rel="stylesheet">
@@ -25,7 +26,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">GMisc</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.4.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.4.1</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -65,7 +66,7 @@
       <h1>Non-linear and self-starting functions</h1>
 
       <p class="author">Maximiliano Garnier-Villarreal</p>
-      <p class="date">2026-05-19</p>
+      <p class="date">2026-05-22</p>
 
       <small class="dont-index">Source: <a href="https://github.com/maxgav13/GMisc/blob/HEAD/vignettes/non_linear_self_starters_vig.qmd" class="external-link"><code>vignettes/non_linear_self_starters_vig.qmd</code></a></small>
       <div class="d-none name"><code></code></div>
@@ -80,16 +81,6 @@
 <div class="sourceCode cell-code" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://maxgav13.github.io/GMisc/">GMisc</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="http://www.r-project.org" class="external-link">drc</a></span><span class="op">)</span></span>
-<span><span class="co">#&gt; Loading required package: MASS</span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; 'drc' has been loaded.</span></span>
-<span><span class="co">#&gt; Please cite R and 'drc' if used for a publication,</span></span>
-<span><span class="co">#&gt; for references type 'citation()' and 'citation('drc')'.</span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; Attaching package: 'drc'</span></span>
-<span><span class="co">#&gt; The following objects are masked from 'package:stats':</span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt;     gaussian, getInitial</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org" class="external-link">ggplot2</a></span><span class="op">)</span></span></code></pre></div>
 </div>
 <section class="level2"><h2 id="introduction">Introduction<a class="anchor" aria-label="anchor" href="#introduction"></a>
@@ -126,93 +117,93 @@
 <tbody>
 <tr class="odd">
 <td>Chapman-Richards</td>
-<td><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>y</mi><mo>=</mo><mi>a</mi><mo stretchy="false" form="prefix">(</mo><mn>1</mn><mo>−</mo><msup><mi>e</mi><mrow><mi>−</mi><mi>b</mi><mi>x</mi></mrow></msup><msup><mo stretchy="false" form="postfix">)</mo><mi>c</mi></msup></mrow><annotation encoding="application/x-tex">y = a(1 - e^{-bx})^c</annotation></semantics></math></td>
+<td><span class="math inline">y = a(1 - e^{-bx})^c</span></td>
 <td>
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>a</mi><annotation encoding="application/x-tex">a</annotation></semantics></math>, <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>b</mi><annotation encoding="application/x-tex">b</annotation></semantics></math>, <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>c</mi><annotation encoding="application/x-tex">c</annotation></semantics></math>
+<span class="math inline">a</span>, <span class="math inline">b</span>, <span class="math inline">c</span>
 </td>
 <td><code><a href="../reference/chaprich.html">SSchaprich()</a></code></td>
 <td><code><a href="../reference/chaprich.html">DRCchaprich()</a></code></td>
 </tr>
 <tr class="even">
 <td>Exp. with inverse predictor (Type 3)</td>
-<td><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>y</mi><mo>=</mo><mi>a</mi><msup><mi>e</mi><mrow><mi>b</mi><mi>/</mi><mi>x</mi></mrow></msup></mrow><annotation encoding="application/x-tex">y = a e^{b/x}</annotation></semantics></math></td>
+<td><span class="math inline">y = a e^{b/x}</span></td>
 <td>
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>a</mi><annotation encoding="application/x-tex">a</annotation></semantics></math>, <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>b</mi><annotation encoding="application/x-tex">b</annotation></semantics></math>
+<span class="math inline">a</span>, <span class="math inline">b</span>
 </td>
 <td><code><a href="../reference/exp3.html">SSexp3()</a></code></td>
 <td><code><a href="../reference/exp3.html">DRCexp3()</a></code></td>
 </tr>
 <tr class="odd">
 <td>Negative exponential</td>
-<td><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>y</mi><mo>=</mo><mi>a</mi><mo>+</mo><mi>b</mi><msup><mi>e</mi><mrow><mi>c</mi><mi>x</mi></mrow></msup></mrow><annotation encoding="application/x-tex">y = a + b e^{cx}</annotation></semantics></math></td>
+<td><span class="math inline">y = a + b e^{cx}</span></td>
 <td>
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>a</mi><annotation encoding="application/x-tex">a</annotation></semantics></math>, <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>b</mi><annotation encoding="application/x-tex">b</annotation></semantics></math>, <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>c</mi><annotation encoding="application/x-tex">c</annotation></semantics></math>
+<span class="math inline">a</span>, <span class="math inline">b</span>, <span class="math inline">c</span>
 </td>
 <td><code><a href="../reference/expneg.html">SSexpneg()</a></code></td>
 <td><code><a href="../reference/expneg.html">DRCexpneg()</a></code></td>
 </tr>
 <tr class="even">
 <td>Two-asymptote exponential</td>
-<td><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>y</mi><mo>=</mo><mi>a</mi><msup><mi>e</mi><mrow><mi>c</mi><mi>x</mi></mrow></msup><mo>+</mo><mi>b</mi><mo stretchy="false" form="prefix">(</mo><mn>1</mn><mo>−</mo><msup><mi>e</mi><mrow><mi>c</mi><mi>x</mi></mrow></msup><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">y = a e^{cx} + b(1 - e^{cx})</annotation></semantics></math></td>
+<td><span class="math inline">y = a e^{cx} + b(1 - e^{cx})</span></td>
 <td>
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>a</mi><annotation encoding="application/x-tex">a</annotation></semantics></math>, <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>b</mi><annotation encoding="application/x-tex">b</annotation></semantics></math>, <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>c</mi><annotation encoding="application/x-tex">c</annotation></semantics></math>
+<span class="math inline">a</span>, <span class="math inline">b</span>, <span class="math inline">c</span>
 </td>
 <td><code><a href="../reference/expneg2.html">SSexpneg2()</a></code></td>
 <td><code><a href="../reference/expneg2.html">DRCexpneg2()</a></code></td>
 </tr>
 <tr class="odd">
 <td>Exponential variogram</td>
-<td><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>y</mi><mo>=</mo><mtext mathvariant="normal">nug</mtext><mo>+</mo><mtext mathvariant="normal">psill</mtext><mo stretchy="false" form="prefix">(</mo><mn>1</mn><mo>−</mo><msup><mi>e</mi><mrow><mi>−</mi><mi>x</mi><mi>/</mi><mtext mathvariant="normal">range</mtext></mrow></msup><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">y = \text{nug} + \text{psill}(1 - e^{-x/\text{range}})</annotation></semantics></math></td>
+<td><span class="math inline">y = \text{nug} + \text{psill}(1 - e^{-x/\text{range}})</span></td>
 <td>nug, psill, range</td>
 <td><code><a href="../reference/varexp.html">SSvarexp()</a></code></td>
 <td><code><a href="../reference/varexp.html">DRCvarexp()</a></code></td>
 </tr>
 <tr class="even">
 <td>Gaussian variogram</td>
-<td><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>y</mi><mo>=</mo><mtext mathvariant="normal">nug</mtext><mo>+</mo><mtext mathvariant="normal">psill</mtext><mo stretchy="false" form="prefix">(</mo><mn>1</mn><mo>−</mo><msup><mi>e</mi><mrow><mi>−</mi><mo stretchy="false" form="prefix">(</mo><mi>x</mi><mi>/</mi><mtext mathvariant="normal">range</mtext><msup><mo stretchy="false" form="postfix">)</mo><mn>2</mn></msup></mrow></msup><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">y = \text{nug} + \text{psill}(1 - e^{-(x/\text{range})^2})</annotation></semantics></math></td>
+<td><span class="math inline">y = \text{nug} + \text{psill}(1 - e^{-(x/\text{range})^2})</span></td>
 <td>nug, psill, range</td>
 <td><code><a href="../reference/vargauss.html">SSvargauss()</a></code></td>
 <td><code><a href="../reference/vargauss.html">DRCvargauss()</a></code></td>
 </tr>
 <tr class="odd">
 <td>Spherical variogram</td>
-<td><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>y</mi><mo>=</mo><mtext mathvariant="normal">nug</mtext><mo>+</mo><mtext mathvariant="normal">psill</mtext><mrow><mo stretchy="true" form="prefix">(</mo><mfrac><mn>3</mn><mn>2</mn></mfrac><mfrac><mi>x</mi><mi>r</mi></mfrac><mo>−</mo><mfrac><mn>1</mn><mn>2</mn></mfrac><msup><mrow><mo stretchy="true" form="prefix">(</mo><mfrac><mi>x</mi><mi>r</mi></mfrac><mo stretchy="true" form="postfix">)</mo></mrow><mn>3</mn></msup><mo stretchy="true" form="postfix">)</mo></mrow><mo>,</mo><mspace width="0.278em"></mspace><mi>x</mi><mo>≤</mo><mi>r</mi></mrow><annotation encoding="application/x-tex">y = \text{nug} + \text{psill}\left(\frac{3}{2}\frac{x}{r} - \frac{1}{2}\left(\frac{x}{r}\right)^3\right),\; x \le r</annotation></semantics></math></td>
+<td><span class="math inline">y = \text{nug} + \text{psill}\left(\frac{3}{2}\frac{x}{r} - \frac{1}{2}\left(\frac{x}{r}\right)^3\right),\; x \le r</span></td>
 <td>nug, psill, range</td>
 <td><code><a href="../reference/varsph.html">SSvarsph()</a></code></td>
 <td><code><a href="../reference/varsph.html">DRCvarsph()</a></code></td>
 </tr>
 <tr class="even">
 <td>Inverse polynomial (1st order)</td>
-<td><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>y</mi><mo>=</mo><mstyle displaystyle="true"><mfrac><mi>x</mi><mrow><mi>a</mi><mo>+</mo><mi>b</mi><mi>x</mi></mrow></mfrac></mstyle></mrow><annotation encoding="application/x-tex">y = \dfrac{x}{a + bx}</annotation></semantics></math></td>
+<td><span class="math inline">y = \dfrac{x}{a + bx}</span></td>
 <td>
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>a</mi><annotation encoding="application/x-tex">a</annotation></semantics></math>, <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>b</mi><annotation encoding="application/x-tex">b</annotation></semantics></math>
+<span class="math inline">a</span>, <span class="math inline">b</span>
 </td>
 <td><code><a href="../reference/invpoly1.html">SSinvpoly1()</a></code></td>
 <td><code><a href="../reference/invpoly1.html">DRCinvpoly1()</a></code></td>
 </tr>
 <tr class="odd">
 <td>Inverse polynomial (2nd order)</td>
-<td><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>y</mi><mo>=</mo><mstyle displaystyle="true"><mfrac><mi>x</mi><mrow><mi>a</mi><mo>+</mo><mi>b</mi><mi>x</mi><mo>+</mo><mi>c</mi><msup><mi>x</mi><mn>2</mn></msup></mrow></mfrac></mstyle></mrow><annotation encoding="application/x-tex">y = \dfrac{x}{a + bx + cx^2}</annotation></semantics></math></td>
+<td><span class="math inline">y = \dfrac{x}{a + bx + cx^2}</span></td>
 <td>
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>a</mi><annotation encoding="application/x-tex">a</annotation></semantics></math>, <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>b</mi><annotation encoding="application/x-tex">b</annotation></semantics></math>, <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>c</mi><annotation encoding="application/x-tex">c</annotation></semantics></math>
+<span class="math inline">a</span>, <span class="math inline">b</span>, <span class="math inline">c</span>
 </td>
 <td><code><a href="../reference/invpoly2.html">SSinvpoly2()</a></code></td>
 <td><code><a href="../reference/invpoly2.html">DRCinvpoly2()</a></code></td>
 </tr>
 <tr class="even">
 <td>Inverse polynomial (3rd order)</td>
-<td><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>y</mi><mo>=</mo><mstyle displaystyle="true"><mfrac><mi>x</mi><mrow><mi>a</mi><mo>+</mo><mi>b</mi><mi>x</mi><mo>+</mo><mi>c</mi><msup><mi>x</mi><mn>2</mn></msup><mo>+</mo><mi>d</mi><msup><mi>x</mi><mn>3</mn></msup></mrow></mfrac></mstyle></mrow><annotation encoding="application/x-tex">y = \dfrac{x}{a + bx + cx^2 + dx^3}</annotation></semantics></math></td>
+<td><span class="math inline">y = \dfrac{x}{a + bx + cx^2 + dx^3}</span></td>
 <td>
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>a</mi><annotation encoding="application/x-tex">a</annotation></semantics></math>, <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>b</mi><annotation encoding="application/x-tex">b</annotation></semantics></math>, <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>c</mi><annotation encoding="application/x-tex">c</annotation></semantics></math>, <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>d</mi><annotation encoding="application/x-tex">d</annotation></semantics></math>
+<span class="math inline">a</span>, <span class="math inline">b</span>, <span class="math inline">c</span>, <span class="math inline">d</span>
 </td>
 <td><code><a href="../reference/invpoly3.html">SSinvpoly3()</a></code></td>
 <td><code><a href="../reference/invpoly3.html">DRCinvpoly3()</a></code></td>
 </tr>
 <tr class="odd">
 <td>Modified Kostiakov</td>
-<td><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>y</mi><mo>=</mo><mi>α</mi><msup><mi>x</mi><mi>β</mi></msup><mo>+</mo><msub><mi>f</mi><mi>c</mi></msub></mrow><annotation encoding="application/x-tex">y = \alpha x^{\beta} + f_c</annotation></semantics></math></td>
+<td><span class="math inline">y = \alpha x^{\beta} + f_c</span></td>
 <td>
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>α</mi><annotation encoding="application/x-tex">\alpha</annotation></semantics></math>, <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>β</mi><annotation encoding="application/x-tex">\beta</annotation></semantics></math>, <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>f</mi><mi>c</mi></msub><annotation encoding="application/x-tex">f_c</annotation></semantics></math>
+<span class="math inline">\alpha</span>, <span class="math inline">\beta</span>, <span class="math inline">f_c</span>
 </td>
 <td><code><a href="../reference/kostmod.html">SSkostmod()</a></code></td>
 <td><code><a href="../reference/kostmod.html">DRCkostmod()</a></code></td>
@@ -223,8 +214,8 @@
 </h2>
 <section class="level3"><h3 id="chapman-richards-growth-model">1. Chapman-Richards growth model<a class="anchor" aria-label="anchor" href="#chapman-richards-growth-model"></a>
 </h3>
-<p>The Chapman-Richards model describes sigmoidal growth towards an upper asymptote <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>a</mi><annotation encoding="application/x-tex">a</annotation></semantics></math>:</p>
-<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>y</mi><mo>=</mo><mi>a</mi><msup><mrow><mo stretchy="true" form="prefix">(</mo><mn>1</mn><mo>−</mo><msup><mi>e</mi><mrow><mi>−</mi><mi>b</mi><mi>x</mi></mrow></msup><mo stretchy="true" form="postfix">)</mo></mrow><mi>c</mi></msup></mrow><annotation encoding="application/x-tex">y = a \left(1 - e^{-bx}\right)^c</annotation></semantics></math></p>
+<p>The Chapman-Richards model describes sigmoidal growth towards an upper asymptote <span class="math inline">a</span>:</p>
+<p><span class="math display">y = a \left(1 - e^{-bx}\right)^c</span></p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed</a></span><span class="op">(</span><span class="fl">42</span><span class="op">)</span></span>
@@ -306,7 +297,7 @@
 <hr></section><section class="level3"><h3 id="exponential-variogram-model">2. Exponential variogram model<a class="anchor" aria-label="anchor" href="#exponential-variogram-model"></a>
 </h3>
 <p>The exponential variogram is widely used in geostatistics to model spatial autocorrelation. It approaches the sill asymptotically:</p>
-<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>γ</mi><mo stretchy="false" form="prefix">(</mo><mi>x</mi><mo stretchy="false" form="postfix">)</mo><mo>=</mo><mtext mathvariant="normal">nug</mtext><mo>+</mo><mtext mathvariant="normal">psill</mtext><mrow><mo stretchy="true" form="prefix">(</mo><mn>1</mn><mo>−</mo><msup><mi>e</mi><mrow><mi>−</mi><mi>x</mi><mi>/</mi><mtext mathvariant="normal">range</mtext></mrow></msup><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">\gamma(x) = \text{nug} + \text{psill}\left(1 - e^{-x / \text{range}}\right)</annotation></semantics></math></p>
+<p><span class="math display">\gamma(x) = \text{nug} + \text{psill}\left(1 - e^{-x / \text{range}}\right)</span></p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed</a></span><span class="op">(</span><span class="fl">7</span><span class="op">)</span></span>
@@ -387,8 +378,8 @@
 </div>
 <hr></section><section class="level3"><h3 id="modified-kostiakov-infiltration-model">3. Modified Kostiakov infiltration model<a class="anchor" aria-label="anchor" href="#modified-kostiakov-infiltration-model"></a>
 </h3>
-<p>The Modified Kostiakov model describes infiltration rate as a power-law decay with an additive constant representing the steady-state rate <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>f</mi><mi>c</mi></msub><annotation encoding="application/x-tex">f_c</annotation></semantics></math>:</p>
-<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>y</mi><mo>=</mo><mi>α</mi><mspace width="0.167em"></mspace><msup><mi>x</mi><mi>β</mi></msup><mo>+</mo><msub><mi>f</mi><mi>c</mi></msub></mrow><annotation encoding="application/x-tex">y = \alpha\, x^{\beta} + f_c</annotation></semantics></math></p>
+<p>The Modified Kostiakov model describes infiltration rate as a power-law decay with an additive constant representing the steady-state rate <span class="math inline">f_c</span>:</p>
+<p><span class="math display">y = \alpha\, x^{\beta} + f_c</span></p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed</a></span><span class="op">(</span><span class="fl">99</span><span class="op">)</span></span>

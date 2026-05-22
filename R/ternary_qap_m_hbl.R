@@ -11,6 +11,8 @@
 #' @details For plotting data on the ggplot object it would be easier if the names of the dataframe are "px", "p", and "hbl", that way it gets mapped automatically, if not make sure to use "aes(x=px,y=p,z=hbl)".
 #' For plotting on the plotly object the mapping of the new data should be as shown in the example: \code{a = ~p, b = ~px, c = ~hbl}, where \code{a} refers to the top ("p"), \code{b} refers to the bottom left ("px"), and \code{c} refers to the bottom right ("hbl").
 #' The examples show basic usage and how to add data, which can be more customizable.
+#' For a more complete description on how to use this function and similar ones, see
+#' \code{vignette("classification_diagrams_vig")}
 #'
 #' @family classification plots, petrology
 #'
@@ -20,10 +22,11 @@
 #'
 #' d = data.frame(p=c(23,40,60),
 #'                hbl=c(27,50,30),
-#'                px=c(50,10,10))
+#'                px=c(50,10,10),
+#'                loc=c("A", "B", "C"))
 #'
 #' # adding data to ggplot object
-#' ternary_qap_m_hbl() + geom_point(data = d)
+#' ternary_qap_m_hbl() + geom_point(aes(col = loc), data = d)
 #'
 #' # adding data to plotly object
 #' ternary_qap_m_hbl('plotly') %>%
@@ -37,6 +40,24 @@
 #'             hovertemplate = paste0('P: %{a}<br>',
 #'                                    'Px: %{b}<br>',
 #'                                    'Hbl: %{c}'))
+#'
+#' # customizing colors and symbols by location
+#' my_pal    <- c("A" = "red",      "B" = "blue",   "C" = "green")
+#' my_shapes <- c("A" = "circle",   "B" = "square",  "C" = "diamond")
+#'
+#' ternary_qap_m_hbl('plotly') %>%
+#'  add_trace(a = ~p, b = ~px, c = ~hbl,
+#'            data = d,
+#'            type = "scatterternary",
+#'            mode = "markers",
+#'            split = ~loc,
+#'            marker = list(size=8,
+#'                          color  = ~my_pal[loc],
+#'                          symbol = ~my_shapes[loc],
+#'                          opacity=.9),
+#'            hovertemplate = paste0('P: %{a}<br>',
+#'                                   'Px: %{b}<br>',
+#'                                   'Hbl: %{c}'))
 #'
 ternary_qap_m_hbl = function(
   output = c('ggplot', 'plotly'),
@@ -153,7 +174,7 @@ ternary_qap_m_hbl = function(
       ggplot2::geom_polygon(
         ggplot2::aes(
           fill = .data$Label.en,
-          color = .data$Label.en,
+          # color = .data$Label.en,
           group = .data$Label.en
         ),
         alpha = opacity
@@ -163,10 +184,10 @@ ternary_qap_m_hbl = function(
       ggtern::theme_clockwise() +
       # custom_percent("Percent") +
       ggplot2::scale_fill_manual(values = QAP_M.pal) +
-      ggplot2::scale_color_manual(values = QAP_M.pal) +
+      # ggplot2::scale_color_manual(values = QAP_M.pal) +
       ggplot2::labs(
         fill = "Mafic",
-        color = "Mafic",
+        # color = "Mafic",
         T = "P",
         L = "Px",
         R = "Hbl"
@@ -179,7 +200,7 @@ ternary_qap_m_hbl = function(
       ggplot2::geom_polygon(
         ggplot2::aes(
           fill = .data$Label.es,
-          color = .data$Label.es,
+          # color = .data$Label.es,
           group = .data$Label.es
         ),
         alpha = opacity
@@ -189,10 +210,10 @@ ternary_qap_m_hbl = function(
       ggtern::theme_clockwise() +
       # custom_percent("Percent") +
       ggplot2::scale_fill_manual(values = QAP_M.pal) +
-      ggplot2::scale_color_manual(values = QAP_M.pal) +
+      # ggplot2::scale_color_manual(values = QAP_M.pal) +
       ggplot2::labs(
         fill = "M\u00e1ficas",
-        color = "M\u00e1ficas",
+        # color = "M\u00e1ficas",
         T = "P",
         L = "Px",
         R = "Hbl"

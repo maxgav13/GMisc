@@ -12,22 +12,25 @@ vignette: >
   %\VignetteEncoding{UTF-8}
 ---
 
-```{r setup, include=FALSE}
-library(GMisc)
-library(ggplot2)
-
-load('../inst/HB_D.rda')
-load('../inst/HB_mi_mr.rda')
-load('../inst/HB_sig_ci.rda')
-
+```{r, include=FALSE}
 knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
   echo = TRUE,
   message = FALSE,
   warning = FALSE,
   error = FALSE,
-  fig.align = "center",
-  out.width = "80%"
+  fig.align = "center"
 )
+
+load('../inst/HB_D.rda')
+load('../inst/HB_mi_mr.rda')
+load('../inst/HB_sig_ci.rda')
+```
+
+```{r setup}
+library(GMisc)
+library(ggplot2)
 ```
 
 This document highlights some functions of the `GMisc` package related to rock mechanics problems.

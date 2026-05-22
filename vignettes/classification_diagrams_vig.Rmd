@@ -12,20 +12,23 @@ vignette: >
   %\VignetteEncoding{UTF-8}
 ---
 
-```{r setup, include=FALSE}
-library(kableExtra)
-library(GMisc)
-library(plotly)
-library(ggplot2)
-
+```{r, include=FALSE}
 knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
   echo = TRUE,
   message = FALSE,
   warning = FALSE,
   error = FALSE,
-  fig.align = "center",
-  out.width = "80%"
+  fig.align = "center"
 )
+```
+
+```{r setup}
+library(kableExtra)
+library(GMisc)
+library(plotly)
+library(ggplot2)
 ```
 
 # Introduction
@@ -103,7 +106,11 @@ d = data.frame(
   l = c(20, 10)
 )
 
-d2 = data.frame(silica = c(58, 70), alkali = c(8, 4))
+d2 = data.frame(
+  silica = c(58, 70),
+  alkali = c(8, 4),
+  sample = c('a', 'b')
+)
 ```
 
 ```{r}
@@ -127,7 +134,25 @@ For the **ggplot** object, data can be added using the function `geom_point`, wh
 ```{r}
 #| fig.cap: Static QtFL ternary diagram for provenance, with user's data.
 ternary_dickinson_qtfl() +
-  geom_point(data = d, color = 'coral', size = 3, shape = 3, alpha = .7)
+  geom_point(
+    data = d,
+    color = 'coral',
+    size = 3,
+    shape = 3,
+    alpha = .7
+  )
+```
+
+```{r}
+#| fig.cap: Static QtFL ternary diagram for provenance, with user's data, colored by sample.
+ternary_dickinson_qtfl() +
+  geom_point(
+    aes(col = sample),
+    data = d,
+    size = 3,
+    shape = 3,
+    alpha = .7
+  )
 ```
 
 ```{r}
@@ -141,6 +166,40 @@ TAS() +
     shape = 3,
     alpha = .7
   )
+```
+
+```{r}
+#| fig.cap: Static TAS diagram, with user's data, colored by sample.
+TAS() +
+  geom_point(
+    aes(x = silica, y = alkali, col = sample),
+    data = d2,
+    size = 3,
+    shape = 3,
+    alpha = .7
+  )
+```
+
+For the static diagrams, the fill color of the polygons can be customized by suplying a `scale_fill_manual` layer, where the `values` argument is a vector with the colors to be used, and, optionally, the names of the vector are the names of the groups (polygons) to be colored, if not they will be colored in order. Another option is to use a `scale_fill_brewer` layer, where the `palette` argument is the name of the palette to be used, and the colors will be assigned in order, but the user needs to check the number of colors in the palette and make sure it is enough for the number of groups (polygons) to be colored. Any other `scale_fill_*` layer can be used, as long as it is compatible with the **ggplot** object.
+
+```{r}
+#| fig.cap: Static pyroclastic size diagram, with different colors for the polygons, using Brewer palette.
+ternary_pyroclastic_size() +
+  scale_fill_brewer(palette = 'Accent')
+```
+
+```{r}
+#| fig.cap: Static USDA diagram, with custom colors for the polygons.
+my_pal_usda = colorRampPalette(RColorBrewer::brewer.pal(11, 'BrBG'))(12)
+
+ternary_usda() +
+  scale_fill_manual(values = my_pal_usda)
+```
+
+```{r}
+#| fig.cap: Static USDA diagram, with different colors for the polygons, using viridis.
+ternary_usda() +
+  scale_fill_viridis_d(option = 'H')
 ```
 
 ### Dynamic
@@ -165,6 +224,32 @@ ternary_dickinson_qtfl(output = 'plotly') %>%
   )
 ```
 
+To color the points by sample, the `split` argument can be used, where the name of the column with the sample names is given. The `marker` argument can be modified to change the appearance of the points, in this case the color and symbol are mapped to the sample names. Here, the `my_pal` and `my_shapes` objects are created to assign a color and symbol to each sample, this is done by using the sample names as names of the vector, so that when mapping the color and symbol to the sample names it gets the corresponding value from the vector.
+
+```{r}
+#| fig.cap: Dynamic QtFL ternary diagram for provenance, with user's data, colored by sample.
+my_pal <- c("a" = "red", "b" = "blue")
+my_shapes <- c("a" = "circle", "b" = "square")
+
+ternary_dickinson_qtfl(output = 'plotly') %>%
+  add_trace(
+    a = ~qt,
+    b = ~f,
+    c = ~l,
+    data = d,
+    split = ~sample,
+    type = "scatterternary",
+    mode = "markers",
+    marker = list(
+      size = 8,
+      color = ~ my_pal[sample],
+      symbol = ~ my_shapes[sample],
+      opacity = .7
+    ),
+    hovertemplate = paste0('Qt: %{a}<br>', 'F: %{b}<br>', 'L: %{c}')
+  )
+```
+
 For the bivariate diagrams, data can be added using the function `add_markers`, where the arguments `data`, `x`, and `y` are required, the rest can be changed. The `name` is what gets displayed in the legend, and the `marker` defines the appearance. The `layout(showlegend = TRUE)` forces the legend to show up.
 
 ```{r}
@@ -178,6 +263,20 @@ TAS('plotly') %>%
     marker = list(size = 8, color = 'orange', symbol = 3, opacity = .9)
   ) %>%
   layout(showlegend = TRUE)
+```
+
+```{r}
+#| fig.cap: Dynamic TAS diagram, with user's data, colored by sample.
+my_pal <- c("a" = "cyan", "b" = "magenta")
+
+TAS('plotly') %>%
+  add_markers(
+    x = ~silica,
+    y = ~alkali,
+    data = d2,
+    split = ~sample,
+    marker = list(size = 8, color = ~ my_pal[sample], symbol = 3, opacity = .9)
+  )
 ```
 
 ### Piper diagram

@@ -29,13 +29,16 @@ soil_swelling()
 
 dat = data.frame(
   clay = c(20, 40, 60),
-  activity = c(.5, 1, 2)
+  activity = c(.5, 1, 2),
+  loc = c("A", "B", "C")
 )
 # Spanish labels
 soil_swelling(lang = "es") +
 ggplot2::geom_point(data = dat,
-                    ggplot2::aes(x = clay, y = activity),
-                    size = 3, inherit.aes = FALSE)
+                    ggplot2::aes(x = clay, y = activity, color = loc),
+                    size = 3,
+                    inherit.aes = FALSE # needed
+                   )
 }
 \references{
 Holtz, R. D., Kovacs, W. D., & Sheahan, T. C. (2023). An Introduction to Geotechnical Engineering (3rd ed.). Pearson Education.

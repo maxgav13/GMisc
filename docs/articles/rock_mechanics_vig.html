@@ -6,9 +6,10 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <title>Rock Mechanics • GMisc</title>
-<script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<link href="../deps/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet">
-<script src="../deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="../deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet">
+<!-- katex math --><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" integrity="sha384-nB0miv6/jRmo5UMMR1wu3Gz6NLsoTkbqJghGIsx//Rlm+ZU03BU6SQNC66uf4l5+" crossorigin="anonymous">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" integrity="sha384-7zkQWkzuo3B5mTepMUcHkMB5jZaolc2xDwL6VFqjFALcbeS9Ggm/Yr2r3Dy4lfFg" crossorigin="anonymous"></script><script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js" integrity="sha384-43gviWU0YVjaDtb/GhzOouOXtZMP/7XUzwPTstBeZFe/+rCMvRwr4yROQP43s0Xk" crossorigin="anonymous" onload="renderMathInElement(document.body);"></script><script src="../katex-auto.js"></script><script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link href="../deps/bootstrap-5.3.8/bootstrap.min.css" rel="stylesheet">
+<script src="../deps/bootstrap-5.3.8/bootstrap.bundle.min.js"></script><link href="../deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet">
 <link href="../deps/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet">
 <script src="../deps/headroom-0.11.0/headroom.min.js"></script><script src="../deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="../deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="../deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="../deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="../deps/search-1.0.0/fuse.min.js"></script><script src="../deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="Rock Mechanics">
 </head>
@@ -20,7 +21,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">GMisc</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.4.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.4.1</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -71,7 +72,7 @@
                         <h4 data-toc-skip class="author">Maximiliano
 Garnier-Villarreal</h4>
             
-            <h4 data-toc-skip class="date">2026-05-19</h4>
+            <h4 data-toc-skip class="date">2026-05-22</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/maxgav13/GMisc/blob/HEAD/vignettes/rock_mechanics_vig.Rmd" class="external-link"><code>vignettes/rock_mechanics_vig.Rmd</code></a></small>
       <div class="d-none name"><code>rock_mechanics_vig.Rmd</code></div>
@@ -79,6 +80,9 @@ Garnier-Villarreal</h4>
 
     
     
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://maxgav13.github.io/GMisc/">GMisc</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org" class="external-link">ggplot2</a></span><span class="op">)</span></span></code></pre></div>
 <p>This document highlights some functions of the <code>GMisc</code>
 package related to rock mechanics problems.</p>
 <div class="section level2">
@@ -89,38 +93,33 @@ using Hoek-Brown. There are different ways to obtain this parameter but
 one simple and cost effective solution is the Point Load Test (PLT). In
 this test several irregular samples are measured (width and diameter)
 and their strength is tested using the PLT machine. Afterwards, these
-data can be analyzed to obtain the
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>I</mi><mn>50</mn></msub><annotation encoding="application/x-tex">I_{50}</annotation></semantics></math>
-and the respective UCS.</p>
+data can be analyzed to obtain the <span class="math inline">I_{50}</span> and the respective UCS.</p>
 <p>The function <code>UCS</code> of the package performs the
 conventional analysis through a classical (Gaussian) regression of the
 failure load with respect to the equivalent diameter (calculated from
 the width and diameter of the irregular samples), and predicting the
-load and
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>I</mi><mn>50</mn></msub><annotation encoding="application/x-tex">I_{50}</annotation></semantics></math>
-for the classical 50 mm cylinder. The function goes beyond and performs
-a robust regression to account for outliers, as well as estimating an
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>I</mi><mn>50</mn></msub><annotation encoding="application/x-tex">I_{50}</annotation></semantics></math>
-for each sample and estimating the mean and median of this value
-(corrected mean and median).</p>
+load and <span class="math inline">I_{50}</span> for the classical 50 mm
+cylinder. The function goes beyond and performs a robust regression to
+account for outliers, as well as estimating an <span class="math inline">I_{50}</span> for each sample and estimating the
+mean and median of this value (corrected mean and median).</p>
 <p>The arguments for <code>UCS</code> are <code>W</code> for the widths
 in millimeters, <code>D</code> for the diameter in millimeters, and
 <code>P</code> for the failure load. Also a vertical dashed line is
 shown at the 50 mm diameter, as this is the reference diameter.</p>
-<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">W</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">70.0</span>, <span class="fl">95.0</span>, <span class="fl">80.0</span>, <span class="fl">90.0</span>, <span class="fl">98.0</span>, <span class="fl">110.0</span>, <span class="fl">100.0</span>, <span class="fl">100.0</span>, <span class="fl">110.0</span><span class="op">)</span></span>
 <span><span class="va">D</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">40</span>, <span class="fl">55</span>, <span class="fl">60</span>, <span class="fl">50</span>, <span class="fl">25</span>, <span class="fl">60</span>, <span class="fl">40</span>, <span class="fl">70</span>, <span class="fl">50</span><span class="op">)</span></span>
 <span><span class="va">P</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">4.3</span>, <span class="fl">3.4</span>, <span class="fl">4.5</span>, <span class="fl">3.1</span>, <span class="fl">5.0</span>, <span class="fl">6.4</span>, <span class="fl">2.6</span>, <span class="fl">11</span>, <span class="fl">4.1</span><span class="op">)</span></span>
-<span><span class="fu"><a href="../reference/UCS.html">UCS</a></span><span class="op">(</span>W <span class="op">=</span> <span class="va">W</span>, D <span class="op">=</span> <span class="va">D</span>, P <span class="op">=</span> <span class="va">P</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## $Graph</span></span></code></pre>
-<p><img src="rock_mechanics_vig_files/figure-html/unnamed-chunk-1-1.png" class="r-plt" alt="" width="80%" style="display: block; margin: auto;"></p>
-<pre><code><span><span class="co">## </span></span>
-<span><span class="co">## $Summary</span></span>
-<span><span class="co">##               Method I50 [MPa] UCS [MPa]</span></span>
-<span><span class="co">## 1           Gaussian      0.69     15.83</span></span>
-<span><span class="co">## 2             Robust      0.82     18.94</span></span>
-<span><span class="co">## 3   Corrected (mean)      1.02     23.41</span></span>
-<span><span class="co">## 4 Corrected (median)      0.90     20.71</span></span></code></pre>
+<span><span class="fu"><a href="../reference/UCS.html">UCS</a></span><span class="op">(</span>W <span class="op">=</span> <span class="va">W</span>, D <span class="op">=</span> <span class="va">D</span>, P <span class="op">=</span> <span class="va">P</span><span class="op">)</span></span>
+<span><span class="co">#&gt; $Graph</span></span></code></pre></div>
+<p><img src="rock_mechanics_vig_files/figure-html/unnamed-chunk-2-1.png" class="r-plt" alt="" width="700" style="display: block; margin: auto;"></p>
+<pre><code><span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; $Summary</span></span>
+<span><span class="co">#&gt;               Method I50 [MPa] UCS [MPa]</span></span>
+<span><span class="co">#&gt; 1           Gaussian      0.69     15.83</span></span>
+<span><span class="co">#&gt; 2             Robust      0.82     18.94</span></span>
+<span><span class="co">#&gt; 3   Corrected (mean)      1.02     23.41</span></span>
+<span><span class="co">#&gt; 4 Corrected (median)      0.90     20.71</span></span></code></pre>
 <p>This result could be compared against different methods and a more
 informative can be made regarding the election of the UCS for the rock
 mass.</p>
@@ -133,17 +132,13 @@ masses (taking in consideration both intact rock and discontinuities)
 along with strength and deformation parameters. The results are useful
 to be used in computer models.</p>
 <p>The general for of the criterion is:</p>
-<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>σ</mi><mn>1</mn></msub><mo>=</mo><msub><mi>σ</mi><mn>3</mn></msub><mo>+</mo><msub><mi>σ</mi><mrow><mi>c</mi><mi>i</mi></mrow></msub><msup><mrow><mo stretchy="true" form="prefix">(</mo><msub><mi>m</mi><mi>b</mi></msub><mfrac><msub><mi>σ</mi><mn>3</mn></msub><msub><mi>σ</mi><mrow><mi>c</mi><mi>i</mi></mrow></msub></mfrac><mo>+</mo><mi>s</mi><mo stretchy="true" form="postfix">)</mo></mrow><mi>a</mi></msup></mrow><annotation encoding="application/x-tex">
-\sigma_1 = \sigma_3 + \sigma_{ci} \left( m_b \frac{\sigma_3}{\sigma_{ci}} +s \right)^a
-</annotation></semantics></math></p>
-<p>where
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>σ</mi><mrow><mi>c</mi><mi>i</mi></mrow></msub><annotation encoding="application/x-tex">\sigma_{ci}</annotation></semantics></math>
-is the compressive strength of the intact rock,
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>m</mi><mi>b</mi></msub><annotation encoding="application/x-tex">m_b</annotation></semantics></math>,
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>a</mi><annotation encoding="application/x-tex">a</annotation></semantics></math>,
-and
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>s</mi><annotation encoding="application/x-tex">s</annotation></semantics></math>
-are material constants.</p>
+<p><span class="math display">
+\sigma_1 = \sigma_3 + \sigma_{ci} \left( m_b
+\frac{\sigma_3}{\sigma_{ci}} +s \right)^a
+</span></p>
+<p>where <span class="math inline">\sigma_{ci}</span> is the compressive
+strength of the intact rock, <span class="math inline">m_b</span>, <span class="math inline">a</span>, and <span class="math inline">s</span> are
+material constants.</p>
 <p>The discontinuities, geological structures, and general state of the
 rock mass is assessed and considered through the Geological Strength
 Index (GSI). Two cases are available, one for a general scenario and one
@@ -158,11 +153,9 @@ and the second one plots the results from the first one. The arguments
 are: <code>sig.ci</code> the uniaxial compressive strength of the intact
 rock in MPa, <code>GSI</code>, <code>mi</code> the intact rock constant,
 <code>MR</code> the modulus ratio, <code>D</code> the quality of the
-explosive campaign design, <code>unit.weight</code> in
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>k</mi><mi>N</mi><mi>/</mi><msup><mi>m</mi><mn>3</mn></msup></mrow><annotation encoding="application/x-tex">kN/m^3</annotation></semantics></math>,
-<code>height</code>, in meters, to which calculate the stress level, and
-<code>use</code> the expected use for the rock mass (“general”,
-“tunnels”, or “slopes”).</p>
+explosive campaign design, <code>unit.weight</code> in <span class="math inline">kN/m^3</span>, <code>height</code>, in meters, to
+which calculate the stress level, and <code>use</code> the expected use
+for the rock mass (“general”, “tunnels”, or “slopes”).</p>
 <p>Some of these inputs can be obtained from the following tables, where
 in most cases are rock type dependent.</p>
 <div class="datatables html-widget html-fill-item" id="htmlwidget-ac96cb3ee4656e2e9ec3" style="width:100%;height:auto;"></div>
@@ -179,38 +172,34 @@ in most cases are rock type dependent.</p>
 <span><span class="va">HB</span> <span class="op">=</span> <span class="fu"><a href="../reference/Hoek_Brown.html">Hoek_Brown</a></span><span class="op">(</span><span class="va">sig.ci</span>, <span class="va">GSI</span>, <span class="va">mi</span>, <span class="va">MR</span>, <span class="va">D</span>, <span class="va">height</span>, <span class="va">unit.weight</span><span class="op">)</span></span>
 <span><span class="va">HB</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
 <span>  <span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/pluck.html" class="external-link">pluck</a></span><span class="op">(</span><span class="st">'Results'</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html" class="external-link">as.data.frame</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">##   sig.ci GSI mi D   mb      s     a  MR   Ei sig.3.max  sig.t sig.c sig.cm</span></span>
-<span><span class="co">## 1     16  75 13 0 5.32 0.0622 0.501 300 4800         4 -0.187  3.98   5.87</span></span>
-<span><span class="co">##       Erm  phi    c phi.h  c.h</span></span>
-<span><span class="co">## 1 3918.48 40.1 1.45  52.5 0.72</span></span></code></pre>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html" class="external-link">as.data.frame</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="co">#&gt;   sig.ci GSI mi D   mb      s     a  MR   Ei sig.3.max  sig.t sig.c sig.cm</span></span>
+<span><span class="co">#&gt; 1     16  75 13 0 5.32 0.0622 0.501 300 4800         4 -0.187  3.98   5.87</span></span>
+<span><span class="co">#&gt;       Erm  phi    c phi.h  c.h</span></span>
+<span><span class="co">#&gt; 1 3918.48 40.1 1.45  52.5 0.72</span></span></code></pre></div>
 <p>The results display the input parameters as well as the estimated
 strength and deformation parameters (in MPa). The <code>phi.h</code> and
 <code>c.h</code> are the strength parameters for the stress level.</p>
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="../reference/Hoek_Brown.html">Hoek_Brown_plot</a></span><span class="op">(</span><span class="va">HB</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## $princ.stresses</span></span></code></pre>
-<p><img src="rock_mechanics_vig_files/figure-html/unnamed-chunk-6-1.png" class="r-plt" alt="" width="80%" style="display: block; margin: auto;"></p>
-<pre><code><span><span class="co">## </span></span>
-<span><span class="co">## $normal.shear</span></span></code></pre>
-<p><img src="rock_mechanics_vig_files/figure-html/unnamed-chunk-6-2.png" class="r-plt" alt="" width="80%" style="display: block; margin: auto;"></p>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/Hoek_Brown.html">Hoek_Brown_plot</a></span><span class="op">(</span><span class="va">HB</span><span class="op">)</span></span>
+<span><span class="co">#&gt; $princ.stresses</span></span></code></pre></div>
+<p><img src="rock_mechanics_vig_files/figure-html/unnamed-chunk-7-1.png" class="r-plt" alt="" width="700" style="display: block; margin: auto;"></p>
+<pre><code><span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; $normal.shear</span></span></code></pre>
+<p><img src="rock_mechanics_vig_files/figure-html/unnamed-chunk-7-2.png" class="r-plt" alt="" width="700" style="display: block; margin: auto;"></p>
 <p>The plotting function shows two graphs, one in terms of the major and
 minor principal stresses, and one in terms of the normal and shear
 stresses. The second one shows the linear fit for the desired stress
-level, along with the parameters of cohesion
-(<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>c</mi><annotation encoding="application/x-tex">c</annotation></semantics></math>)
-and friction angle
-(<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>ϕ</mi><annotation encoding="application/x-tex">\phi</annotation></semantics></math>)
-for the whole rock mass and for the desired stress level.</p>
+level, along with the parameters of cohesion (<span class="math inline">c</span>) and friction angle (<span class="math inline">\phi</span>) for the whole rock mass and for the
+desired stress level.</p>
 </div>
 <div class="section level2">
 <h2 id="q">Q<a class="anchor" aria-label="anchor" href="#q"></a>
 </h2>
 <p>The function <code>Q_93</code> is very simple in the way that it
-plots the
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>Q</mi><annotation encoding="application/x-tex">Q</annotation></semantics></math>
-parameter for the given equivalent diameter on top of the Q-diagram to
-determine the quality of the rock mass and the needed support.</p>
+plots the <span class="math inline">Q</span> parameter for the given
+equivalent diameter on top of the Q-diagram to determine the quality of
+the rock mass and the needed support.</p>
 <p>The arguments are <code>De</code> for the equivalent diameter, and
 <code>Q</code>. The amount of points have to be same in both vectors, or
 one can be a unique value and it will be assigned to all the values of
@@ -218,74 +207,60 @@ the other.</p>
 <p>In this example different values of <code>Q</code> are plotted for a
 single value of <code>De</code>, giving different classifications for
 some of the points.</p>
-<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">De</span> <span class="op">=</span> <span class="fl">9</span></span>
 <span><span class="va">Q</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">.026</span>, <span class="fl">1.4</span>, <span class="fl">.078</span>, <span class="fl">.56</span>, <span class="fl">.35</span><span class="op">)</span></span>
 <span><span class="fu"><a href="../reference/Q_93.html">Q_93</a></span><span class="op">(</span><span class="va">Q</span>, <span class="va">De</span><span class="op">)</span></span></code></pre></div>
-<p><img src="rock_mechanics_vig_files/figure-html/unnamed-chunk-7-1.png" class="r-plt" alt="" width="80%" style="display: block; margin: auto;"></p>
+<p><img src="rock_mechanics_vig_files/figure-html/unnamed-chunk-8-1.png" class="r-plt" alt="" width="700" style="display: block; margin: auto;"></p>
 </div>
 <div class="section level2">
 <h2 id="barton-choubey">Barton-Choubey<a class="anchor" aria-label="anchor" href="#barton-choubey"></a>
 </h2>
 <p>This criterion estimates the strength parameters for discontinuities
 (fractures, bedding planes, etc.) and has the following form:</p>
-<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>τ</mi><mo>=</mo><msubsup><mi>σ</mi><mi>n</mi><mo>′</mo></msubsup><mi>t</mi><mi>a</mi><mi>n</mi><mrow><mo stretchy="true" form="prefix">[</mo><mi>J</mi><mi>R</mi><mi>C</mi><mspace width="0.222em"></mspace><mi>l</mi><mi>o</mi><msub><mi>g</mi><mn>10</mn></msub><mrow><mo stretchy="true" form="prefix">(</mo><mfrac><mrow><mi>J</mi><mi>C</mi><mi>S</mi></mrow><msubsup><mi>σ</mi><mi>n</mi><mo>′</mo></msubsup></mfrac><mo stretchy="true" form="postfix">)</mo></mrow><mo>+</mo><msub><mi>ϕ</mi><mi>r</mi></msub><mo stretchy="true" form="postfix">]</mo></mrow></mrow><annotation encoding="application/x-tex">
-\tau = \sigma'_n tan \left[ JRC \ log_{10} \left(\frac{JCS}{\sigma'_n} \right) + \phi_r \right]
-</annotation></semantics></math> where
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>τ</mi><annotation encoding="application/x-tex">\tau</annotation></semantics></math>
-and
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>σ</mi><annotation encoding="application/x-tex">\sigma</annotation></semantics></math>
-are the shear and normal stress on the discontinuity plane,
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>J</mi><mi>R</mi><mi>C</mi></mrow><annotation encoding="application/x-tex">JRC</annotation></semantics></math>
-is the joint roughness coefficient,
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>J</mi><mi>C</mi><mi>S</mi></mrow><annotation encoding="application/x-tex">JCS</annotation></semantics></math>
-is the joint compressive strength, and
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>ϕ</mi><mi>r</mi></msub><annotation encoding="application/x-tex">\phi_r</annotation></semantics></math>
-is the residual friction angle of the rock mass.</p>
-<p>The
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>J</mi><mi>R</mi><mi>C</mi></mrow><annotation encoding="application/x-tex">JRC</annotation></semantics></math>
-can be estimated using:</p>
+<p><span class="math display">
+\tau = \sigma'_n tan \left[ JRC \ log_{10}
+\left(\frac{JCS}{\sigma'_n} \right) + \phi_r \right]
+</span> where <span class="math inline">\tau</span> and <span class="math inline">\sigma</span> are the shear and normal stress on the
+discontinuity plane, <span class="math inline">JRC</span> is the joint
+roughness coefficient, <span class="math inline">JCS</span> is the joint
+compressive strength, and <span class="math inline">\phi_r</span> is the
+residual friction angle of the rock mass.</p>
+<p>The <span class="math inline">JRC</span> can be estimated using:</p>
 <p><img src="../inst/JRC.png" class="r-plt" alt="" width="50%" style="display: block; margin: auto;"></p>
-<p>while the
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>J</mi><mi>C</mi><mi>S</mi></mrow><annotation encoding="application/x-tex">JCS</annotation></semantics></math>
-(in MPa) can be calculated using:</p>
-<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>J</mi><mi>C</mi><mi>S</mi><mo>=</mo><msup><mn>10</mn><mrow><mn>0.00088</mn><mspace width="0.222em"></mspace><msub><mi>γ</mi><mrow><mi>r</mi><mi>o</mi><mi>c</mi><mi>k</mi></mrow></msub><mspace width="0.222em"></mspace><mi>r</mi><mspace width="0.222em"></mspace><mo>+</mo><mn>1.01</mn></mrow></msup></mrow><annotation encoding="application/x-tex">JCS = 10^{0.00088 \ \gamma_{rock} \ r \ + 1.01}</annotation></semantics></math></p>
-<p>where
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>r</mi><annotation encoding="application/x-tex">r</annotation></semantics></math>
-is the Schmidt hammer’s rebound on the wall of the joint and
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>γ</mi><mrow><mi>r</mi><mi>o</mi><mi>c</mi><mi>k</mi></mrow></msub><annotation encoding="application/x-tex">\gamma_{rock}</annotation></semantics></math>
-is the unit weight of the rock in
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>k</mi><mi>N</mi><mi>/</mi><msup><mi>m</mi><mn>3</mn></msup></mrow><annotation encoding="application/x-tex">kN/m^3</annotation></semantics></math></p>
+<p>while the <span class="math inline">JCS</span> (in MPa) can be
+calculated using:</p>
+<p><span class="math display">JCS = 10^{0.00088 \ \gamma_{rock} \ r \ +
+1.01}</span></p>
+<p>where <span class="math inline">r</span> is the Schmidt hammer’s
+rebound on the wall of the joint and <span class="math inline">\gamma_{rock}</span> is the unit weight of the rock
+in <span class="math inline">kN/m^3</span></p>
 <p>To use this criterion there are two functions
 <code>Barton_Choubey</code> and <code>Barton_Choubey_plot</code>. The
 first one calculates the criterion and the second one plots the results
 from the first one. The arguments are: <code>JRC</code>,
 <code>JCS</code> in MPa, <code>phi.r</code> in degrees,
-<code>unit.weight</code> in
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>k</mi><mi>N</mi><mi>/</mi><msup><mi>m</mi><mn>3</mn></msup></mrow><annotation encoding="application/x-tex">kN/m^3</annotation></semantics></math>,
-and the <code>depth</code>, in meters, to which calculate the stress
+<code>unit.weight</code> in <span class="math inline">kN/m^3</span>, and
+the <code>depth</code>, in meters, to which calculate the stress
 level.</p>
-<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">JRC</span> <span class="op">=</span> <span class="fl">10</span></span>
 <span><span class="va">JCS</span> <span class="op">=</span> <span class="fl">30</span></span>
 <span><span class="va">phi.r</span> <span class="op">=</span> <span class="fl">26</span></span>
 <span><span class="va">unit.weight</span> <span class="op">=</span> <span class="fl">18.6</span></span>
 <span><span class="va">depth</span> <span class="op">=</span> <span class="fl">40</span></span>
 <span><span class="va">BC</span> <span class="op">=</span> <span class="fu"><a href="../reference/Barton_Choubey.html">Barton_Choubey</a></span><span class="op">(</span><span class="va">JRC</span>, <span class="va">JCS</span>, <span class="va">phi.r</span>, <span class="va">unit.weight</span>, <span class="va">depth</span><span class="op">)</span></span>
-<span><span class="va">BC</span><span class="op">$</span><span class="va">parameters</span></span></code></pre></div>
-<pre><code><span><span class="co">## <span style="color: #949494;"># A tibble: 1 × 2</span></span></span>
-<span><span class="co">##       c   phi</span></span>
-<span><span class="co">##   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span></span>
-<span><span class="co">## <span style="color: #BCBCBC;">1</span> 0.102  37.4</span></span></code></pre>
-<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="../reference/Barton_Choubey.html">Barton_Choubey_plot</a></span><span class="op">(</span><span class="va">BC</span>, units <span class="op">=</span> <span class="st">'MPa'</span><span class="op">)</span></span></code></pre></div>
-<p><img src="rock_mechanics_vig_files/figure-html/unnamed-chunk-9-1.png" class="r-plt" alt="" width="80%" style="display: block; margin: auto;"></p>
+<span><span class="va">BC</span><span class="op">$</span><span class="va">parameters</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 1 × 2</span></span></span>
+<span><span class="co">#&gt;       c   phi</span></span>
+<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> 0.102  37.4</span></span>
+<span><span class="fu"><a href="../reference/Barton_Choubey.html">Barton_Choubey_plot</a></span><span class="op">(</span><span class="va">BC</span>, units <span class="op">=</span> <span class="st">'MPa'</span><span class="op">)</span></span></code></pre></div>
+<p><img src="rock_mechanics_vig_files/figure-html/unnamed-chunk-10-1.png" class="r-plt" alt="" width="700" style="display: block; margin: auto;"></p>
 <p>The results display the strength parameters, and the plot shows the
 general criterion (red) and a fit for the desired stress level (blue),
-and also the parameters of cohesion
-(<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>c</mi><annotation encoding="application/x-tex">c</annotation></semantics></math>)
-and friction angle
-(<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>ϕ</mi><annotation encoding="application/x-tex">\phi</annotation></semantics></math>).</p>
+and also the parameters of cohesion (<span class="math inline">c</span>)
+and friction angle (<span class="math inline">\phi</span>).</p>
 </div>
 <div class="section level2">
 <h2 id="shinyapp">Shinyapp<a class="anchor" aria-label="anchor" href="#shinyapp"></a>
