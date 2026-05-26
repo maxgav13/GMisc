@@ -132,7 +132,7 @@ Other directional statistics:
 # From a data frame
 csv_path <- system.file("spherical_data_ax_bp_aov.csv", package = "GMisc")
 df <- utils::read.csv(csv_path)
-dir_aov_spher_ax(trend, plunge, type, data = df)
+dir_aov_spher_ax(trend, plunge, gr = type, data = df)
 #> $PGR
 #> # A tibble: 1 × 4
 #>       P      G     R     B

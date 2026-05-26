@@ -33,7 +33,8 @@ to go to the help page) these are (diagram - function):
   and
   [`ternary_qap_um_hbl()`](https://maxgav13.github.io/GMisc/reference/ternary_qap_um_hbl.md)
 
-- Feldspar classification - `ternary_feldspar()`
+- Feldspar classification -
+  [`ternary_feldspars()`](https://maxgav13.github.io/GMisc/reference/ternary_feldspars.md)
 
 - For provenance -
   [`ternary_dickinson_qtfl()`](https://maxgav13.github.io/GMisc/reference/ternary_dickinson_qtfl.md)
