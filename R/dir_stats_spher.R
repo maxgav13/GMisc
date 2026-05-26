@@ -105,6 +105,9 @@ dir_stats_spher = function(
   type = c('line', 'dir', 'strike'),
   plot = c('all', 'eig', 'mean')
 ) {
+  type = match.arg(type)
+  plot = match.arg(plot)
+
   a = 1 - conf.level
 
   if (is.null(data)) {
@@ -126,7 +129,7 @@ dir_stats_spher = function(
     system.file("spherical_bingham_kappas.csv", package = "GMisc")
   )
 
-  if (any(type == 'line')) {
+  if (type == 'line') {
     d = trd
     i = plg
   } else if (type == 'dir') {
@@ -518,7 +521,7 @@ dir_stats_spher = function(
   mean.shape = 'triangle' # 8
   eigen.shape = 'square'
 
-  if (any(plot == 'all')) {
+  if (plot == 'all') {
     stereoplot = ggstereo() +
       # geom_point(ggplot2::aes(x,y),StPointD(d,90-i),size=2,alpha=.5) +
       ggplot2::geom_point(

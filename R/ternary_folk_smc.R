@@ -64,6 +64,9 @@ ternary_folk_smc = function(
   language = c('en', 'es'),
   opacity = .5
 ) {
+  output <- match.arg(output)
+  language <- match.arg(language)
+
   tb.Folk = tibble::tribble(
     ~s  , ~m    , ~c    , ~Label                             , ~Label.es                                 ,
     100 ,   0   ,   0   , "Sandstone \n(Sand)"               , "Arenisca \n(Arena)"                      ,
@@ -170,7 +173,7 @@ ternary_folk_smc = function(
     "#7F0000"
   )
 
-  if (any(output == 'ggplot' & language == 'en')) {
+  if (output == 'ggplot' & language == 'en') {
     Folk <- ggtern::ggtern(
       data = tb.Folk,
       ggtern::aes(.data$m, .data$s, .data$c)
@@ -181,6 +184,8 @@ ternary_folk_smc = function(
           # color = .data$Label,
           group = .data$Label
         ),
+        color = "black",
+        linewidth = 0.25,
         alpha = opacity
       ) +
       ggtern::theme_bw() +
@@ -195,7 +200,7 @@ ternary_folk_smc = function(
         L = "Silt",
         R = "Clay"
       )
-  } else if (any(output == 'ggplot' & language == 'es')) {
+  } else if (output == 'ggplot' & language == 'es') {
     Folk <- ggtern::ggtern(
       data = tb.Folk,
       ggtern::aes(.data$m, .data$s, .data$c)
@@ -206,6 +211,8 @@ ternary_folk_smc = function(
           # color = .data$Label.es,
           group = .data$Label.es
         ),
+        color = "black",
+        linewidth = 0.25,
         alpha = opacity
       ) +
       ggtern::theme_bw() +
@@ -220,7 +227,7 @@ ternary_folk_smc = function(
         L = "Limo",
         R = "Arcilla"
       )
-  } else if (any(output == 'plotly' & language == 'en')) {
+  } else if (output == 'plotly' & language == 'en') {
     Folk = plotly::plot_ly() %>%
       plotly::add_trace(
         data = tb.Folk,
@@ -233,6 +240,8 @@ ternary_folk_smc = function(
         type = "scatterternary",
         fill = "toself",
         mode = "lines",
+        line = list(color = "black", width = 0.5),
+        hoverinfo = 'text',
         hoveron = 'fills'
       ) %>%
       plotly::layout(
@@ -248,7 +257,7 @@ ternary_folk_smc = function(
           height = 6 * 96
         )
       )
-  } else if (any(output == 'plotly' & language == 'es')) {
+  } else if (output == 'plotly' & language == 'es') {
     Folk = plotly::plot_ly() %>%
       plotly::add_trace(
         data = tb.Folk,
@@ -261,6 +270,8 @@ ternary_folk_smc = function(
         type = "scatterternary",
         fill = "toself",
         mode = "lines",
+        line = list(color = "black", width = 0.5),
+        hoverinfo = 'text',
         hoveron = 'fills'
       ) %>%
       plotly::layout(

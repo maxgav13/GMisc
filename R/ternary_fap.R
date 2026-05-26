@@ -2,7 +2,7 @@
 #' @description \code{ternary_fap()} draws either a static or interactive ternary diagram, in english or spanish. It is a base diagram where data can be plotted.
 #' @param output The output format: "ggplot" or "plotly" (default is "ggplot")
 #' @param language The language to be displayed: "en" for english or "es" for spanish (deafult is "en")
-#' @param type The type of volcanic rock: "plutonic" or "volcanic" (default is "plutonic")
+#' @param type The type of igneous rock: "volcanic" or "plutonic" (default is "volcanic")
 #'
 #' @return FAP ternary diagram for plutonic and volcanic rocks in the desired format (object)
 #' @export
@@ -41,8 +41,12 @@
 ternary_fap = function(
   output = c('ggplot', 'plotly'),
   language = c('en', 'es'),
-  type = c('plutonic', 'volcanic')
+  type = c('volcanic', 'plutonic')
 ) {
+  output <- match.arg(output)
+  language <- match.arg(language)
+  type <- match.arg(type)
+
   tb.FAP = tibble::tribble(
     ~f , ~p    , ~a    , ~Label , ~Plut.en                                  , ~Plut.es                                     , ~Volc.en                                 , ~Volc.es                                      ,
      0 ,   0   , 100   , "6'"   , "Foid-bearing alakali feldspar syenite"   , "Sienita alcalifeldesp\u00e1tica con foides" , "Foid-bearing alakali feldspar trachyte" , "Traquita alcalifeldesp\u00e1tica con foides" ,
@@ -211,7 +215,7 @@ ternary_fap = function(
     '#3364A2'
   )
 
-  if (any(type == 'plutonic' & output == 'ggplot')) {
+  if (type == 'plutonic' & output == 'ggplot') {
     FAP <- ggtern::ggtern(
       data = tb.fap.plut,
       ggtern::aes(.data$p, .data$f, .data$a)
@@ -224,10 +228,11 @@ ternary_fap = function(
       ) +
       ggplot2::geom_text(
         data = Labs.fap.plut,
-        ggplot2::aes(label = .data$Label),
+        ggtern::aes(label = .data$Label),
         size = 2.5,
         color = "black",
-        show.legend = T
+        show.legend = T,
+        position = "identity"
       ) +
       ggplot2::theme_bw() +
       ggtern::theme_arrowdefault() +
@@ -237,7 +242,7 @@ ternary_fap = function(
       # ggplot2::scale_fill_manual(values = FAP.pal) +
       # ggplot2::scale_color_manual(values = FAP.pal) +
       ggplot2::labs(T = "F", L = "P", R = "A")
-  } else if (any(type == 'volcanic' & output == 'ggplot')) {
+  } else if (type == 'volcanic' & output == 'ggplot') {
     FAP <- ggtern::ggtern(
       data = tb.fap.volc,
       ggtern::aes(.data$p, .data$f, .data$a)
@@ -250,17 +255,18 @@ ternary_fap = function(
       ) +
       ggplot2::geom_text(
         data = Labs.fap.volc,
-        ggplot2::aes(label = .data$Label),
+        ggtern::aes(label = .data$Label),
         size = 2.5,
         color = "black",
-        show.legend = T
+        show.legend = T,
+        position = "identity"
       ) +
       ggplot2::theme_bw() +
       ggtern::theme_arrowdefault() +
       ggtern::theme_clockwise() +
       ggtern::theme_rotate(180) +
       ggplot2::labs(T = "F", L = "P", R = "A")
-  } else if (any(type == 'plutonic' & output == 'plotly' & language == 'en')) {
+  } else if (type == 'plutonic' & output == 'plotly' & language == 'en') {
     FAP = plotly::plot_ly() %>%
       plotly::add_trace(
         data = tb.fap.plut,
@@ -272,7 +278,7 @@ ternary_fap = function(
         type = "scatterternary",
         fill = "toself",
         mode = "lines",
-        line = list(color = "black"),
+        line = list(color = "black", width = 0.5),
         hoverinfo = 'text',
         text = ~ paste('</br>', Label, '</br>', Plut.en),
         hoveron = 'fills'
@@ -301,7 +307,7 @@ ternary_fap = function(
           height = 6 * 96
         )
       )
-  } else if (any(type == 'plutonic' & output == 'plotly' & language == 'es')) {
+  } else if (type == 'plutonic' & output == 'plotly' & language == 'es') {
     FAP = plotly::plot_ly() %>%
       plotly::add_trace(
         data = tb.fap.plut,
@@ -313,7 +319,7 @@ ternary_fap = function(
         type = "scatterternary",
         fill = "toself",
         mode = "lines",
-        line = list(color = "black"),
+        line = list(color = "black", width = 0.5),
         hoverinfo = 'text',
         text = ~ paste('</br>', Label, '</br>', Plut.es),
         hoveron = 'fills'
@@ -342,7 +348,7 @@ ternary_fap = function(
           height = 6 * 96
         )
       )
-  } else if (any(type == 'volcanic' & output == 'plotly' & language == 'en')) {
+  } else if (type == 'volcanic' & output == 'plotly' & language == 'en') {
     FAP = plotly::plot_ly() %>%
       plotly::add_trace(
         data = tb.fap.volc,
@@ -354,7 +360,7 @@ ternary_fap = function(
         type = "scatterternary",
         fill = "toself",
         mode = "lines",
-        line = list(color = "black"),
+        line = list(color = "black", width = 0.5),
         hoverinfo = 'text',
         text = ~ paste('</br>', Label, '</br>', Volc.en),
         hoveron = 'fills'
@@ -384,7 +390,7 @@ ternary_fap = function(
           height = 6 * 96
         )
       )
-  } else if (any(type == 'volcanic' & output == 'plotly' & language == 'es')) {
+  } else if (type == 'volcanic' & output == 'plotly' & language == 'es') {
     FAP = plotly::plot_ly() %>%
       plotly::add_trace(
         data = tb.fap.volc,
@@ -396,7 +402,7 @@ ternary_fap = function(
         type = "scatterternary",
         fill = "toself",
         mode = "lines",
-        line = list(color = "black"),
+        line = list(color = "black", width = 0.5),
         hoverinfo = 'text',
         text = ~ paste('</br>', Label, '</br>', Volc.es),
         hoveron = 'fills'

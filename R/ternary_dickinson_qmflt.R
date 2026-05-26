@@ -66,6 +66,9 @@ ternary_dickinson_qmflt = function(
   language = c('en', 'es'),
   opacity = 0.5
 ) {
+  output <- match.arg(output)
+  language <- match.arg(language)
+
   tb.QmFLt = tibble::tribble(
     ~qm     , ~f      , ~lt     , ~Label                     , ~Label.es                     ,
     100     ,   0     ,   0     , "Craton interior"          , "Crat\u00f3n interior"        ,
@@ -162,7 +165,7 @@ ternary_dickinson_qmflt = function(
     "#B21C3F"
   )
 
-  if (any(output == 'ggplot' & language == 'en')) {
+  if (output == 'ggplot' & language == 'en') {
     QmFLt <- ggtern::ggtern(
       data = tb.QmFLt,
       ggtern::aes(.data$f, .data$qm, .data$lt)
@@ -173,8 +176,11 @@ ternary_dickinson_qmflt = function(
           # color = .data$Label,
           group = .data$Label
         ),
+        color = "black",
+        linewidth = 0.25,
         alpha = opacity
       ) +
+      ggplot2::theme_bw() +
       ggtern::theme_arrowdefault() +
       ggtern::theme_clockwise() +
       ggplot2::scale_fill_manual(values = QmFLt.pal) +
@@ -187,7 +193,7 @@ ternary_dickinson_qmflt = function(
         L = "F",
         R = "Lt"
       )
-  } else if (any(output == 'ggplot' & language == 'es')) {
+  } else if (output == 'ggplot' & language == 'es') {
     QmFLt <- ggtern::ggtern(
       data = tb.QmFLt,
       ggtern::aes(.data$f, .data$qm, .data$lt)
@@ -198,8 +204,11 @@ ternary_dickinson_qmflt = function(
           # color = .data$Label.es,
           group = .data$Label.es
         ),
+        color = "black",
+        linewidth = 0.25,
         alpha = opacity
       ) +
+      ggplot2::theme_bw() +
       ggtern::theme_arrowdefault() +
       ggtern::theme_clockwise() +
       ggplot2::scale_fill_manual(values = QmFLt.pal) +
@@ -212,7 +221,7 @@ ternary_dickinson_qmflt = function(
         L = "F",
         R = "Lt"
       )
-  } else if (any(output == 'plotly' & language == 'en')) {
+  } else if (output == 'plotly' & language == 'en') {
     QmFLt = plotly::plot_ly() %>%
       plotly::add_trace(
         data = tb.QmFLt,
@@ -225,6 +234,8 @@ ternary_dickinson_qmflt = function(
         type = "scatterternary",
         fill = "toself",
         mode = "lines",
+        line = list(color = "black", width = 0.5),
+        hoverinfo = 'text',
         hoveron = 'fills'
       ) %>%
       plotly::layout(
@@ -240,7 +251,7 @@ ternary_dickinson_qmflt = function(
           height = 6 * 96
         )
       )
-  } else if (any(output == 'plotly' & language == 'es')) {
+  } else if (output == 'plotly' & language == 'es') {
     QmFLt = plotly::plot_ly() %>%
       plotly::add_trace(
         data = tb.QmFLt,
@@ -253,6 +264,8 @@ ternary_dickinson_qmflt = function(
         type = "scatterternary",
         fill = "toself",
         mode = "lines",
+        line = list(color = "black", width = 0.5),
+        hoverinfo = 'text',
         hoveron = 'fills'
       ) %>%
       plotly::layout(

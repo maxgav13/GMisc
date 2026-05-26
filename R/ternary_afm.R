@@ -44,6 +44,9 @@ ternary_afm = function(
   output = c('ggplot', 'plotly'),
   language = c('en', 'es')
 ) {
+  output = match.arg(output)
+  language = match.arg(language)
+
   tb.AFM = tibble::tribble(
     ~IDPoint , ~f    , ~a    , ~m    ,
      1L      , 31.37 , 64.81 ,  3.82 ,
@@ -107,7 +110,7 @@ ternary_afm = function(
     caxis = axis("M")
   )
 
-  if (any(output == 'ggplot' & language == 'en')) {
+  if (output == 'ggplot' & language == 'en') {
     AFM <- ggtern::ggtern(
       data = tb.AFM,
       ggtern::aes(.data$a, .data$f, .data$m)
@@ -135,7 +138,7 @@ ternary_afm = function(
       ggtern::theme_arrowdefault() +
       ggtern::theme_clockwise() +
       ggplot2::labs(title = "AFM", T = "F", L = "A", R = "M")
-  } else if (any(output == 'ggplot' & language == 'es')) {
+  } else if (output == 'ggplot' & language == 'es') {
     AFM <- ggtern::ggtern(
       data = tb.AFM,
       ggtern::aes(.data$a, .data$f, .data$m)
@@ -163,7 +166,7 @@ ternary_afm = function(
       ggtern::theme_arrowdefault() +
       ggtern::theme_clockwise() +
       ggplot2::labs(title = "AFM", T = "F", L = "A", R = "M")
-  } else if (any(output == 'plotly' & language == 'en')) {
+  } else if (output == 'plotly' & language == 'en') {
     AFM = plotly::plot_ly() %>%
       plotly::add_trace(
         data = tb.AFM,
@@ -200,7 +203,7 @@ ternary_afm = function(
           height = 6 * 96
         )
       )
-  } else if (any(output == 'plotly' & language == 'es')) {
+  } else if (output == 'plotly' & language == 'es') {
     AFM = plotly::plot_ly() %>%
       plotly::add_trace(
         data = tb.AFM,

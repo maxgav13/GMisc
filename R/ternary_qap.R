@@ -2,7 +2,7 @@
 #' @description \code{ternary_qap()} draws either a static or interactive ternary diagram, in english or spanish. It is a base diagram where data can be plotted.
 #' @param output The output format: "ggplot" or "plotly" (default is "ggplot")
 #' @param language The language to be displayed: "en" for english or "es" for spanish (deafult is "en")
-#' @param type The type of volcanic rock: "plutonic" or "volcanic" (default is "plutonic")
+#' @param type The type of igneous rock: "volcanic" or "plutonic" (default is "volcanic")
 #'
 #' @return QAP ternary diagram for plutonic and volcanic rocks in the desired format (object)
 #' @export
@@ -43,8 +43,12 @@
 ternary_qap = function(
   output = c('ggplot', 'plotly'),
   language = c('en', 'es'),
-  type = c('plutonic', 'volcanic')
+  type = c('volcanic', 'plutonic')
 ) {
+  output <- match.arg(output)
+  language <- match.arg(language)
+  type <- match.arg(type)
+
   tb.QAP = tibble::tribble(
     ~q  , ~a    , ~p    , ~Label , ~Plut.en                                              , ~Plut.es                                                  , ~Volc.en                                        , ~Volc.es                                       ,
     100 ,   0   ,   0   , "1a"   , "Quartzolite"                                         , "Cuarzolita"                                              , NA                                              , NA                                             ,
@@ -246,29 +250,29 @@ ternary_qap = function(
     caxis = axis("P")
   )
 
-  if (any(output == 'ggplot')) {
+  if (output == 'ggplot') {
     QAP <- ggtern::ggtern(
       data = tb.QAP,
       ggtern::aes(.data$a, .data$q, .data$p)
     ) +
       ggplot2::geom_polygon(
+        ggplot2::aes(group = .data$Label),
         fill = 'white',
-        aes(group = .data$Label),
         color = "black",
         alpha = 0.05
       ) +
       ggplot2::geom_text(
         data = Labs.QAP,
-        aes(label = .data$Label),
+        ggtern::aes(label = .data$Label),
         size = 2.5,
-        color = "black"
+        color = "black",
+        position = "identity"
       ) +
       ggplot2::theme_bw() +
       ggtern::theme_arrowdefault() +
       ggtern::theme_clockwise() +
-      # custom_percent("Percent") +
       ggplot2::labs(title = "QAP", T = "Q", L = "A", R = "P")
-  } else if (any(type == 'plutonic' & output == 'plotly' & language == 'en')) {
+  } else if (type == 'plutonic' & output == 'plotly' & language == 'en') {
     QAP = plotly::plot_ly() %>%
       plotly::add_trace(
         data = tb.QAP,
@@ -280,7 +284,7 @@ ternary_qap = function(
         type = "scatterternary",
         fill = "toself",
         mode = "lines",
-        line = list(color = "black"),
+        line = list(color = "black", width = 0.5),
         hoverinfo = 'text',
         text = ~ paste('</br>', Label, '</br>', Plut.en),
         hoveron = 'fills'
@@ -310,7 +314,7 @@ ternary_qap = function(
           height = 6 * 96
         )
       )
-  } else if (any(type == 'plutonic' & output == 'plotly' & language == 'es')) {
+  } else if (type == 'plutonic' & output == 'plotly' & language == 'es') {
     QAP = plotly::plot_ly() %>%
       plotly::add_trace(
         data = tb.QAP,
@@ -322,7 +326,7 @@ ternary_qap = function(
         type = "scatterternary",
         fill = "toself",
         mode = "lines",
-        line = list(color = "black"),
+        line = list(color = "black", width = 0.5),
         hoverinfo = 'text',
         text = ~ paste('</br>', Label, '</br>', Plut.es),
         hoveron = 'fills'
@@ -352,7 +356,7 @@ ternary_qap = function(
           height = 6 * 96
         )
       )
-  } else if (any(type == 'volcanic' & output == 'plotly' & language == 'en')) {
+  } else if (type == 'volcanic' & output == 'plotly' & language == 'en') {
     QAP = plotly::plot_ly() %>%
       plotly::add_trace(
         data = tb.QAP,
@@ -364,7 +368,7 @@ ternary_qap = function(
         type = "scatterternary",
         fill = "toself",
         mode = "lines",
-        line = list(color = "black"),
+        line = list(color = "black", width = 0.5),
         hoverinfo = 'text',
         text = ~ paste('</br>', Label, '</br>', Volc.en),
         hoveron = 'fills'
@@ -394,7 +398,7 @@ ternary_qap = function(
           height = 6 * 96
         )
       )
-  } else if (any(type == 'volcanic' & output == 'plotly' & language == 'es')) {
+  } else if (type == 'volcanic' & output == 'plotly' & language == 'es') {
     QAP = plotly::plot_ly() %>%
       plotly::add_trace(
         data = tb.QAP,
@@ -406,7 +410,7 @@ ternary_qap = function(
         type = "scatterternary",
         fill = "toself",
         mode = "lines",
-        line = list(color = "black"),
+        line = list(color = "black", width = 0.5),
         hoverinfo = 'text',
         text = ~ paste('</br>', Label, '</br>', Volc.es),
         hoveron = 'fills'

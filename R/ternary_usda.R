@@ -64,6 +64,9 @@ ternary_usda = function(
   language = c('en', 'es'),
   opacity = 0.5
 ) {
+  output <- match.arg(output)
+  language <- match.arg(language)
+
   tb.usda = tibble::tribble(
     ~clay , ~sand , ~silt , ~Label            ,
     1     , 0     , 0     , "Clay"            ,
@@ -189,7 +192,7 @@ ternary_usda = function(
     caxis = axis("Limo")
   )
 
-  if (any(output == 'ggplot' & language == 'en')) {
+  if (output == 'ggplot' & language == 'en') {
     usda <- ggtern::ggtern(
       data = tb.usda,
       ggtern::aes(.data$sand, .data$clay, .data$silt)
@@ -200,9 +203,11 @@ ternary_usda = function(
           # color = .data$Label,
           group = .data$Label
         ),
+        color = "black",
+        linewidth = 0.25,
         alpha = opacity
       ) +
-      # ggtern::theme_bw() +
+      ggtern::theme_bw() +
       ggtern::theme_arrowdefault() +
       ggtern::theme_clockwise() +
       ggplot2::scale_fill_brewer(palette = 'Set3') +
@@ -214,7 +219,7 @@ ternary_usda = function(
         L = "Sand",
         R = "Silt"
       )
-  } else if (any(output == 'ggplot' & language == 'es')) {
+  } else if (output == 'ggplot' & language == 'es') {
     usda <- ggtern::ggtern(
       data = tb.usda,
       ggtern::aes(.data$sand, .data$clay, .data$silt)
@@ -225,9 +230,11 @@ ternary_usda = function(
           # color = .data$Label.es,
           group = .data$Label.es
         ),
+        color = "black",
+        linewidth = 0.25,
         alpha = opacity
       ) +
-      # ggtern::theme_bw() +
+      ggtern::theme_bw() +
       ggtern::theme_arrowdefault() +
       ggtern::theme_clockwise() +
       ggplot2::scale_fill_brewer(palette = 'Set3') +
@@ -239,7 +246,7 @@ ternary_usda = function(
         L = "Arena",
         R = "Limo"
       )
-  } else if (any(output == 'plotly' & language == 'en')) {
+  } else if (output == 'plotly' & language == 'en') {
     usda = plotly::plot_ly() %>%
       plotly::add_trace(
         data = tb.usda,
@@ -252,6 +259,8 @@ ternary_usda = function(
         type = "scatterternary",
         fill = "toself",
         mode = "lines",
+        line = list(color = "black", width = 0.5),
+        hoverinfo = 'text',
         hoveron = 'fills'
       ) %>%
       plotly::layout(
@@ -267,7 +276,7 @@ ternary_usda = function(
           height = 6 * 96
         )
       )
-  } else if (any(output == 'plotly' & language == 'es')) {
+  } else if (output == 'plotly' & language == 'es') {
     usda = plotly::plot_ly() %>%
       plotly::add_trace(
         data = tb.usda,
@@ -280,6 +289,8 @@ ternary_usda = function(
         type = "scatterternary",
         fill = "toself",
         mode = "lines",
+        line = list(color = "black", width = 0.5),
+        hoverinfo = 'text',
         hoveron = 'fills'
       ) %>%
       plotly::layout(

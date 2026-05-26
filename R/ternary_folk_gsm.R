@@ -8,7 +8,7 @@
 #' @export
 #' @importFrom ggplot2 .data
 #'
-#' @details For plotting data on the ggplot object it would be easier if the names of the dataframe are "g", "s", and "m", that way it gets mapped automatically, if not make sure to use "aes(x=g,y=s,z=m)".
+#' @details For plotting data on the ggplot object it would be easier if the names of the dataframe are "s", "g", and "m", that way it gets mapped automatically, if not make sure to use "aes(x=s,y=g,z=m)".
 #' For plotting on the plotly object the mapping of the new data should be as shown in the example: \code{a = ~g, b = ~s, c = ~m}, where \code{a} refers to the top ("g"), \code{b} refers to the bottom left ("s"), and \code{c} refers to the bottom right ("m").
 #' The examples show basic usage and how to add data, which can be more customizable.
 #' For a more complete description on how to use this function and similar ones, see
@@ -64,6 +64,9 @@ ternary_folk_gsm = function(
   language = c('en', 'es'),
   opacity = .5
 ) {
+  output <- match.arg(output)
+  language <- match.arg(language)
+
   tb.Folk = tibble::tribble(
     ~g  , ~s    , ~m    , ~Label                                                  , ~Label.es                                                      ,
     100 ,   0   ,   0   , "Conglomerate \n(Gravel)"                               , "Conglomerado \n(Grava)"                                       ,
@@ -176,10 +179,10 @@ ternary_folk_gsm = function(
     "#7F0000"
   )
 
-  if (any(output == 'ggplot' & language == 'en')) {
+  if (output == 'ggplot' & language == 'en') {
     Folk <- ggtern::ggtern(
       data = tb.Folk,
-      ggtern::aes(.data$g, .data$s, .data$m)
+      ggtern::aes(.data$s, .data$g, .data$m)
     ) +
       ggplot2::geom_polygon(
         ggplot2::aes(
@@ -187,6 +190,8 @@ ternary_folk_gsm = function(
           # color = .data$Label,
           group = .data$Label
         ),
+        color = "black",
+        linewidth = 0.25,
         alpha = opacity
       ) +
       ggtern::theme_bw() +
@@ -201,10 +206,10 @@ ternary_folk_gsm = function(
         L = "Sand",
         R = "Mud"
       )
-  } else if (any(output == 'ggplot' & language == 'es')) {
+  } else if (output == 'ggplot' & language == 'es') {
     Folk <- ggtern::ggtern(
       data = tb.Folk,
-      ggtern::aes(.data$g, .data$s, .data$m)
+      ggtern::aes(.data$s, .data$g, .data$m)
     ) +
       ggplot2::geom_polygon(
         ggplot2::aes(
@@ -212,6 +217,8 @@ ternary_folk_gsm = function(
           # color = .data$Label.es,
           group = .data$Label.es
         ),
+        color = "black",
+        linewidth = 0.25,
         alpha = opacity
       ) +
       ggtern::theme_bw() +
@@ -226,7 +233,7 @@ ternary_folk_gsm = function(
         L = "Arena",
         R = "Lodo"
       )
-  } else if (any(output == 'plotly' & language == 'en')) {
+  } else if (output == 'plotly' & language == 'en') {
     Folk = plotly::plot_ly() %>%
       plotly::add_trace(
         data = tb.Folk,
@@ -239,6 +246,8 @@ ternary_folk_gsm = function(
         type = "scatterternary",
         fill = "toself",
         mode = "lines",
+        line = list(color = "black", width = 0.5),
+        hoverinfo = 'text',
         hoveron = 'fills'
       ) %>%
       plotly::layout(
@@ -254,7 +263,7 @@ ternary_folk_gsm = function(
           height = 6 * 96
         )
       )
-  } else if (any(output == 'plotly' & language == 'es')) {
+  } else if (output == 'plotly' & language == 'es') {
     Folk = plotly::plot_ly() %>%
       plotly::add_trace(
         data = tb.Folk,
@@ -267,6 +276,8 @@ ternary_folk_gsm = function(
         type = "scatterternary",
         fill = "toself",
         mode = "lines",
+        line = list(color = "black", width = 0.5),
+        hoverinfo = 'text',
         hoveron = 'fills'
       ) %>%
       plotly::layout(

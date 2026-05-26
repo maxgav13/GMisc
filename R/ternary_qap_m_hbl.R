@@ -64,6 +64,9 @@ ternary_qap_m_hbl = function(
   language = c('en', 'es'),
   opacity = 0.5
 ) {
+  output <- match.arg(output)
+  language <- match.arg(language)
+
   tb.QAP_M = tibble::tribble(
     ~p                                               , ~px , ~hbl , ~Label.en                                   , ~Label.es                      ,
                                                  100 ,   0 ,    0 , "Anorthosite"                               , "Anortosita"                   ,
@@ -166,7 +169,7 @@ ternary_qap_m_hbl = function(
     "#4C1D4BFF"
   )
 
-  if (any(output == 'ggplot' & language == 'en')) {
+  if (output == 'ggplot' & language == 'en') {
     QAP_M <- ggtern::ggtern(
       data = tb.QAP_M,
       ggtern::aes(.data$px, .data$p, .data$hbl)
@@ -177,6 +180,8 @@ ternary_qap_m_hbl = function(
           # color = .data$Label.en,
           group = .data$Label.en
         ),
+        color = "black",
+        linewidth = 0.25,
         alpha = opacity
       ) +
       ggtern::theme_bw() +
@@ -192,7 +197,7 @@ ternary_qap_m_hbl = function(
         L = "Px",
         R = "Hbl"
       )
-  } else if (any(output == 'ggplot' & language == 'es')) {
+  } else if (output == 'ggplot' & language == 'es') {
     QAP_M <- ggtern::ggtern(
       data = tb.QAP_M,
       ggtern::aes(.data$px, .data$p, .data$hbl)
@@ -203,6 +208,8 @@ ternary_qap_m_hbl = function(
           # color = .data$Label.es,
           group = .data$Label.es
         ),
+        color = "black",
+        linewidth = 0.25,
         alpha = opacity
       ) +
       ggtern::theme_bw() +
@@ -218,7 +225,7 @@ ternary_qap_m_hbl = function(
         L = "Px",
         R = "Hbl"
       )
-  } else if (any(output == 'plotly' & language == 'en')) {
+  } else if (output == 'plotly' & language == 'en') {
     QAP_M = plotly::plot_ly() %>%
       plotly::add_trace(
         data = tb.QAP_M,
@@ -231,6 +238,7 @@ ternary_qap_m_hbl = function(
         type = "scatterternary",
         fill = "toself",
         mode = "lines",
+        line = list(color = "black", width = 0.5),
         hoverinfo = 'text',
         hoveron = 'fills'
       ) %>%
@@ -247,7 +255,7 @@ ternary_qap_m_hbl = function(
           height = 6 * 96
         )
       )
-  } else if (any(output == 'plotly' & language == 'es')) {
+  } else if (output == 'plotly' & language == 'es') {
     QAP_M = plotly::plot_ly() %>%
       plotly::add_trace(
         data = tb.QAP_M,
@@ -260,6 +268,7 @@ ternary_qap_m_hbl = function(
         type = "scatterternary",
         fill = "toself",
         mode = "lines",
+        line = list(color = "black", width = 0.5),
         hoverinfo = 'text',
         hoveron = 'fills'
       ) %>%

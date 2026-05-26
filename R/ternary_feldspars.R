@@ -64,6 +64,9 @@ ternary_feldspars = function(
   language = c('en', 'es'),
   opacity = 0.5
 ) {
+  output <- match.arg(output)
+  language <- match.arg(language)
+
   tb.feld = tibble::tribble(
     ~K    , ~Na   , ~Ca   , ~Label                             , ~Label.es                         ,
     100   ,   0   ,   0   , "Sanidine / Orthoclase Microcline" , "Sanidina / Ortoclasa Microclina" ,
@@ -180,7 +183,7 @@ ternary_feldspars = function(
     "#14243F"
   )
 
-  if (any(output == 'ggplot' & language == 'en')) {
+  if (output == 'ggplot' & language == 'en') {
     feld <- ggtern::ggtern(
       data = tb.feld,
       ggtern::aes(.data$Na, .data$K, .data$Ca)
@@ -191,6 +194,8 @@ ternary_feldspars = function(
           # color = .data$Label,
           group = .data$Label
         ),
+        color = "black",
+        linewidth = 0.25,
         alpha = opacity
       ) +
       ggtern::theme_bw() +
@@ -205,7 +210,7 @@ ternary_feldspars = function(
         L = "Na",
         R = "Ca"
       )
-  } else if (any(output == 'ggplot' & language == 'es')) {
+  } else if (output == 'ggplot' & language == 'es') {
     feld <- ggtern::ggtern(
       data = tb.feld,
       ggtern::aes(.data$Na, .data$K, .data$Ca)
@@ -216,6 +221,8 @@ ternary_feldspars = function(
           # color = .data$Label.es,
           group = .data$Label.es
         ),
+        color = "black",
+        linewidth = 0.25,
         alpha = opacity
       ) +
       ggtern::theme_bw() +
@@ -230,7 +237,7 @@ ternary_feldspars = function(
         L = "Na",
         R = "Ca"
       )
-  } else if (any(output == 'plotly' & language == 'en')) {
+  } else if (output == 'plotly' & language == 'en') {
     feld = plotly::plot_ly() %>%
       plotly::add_trace(
         data = tb.feld,
@@ -243,6 +250,8 @@ ternary_feldspars = function(
         type = "scatterternary",
         fill = "toself",
         mode = "lines",
+        line = list(color = "black", width = 0.5),
+        hoverinfo = 'text',
         hoveron = 'fills'
       ) %>%
       plotly::layout(
@@ -258,7 +267,7 @@ ternary_feldspars = function(
           height = 6 * 96
         )
       )
-  } else if (any(output == 'plotly' & language == 'es')) {
+  } else if (output == 'plotly' & language == 'es') {
     feld = plotly::plot_ly() %>%
       plotly::add_trace(
         data = tb.feld,
@@ -271,6 +280,8 @@ ternary_feldspars = function(
         type = "scatterternary",
         fill = "toself",
         mode = "lines",
+        line = list(color = "black", width = 0.5),
+        hoverinfo = 'text',
         hoveron = 'fills'
       ) %>%
       plotly::layout(

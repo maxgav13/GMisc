@@ -64,6 +64,9 @@ ternary_folk_qfl = function(
   language = c('en', 'es'),
   opacity = .5
 ) {
+  output <- match.arg(output)
+  language <- match.arg(language)
+
   tb.Folk = tibble::tribble(
     ~q  , ~f     , ~l     , ~Label                    , ~Label.es                      ,
     100 ,   0    ,   0    , "Quartzarenite"           , "Quarzo arenita"               ,
@@ -140,7 +143,7 @@ ternary_folk_qfl = function(
     "#564E37"
   )
 
-  if (any(output == 'ggplot' & language == 'en')) {
+  if (output == 'ggplot' & language == 'en') {
     Folk <- ggtern::ggtern(
       data = tb.Folk,
       ggtern::aes(.data$f, .data$q, .data$l)
@@ -151,8 +154,11 @@ ternary_folk_qfl = function(
           # color = .data$Label,
           group = .data$Label
         ),
+        color = "black",
+        linewidth = 0.25,
         alpha = opacity
       ) +
+      ggplot2::theme_bw() +
       ggtern::theme_arrowdefault() +
       ggtern::theme_clockwise() +
       ggplot2::scale_fill_manual(values = Folk.pal) +
@@ -165,7 +171,7 @@ ternary_folk_qfl = function(
         L = "F",
         R = "L"
       )
-  } else if (any(output == 'ggplot' & language == 'es')) {
+  } else if (output == 'ggplot' & language == 'es') {
     Folk <- ggtern::ggtern(
       data = tb.Folk,
       ggtern::aes(.data$f, .data$q, .data$l)
@@ -176,8 +182,11 @@ ternary_folk_qfl = function(
           # color = .data$Label.es,
           group = .data$Label.es
         ),
+        color = "black",
+        linewidth = 0.25,
         alpha = opacity
       ) +
+      ggplot2::theme_bw() +
       ggtern::theme_arrowdefault() +
       ggtern::theme_clockwise() +
       ggplot2::scale_fill_manual(values = Folk.pal) +
@@ -190,7 +199,7 @@ ternary_folk_qfl = function(
         L = "F",
         R = "L"
       )
-  } else if (any(output == 'plotly' & language == 'en')) {
+  } else if (output == 'plotly' & language == 'en') {
     Folk = plotly::plot_ly() %>%
       plotly::add_trace(
         data = tb.Folk,
@@ -203,6 +212,8 @@ ternary_folk_qfl = function(
         type = "scatterternary",
         fill = "toself",
         mode = "lines",
+        line = list(color = "black", width = 0.5),
+        hoverinfo = 'text',
         hoveron = 'fills'
       ) %>%
       plotly::layout(
@@ -218,7 +229,7 @@ ternary_folk_qfl = function(
           height = 6 * 96
         )
       )
-  } else if (any(output == 'plotly' & language == 'es')) {
+  } else if (output == 'plotly' & language == 'es') {
     Folk = plotly::plot_ly() %>%
       plotly::add_trace(
         data = tb.Folk,
@@ -231,6 +242,8 @@ ternary_folk_qfl = function(
         type = "scatterternary",
         fill = "toself",
         mode = "lines",
+        line = list(color = "black", width = 0.5),
+        hoverinfo = 'text',
         hoveron = 'fills'
       ) %>%
       plotly::layout(

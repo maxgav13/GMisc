@@ -65,7 +65,7 @@
 #' # From a data frame
 #' csv_path <- system.file("spherical_data_ax_bp_aov.csv", package = "GMisc")
 #' df <- utils::read.csv(csv_path)
-#' dir_aov_spher_ax(trend, plunge, type, data = df)
+#' dir_aov_spher_ax(trend, plunge, gr = type, data = df)
 dir_aov_spher_ax = function(
   trd,
   plg,
@@ -74,6 +74,8 @@ dir_aov_spher_ax = function(
   conf.level = .95,
   type = c('line', 'dir', 'strike')
 ) {
+  type = match.arg(type)
+
   a = 1 - conf.level
 
   if (is.null(data)) {
@@ -86,7 +88,7 @@ dir_aov_spher_ax = function(
     grp = data %>% dplyr::pull({{ grp }})
   }
 
-  if (any(type == 'line')) {
+  if (type == 'line') {
     d = trd
     i = plg
   } else if (type == 'dir') {

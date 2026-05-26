@@ -81,6 +81,8 @@ rose_diag_spher = function(
   show = 'all',
   show.mean = T
 ) {
+  type = match.arg(type)
+
   if (is.null(data)) {
     trd = trd
     plg = plg
@@ -89,7 +91,7 @@ rose_diag_spher = function(
     plg = data %>% dplyr::pull({{ plg }})
   }
 
-  if (any(type == 'line')) {
+  if (type == 'line') {
     d = trd
     i = plg
   } else if (type == 'dir') {

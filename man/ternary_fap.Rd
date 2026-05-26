@@ -7,7 +7,7 @@
 ternary_fap(
   output = c("ggplot", "plotly"),
   language = c("en", "es"),
-  type = c("plutonic", "volcanic")
+  type = c("volcanic", "plutonic")
 )
 }
 \arguments{
@@ -15,7 +15,7 @@ ternary_fap(
 
 \item{language}{The language to be displayed: "en" for english or "es" for spanish (deafult is "en")}
 
-\item{type}{The type of volcanic rock: "plutonic" or "volcanic" (default is "plutonic")}
+\item{type}{The type of igneous rock: "volcanic" or "plutonic" (default is "volcanic")}
 }
 \value{
 FAP ternary diagram for plutonic and volcanic rocks in the desired format (object)

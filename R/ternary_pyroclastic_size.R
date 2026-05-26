@@ -66,6 +66,9 @@ ternary_pyroclastic_size = function(
   language = c('en', 'es'),
   opacity = .5
 ) {
+  output <- match.arg(output)
+  language <- match.arg(language)
+
   tb.pyro = tibble::tribble(
     ~bb, ~lapilli, ~ash, ~Label, ~Label.es,
     100,0,0,"Pyroclastic breccia /
@@ -139,7 +142,7 @@ ternary_pyroclastic_size = function(
     caxis = axis("Ceniza (< 2 mm)")
   )
 
-  if (any(output == 'ggplot' & language == 'en')) {
+  if (output == 'ggplot' & language == 'en') {
     pyro <- ggtern::ggtern(
       data = tb.pyro,
       ggtern::aes(.data$lapilli, .data$bb, .data$ash)
@@ -150,8 +153,11 @@ ternary_pyroclastic_size = function(
           # color = .data$Label,
           group = .data$Label
         ),
+        color = "black",
+        linewidth = 0.25,
         alpha = opacity
       ) +
+      ggplot2::theme_bw() +
       ggtern::theme_arrowdefault() +
       ggtern::theme_clockwise() +
       ggplot2::scale_fill_brewer(palette = 'Set1') +
@@ -163,7 +169,7 @@ ternary_pyroclastic_size = function(
         L = "Lapilli\n(2-64 mm)",
         R = "Ash\n(< 2 mm)"
       )
-  } else if (any(output == 'ggplot' & language == 'es')) {
+  } else if (output == 'ggplot' & language == 'es') {
     pyro <- ggtern::ggtern(
       data = tb.pyro,
       ggtern::aes(.data$lapilli, .data$bb, .data$ash)
@@ -174,8 +180,11 @@ ternary_pyroclastic_size = function(
           # color = .data$Label.es,
           group = .data$Label.es
         ),
+        color = "black",
+        linewidth = 0.25,
         alpha = opacity
       ) +
+      ggplot2::theme_bw() +
       ggtern::theme_arrowdefault() +
       ggtern::theme_clockwise() +
       ggplot2::scale_fill_brewer(palette = 'Set1') +
@@ -187,7 +196,7 @@ ternary_pyroclastic_size = function(
         L = "Lapilli\n(2-64 mm)",
         R = "Ceniza\n(< 2 mm)"
       )
-  } else if (any(output == 'plotly' & language == 'en')) {
+  } else if (output == 'plotly' & language == 'en') {
     pyro = plotly::plot_ly() %>%
       plotly::add_trace(
         data = tb.pyro,
@@ -200,6 +209,8 @@ ternary_pyroclastic_size = function(
         type = "scatterternary",
         fill = "toself",
         mode = "lines",
+        line = list(color = "black", width = 0.5),
+        hoverinfo = 'text',
         hoveron = 'fills'
       ) %>%
       plotly::layout(
@@ -214,7 +225,7 @@ ternary_pyroclastic_size = function(
           height = 6 * 96
         )
       )
-  } else if (any(output == 'plotly' & language == 'es')) {
+  } else if (output == 'plotly' & language == 'es') {
     pyro = plotly::plot_ly() %>%
       plotly::add_trace(
         data = tb.pyro,
@@ -227,6 +238,8 @@ ternary_pyroclastic_size = function(
         type = "scatterternary",
         fill = "toself",
         mode = "lines",
+        line = list(color = "black", width = 0.5),
+        hoverinfo = 'text',
         hoveron = 'fills'
       ) %>%
       plotly::layout(

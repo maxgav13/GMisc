@@ -64,6 +64,9 @@ ternary_qap_m_ol = function(
   language = c('en', 'es'),
   opacity = 0.5
 ) {
+  output <- match.arg(output)
+  language <- match.arg(language)
+
   tb.QAP_M = tibble::tribble(
     ~p, ~ol, ~px, ~Label.en, ~Label.es,
     100,0,0,"Anorthosite","Anortosita",
@@ -163,7 +166,7 @@ ternary_qap_m_ol = function(
     "#4C1D4BFF"
   )
 
-  if (any(output == 'ggplot' & language == 'en')) {
+  if (output == 'ggplot' & language == 'en') {
     QAP_M <- ggtern::ggtern(
       data = tb.QAP_M,
       ggtern::aes(.data$ol, .data$p, .data$px)
@@ -174,15 +177,18 @@ ternary_qap_m_ol = function(
           # color = .data$Label.en,
           group = .data$Label.en
         ),
+        color = "black",
+        linewidth = 0.25,
         alpha = opacity
       ) +
+      ggplot2::theme_bw() +
       ggtern::theme_arrowdefault() +
       ggtern::theme_clockwise() +
       # custom_percent("Percent") +
       ggplot2::scale_fill_manual('Mafic', values = QAP_M.pal) +
       # ggplot2::scale_color_manual('Mafic', values = QAP_M.pal) +
       ggplot2::labs(T = "P", L = "Ol", R = "Px")
-  } else if (any(output == 'ggplot' & language == 'es')) {
+  } else if (output == 'ggplot' & language == 'es') {
     QAP_M <- ggtern::ggtern(
       data = tb.QAP_M,
       ggtern::aes(.data$ol, .data$p, .data$px)
@@ -193,15 +199,18 @@ ternary_qap_m_ol = function(
           # color = .data$Label.es,
           group = .data$Label.es
         ),
+        color = "black",
+        linewidth = 0.25,
         alpha = opacity
       ) +
+      ggplot2::theme_bw() +
       ggtern::theme_arrowdefault() +
       ggtern::theme_clockwise() +
       # custom_percent("Percent") +
       ggplot2::scale_fill_manual('M\u00e1ficas', values = QAP_M.pal) +
       # ggplot2::scale_color_manual('M\u00e1ficas', values = QAP_M.pal) +
       ggplot2::labs(T = "P", L = "Ol", R = "Px")
-  } else if (any(output == 'plotly' & language == 'en')) {
+  } else if (output == 'plotly' & language == 'en') {
     QAP_M = plotly::plot_ly() %>%
       plotly::add_trace(
         data = tb.QAP_M,
@@ -214,7 +223,7 @@ ternary_qap_m_ol = function(
         type = "scatterternary",
         fill = "toself",
         mode = "lines",
-        line = list(color = "black"),
+        line = list(color = "black", width = 0.5),
         hoverinfo = 'text',
         hoveron = 'fills'
       ) %>%
@@ -230,7 +239,7 @@ ternary_qap_m_ol = function(
           height = 6 * 96
         )
       )
-  } else if (any(output == 'plotly' & language == 'es')) {
+  } else if (output == 'plotly' & language == 'es') {
     QAP_M = plotly::plot_ly() %>%
       plotly::add_trace(
         data = tb.QAP_M,
@@ -243,7 +252,7 @@ ternary_qap_m_ol = function(
         type = "scatterternary",
         fill = "toself",
         mode = "lines",
-        line = list(color = "black"),
+        line = list(color = "black", width = 0.5),
         hoverinfo = 'text',
         hoveron = 'fills'
       ) %>%

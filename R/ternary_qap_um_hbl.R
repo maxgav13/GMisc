@@ -64,6 +64,9 @@ ternary_qap_um_hbl = function(
   language = c('en', 'es'),
   opacity = 0.5
 ) {
+  output <- match.arg(output)
+  language <- match.arg(language)
+
   tb.QAP_UM = tibble::tribble(
     ~ol , ~px   , ~hbl  , ~Label.en                        , ~Label.es                                      ,
     100 ,   0   ,   0   , "Dunite"                         , "Dunita"                                       ,
@@ -176,7 +179,7 @@ ternary_qap_um_hbl = function(
     "#440154FF"
   )
 
-  if (any(output == 'ggplot' & language == 'en')) {
+  if (output == 'ggplot' & language == 'en') {
     QAP_UM <- ggtern::ggtern(
       data = tb.QAP_UM,
       ggtern::aes(.data$px, .data$ol, .data$hbl)
@@ -187,6 +190,8 @@ ternary_qap_um_hbl = function(
           # color = .data$Label.en,
           group = .data$Label.en
         ),
+        color = "black",
+        linewidth = 0.25,
         alpha = opacity
       ) +
       ggtern::theme_bw() +
@@ -201,7 +206,7 @@ ternary_qap_um_hbl = function(
         L = "Px",
         R = "Hbl"
       )
-  } else if (any(output == 'ggplot' & language == 'es')) {
+  } else if (output == 'ggplot' & language == 'es') {
     QAP_UM <- ggtern::ggtern(
       data = tb.QAP_UM,
       ggtern::aes(.data$px, .data$ol, .data$hbl)
@@ -212,6 +217,8 @@ ternary_qap_um_hbl = function(
           # color = .data$Label.es,
           group = .data$Label.es
         ),
+        color = "black",
+        linewidth = 0.25,
         alpha = opacity
       ) +
       ggtern::theme_bw() +
@@ -226,7 +233,7 @@ ternary_qap_um_hbl = function(
         L = "Px",
         R = "Hbl"
       )
-  } else if (any(output == 'plotly' & language == 'en')) {
+  } else if (output == 'plotly' & language == 'en') {
     QAP_UM = plotly::plot_ly() %>%
       plotly::add_trace(
         data = tb.QAP_UM,
@@ -239,6 +246,7 @@ ternary_qap_um_hbl = function(
         type = "scatterternary",
         fill = "toself",
         mode = "lines",
+        line = list(color = "black", width = 0.5),
         hoverinfo = 'text',
         hoveron = 'fills'
       ) %>%
@@ -255,7 +263,7 @@ ternary_qap_um_hbl = function(
           height = 6 * 96
         )
       )
-  } else if (any(output == 'plotly' & language == 'es')) {
+  } else if (output == 'plotly' & language == 'es') {
     QAP_UM = plotly::plot_ly() %>%
       plotly::add_trace(
         data = tb.QAP_UM,
@@ -268,7 +276,7 @@ ternary_qap_um_hbl = function(
         type = "scatterternary",
         fill = "toself",
         mode = "lines",
-        # line = list(color = "black"),
+        line = list(color = "black", width = 0.5),
         hoverinfo = 'text',
         hoveron = 'fills'
       ) %>%

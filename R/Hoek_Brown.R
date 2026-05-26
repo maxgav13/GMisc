@@ -27,6 +27,8 @@ Hoek_Brown = function(
   unit.weight,
   use = c("general", "tunnels", "slopes")
 ) {
+  use = match.arg(use)
+
   unit.weight = unit.weight / 1000
 
   mb = signif(mi * exp((GSI - 100) / (28 - 14 * D)), 3)
@@ -48,7 +50,7 @@ Hoek_Brown = function(
     3
   )
 
-  if (any(use == "general")) {
+  if (use == "general") {
     sig.3max = sig.ci / 4
   } else if (use == "slopes") {
     sig.3max = ((sig.cm / (unit.weight * height))^-0.91) * sig.cm * 0.72
@@ -99,7 +101,7 @@ Hoek_Brown = function(
   )
   c.inst = signif(tau.inst - sig.n.inst * tan(rads(phi.inst)), 3)
 
-  if (any(use == "general")) {
+  if (use == "general") {
     sig.n = seq(sig.t, sig.3max, .001)
   } else {
     sig.n = seq(sig.t, 3 * sig.n.inst, .001)

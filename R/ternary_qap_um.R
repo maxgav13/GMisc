@@ -64,6 +64,8 @@ ternary_qap_um = function(
   language = c('en', 'es'),
   opacity = 0.5
 ) {
+  output <- match.arg(output)
+  language <- match.arg(language)
   tb.QAP_UM = tibble::tribble(
     ~ol , ~opx , ~cpx , ~Label.en                 , ~Label.es                        ,
     100 ,    0 ,    0 , "Dunite"                  , "Dunita"                         ,
@@ -165,8 +167,11 @@ ternary_qap_um = function(
           # color = .data$Label.en,
           group = .data$Label.en
         ),
+        color = "black",
+        linewidth = 0.25,
         alpha = opacity
       ) +
+      ggplot2::theme_bw() +
       ggtern::theme_arrowdefault() +
       ggtern::theme_clockwise() +
       ggplot2::scale_fill_manual('Ultramafic', values = QAP_UM.pal) +
@@ -183,8 +188,11 @@ ternary_qap_um = function(
           # color = .data$Label.es,
           group = .data$Label.es
         ),
+        color = "black",
+        linewidth = 0.25,
         alpha = opacity
       ) +
+      ggplot2::theme_bw() +
       ggtern::theme_arrowdefault() +
       ggtern::theme_clockwise() +
       ggplot2::scale_fill_manual("Ultram\u00e1ficas", values = QAP_UM.pal) +
@@ -203,7 +211,7 @@ ternary_qap_um = function(
         type = "scatterternary",
         fill = "toself",
         mode = "lines",
-        line = list(color = "black"),
+        line = list(color = "black", width = 0.5),
         hoverinfo = 'text',
         hoveron = 'fills'
       ) %>%
@@ -232,7 +240,7 @@ ternary_qap_um = function(
         type = "scatterternary",
         fill = "toself",
         mode = "lines",
-        line = list(color = "black"),
+        line = list(color = "black", width = 0.5),
         hoverinfo = 'text',
         hoveron = 'fills'
       ) %>%

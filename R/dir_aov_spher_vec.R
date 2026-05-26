@@ -72,6 +72,8 @@ dir_aov_spher_vec = function(
   conf.level = .95,
   type = c('line', 'dir', 'strike')
 ) {
+  type = match.arg(type)
+
   a = 1 - conf.level
 
   if (is.null(data)) {
@@ -84,7 +86,7 @@ dir_aov_spher_vec = function(
     grp = data %>% dplyr::pull({{ grp }})
   }
 
-  if (any(type == 'line')) {
+  if (type == 'line') {
     d = trd
     i = plg
   } else if (type == 'dir') {

@@ -4,12 +4,18 @@
 \alias{TAS}
 \title{TAS Diagram}
 \usage{
-TAS(output = c("ggplot", "plotly"), language = c("en", "es"))
+TAS(
+  output = c("ggplot", "plotly"),
+  language = c("en", "es"),
+  type = c("volcanic", "plutonic")
+)
 }
 \arguments{
 \item{output}{The output format: "ggplot" or "plotly" (default is "ggplot")}
 
 \item{language}{The language to be displayed: "en" for english or "es" for spanish (deafult is "en")}
+
+\item{type}{The type of igneous rock: "volcanic" or "plutonic" (default is "volcanic")}
 }
 \value{
 TAS diagram in the desired format (object)

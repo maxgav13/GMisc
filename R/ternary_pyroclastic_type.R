@@ -8,7 +8,7 @@
 #' @export
 #' @importFrom ggplot2 .data
 #'
-#' @details For plotting data on the ggplot object it would be easier if the names of the dataframe are "l", "g", and "c", that way it gets mapped automatically, if not make sure to use "aes(x=l,y=g,z=c)".
+#' @details For plotting data on the ggplot object it would be easier if the names of the dataframe are "l", "g", and "c", that way it gets mapped automatically, if not make sure to use "aes(x=g,y=l,z=c)".
 #' For plotting on the plotly object the mapping of the new data should be as shown in the example: \code{a = ~l, b = ~g, c = ~c}, where \code{a} refers to the top ("l"), \code{b} refers to the bottom left ("g"), and \code{c} refers to the bottom right ("c").
 #' The examples show basic usage and how to add data, which can be more customizable.
 #'
@@ -66,6 +66,9 @@ ternary_pyroclastic_type = function(
   language = c('en', 'es'),
   opacity = .5
 ) {
+  output <- match.arg(output)
+  language <- match.arg(language)
+
   tb.pyro = tibble::tribble(
     ~l  , ~g  , ~c  , ~Label         , ~Label.es           ,
     100 ,   0 ,   0 , "Lithic tuff"  , "Toba l\u00edtica"  ,
@@ -125,7 +128,7 @@ ternary_pyroclastic_type = function(
     caxis = axis("Cristaloclastos")
   )
 
-  if (any(output == 'ggplot' & language == 'en')) {
+  if (output == 'ggplot' & language == 'en') {
     pyro <- ggtern::ggtern(
       data = tb.pyro,
       ggtern::aes(.data$g, .data$l, .data$c)
@@ -136,6 +139,8 @@ ternary_pyroclastic_type = function(
           # color = .data$Label,
           group = .data$Label
         ),
+        color = "black",
+        linewidth = 0.25,
         alpha = opacity
       ) +
       ggtern::theme_bw() +
@@ -150,7 +155,7 @@ ternary_pyroclastic_type = function(
         L = "Glass",
         R = "Crystals"
       )
-  } else if (any(output == 'ggplot' & language == 'es')) {
+  } else if (output == 'ggplot' & language == 'es') {
     pyro <- ggtern::ggtern(
       data = tb.pyro,
       ggtern::aes(.data$g, .data$l, .data$c)
@@ -161,6 +166,8 @@ ternary_pyroclastic_type = function(
           # color = .data$Label.es,
           group = .data$Label.es
         ),
+        color = "black",
+        linewidth = 0.25,
         alpha = opacity
       ) +
       ggtern::theme_bw() +
@@ -175,7 +182,7 @@ ternary_pyroclastic_type = function(
         L = "Vitroclastos",
         R = "Cristaloclastos"
       )
-  } else if (any(output == 'plotly' & language == 'en')) {
+  } else if (output == 'plotly' & language == 'en') {
     pyro = plotly::plot_ly() %>%
       plotly::add_trace(
         data = tb.pyro,
@@ -188,6 +195,8 @@ ternary_pyroclastic_type = function(
         type = "scatterternary",
         fill = "toself",
         mode = "lines",
+        line = list(color = "black", width = 0.5),
+        hoverinfo = 'text',
         hoveron = 'fills'
       ) %>%
       plotly::layout(
@@ -203,7 +212,7 @@ ternary_pyroclastic_type = function(
           height = 6 * 96
         )
       )
-  } else if (any(output == 'plotly' & language == 'es')) {
+  } else if (output == 'plotly' & language == 'es') {
     pyro = plotly::plot_ly() %>%
       plotly::add_trace(
         data = tb.pyro,
@@ -216,6 +225,8 @@ ternary_pyroclastic_type = function(
         type = "scatterternary",
         fill = "toself",
         mode = "lines",
+        line = list(color = "black", width = 0.5),
+        hoverinfo = 'text',
         hoveron = 'fills'
       ) %>%
       plotly::layout(

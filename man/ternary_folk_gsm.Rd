@@ -24,7 +24,7 @@ Folk's ternary diagram for clastic rocks in the desired format (object)
 \code{ternary_folk_gsm()} draws either a static or interactive ternary diagram, in english or spanish. It is a base diagram where data can be plotted.
 }
 \details{
-For plotting data on the ggplot object it would be easier if the names of the dataframe are "g", "s", and "m", that way it gets mapped automatically, if not make sure to use "aes(x=g,y=s,z=m)".
+For plotting data on the ggplot object it would be easier if the names of the dataframe are "s", "g", and "m", that way it gets mapped automatically, if not make sure to use "aes(x=s,y=g,z=m)".
 For plotting on the plotly object the mapping of the new data should be as shown in the example: \code{a = ~g, b = ~s, c = ~m}, where \code{a} refers to the top ("g"), \code{b} refers to the bottom left ("s"), and \code{c} refers to the bottom right ("m").
 The examples show basic usage and how to add data, which can be more customizable.
 For a more complete description on how to use this function and similar ones, see

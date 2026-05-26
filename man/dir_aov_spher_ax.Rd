@@ -81,7 +81,7 @@ distinct colours.
 # From a data frame
 csv_path <- system.file("spherical_data_ax_bp_aov.csv", package = "GMisc")
 df <- utils::read.csv(csv_path)
-dir_aov_spher_ax(trend, plunge, type, data = df)
+dir_aov_spher_ax(trend, plunge, gr = type, data = df)
 }
 \references{
 Fisher, N. I., Lewis, T., & Embleton, B. J. J. (1987). Statistical analysis of spherical data. Cambridge University Press.

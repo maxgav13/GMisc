@@ -24,7 +24,7 @@ Ternary diagram for pyroclastic rocks based on type in the desired format (objec
 \code{ternary_pyroclastic_type()} draws either a static or interactive ternary diagram, in english or spanish. It is a base diagram where data can be plotted.
 }
 \details{
-For plotting data on the ggplot object it would be easier if the names of the dataframe are "l", "g", and "c", that way it gets mapped automatically, if not make sure to use "aes(x=l,y=g,z=c)".
+For plotting data on the ggplot object it would be easier if the names of the dataframe are "l", "g", and "c", that way it gets mapped automatically, if not make sure to use "aes(x=g,y=l,z=c)".
 For plotting on the plotly object the mapping of the new data should be as shown in the example: \code{a = ~l, b = ~g, c = ~c}, where \code{a} refers to the top ("l"), \code{b} refers to the bottom left ("g"), and \code{c} refers to the bottom right ("c").
 The examples show basic usage and how to add data, which can be more customizable.
 

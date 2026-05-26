@@ -2,6 +2,7 @@
 #' @description \code{TAS()} draws either a static or interactive diagram, in english or spanish. It is a base diagram where data can be plotted.
 #' @param output The output format: "ggplot" or "plotly" (default is "ggplot")
 #' @param language The language to be displayed: "en" for english or "es" for spanish (deafult is "en")
+#' @param type The type of igneous rock: "volcanic" or "plutonic" (default is "volcanic")
 #'
 #' @return TAS diagram in the desired format (object)
 #' @export
@@ -55,7 +56,15 @@
 #'                             symbol = ~my_shapes[loc],
 #'                             opacity=.9))
 #'
-TAS = function(output = c('ggplot', 'plotly'), language = c('en', 'es')) {
+TAS = function(
+  output = c('ggplot', 'plotly'),
+  language = c('en', 'es'),
+  type = c('volcanic', 'plutonic')
+) {
+  output = match.arg(output)
+  language = match.arg(language)
+  type = match.arg(type)
+
   clssf = list(
     zona = as.character(1:15),
     name = c(
@@ -147,6 +156,40 @@ TAS = function(output = c('ggplot', 'plotly'), language = c('en', 'es')) {
         'Fonolita\u000atefr\u00edtica',
         'Fonolita',
         'Foidita'
+      ),
+      plut = c(
+        'Peridotgabbro',
+        'Gabbro',
+        'Gabbroic\u000adiorite',
+        'Diorite',
+        'Granodiorite',
+        'Granite',
+        'Syenite\u000aQuartz monzonite',
+        'Monzonite',
+        'Monzodiorite',
+        'Monzogabbro',
+        'Foid gabbro',
+        'Foid monzodiorite',
+        'Foid monzosyenite',
+        'Foid syenite',
+        'Foidolite'
+      ),
+      plut.es = c(
+        'Peridotita',
+        'Gabro',
+        'Diorita\u000agabr\u00f3ica',
+        'Diorita',
+        'Granodiorita',
+        'Granito',
+        'Sienita\u000aMonzonita cuarzosa',
+        'Monzonita',
+        'Monzodiorita',
+        'Monzogabro',
+        'Gabro foid\u00edtico',
+        'Monzodiorita foid\u00edtica',
+        'Monzosienita foid\u00edtica',
+        'Sienita foid\u00edtica',
+        'Foidolita'
       )
     )
 
@@ -189,11 +232,25 @@ TAS = function(output = c('ggplot', 'plotly'), language = c('en', 'es')) {
     theme_classic(base_size = 14) +
     coord_fixed(ratio = 1.5)
 
-  if (any(output == 'ggplot' & language == 'en')) {
+  if (output == 'ggplot' & language == 'en') {
     TAS = TAS_base.gg +
       geom_polygon(aes(group = .data$name), fill = 'white', col = 'black') +
       geom_line(data = TAS.line, col = 'darkred') +
-      geom_text(aes(label = .data$name), data = TAS.labels, size = 2) +
+      list(
+        if (type == 'volcanic') {
+          geom_text(
+            aes(label = .data$name),
+            data = TAS.labels,
+            size = 2
+          )
+        } else {
+          geom_text(
+            aes(label = .data$plut),
+            data = TAS.labels,
+            size = 2
+          )
+        }
+      ) +
       annotate(
         'text',
         label = 'Alkaline',
@@ -214,11 +271,25 @@ TAS = function(output = c('ggplot', 'plotly'), language = c('en', 'es')) {
         x = expression(paste(SiO[2], ' [wt %]')),
         y = expression(paste(Na[2], 'O', ' + ', K[2], 'O', ' [wt %]'))
       )
-  } else if (any(output == 'ggplot' & language == 'es')) {
+  } else if (output == 'ggplot' & language == 'es') {
     TAS = TAS_base.gg +
       geom_polygon(aes(group = .data$name), fill = 'white', col = 'black') +
       geom_line(data = TAS.line, col = 'darkred') +
-      geom_text(aes(label = .data$name.es), data = TAS.labels, size = 2) +
+      list(
+        if (type == 'volcanic') {
+          geom_text(
+            aes(label = .data$name.es),
+            data = TAS.labels,
+            size = 2
+          )
+        } else {
+          geom_text(
+            aes(label = .data$plut.es),
+            data = TAS.labels,
+            size = 2
+          )
+        }
+      ) +
       annotate(
         'text',
         label = 'Alcalina',
@@ -239,13 +310,17 @@ TAS = function(output = c('ggplot', 'plotly'), language = c('en', 'es')) {
         x = expression(paste(SiO[2], ' [% peso]')),
         y = expression(paste(Na[2], 'O', ' + ', K[2], 'O', ' [% peso]'))
       )
-  } else if (any(output == 'plotly' & language == 'en')) {
+  } else if (output == 'plotly' & language == 'en') {
     TAS = plotly::plot_ly() %>%
       plotly::add_polygons(
         data = tb.TAS,
         x = ~x,
         y = ~y,
-        color = ~name,
+        color = if (type == 'volcanic') {
+          ~name
+        } else {
+          ~plut
+        },
         colors = 'transparent',
         mode = 'lines',
         line = list(color = "black"),
@@ -265,7 +340,11 @@ TAS = function(output = c('ggplot', 'plotly'), language = c('en', 'es')) {
         data = TAS.labels,
         x = ~x,
         y = ~y,
-        text = ~name,
+        text = if (type == 'volcanic') {
+          ~name
+        } else {
+          ~plut
+        },
         name = 'Type',
         hoverinfo = 'none',
         textfont = list(family = "Arial", size = 7, color = "Black"),
@@ -295,13 +374,17 @@ TAS = function(output = c('ggplot', 'plotly'), language = c('en', 'es')) {
           height = 6 * 96
         )
       )
-  } else if (any(output == 'plotly' & language == 'es')) {
+  } else if (output == 'plotly' & language == 'es') {
     TAS = plotly::plot_ly() %>%
       plotly::add_polygons(
         data = tb.TAS,
         x = ~x,
         y = ~y,
-        color = ~name.es,
+        color = if (type == 'volcanic') {
+          ~name.es
+        } else {
+          ~plut.es
+        },
         colors = 'transparent',
         mode = 'lines',
         line = list(color = "black"),
@@ -321,7 +404,11 @@ TAS = function(output = c('ggplot', 'plotly'), language = c('en', 'es')) {
         data = TAS.labels,
         x = ~x,
         y = ~y,
-        text = ~name.es,
+        text = if (type == 'volcanic') {
+          ~name.es
+        } else {
+          ~plut.es
+        },
         name = 'Tipo',
         hoverinfo = 'none',
         textfont = list(family = "Arial", size = 7, color = "Black"),
