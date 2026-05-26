@@ -43,7 +43,7 @@ This document shows how to display and use different classification diagrams, av
 
 -   QAP for ultramafic rocks - `ternary_qap_um()` and `ternary_qap_um_hbl()`
 
--   Feldspar classification - `ternary_feldspar()`
+-   Feldspar classification - `ternary_feldspars()`
 
 -   For provenance - `ternary_dickinson_qtfl()` and `ternary_dickinson_qmflt()`
 
@@ -349,10 +349,10 @@ diagrams.tern = data.frame(
     'Na',
     'f',
     'f',
-    'g',
+    's',
     'm',
     'lapilli',
-    'l',
+    'g',
     'cpx',
     'ol',
     'px',
@@ -370,10 +370,10 @@ diagrams.tern = data.frame(
     'K',
     'q',
     'q',
-    's',
+    'g',
     's',
     'bb',
-    'g',
+    'l',
     'p',
     'p',
     'p',
@@ -389,9 +389,9 @@ diagrams.tern = data.frame(
   z = c(
     'm',
     'Ca',
-    'r',
+    'l',
     'm',
-    's',
+    'm',
     'c',
     'ash',
     'c',
@@ -452,7 +452,7 @@ diagrams.tern = data.frame(
   c = c(
     '~m',
     '~Ca',
-    '~r',
+    '~l',
     '~m',
     '~m',
     '~c',

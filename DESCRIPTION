@@ -1,7 +1,7 @@
 Package: GMisc
 Title: Miscellaneous Functions for Geology (and its areas)
-Version: 0.4.1
-Date: 2026-05-22
+Version: 0.4.2
+Date: 2026-05-26
 Author: Maximiliano Garnier-Villarreal <max.garnier.villa@gmail.com>
 Maintainer: Maximiliano Garnier-Villarreal <max.garnier.villa@gmail.com>
 Description: Functions for general statistical purpose use, and geological use. 
